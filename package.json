@@ -7,7 +7,7 @@
         "async": "3.2.2",
         "typescript": "^5.0.2"
     },
-    "name": "@masx200/ant-colony-algorithm-for-multiple-populations",
+    "name": "@masx200/multiple-ant-colony-algorithms-in-path-planning-applications",
     "type": "module",
     "scripts": {
         "test": "vitest run",
