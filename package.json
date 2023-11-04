@@ -74,7 +74,7 @@
         "@babel/core": "^7.20.2",
         "@masx200/tsp-lib-test-data": "^2.0.1",
         "@masx200/weighted-randomly-select": "^2.1.1",
-        "@types/node": "^20.1.0",
+        "@types/node": "^20.8.10",
         "@types/robust-segment-intersect": "^1.0.0",
         "@vue/eslint-config-prettier": "^7.0.0",
         "@vue/eslint-config-typescript": "^11.0.2",
