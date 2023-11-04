@@ -2,13 +2,8 @@ export class GridMethod {
     constructor(
         public column: number,
         public row: number,
-        public data: number[]
+        /**
+         当该栅格内有障碍物时赋值为1，并用黑色表示；无障碍物时赋值为0，并用白色表示。 */
+        public data: number[][]
     ) {}
-    get(x: number, y: number) {
-        return this.data[x * this.row + y];
-    }
-    set(x: number, y: number, value: number) {
-        this.data[x * this.row + y] = value;
-        return this;
-    }
 }
