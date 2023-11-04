@@ -1,15 +1,14 @@
-export class GridMethod extends Array<Array<number>> {
-  constructor(
-    public row: number,
-    public column: number,
-    public data: number[],
-  ) {
-    super(row);
-    for (let i = 0; i < row; i++) {
-      this[i] = new Array(column);
-      for (let j = 0; j < column; j++) {
-        this[i][j] = data[i * column + j];
-      }
+export class GridMethod {
+    constructor(
+        public row: number,
+        public column: number,
+        public data: number[]
+    ) {}
+    get(x: number, y: number) {
+        return this.data[x * this.row + y];
     }
-  }
+    set(x: number, y: number, value: number) {
+        this.data[x * this.row + y] = value;
+        return this;
+    }
 }
