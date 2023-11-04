@@ -60,13 +60,13 @@ export function getPathCoordinates(
             // 如果起点x小于终点x，直接将终点加入路径
             for (let i = 0; i < Math.abs(x2 - x1); i++) {
                 // 当直线与x轴平行时，输出abs(x2-x1)个点
-                path.push([Math.round(x2 - i), Math.round(y1)]); // 四舍五入，保留整数位
+                path.push([Math.round(x1 + i), Math.round(y1)]); // 四舍五入，保留整数位
             }
         } else if (x1 > x2) {
             // 如果起点x大于终点x，直接将起点加入路径
             for (let i = 0; i < Math.abs(x2 - x1); i++) {
                 // 当直线与x轴平行时，输出abs(x2-x1)个点
-                path.push([Math.round(x1 + i), Math.round(y1)]); // 四舍五入，保留整数位
+                path.push([Math.round(x1 - i), Math.round(y1)]); // 四舍五入，保留整数位
             }
         } else {
             // 如果 x1 == x2，只加入起点的坐标
@@ -79,5 +79,6 @@ export function getPathCoordinates(
     // 这个箭头函数使用 JavaScript 的 JSON.stringify 方法将元素转换为字符串。
     // 然后，uniqBy 函数使用这个箭头函数来确定哪些元素是唯一的，并返回一个只包含唯一元素的新数组。
     path.push(end);
+    // console.log(path);
     return uniqBy(path, (item) => JSON.stringify(item));
 }
