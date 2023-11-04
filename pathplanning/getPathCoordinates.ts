@@ -1,3 +1,12 @@
+import { uniqBy } from "lodash-es";
+
+/**
+ * 获取两点间直线的坐标路径
+ *
+ * @param start 起始点坐标
+ * @param end   终点坐标
+ * @returns 包含路径坐标的数组
+ */
 export function getPathCoordinates(
     start: [number, number],
     end: [number, number]
@@ -8,6 +17,7 @@ export function getPathCoordinates(
 
     let currentX = x1 + 0.5;
     let currentY = y1 + 0.5;
+    // 计算斜率
     let m = (y2 - y1) / (x2 - x1); // 计算斜率
 
     if (x1 < x2) {
@@ -50,6 +60,12 @@ export function getPathCoordinates(
             // 如果 x1 == x2，只加入起点的坐标
             path.push([Math.round(x1), Math.round(y1)]); // 四舍五入，保留整数位
         }
-    }
-    return path;
+    } /*  */
+    // uniqBy 是一个函数，它接受两个参数：path 和一个箭头函数。
+    // path 是一个数组，指定了要在其中查找重复项的路径。
+    // 箭头函数接受一个元素作为参数，并返回它的字符串表示形式。
+    // 这个箭头函数使用 JavaScript 的 JSON.stringify 方法将元素转换为字符串。
+    // 然后，uniqBy 函数使用这个箭头函数来确定哪些元素是唯一的，并返回一个只包含唯一元素的新数组。
+
+    return uniqBy(path, (item) => JSON.stringify(item));
 }
