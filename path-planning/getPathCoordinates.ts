@@ -29,8 +29,8 @@ export function getPathCoordinates(
                 currentX += 1; // 步长为1，以中心坐标为基准
                 currentY += m; // 根据斜率计算y值
             } else {
-                currentX += 1 / m; // 步长为1，以中心坐标为基准
-                currentY += 1; // 根据斜率计算y值
+                currentX += Math.abs(1 / m); // 步长为1，以中心坐标为基准
+                currentY += m * Math.abs(1 / m); // 根据斜率计算y值
             }
         }
     } else if (x1 > x2) {
@@ -40,10 +40,10 @@ export function getPathCoordinates(
             // console.log(currentX, currentY);
             if (Math.abs(m) < 1) {
                 currentX -= 1; // 步长为-1，以中心坐标为基准
-                currentY += m; // 根据斜率计算y值
+                currentY -= m; // 根据斜率计算y值
             } else {
-                currentX -= 1 / m; // 步长为1，以中心坐标为基准
-                currentY += 1; // 根据斜率计算y值
+                currentX -= Math.abs(1 / m); // 步长为1，以中心坐标为基准
+                currentY -= m * Math.abs(1 / m); // 根据斜率计算y值
             }
         }
     } else {
