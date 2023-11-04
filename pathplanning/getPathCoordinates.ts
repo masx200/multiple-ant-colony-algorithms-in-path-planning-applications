@@ -14,25 +14,37 @@ export function getPathCoordinates(
     const path: [number, number][] = [];
     const [x1, y1] = start;
     const [x2, y2] = end;
-
-    let currentX = x1 + 0.5;
-    let currentY = y1 + 0.5;
+    path.push(start);
+    let currentX = x1;
+    let currentY = y1;
     // 计算斜率
     let m = (y2 - y1) / (x2 - x1); // 计算斜率
 
     if (x1 < x2) {
-        while (currentX < x2 + 0.5) {
+        while (currentX < x2) {
             // 修改了循环条件，以包含终点坐标
             path.push([Math.round(currentX), Math.round(currentY)]); // 四舍五入，保留整数位
-            currentX += 1; // 步长为1，以中心坐标为基准
-            currentY += m; // 根据斜率计算y值
+            // console.log(currentX, currentY);
+            if (Math.abs(m) < 1) {
+                currentX += 1; // 步长为1，以中心坐标为基准
+                currentY += m; // 根据斜率计算y值
+            } else {
+                currentX += 1 / m; // 步长为1，以中心坐标为基准
+                currentY += 1; // 根据斜率计算y值
+            }
         }
     } else if (x1 > x2) {
-        while (currentX > x2 + 0.5) {
+        while (currentX > x2) {
             // 修改了循环条件，以包含终点坐标
             path.push([Math.round(currentX), Math.round(currentY)]); // 四舍五入，保留整数位
-            currentX -= 1; // 步长为-1，以中心坐标为基准
-            currentY += m; // 根据斜率计算y值
+            // console.log(currentX, currentY);
+            if (Math.abs(m) < 1) {
+                currentX -= 1; // 步长为-1，以中心坐标为基准
+                currentY += m; // 根据斜率计算y值
+            } else {
+                currentX -= 1 / m; // 步长为1，以中心坐标为基准
+                currentY += 1; // 根据斜率计算y值
+            }
         }
     } else {
         // 如果 x1 == x2
@@ -66,6 +78,6 @@ export function getPathCoordinates(
     // 箭头函数接受一个元素作为参数，并返回它的字符串表示形式。
     // 这个箭头函数使用 JavaScript 的 JSON.stringify 方法将元素转换为字符串。
     // 然后，uniqBy 函数使用这个箭头函数来确定哪些元素是唯一的，并返回一个只包含唯一元素的新数组。
-
+    path.push(end);
     return uniqBy(path, (item) => JSON.stringify(item));
 }
