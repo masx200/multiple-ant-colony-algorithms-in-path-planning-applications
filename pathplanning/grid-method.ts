@@ -1,7 +1,7 @@
 export class GridMethod {
     constructor(
-        public row: number,
         public column: number,
+        public row: number,
         public data: number[]
     ) {}
     get(x: number, y: number) {
