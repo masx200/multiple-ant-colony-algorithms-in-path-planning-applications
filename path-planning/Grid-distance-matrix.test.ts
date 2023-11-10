@@ -1,26 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { GridDistanceMatrix } from "./Grid-distance-matrix";
 
-
 describe("GridDistanceMatrix", () => {
     it("test constructor1", () => {
         const column = 2,
             row = 2;
         const result1 = GridDistanceMatrix(column, row);
-        // console.log(JSON.stringify(result1, null, 0));
-        // for (let i = 0; i < column; i++) {
-        //     // 遍历 grid 的行
-        //     for (let j = 0; j < row; j++) {
-        //         // 遍历 grid 的列
-        //         for (let k = 0; k < column; k++) {
-        //             // 遍历 grid 的列
-        //             for (let l = 0; l < row; l++) {
-        //                 // 计算欧几里得距离，并赋值给 res[i][j][k][l]
-        //                 console.log(i, j, k, l, result1[i][j][k][l]);
-        //             }
-        //         }
-        //     }
-        // }
+
         expect(result1).toEqual([
             [
                 [
@@ -48,20 +34,7 @@ describe("GridDistanceMatrix", () => {
         const column = 5,
             row = 5;
         const result = GridDistanceMatrix(column, row);
-        // console.log(JSON.stringify(result, null, 0));
-        // for (let i = 0; i < column; i++) {
-        //     // 遍历 grid 的行
-        //     for (let j = 0; j < row; j++) {
-        //         // 遍历 grid 的列
-        //         for (let k = 0; k < column; k++) {
-        //             // 遍历 grid 的列
-        //             for (let l = 0; l < row; l++) {
-        //                 // 计算欧几里得距离，并赋值给 res[i][j][k][l]
-        //                 console.log(i, j, k, l, result[i][j][k][l]);
-        //             }
-        //         }
-        //     }
-        // }
+
         expect(result).toEqual([
             [
                 [
@@ -555,20 +528,7 @@ describe("GridDistanceMatrix", () => {
         const column = 1,
             row = 3;
         const result = GridDistanceMatrix(column, row);
-        // console.log(JSON.stringify(result, null, 0));
-        // for (let i = 0; i < column; i++) {
-        //     // 遍历 grid 的行
-        //     for (let j = 0; j < row; j++) {
-        //         // 遍历 grid 的列
-        //         for (let k = 0; k < column; k++) {
-        //             // 遍历 grid 的列
-        //             for (let l = 0; l < row; l++) {
-        //                 // 计算欧几里得距离，并赋值给 res[i][j][k][l]
-        //                 console.log(i, j, k, l, result[i][j][k][l]);
-        //             }
-        //         }
-        //     }
-        // }
+
         expect(result).toEqual([[[[0, 1, 2]], [[1, 0, 1]], [[2, 1, 0]]]]);
     });
 });

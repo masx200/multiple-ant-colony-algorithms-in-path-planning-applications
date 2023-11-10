@@ -16,8 +16,10 @@ export function canReach(
     const [startRow, startCol] = start;
     const [endRow, endCol] = end;
 
+    // 获取地图的列和行
     const [mapColumn, mapRow] = [grid.column, grid.row];
 
+    // 判断起始点和终点是否在地图范围内
     // 判断起始点和终点是否在地图范围内
     if (
         startRow < 0 ||
@@ -33,10 +35,13 @@ export function canReach(
     }
 
     // 判断起始点是否是终点
+    // 判断起始点是否是终点
     if (startRow === endRow && startCol === endCol) {
         return true;
     }
     const pcd = getPathCoordinates(start, end);
+
+    // 检查路径是否在网格内
     // 检查路径是否在网格内
     if (
         pcd.every(([x, y]) => {

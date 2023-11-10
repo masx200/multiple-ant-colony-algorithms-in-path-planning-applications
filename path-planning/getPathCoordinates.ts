@@ -72,7 +72,7 @@ export function getPathCoordinates(
             // 如果 x1 == x2，只加入起点的坐标
             path.push([Math.round(x1), Math.round(y1)]); // 四舍五入，保留整数位
         }
-    } /*  */
+    }
     // uniqBy 是一个函数，它接受两个参数：path 和一个箭头函数。
     // path 是一个数组，指定了要在其中查找重复项的路径。
     // 箭头函数接受一个元素作为参数，并返回它的字符串表示形式。
