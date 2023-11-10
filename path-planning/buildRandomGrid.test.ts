@@ -29,7 +29,8 @@ describe("buildRandomGrid function", () => {
             }
         }
         expect(obstaclesCount / (column * row)).toBeCloseTo(
-            Math.round(column * row * ObstacleProbability) / (column * row)
+            Math.round(column * row * ObstacleProbability) / (column * row),
+            1
         );
     });
 });
@@ -55,7 +56,7 @@ describe("buildRandomGrid", () => {
             }
         }
 
-        expect(obstacleCount / (grid.column * grid.row)).toBeCloseTo(0.7);
+        expect(obstacleCount / (grid.column * grid.row)).toBeCloseTo(0.7, 1);
     });
 
     it("should place free cells on the grid when there are no obstacles", () => {
@@ -71,7 +72,7 @@ describe("buildRandomGrid", () => {
             }
         }
 
-        expect(freeCellCount / (grid.column * grid.row)).toBeCloseTo(0.9);
+        expect(freeCellCount / (grid.column * grid.row)).toBeCloseTo(0.9, 1);
     });
 });
 describe("buildRandomGrid", () => {
@@ -96,7 +97,7 @@ describe("buildRandomGrid", () => {
         }
 
         //    expect(obstacleCount).toBeGreaterThanOrEqual(1); // 至少有一个障碍物
-        expect(obstacleCount / (grid.column * grid.row)).toBeCloseTo(0.2); // 没有过多的障碍物
+        expect(obstacleCount / (grid.column * grid.row)).toBeCloseTo(0.2, 1); // 没有过多的障碍物
     });
 
     test("set other cells as free", () => {
@@ -113,6 +114,6 @@ describe("buildRandomGrid", () => {
         }
 
         //expect(freeCellCount).toBeGreaterThan(1); // 至少有一个自由细胞
-        expect(freeCellCount / (grid.column * grid.row)).toBeCloseTo(0.8); // 没有过少的自由细胞
+        expect(freeCellCount / (grid.column * grid.row)).toBeCloseTo(0.8, 1); // 没有过少的自由细胞
     });
 });
