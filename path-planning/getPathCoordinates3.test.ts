@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { getPathCoordinates } from "./getPathCoordinates";
 
-describe("getPathCoordinates", () => {
-    it("getPathCoordinates", () => {
+describe("getPathCoordinates3", () => {
+    it("getPathCoordinates1", () => {
         expect(getPathCoordinates([10, 10], [1, 10])).toEqual([
             [10, 10],
 
@@ -16,5 +16,8 @@ describe("getPathCoordinates", () => {
             [2, 10],
             [1, 10],
         ]);
+    });
+    it("getPathCoordinates3", () => {
+        expect(getPathCoordinates([10, 10], [10, 10])).toEqual([[10, 10]]);
     });
 });
