@@ -1,4 +1,4 @@
-export class GridMethod {
+export class GridMap {
     /**
      * 构造函数
      *
