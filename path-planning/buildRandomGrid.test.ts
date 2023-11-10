@@ -4,7 +4,7 @@ import { buildRandomGrid } from "./buildRandomGrid";
 
 describe("buildRandomGrid function", () => {
     it("should create a grid with all free cells", () => {
-        const column = 5;
+        const column = 50;
         const row = 5;
         const grid = buildRandomGrid(column, row, 0);
         for (let i = 0; i < column; i++) {
@@ -16,8 +16,8 @@ describe("buildRandomGrid function", () => {
     });
 
     it("should create a grid with obstacles", () => {
-        const column = 10;
-        const row = 10;
+        const column = 500;
+        const row = 100;
         const ObstacleProbability = 0.5;
         const grid = buildRandomGrid(column, row, ObstacleProbability);
         let obstaclesCount = 0;
@@ -28,22 +28,22 @@ describe("buildRandomGrid function", () => {
                 }
             }
         }
-        expect(obstaclesCount).toBeCloseTo(
-            Math.round(column * row * ObstacleProbability)
+        expect(obstaclesCount / (column * row)).toBeCloseTo(
+            Math.round(column * row * ObstacleProbability) / (column * row)
         );
     });
 });
 
 describe("buildRandomGrid", () => {
     it("should create a grid with the correct dimensions", () => {
-        const grid = buildRandomGrid(5, 4, 0.3);
+        const grid = buildRandomGrid(5, 40, 0.3);
 
         expect(grid.column).toBe(5);
-        expect(grid.row).toBe(4);
+        expect(grid.row).toBe(40);
     });
 
     it("should place obstacles on the grid based on the probability given", () => {
-        const grid = buildRandomGrid(5, 4, 0.7);
+        const grid = buildRandomGrid(500, 40, 0.7);
 
         let obstacleCount = 0;
 
@@ -59,7 +59,7 @@ describe("buildRandomGrid", () => {
     });
 
     it("should place free cells on the grid when there are no obstacles", () => {
-        const grid = buildRandomGrid(5, 4, 0.1);
+        const grid = buildRandomGrid(50, 400, 0.1);
 
         let freeCellCount = 0;
 
@@ -76,14 +76,14 @@ describe("buildRandomGrid", () => {
 });
 describe("buildRandomGrid", () => {
     test("create a grid with specified column and row", () => {
-        const grid = buildRandomGrid(5, 4, 0.5);
+        const grid = buildRandomGrid(50, 4, 0.5);
 
-        expect(grid.column).toBe(5);
+        expect(grid.column).toBe(50);
         expect(grid.row).toBe(4);
     });
 
     test("set some cells as obstacle according to the probability", () => {
-        const grid = buildRandomGrid(5, 4, 0.2);
+        const grid = buildRandomGrid(50, 400, 0.2);
 
         let obstacleCount = 0;
 
@@ -100,7 +100,7 @@ describe("buildRandomGrid", () => {
     });
 
     test("set other cells as free", () => {
-        const grid = buildRandomGrid(5, 4, 0.2);
+        const grid = buildRandomGrid(90, 400, 0.2);
 
         let freeCellCount = 0;
 
