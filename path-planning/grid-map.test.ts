@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it, test } from "vitest";
 import { GridMap } from "./grid-map";
 
-
 describe("GridMap", () => {
     it("should correctly identify if a cell is an obstacle", () => {
         const grid = new GridMap(5, 5);

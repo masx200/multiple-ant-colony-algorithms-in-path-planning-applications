@@ -1,7 +1,6 @@
 import { describe, expect, it, test } from "vitest";
 import { buildRandomGrid } from "./buildRandomGrid";
 
-
 describe("buildRandomGrid function", () => {
     it("should create a grid with all free cells", () => {
         const column = 50;
