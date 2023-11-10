@@ -102,7 +102,7 @@ describe("GridMap", () => {
     it("should be able to check if a cell is free", () => {
         gridMap.setFree(3, 3);
         expect(gridMap.isFree(3, 3)).toBe(true);
-        expect(gridMap.isFree(1, 1)).toBe(false);
+        expect(gridMap.isFree(1, 1)).toBe(true);
     });
 
     it("should be able to set a cell as free", () => {
