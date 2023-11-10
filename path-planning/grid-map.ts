@@ -1,5 +1,12 @@
 export class GridMap {
     //判断指定单元格是否是障碍物
+    /**
+     * 判断坐标(i, j)是否为障碍物
+     *
+     * @param i 横坐标
+     * @param j 纵坐标
+     * @returns 是障碍物返回true，否则返回false
+     */
     isObstacle(i: number, j: number) {
         return this.data[i][j] === 1;
     }

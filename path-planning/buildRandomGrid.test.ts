@@ -12,6 +12,7 @@ describe("buildRandomGrid function", () => {
                 expect(grid.isFree(i, j)).toBeTruthy();
             }
         }
+        // console.log(grid);
     });
 
     it("should create a grid with obstacles", () => {
@@ -40,6 +41,7 @@ describe("buildRandomGrid", () => {
 
         expect(grid.column).toBe(5);
         expect(grid.row).toBe(40);
+        // console.log(grid);
     });
 
     it("should place obstacles on the grid based on the probability given", () => {

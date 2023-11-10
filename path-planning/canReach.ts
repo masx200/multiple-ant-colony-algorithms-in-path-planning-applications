@@ -1,5 +1,6 @@
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
+
 /**
  * 判断从起始点能否到达终点
  *
@@ -13,8 +14,8 @@ export function canReach(
     end: [number, number],
     grid: GridMap
 ): boolean {
-    const [startRow, startCol] = start;
-    const [endRow, endCol] = end;
+    const [startCol, startRow] = start;
+    const [endCol, endRow] = end;
 
     // 获取地图的列和行
     const [mapColumn, mapRow] = [grid.column, grid.row];
@@ -40,7 +41,8 @@ export function canReach(
         return true;
     }
     const pcd = getPathCoordinates(start, end);
-
+    if (grid.isObstacle(startCol, startRow)) return false;
+    if (grid.isObstacle(endCol, endRow)) return false;
     // 检查路径是否在网格内
     // 检查路径是否在网格内
     if (
@@ -50,5 +52,6 @@ export function canReach(
     ) {
         return true;
     }
+
     return false;
 }
