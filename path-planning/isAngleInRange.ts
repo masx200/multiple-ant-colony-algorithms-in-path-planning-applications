@@ -10,13 +10,16 @@ export function isAngleInRange(a: number, b: number, c: number): boolean {
     const radiansA = a; // 将角度转换为弧度，并其在-π到+π范围内
     const radiansB = b; // 将角度转换为弧度，并其在-π到+π范围内
     const radiansC = c; // 将角度转换为弧度，并其在-π到+π范围内
-
-    if (b > 0 && c < 0) {
+    if (b > c) {
         // 当b>0且c<0时，需要进行特殊处理
         const positiveB = b; // 将b转换为大于0的角度
         const positiveC = c + 2 * Math.PI; // 将c转换为大于0的角度
-        return radiansA >= positiveB && positiveC < radiansA; // 判断弧度 a 是否在大于0的角度 b 和 c 之间
+        return (
+            (radiansA + 2 * Math.PI >= positiveB &&
+                positiveC >= radiansA + 2 * Math.PI) ||
+            (radiansA >= positiveB && positiveC >= radiansA)
+        ); // 判断弧度 a 是否在大于0的角度 b 和 c 之间
     } else {
-        return radiansA >= radiansB && radiansC < radiansA; // 判断弧度 a 是否在弧度 b 和 c 之间
+        return radiansA >= radiansB && radiansC >= radiansA; // 判断弧度 a 是否在弧度 b 和 c 之间
     }
 }
