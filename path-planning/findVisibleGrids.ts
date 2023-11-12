@@ -79,5 +79,5 @@ export function findVisibleGrids(
         }
     }
     // 返回结果数组，即所有符合条件的网格坐标
-    return result;
+    return result.filter(([x, y]) => !(x === starti && y === startj));
 }
