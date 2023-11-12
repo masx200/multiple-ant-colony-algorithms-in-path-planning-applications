@@ -25,3 +25,17 @@ test("isAngleInRange", () => {
         expect(result).toBe(true);
     }
 });
+test("isAngleInRange", () => {
+    // 定义测试用例
+    const testCases = [
+        { a: Math.PI, b: -Math.PI / 2, c: +Math.PI / 2 },
+
+        { a: 0, b: Math.PI / 2, c: -Math.PI / 2 },
+    ];
+    // 进行测试
+    for (const { a, b, c } of testCases) {
+        const result = isAngleInRange(a, b, c);
+        // console.log(a, b, c);
+        expect(result).toBe(false);
+    }
+});
