@@ -1,6 +1,14 @@
 import { canReach } from "./canReach";
 import { GridMap } from "./grid-map";
 
+/**
+ * 查找所有可见的网格
+ *
+ * @param starti 起始行索引
+ * @param startj 起始列索引
+ * @param grid 网格地图
+ * @returns 包含所有可见网格的数组
+ */
 export function findVisibleGrids(
     starti: number,
     startj: number,
