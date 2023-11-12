@@ -8,6 +8,7 @@ import { isAngleInRange } from "./isAngleInRange";
 test("isAngleInRange", () => {
     // 定义测试用例
     const testCases = [
+        { a: Math.PI / 3, b: Math.PI / 6, c: Math.PI / 2 },
         { a: 0, b: 0, c: Math.PI },
         { a: Math.PI / 3, b: 0, c: Math.PI },
         { a: -Math.PI, b: -Math.PI, c: Math.PI },
@@ -31,6 +32,7 @@ test("isAngleInRange", () => {
         { a: Math.PI, b: -Math.PI / 2, c: +Math.PI / 2 },
 
         { a: 0, b: Math.PI / 2, c: -Math.PI / 2 },
+        { a: Math.PI / 6, b: Math.PI / 3, c: Math.PI / 2 },
     ];
     // 进行测试
     for (const { a, b, c } of testCases) {
