@@ -4,7 +4,7 @@
  * @param current 当前位置坐标 [[number, number]]
  * @param next 下一个位置坐标 [[number, number]]
  * @param destination 目标位置坐标 [[number, number]]
- * @param distanceMatrix 距离矩阵 [[[number, number], [number, number]], [[number, number], [number, number]]]
+ * @param distanceMatrix 距离矩阵
  * @returns 返回启发式信息
  */
 export function HeuristicInformation(
