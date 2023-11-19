@@ -50,4 +50,32 @@ describe("containedByFanArea函数测试", () => {
 
         assert.equal(result, true);
     });
+
+    it("测试用例1", () => {
+        let o = new Point(0, 0);
+        let p = new Point(1, 1);
+        let q = new Point(1, 0);
+        let ij = new Point(0, 1);
+
+        let result = containedByFanArea(o, p, q, ij);
+        assert.equal(result, true);
+    });
+    it("测试用例1", () => {
+        let o = new Point(0, 0);
+        let p = new Point(1, 1);
+        let q = new Point(1, 0);
+        let ij = new Point(2, 1);
+
+        let result = containedByFanArea(o, p, q, ij);
+        assert.equal(result, false);
+    });
+    it("测试用例1", () => {
+        let o = new Point(0, 0);
+        let p = new Point(1, 1);
+        let q = new Point(1, 0);
+        let ij = new Point(-2, -1);
+
+        let result = containedByFanArea(o, p, q, ij);
+        assert.equal(result, true);
+    });
 });
