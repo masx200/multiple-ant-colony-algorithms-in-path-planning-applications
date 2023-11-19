@@ -15,6 +15,12 @@ export function findVisibleGrids(
     startj: number,
     grid: GridMap
 ): [number, number][] {
+    // 定义障碍数组，用于标记障碍的网格
+    const obstacled: boolean[][] = Array(grid.column)
+        // 初始化访问数组
+        .fill(0)
+        // 生成行数为 grid.row，列数为 0 的二维数组
+        .map(() => Array(grid.row).fill(false));
     // 定义禁止数组，用于标记禁止的网格
     const blocked: boolean[][] = Array(grid.column)
         // 初始化访问数组
@@ -81,13 +87,14 @@ export function findVisibleGrids(
                 continue;
             }
             // 如果x或y是障碍物，则跳过
-            if (blocked[x][y]) {
+            if (blocked[x][y] || obstacled[x][y]) {
                 continue;
             }
             // 如果网格是障碍物，则将该网格标记为禁止
             if (grid.isObstacle(x, y)) {
                 // 如果网格是障碍物，则将该网格标记为禁止
                 blocked[x][y] = true;
+                obstacled[x][y] = true;
             }
         }
         // 如果当前网格可以到达起点网格
