@@ -1,6 +1,7 @@
 import { canReach } from "./canReach";
 import { GridMap } from "./grid-map";
 
+
 /**
  * 查找所有可见的网格
  *
@@ -14,6 +15,12 @@ export function findVisibleGrids(
     startj: number,
     grid: GridMap
 ): [number, number][] {
+    // 定义禁止数组，用于标记禁止的网格
+    const blocked: boolean[][] = Array(grid.column)
+        // 初始化访问数组
+        .fill(0)
+        // 生成行数为 grid.row，列数为 0 的二维数组
+        .map(() => Array(grid.row).fill(false));
     // 定义结果数组，用于存储符合条件的网格坐标
     const result: [number, number][] = [];
     // 定义访问数组，用于标记已访问的网格
@@ -48,6 +55,41 @@ export function findVisibleGrids(
         }
         // 将当前网格标记为已访问
         visited[i][j] = true;
+        /* 
+这段 TypeScript 代码似乎是在实现一种简单的路径查找算法，例如宽度优先搜索（BFS）或深度优先搜索（DFS）。代码的主要目的是遍历一个二维网格，可能代表一个地图或迷宫，并标记或跳过不同的网格点。
+
+这段代码中的主要部分是一个 for...of 循环，它遍历一个包含四个元素的数组，每个元素都是一个包含两个元素的数组，分别代表 x 和 y 坐标。这四个坐标分别表示当前格子周围的四个格子：上、下、左、右。
+
+对于每个坐标，代码首先检查这个坐标是否在网格的范围之外。如果是，那么它就跳过这个坐标，因为超出范围的坐标不可能是有效的路径点。
+
+然后，代码检查这个坐标是否已经被障碍物阻挡。如果是，那么它也跳过这个坐标。
+
+最后，如果这个坐标没有被障碍物阻挡，代码会检查这个坐标是否是一个障碍物。如果是，那么它将这个坐标标记为禁止。
+
+在这段代码中，"grid" 应该是一个对象，它有一个 row 和 column 属性，代表网格的行数和列数。它还有一个 isObstacle 方法，用来判断一个坐标是否是障碍物。另外，"blocked" 应该是一个二维数组，用来存储哪些坐标是禁止的。
+
+总的来说，这段代码在遍历一个二维网格并标记或跳过不同的坐标，以实现一种简单的路径查找算法。
+*/
+        for (const [x, y] of [
+            [i + 1, j],
+            [i - 1, j],
+            [i, j + 1],
+            [i, j - 1],
+        ]) {
+            // 如果x或y超出网格范围，则跳过
+            if (x < 0 || x >= grid.row || y < 0 || y >= grid.column) {
+                continue;
+            }
+            // 如果x或y是障碍物，则跳过
+            if (blocked[x][y]) {
+                continue;
+            }
+            // 如果网格是障碍物，则将该网格标记为禁止
+            if (grid.isObstacle(x, y)) {
+                // 如果网格是障碍物，则将该网格标记为禁止
+                blocked[x][y] = true;
+            }
+        }
         // 如果当前网格可以到达起点网格
         if (canReach([starti, startj], [i, j], grid)) {
             // 将当前网格添加到结果数组中
