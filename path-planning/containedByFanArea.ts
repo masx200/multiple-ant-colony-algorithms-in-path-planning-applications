@@ -1,5 +1,6 @@
 import { Point } from "./Point";
 import { VecFromTo } from "./VecFromTo";
+import { vectorAngle } from "./vectorAngle";
 
 /**
  * 判断一个点是否在一个扇形区域内
@@ -19,6 +20,8 @@ export function containedByFanArea(
     let op = VecFromTo(o, p),
         oq = VecFromTo(o, q),
         ox = VecFromTo(o, ij);
+    if (0 > vectorAngle([op.x, op.y], [oq.x, oq.y]))
+        return !containedByFanArea(o, q, p, ij);
     if (ox.x === 0 && ox.y === 0)
         // 零向量的方向不确定
         return true;
