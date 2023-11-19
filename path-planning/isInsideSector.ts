@@ -13,12 +13,18 @@ import { Point } from "./Point";
  * @returns 如果给定点在扇区内则返回true，否则返回false
  */
 export function isInsideSector(
+    // 任意一点
     point: Point,
+    // 圆心
     center: Point,
+    // "起始臂"
     sectorStart: Point,
+    // "结束臂"
     sectorEnd: Point,
+    // 最小半径的平方
     min_radiusSquared: number
 ) {
+    // 计算相对坐标
     //point即为任意一点,sectorStart即为"start arm", 同理sectorEnd.
     const relPoint: Point = {
         x: point.x - center.x,
@@ -26,8 +32,10 @@ export function isInsideSector(
     };
 
     return (
+        // 判断点不在扇形的起始臂并且在扇形的结束臂内
         !areClockWise(sectorStart, relPoint) &&
         areClockWise(sectorEnd, relPoint) &&
+        // 判断点不在指定半径内
         !isWithinRadius(relPoint, min_radiusSquared)
     );
 }

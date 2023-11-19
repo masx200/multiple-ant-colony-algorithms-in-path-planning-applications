@@ -8,5 +8,6 @@ import { Point } from "./Point";
  * @returns 如果点在圆内返回true，否则返回false
  */
 export function isWithinRadius(v: Point, radiusSquared: number) {
+    // 判断点v是否在半径为radiusSquared的圆内
     return v.x * v.x + v.y * v.y <= radiusSquared;
 }
