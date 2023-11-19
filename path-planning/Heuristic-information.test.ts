@@ -50,5 +50,7 @@ function createDistanceMatrix() {
                         )
                 )
         );
+    console.log(JSON.stringify(res));
+    console.log(res[1][2][3][4], res[3][4][5][6]);
     return res;
 }
