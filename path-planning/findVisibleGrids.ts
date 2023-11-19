@@ -83,7 +83,7 @@ export function findVisibleGrids(
                 continue;
             }
             // 如果x或y是障碍物，则跳过
-            if (blocked[x][y]) {
+            if (blocked[x][y] || visited[i][j]) {
                 continue;
             }
             // 如果网格是障碍物，则将该网格标记为禁止
