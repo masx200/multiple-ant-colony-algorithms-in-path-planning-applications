@@ -1,26 +1,28 @@
+import { containedByFanArea } from "./containedByFanArea";
+
+/**
+ * 判断一个点是否在扇形区域内部
+ *
+ * @param i1 - 点的x坐标
+ * @param j1 - 点的y坐标
+ * @param x1 - 扇形区域的起点x坐标
+ * @param y1 - 扇形区域的起点y坐标
+ * @param x2 - 扇形区域的终点x坐标
+ * @param y2 - 扇形区域的终点y坐标
+ * @returns 如果点在扇形区域内则返回true，否则返回false
+ */
 export function isPointInSector(
-    i: number,
-    j: number,
+    i1: number,
+    j1: number,
     x1: number,
     y1: number,
     x2: number,
     y2: number
 ) {
-    // 计算OA和OB的长度
-    // const len1 = Math.sqrt(x1 * x1 + y1 * y1);
-    // const len2 = Math.sqrt(x2 * x2 + y2 * y2);
-    // 计算OA和OB的夹角
-    const angle1 = Math.atan2(y1, x1);
-    const angle2 = Math.atan2(y2, x2);
-    let theta = angle2 - angle1;
-    if (theta < 0) {
-        theta += 2 * Math.PI;
-    }
-    // 判断点(i,j)与扇形起点的连线与OA的夹角是否在θ的范围内
-    const pointAngle = Math.atan2(j - y1, i - x1);
-    if (pointAngle < angle1 && pointAngle + 2 * Math.PI > angle2) {
-        return true;
-    } else {
-        return false;
-    }
+    return containedByFanArea(
+        { x: 0, y: 0 },
+        { x: x2, y: y2 },
+        { x: x1, y: y1 },
+        { x: i1, y: j1 }
+    );
 }
