@@ -1,5 +1,9 @@
 import { canReach } from "./canReach";
+import { EuclideanDistance } from "./Euclidean-distance";
+import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1";
 import { GridMap } from "./grid-map";
+import { isInsideSector } from "./isInsideSector";
+import { Point } from "./Point";
 
 
 /**
@@ -34,7 +38,7 @@ export function findVisibleGrids(
     const stack: [number, number][] = [[starti, startj]];
 
     // 当栈不为空时，循环执行以下操作
-    while (stack.length > 0) {
+    loop0: while (stack.length > 0) {
         // 从栈中弹出一个网格坐标
         const [i, j] = stack.pop() as [number, number];
         if (
@@ -54,6 +58,37 @@ export function findVisibleGrids(
         ) {
             // 继续下一次循环，不进行任何操作
             continue;
+        }
+
+        for (const [x, y] of obstacled) {
+            const [minAngle, maxAngle] = getAngleRangeOfPointAndSquare1(
+                x,
+                y,
+                starti,
+                startj
+            );
+            const LocalStart = new Point(
+                Math.cos(minAngle),
+                Math.sin(minAngle)
+            );
+            const LocalEnd = new Point(Math.cos(maxAngle), Math.sin(maxAngle));
+            if (
+                isInsideSector(
+                    new Point(x, y),
+                    { x: starti, y: startj },
+                    LocalStart,
+                    LocalEnd,
+                    Math.max(
+                        EuclideanDistance(starti, startj, x - 0.5, y),
+                        EuclideanDistance(starti, startj, x + 0.5, y),
+                        EuclideanDistance(starti, startj, x, y - 0.5),
+                        EuclideanDistance(starti, startj, x, y + 0.5)
+                    )
+                )
+            ) {
+                blocked[x][y] = true;
+                continue loop0;
+            }
         }
         // 将当前网格标记为已访问
         visited[i][j] = true;
