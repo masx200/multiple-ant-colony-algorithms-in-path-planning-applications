@@ -7,7 +7,7 @@ import { Point } from "./Point";
 describe("containedByFanArea函数测试", () => {
     it("测试用例1", () => {
         let o = new Point(0, 0);
-        let p = new Point(2, 2);
+        let p = new Point(2, 0);
         let q = new Point(0, 2);
         let x = new Point(1, 1);
         let y = new Point(2, 2);

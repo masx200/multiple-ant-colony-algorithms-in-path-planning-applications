@@ -1,5 +1,6 @@
 import { containedByFanArea } from "./containedByFanArea";
 
+
 /**
  * 判断一个点是否在扇形区域内部
  *
@@ -21,8 +22,9 @@ export function isPointInSector(
 ) {
     return containedByFanArea(
         { x: 0, y: 0 },
-        { x: x2, y: y2 },
+
         { x: x1, y: y1 },
+        { x: x2, y: y2 },
         { x: i1, y: j1 }
     );
 }

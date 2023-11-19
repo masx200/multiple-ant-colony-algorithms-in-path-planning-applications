@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import { isInsideSector } from "./isInsideSector";
 import { Point } from "./Point";
 
+
 describe("isInsideSector", () => {
     test("isInsideSector - case 1", () => {
         const point: Point = { x: 0, y: 0 };
@@ -46,7 +47,7 @@ describe("isInsideSector", () => {
 
         expect(
             isInsideSector(point, center, sectorStart, sectorEnd, min_radius)
-        ).toBe(true);
+        ).toBe(false);
     });
     test("isInsideSector - case 3", () => {
         const point: Point = { x: 0, y: 0 };
