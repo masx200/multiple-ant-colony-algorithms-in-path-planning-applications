@@ -5,7 +5,6 @@ import { GridMap } from "./grid-map";
 import { isInsideSector } from "./isInsideSector";
 import { Point } from "./Point";
 
-
 /**
  * 查找所有可见的网格
  *
