@@ -2,6 +2,7 @@ import { areClockWise } from "./areClockWise";
 import { isWithinRadius } from "./isWithinRadius";
 import { Point } from "./Point";
 
+
 /**
  * 判断给定点是否在扇区内
  *
@@ -21,8 +22,8 @@ export function isInsideSector(
     sectorStart: Point,
     // "结束臂"
     sectorEnd: Point,
-    // 最小半径的平方
-    min_radiusSquared: number
+    // 最小半径
+    min_radius: number
 ) {
     // 计算相对坐标
     //point即为任意一点,sectorStart即为"start arm", 同理sectorEnd.
@@ -30,7 +31,7 @@ export function isInsideSector(
         x: point.x - center.x,
         y: point.y - center.y,
     };
-
+    const min_radiusSquared = Math.pow(min_radius, 2);
     return (
         // 判断点不在扇形的起始臂并且在扇形的结束臂内
         !areClockWise(sectorStart, relPoint) &&
