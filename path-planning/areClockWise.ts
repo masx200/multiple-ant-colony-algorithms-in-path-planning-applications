@@ -1,5 +1,6 @@
 import { Point } from "./Point";
 
+
 /**
  * 判断两个点是否顺时针排列
  *

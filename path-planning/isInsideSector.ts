@@ -2,6 +2,7 @@ import { areClockWise } from "./areClockWise";
 import { isWithinRadius } from "./isWithinRadius";
 import { Point } from "./Point";
 
+
 /**
  * 判断给定点是否在扇区内
  *
@@ -9,7 +10,7 @@ import { Point } from "./Point";
  * @param center 扇区中心点
  * @param sectorStart 扇区起始向量
  * @param sectorEnd 扇区终止向量
- * @param min_radiusSquared 扇区最小半径的平方
+ * @param min_radius 扇区最小半径
  * @returns 如果给定点在扇区内则返回true，否则返回false
  */
 export function isInsideSector(
