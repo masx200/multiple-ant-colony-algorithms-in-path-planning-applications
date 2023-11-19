@@ -1,4 +1,4 @@
-import { areClockWise } from "./areClockWise";
+import { isPointInSector } from "./isPointInSector";
 import { isWithinRadius } from "./isWithinRadius";
 import { Point } from "./Point";
 
@@ -34,8 +34,14 @@ export function isInsideSector(
     const min_radiusSquared = Math.pow(min_radius, 2);
     return (
         // 判断点不在扇形的起始臂并且在扇形的结束臂内
-        !areClockWise(sectorStart, relPoint) &&
-        areClockWise(sectorEnd, relPoint) &&
+        isPointInSector(
+            relPoint.x,
+            relPoint.y,
+            sectorStart.x,
+            sectorStart.y,
+            sectorEnd.x,
+            sectorEnd.y
+        ) &&
         // 判断点不在指定半径内
         !isWithinRadius(relPoint, min_radiusSquared)
     );
