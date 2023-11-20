@@ -1,6 +1,5 @@
 import { containedByFanArea } from "./containedByFanArea";
 
-
 /**
  * 判断一个点是否在扇形区域内部
  *

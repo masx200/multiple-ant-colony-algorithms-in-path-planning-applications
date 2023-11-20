@@ -2,7 +2,6 @@ import { expect } from "chai";
 import { describe, it } from "vitest";
 import { HeuristicInformation } from "./Heuristic-information.ts";
 
-
 describe("HeuristicInformation", function () {
     const current: [number, number] = [1, 2];
     const next: [number, number] = [3, 4];

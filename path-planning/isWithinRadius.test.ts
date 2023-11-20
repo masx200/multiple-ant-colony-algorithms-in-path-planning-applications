@@ -3,7 +3,6 @@ import { describe, it } from "vitest";
 import { isWithinRadius } from "./isWithinRadius";
 import { Point } from "./Point";
 
-
 describe("isWithinRadius 函数测试", () => {
     it("正常情况下的测试 - 在半径内的点", () => {
         let p1 = new Point(1, 1);

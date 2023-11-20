@@ -3,7 +3,6 @@ import { describe, it } from "vitest";
 import { Point } from "./Point";
 import { VecFromTo } from "./VecFromTo";
 
-
 describe("VecFromTo测试用例", () => {
     it("测试从点A到点B的向量", () => {
         let from = new Point(0, 0);

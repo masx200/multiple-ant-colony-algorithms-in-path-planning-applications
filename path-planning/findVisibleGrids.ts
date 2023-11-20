@@ -131,6 +131,8 @@ export function findVisibleGrids(
         if (canReach([starti, startj], [i, j], grid)) {
             // 将当前网格添加到结果数组中
             result.push([i, j]);
+        } else {
+            blocked[i][j] = true;
         }
         // 如果上方的网格未被访问且不是障碍物，则将该网格添加到栈中
         if (i - 1 >= 0 && !visited[i - 1][j] && !grid.isObstacle(i - 1, j)) {

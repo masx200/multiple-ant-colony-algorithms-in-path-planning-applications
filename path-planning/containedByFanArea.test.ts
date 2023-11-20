@@ -3,7 +3,6 @@ import { describe, it } from "vitest";
 import { containedByFanArea } from "./containedByFanArea";
 import { Point } from "./Point";
 
-
 describe("containedByFanArea函数测试", () => {
     it("测试用例1", () => {
         let o = new Point(0, 0);

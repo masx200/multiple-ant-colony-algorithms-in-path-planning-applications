@@ -1,6 +1,5 @@
 import { EuclideanDistance } from "./Euclidean-distance";
 
-
 /**
  * 计算二维网格中任意两点之间的欧几里得距离的矩阵
  *

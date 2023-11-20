@@ -2,7 +2,6 @@ import { describe, expect, test } from "vitest";
 import { isInsideSector } from "./isInsideSector";
 import { Point } from "./Point";
 
-
 describe("isInsideSector", () => {
     test("isInsideSector - case 1", () => {
         const point: Point = { x: 0, y: 0 };

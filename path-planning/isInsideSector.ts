@@ -2,7 +2,6 @@ import { isPointInSector } from "./isPointInSector";
 import { isWithinRadius } from "./isWithinRadius";
 import { Point } from "./Point";
 
-
 /**
  * 判断给定点是否在扇区内
  *

@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { Vec } from "./Vec";
 
-
 describe("Vec", () => {
     it("构造函数", () => {
         let v = new Vec(1, 2);
