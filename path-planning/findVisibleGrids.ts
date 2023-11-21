@@ -135,25 +135,37 @@ export function findVisibleGrids(
             blocked[i][j] = true;
         }
         // 如果上方的网格未被访问且不是障碍物，则将该网格添加到栈中
-        if (i - 1 >= 0 && !visited[i - 1][j] && !grid.isObstacle(i - 1, j)) {
+        if (
+            i - 1 >= 0 &&
+            !visited[i - 1][j] &&
+            !grid.isObstacle(i - 1, j) &&
+            !blocked[i - 1][j]
+        ) {
             stack.push([i - 1, j]);
         }
         // 如果下方的网格未被访问且不是障碍物，则将该网格添加到栈中
         if (
             i + 1 < grid.row &&
             !visited[i + 1][j] &&
+            !blocked[i + 1][j] &&
             !grid.isObstacle(i + 1, j)
         ) {
             stack.push([i + 1, j]);
         }
         // 如果左方的网格未被访问且不是障碍物，则将该网格添加到栈中
-        if (j - 1 >= 0 && !visited[i][j - 1] && !grid.isObstacle(i, j - 1)) {
+        if (
+            j - 1 >= 0 &&
+            !visited[i][j - 1] &&
+            !blocked[i][j - 1] &&
+            !grid.isObstacle(i, j - 1)
+        ) {
             stack.push([i, j - 1]);
         }
         // 如果右方的网格未被访问且不是障碍物，则将该网格添加到栈中
         if (
             j + 1 < grid.column &&
             !visited[i][j + 1] &&
+            !blocked[i][j + 1] &&
             !grid.isObstacle(i, j + 1)
         ) {
             stack.push([i, j + 1]);
