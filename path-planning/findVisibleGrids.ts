@@ -18,6 +18,7 @@ export function findVisibleGrids(
     startj: number,
     grid: GridMap
 ): [number, number][] {
+    if (grid.isObstacle(starti, startj)) return [];
     // 定义障碍数组，用于标记障碍的网格
     const obstacled: [number, number][] = [] as [number, number][]; // 定义禁止数组，用于标记禁止的网格
     const blocked: boolean[][] = Array(grid.column)
