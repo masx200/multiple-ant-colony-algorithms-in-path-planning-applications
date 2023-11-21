@@ -2,7 +2,7 @@ import { canReach } from "./canReach";
 import { EuclideanDistance } from "./Euclidean-distance";
 import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1";
 import { GridMap } from "./grid-map";
-import { isInsideSector } from "./isInsideSector";
+import { isInsideSectorWithRadius } from "./isInsideSectorWithRadius";
 import { Point } from "./Point";
 
 /**
@@ -72,7 +72,7 @@ export function findVisibleGrids(
             );
             const LocalEnd = new Point(Math.cos(maxAngle), Math.sin(maxAngle));
             if (
-                isInsideSector(
+                isInsideSectorWithRadius(
                     new Point(x, y),
                     { x: starti, y: startj },
                     LocalStart,

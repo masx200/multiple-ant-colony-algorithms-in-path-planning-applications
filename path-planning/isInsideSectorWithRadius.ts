@@ -12,7 +12,7 @@ import { Point } from "./Point";
  * @param min_radius 扇区最小半径
  * @returns 如果给定点在扇区内则返回true，否则返回false
  */
-export function isInsideSector(
+export function isInsideSectorWithRadius(
     // 任意一点
     point: Point,
     // 圆心
@@ -30,7 +30,7 @@ export function isInsideSector(
         x: point.x - center.x,
         y: point.y - center.y,
     };
-    const min_radiusSquared = Math.pow(min_radius, 2);
+
     return (
         // 判断点不在扇形的起始臂并且在扇形的结束臂内
         isPointInSector(
@@ -42,6 +42,6 @@ export function isInsideSector(
             sectorEnd.y
         ) &&
         // 判断点不在指定半径内
-        !isWithinRadius(relPoint, min_radiusSquared)
+        !isWithinRadius(relPoint, min_radius)
     );
 }
