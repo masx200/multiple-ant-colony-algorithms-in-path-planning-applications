@@ -46,11 +46,11 @@ export function findVisibleGrids(
             // 如果网格坐标越界了
             i < 0 ||
             // 或者网格坐标超出网格行数范围
-            i >= grid.row ||
+            i >= grid.column ||
             // 或者网格坐标超出网格列数范围
             j < 0 ||
             // 或者网格坐标超出网格列数范围
-            j >= grid.column ||
+            j >= grid.row ||
             // 或者当前网格是障碍物
             grid.isObstacle(i, j) ||
             // 或者该网格已经被访问过了
@@ -115,7 +115,7 @@ export function findVisibleGrids(
             [i, j - 1],
         ]) {
             // 如果x或y超出网格范围，则跳过
-            if (x < 0 || x >= grid.row || y < 0 || y >= grid.column) {
+            if (x < 0 || x >= grid.column || y < 0 || y >= grid.row) {
                 continue;
             }
             // 如果x或y是障碍物，则跳过
@@ -148,7 +148,7 @@ export function findVisibleGrids(
         }
         // 如果下方的网格未被访问且不是障碍物，则将该网格添加到栈中
         if (
-            i + 1 < grid.row &&
+            i + 1 < grid.column &&
             !visited[i + 1][j] &&
             !blocked[i + 1][j] &&
             !grid.isObstacle(i + 1, j)
@@ -166,7 +166,7 @@ export function findVisibleGrids(
         }
         // 如果右方的网格未被访问且不是障碍物，则将该网格添加到栈中
         if (
-            j + 1 < grid.column &&
+            j + 1 < grid.row &&
             !visited[i][j + 1] &&
             !blocked[i][j + 1] &&
             !grid.isObstacle(i, j + 1)
