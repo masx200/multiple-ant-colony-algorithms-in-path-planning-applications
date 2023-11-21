@@ -20,25 +20,28 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
     const config: UserConfig = {
         worker: {
             format: "es",
-            plugins: [
-                babel({
-                    sourceMaps: true,
-                    babelHelpers: "bundled",
-                    exclude: [/node_modules/],
-                    extensions: [".ts", ".js"],
-                    plugins: [
-                        [
-                            "babel-plugin-import",
-                            {
-                                libraryName: "lodash",
-                                libraryDirectory: "",
-                                camel2DashComponentName: false,
-                            },
+            plugins: () =>
+                [
+                    babel({
+                        sourceMaps: true,
+                        babelHelpers: "bundled",
+                        exclude: [/node_modules/],
+                        extensions: [".ts", ".js"],
+                        plugins: [
+                            [
+                                "babel-plugin-import",
+                                {
+                                    libraryName: "lodash",
+                                    libraryDirectory: "",
+                                    camel2DashComponentName: false,
+                                },
+                            ],
+                            [
+                                "@babel/plugin-proposal-async-generator-functions",
+                            ],
                         ],
-                        ["@babel/plugin-proposal-async-generator-functions"],
-                    ],
-                }) as PluginOption,
-            ] as PluginOption[],
+                    }) as PluginOption,
+                ] as PluginOption[],
         },
         esbuild: {
             legalComments: "none",
