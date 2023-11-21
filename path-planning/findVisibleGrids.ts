@@ -5,6 +5,7 @@ import { GridMap } from "./grid-map";
 import { isInsideSectorWithRadius } from "./isInsideSectorWithRadius";
 import { Point } from "./Point";
 
+
 /**
  * 查找所有可见的网格
  *
@@ -16,7 +17,7 @@ import { Point } from "./Point";
 export function findVisibleGrids(
     starti: number,
     startj: number,
-    grid: GridMap
+    grid: GridMap,
 ): [number, number][] {
     if (grid.isObstacle(starti, startj)) return [];
     // 定义障碍数组，用于标记障碍的网格
@@ -65,16 +66,16 @@ export function findVisibleGrids(
                 x,
                 y,
                 starti,
-                startj
+                startj,
             );
             const LocalStart = new Point(
                 Math.cos(minAngle),
-                Math.sin(minAngle)
+                Math.sin(minAngle),
             );
             const LocalEnd = new Point(Math.cos(maxAngle), Math.sin(maxAngle));
             if (
                 isInsideSectorWithRadius(
-                    new Point(x, y),
+                    new Point(i, j),
                     { x: starti, y: startj },
                     LocalStart,
                     LocalEnd,
@@ -82,11 +83,11 @@ export function findVisibleGrids(
                         EuclideanDistance(starti, startj, x - 0.5, y),
                         EuclideanDistance(starti, startj, x + 0.5, y),
                         EuclideanDistance(starti, startj, x, y - 0.5),
-                        EuclideanDistance(starti, startj, x, y + 0.5)
-                    )
+                        EuclideanDistance(starti, startj, x, y + 0.5),
+                    ),
                 )
             ) {
-                blocked[x][y] = true;
+                blocked[i][j] = true;
                 continue loop0;
             }
         }
@@ -118,7 +119,7 @@ export function findVisibleGrids(
                 continue;
             }
             // 如果x或y是障碍物，则跳过
-            if (blocked[x][y] || visited[i][j]) {
+            if (blocked[x][y] || visited[x][y]) {
                 continue;
             }
             // 如果网格是障碍物，则将该网格标记为禁止
@@ -134,6 +135,7 @@ export function findVisibleGrids(
             result.push([i, j]);
         } else {
             blocked[i][j] = true;
+            continue loop0;
         }
         // 如果上方的网格未被访问且不是障碍物，则将该网格添加到栈中
         if (

@@ -53,6 +53,6 @@ export class GridMap {
         // 数据，默认为大小为 column x row 的二维数组，所有元素初始化为0
         public data: number[][] = Array(column)
             .fill(0)
-            .map(() => Array(row).fill(0))
+            .map(() => Array(row).fill(0)),
     ) {}
 }

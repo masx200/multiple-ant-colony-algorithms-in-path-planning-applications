@@ -5,7 +5,7 @@ import { GridMap } from "./grid-map";
  *
  * @param column 网格列数
  * @param row 网格行数
- * @param ObstacleProbability 障碍物出现概率
+ * @param obstacleProbability 障碍物出现概率
  * @returns 返回生成的网格地图
  */
 export function buildRandomGrid(
@@ -14,7 +14,7 @@ export function buildRandomGrid(
     // 行数
     row: number,
     // 障碍物出现的概率
-    ObstacleProbability: number
+    obstacleProbability: number,
 ): GridMap {
     // 创建一个网格对象
     const grid = new GridMap(column, row);
@@ -23,7 +23,7 @@ export function buildRandomGrid(
         // 遍历每一行
         for (let j = 0; j < row; j++) {
             // 如果随机数小于障碍物出现的概率
-            if (Math.random() < ObstacleProbability) {
+            if (Math.random() < obstacleProbability) {
                 // 在网格上设置障碍物
                 grid.setObstacle(i, j);
             } else {
