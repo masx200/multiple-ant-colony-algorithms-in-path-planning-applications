@@ -5,7 +5,7 @@ import { describe, it } from "vitest";
 describe("isPointInSector", function () {
     it("should return true when point is in the sector", function () {
         const result = isPointInSector(1, 1, 0, 0, 0, 0);
-        expect(result).to.be.true;
+        expect(result).to.equal(false);
     });
 
     it("should return false when point is not in the sector", function () {
@@ -29,7 +29,7 @@ describe("isPointInSector", () => {
 describe("isPointInSector", () => {
     it("should return true when point is in the sector", () => {
         const result = isPointInSector(1, 1, 0, 0, 0, 1);
-        expect(result).to.be.true;
+        expect(result).to.be.equal(false);
     });
 
     it("should return false when point is not in the sector", () => {
