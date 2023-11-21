@@ -2,6 +2,7 @@ import { test } from "vitest";
 import { buildRandomGrid } from "./buildRandomGrid";
 import { findVisibleGrids } from "./findVisibleGrids";
 
+
 test("findVisibleGrids", () => {
     const column = Math.floor(4 + 25 * Math.random());
     const row = Math.floor(3 + 26 * Math.random());
@@ -12,6 +13,17 @@ test("findVisibleGrids", () => {
     const starti = Math.floor(Math.random() * column);
     const visibleGrids = findVisibleGrids(starti, startj, grid);
 
+    const res = Array(column)
+        .fill(0)
+        .map((_q, x) =>
+            Array(row)
+                .fill(0)
+                .map((_p, y) => grid.data[x][y]),
+        );
+    for (const [x, y] of visibleGrids) {
+        res[x][y] += 10;
+    }
+    res[starti][startj] += 100;
     console.log(
         JSON.stringify({
             column,
@@ -23,4 +35,5 @@ test("findVisibleGrids", () => {
             obstacleProbability,
         }),
     );
+    console.log(JSON.stringify(res));
 });
