@@ -20,8 +20,7 @@ export function findVisibleGrids(
 ): [number, number][] {
     const result: [number, number][] = [];
     if (grid.isObstacle(starti, startj)) return [];
-    // 定义障碍数组，用于标记障碍的网格
-    // const minheap: [number, number][] = [[starti, startj]];
+
     const distances: number[][] = Array(grid.data.length)
         .fill(0)
         .map((_v, i) =>
@@ -29,8 +28,10 @@ export function findVisibleGrids(
                 .fill(Infinity)
                 .map((_p, j) => EuclideanDistance(starti, startj, i, j))
         );
+    // 使用最小堆来存储网格坐标，按照距离的远近进行排序
     const minheap = new MinHeap<[number, number]>(([x, y]) => distances[x][y]);
     minheap.push([starti, startj]);
+    // 记录访问过的网格，避免重复访问
     const visited: boolean[][] = Array(grid.data.length)
         .fill(0)
         .map(() => Array(grid.data[0].length).fill(false));
@@ -38,7 +39,13 @@ export function findVisibleGrids(
     while (minheap.size() > 0) {
         const [x, y] = minheap.pop() as [number, number];
         visited[x][y] = true;
-
+        if (
+            !(starti == x && startj == y) &&
+            canReach([starti, startj], [x, y], grid)
+        ) {
+            result.push([x, y]);
+        }
+        // 上下左右四个方向进行遍历
         if (x > 0 && !visited[x - 1][y]) {
             minheap.push([x - 1, y]);
         }
@@ -54,9 +61,5 @@ export function findVisibleGrids(
     }
 
     // 返回结果数组，即所有符合条件的网格坐标
-    return result.filter(
-        ([x, y]) =>
-            !(x === starti && y === startj) &&
-            canReach([starti, startj], [x, y], grid)
-    );
+    return result;
 }
