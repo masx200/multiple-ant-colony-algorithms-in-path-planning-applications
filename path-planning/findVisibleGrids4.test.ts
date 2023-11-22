@@ -36,7 +36,6 @@ test("findVisibleGrids", () => {
     const row = data.row;
 
     const grid = new GridMap(column, row, data.grid.data);
-    // console.log(grid);
 
     const starti = data.starti;
     const startj = data.startj;
@@ -62,10 +61,9 @@ test("findVisibleGrids", () => {
             [0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
             [
                 0, 1, 0, 1, 1, 1, 1, 1, 1,
-                //+     2,
-                //  +     2,
+
                 0,
-                // +     1,
+
                 0, +0, +1, +0,
             ],
             [0, 1, 1, 2, 2, 2, 2, 3, 2, 1, 1, 0, 0, 1],
