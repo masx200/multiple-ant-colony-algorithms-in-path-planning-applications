@@ -40,6 +40,7 @@ export function findVisibleGrids(
         const [x, y] = minheap.pop() as [number, number];
         visited[x][y] = true;
         if (
+            grid.isFree(x, y) &&
             !(starti == x && startj == y) &&
             canReach([starti, startj], [x, y], grid)
         ) {
