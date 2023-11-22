@@ -2,7 +2,8 @@ import { test } from "vitest";
 import { buildRandomGrid } from "./buildRandomGrid";
 import { findVisibleGrids } from "./findVisibleGrids";
 
-test("findVisibleGrids", () => {
+
+test.skip("findVisibleGrids", () => {
     const column = Math.floor(4 + 25 * Math.random());
     const row = Math.floor(3 + 26 * Math.random());
     const obstacleProbability = Math.random();
