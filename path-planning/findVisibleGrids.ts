@@ -19,8 +19,10 @@ export function findVisibleGrids(
     grid: GridMap,
 ): [number, number][] {
     const result: [number, number][] = [];
+    // 如果起始位置是障碍物，则返回空数组
     if (grid.isObstacle(starti, startj)) return [];
 
+    // 初始化距离数组，距离从近到远，初始值设置为无穷大
     const distances: number[][] = Array(grid.data.length)
         .fill(0)
         .map(
@@ -34,21 +36,26 @@ export function findVisibleGrids(
             : ((distances[x][y] = EuclideanDistance(starti, startj, x, y)),
               distances[x][y]);
     });
+    // 将起始位置添加到最小堆中
     minheap.push([starti, startj]);
     // 记录访问过的网格，避免重复访问
     const visited: boolean[][] = Array(grid.data.length)
         .fill(0)
         .map(() => Array(grid.data[0].length).fill(false));
 
+    // 当最小堆不为空时，循环查找
     while (minheap.size() > 0) {
+        // 从最小堆中取出一个坐标
         const [x, y] = minheap.pop() as [number, number];
-        //范围判断,如果范围错误就跳过
+        // 范围判断,如果范围错误就跳过
         if (x < 0 || x >= grid.data.length) continue;
         if (y < 0 || y >= grid.data[0].length) continue;
         if (grid.isObstacle(x, y)) continue;
 
+        // 如果该位置已被访问过，则跳过
         if (visited[x][y]) continue;
         visited[x][y] = true;
+        // 如果该位置是空闲的，且不是起始位置，且可以直接到达，则将其加入结果数组
         if (
             grid.isFree(x, y) &&
             !(starti == x && startj == y) &&
