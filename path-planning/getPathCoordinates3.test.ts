@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, test } from "vitest";
 import { getPathCoordinates } from "./getPathCoordinates";
 
 describe("getPathCoordinates3", () => {
@@ -20,4 +20,32 @@ describe("getPathCoordinates3", () => {
     it("getPathCoordinates3", () => {
         expect(getPathCoordinates([10, 10], [10, 10])).toEqual([[10, 10]]);
     });
+});
+test("getPathCoordinates", () => {
+    expect(getPathCoordinates([7, 7], [0, 7])).toEqual(
+        [
+            [+7, +7],
+            [+7, +6],
+            [+7, +5],
+            [+7, +4],
+            [+7, +3],
+            [+7, +2],
+            [+7, +1],
+            [+7, +0],
+        ].map((a) => a.reverse())
+    );
+    expect(getPathCoordinates([0, 7], [7, 7])).toEqual(
+        [
+            [+7, +7],
+            [+7, +6],
+            [+7, +5],
+            [+7, +4],
+            [+7, +3],
+            [+7, +2],
+            [+7, +1],
+            [+7, +0],
+        ]
+            .reverse()
+            .map((a) => a.reverse())
+    );
 });
