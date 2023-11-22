@@ -64,7 +64,7 @@ test("findVisibleGrids", () => {
         res[x][y] += 10;
     }
     res[starti][startj] += 100;
-
+    assert.equal(visibleGrids.length, 183);
     assert.deepStrictEqual(
         [
             [
@@ -107,7 +107,7 @@ test("findVisibleGrids", () => {
                 10, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 10, 10, 10, 10,
             ],
-        ],
-        res,
+        ].map((a) => a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v))),
+        res.map((a) => a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v))),
     );
 });

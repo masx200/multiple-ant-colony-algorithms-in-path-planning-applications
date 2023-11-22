@@ -17,7 +17,7 @@ test("findVisibleGrids", () => {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
     ]);
-    console.log(grid);
+    // console.log(grid);
 
     const starti = 5;
     const startj = 13;
@@ -34,7 +34,7 @@ test("findVisibleGrids", () => {
         res[x][y] += 10;
     }
     res[starti][startj] += 100;
-
+    assert.equal(visibleGrids.length, 42);
     assert.deepStrictEqual(
         [
             [0, 0, 0, 0, 10, 10, 1, 10, 10, 0, 0, 10, 10, 10, 10],
@@ -46,7 +46,7 @@ test("findVisibleGrids", () => {
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 1, 10],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 0, 0, 10],
             [0, 0, 0, 0, 0, 0, 0, 1, 10, 10, 10, 10, 0, 0, 0],
-        ],
-        res,
+        ].map((a) => a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v))),
+        res.map((a) => a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v))),
     );
 });
