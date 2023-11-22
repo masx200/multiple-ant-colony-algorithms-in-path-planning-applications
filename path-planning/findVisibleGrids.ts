@@ -5,9 +5,10 @@ import { GridMap } from "./grid-map";
 import { isInsideSectorWithRadius } from "./isInsideSectorWithRadius";
 import { Point } from "./Point";
 
-
 /**
  * 查找所有可见的网格
+ *
+ * 使用广度优先搜索,和优先级队列,距离从近到远,添加角度的范围模块,遇到障碍物就禁止被遮挡的角度,如果所有角度都禁止了,就停止搜索
  *
  * @param starti 起始行索引
  * @param startj 起始列索引
@@ -17,7 +18,7 @@ import { Point } from "./Point";
 export function findVisibleGrids(
     starti: number,
     startj: number,
-    grid: GridMap,
+    grid: GridMap
 ): [number, number][] {
     if (grid.isObstacle(starti, startj)) return [];
     // 定义障碍数组，用于标记障碍的网格
@@ -66,11 +67,11 @@ export function findVisibleGrids(
                 x,
                 y,
                 starti,
-                startj,
+                startj
             );
             const LocalStart = new Point(
                 Math.cos(minAngle),
-                Math.sin(minAngle),
+                Math.sin(minAngle)
             );
             const LocalEnd = new Point(Math.cos(maxAngle), Math.sin(maxAngle));
             if (
@@ -83,8 +84,8 @@ export function findVisibleGrids(
                         EuclideanDistance(starti, startj, x - 0.5, y),
                         EuclideanDistance(starti, startj, x + 0.5, y),
                         EuclideanDistance(starti, startj, x, y - 0.5),
-                        EuclideanDistance(starti, startj, x, y + 0.5),
-                    ),
+                        EuclideanDistance(starti, startj, x, y + 0.5)
+                    )
                 )
             ) {
                 blocked[i][j] = true;
