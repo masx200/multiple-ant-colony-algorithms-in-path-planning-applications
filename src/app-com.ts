@@ -71,24 +71,24 @@ export default defineComponent({
                 const title_text = 迭代次数和全局最优路径长度;
                 const datas: [number, number][][] =
                     IterationDataOfIndividualPopulations.map((a) =>
-                        a.map((d, i) => [i + 1, d.global_best_length]),
+                        a.map((d, i) => [i + 1, d.global_best_length])
                     );
                 return createMultipleLinesChartOptions({
                     yAxis_min: 0,
                     title_text,
                     datas: datas,
                 });
-            },
+            }
         );
         const count_of_populations = computed(
             () =>
                 input_options.number_of_the_second_type_of_population +
-                input_options.number_of_populations_of_the_first_category,
+                input_options.number_of_populations_of_the_first_category
         );
         const search_rounds_all = computed({
             get() {
                 return Math.floor(
-                    searchrounds.value * count_of_populations.value,
+                    searchrounds.value * count_of_populations.value
                 );
             },
             set(v) {
@@ -112,7 +112,7 @@ export default defineComponent({
             optionsOfIterationAndIterationWorstLength,
             // onUpdateRouteDataOfIndividualPopulations,
         } = useOptionsOfRoutesAndRouteLengthChart(
-            IterationDataOfIndividualPopulationsRef,
+            IterationDataOfIndividualPopulationsRef
         );
         const selected_value = ref(TSP_cities_data[0]);
         const selected_node_coordinates = ref<NodeCoordinates>();
@@ -174,7 +174,7 @@ export default defineComponent({
                     | {
                           addEventListener: (
                               arg0: string,
-                              arg1: () => void,
+                              arg1: () => void
                           ) => void;
                           release: () => Promise<void>;
                       }
@@ -248,7 +248,7 @@ export default defineComponent({
         const optionsOfIterationAndIterationBestLength: Ref<ECBasicOption> =
             computed(() => {
                 return get_options_route_number_and_best_length_chart(
-                    IterationDataOfIndividualPopulationsRef.value,
+                    IterationDataOfIndividualPopulationsRef.value
                 );
             });
         const submit = async () => {
@@ -345,7 +345,7 @@ export default defineComponent({
             // onReceiveDeltadataOfAllIterations(data.data_of_routes);
 
             onUpdateIterationDataOfIndividualPopulations(
-                data.IterationDataOfIndividualPopulations,
+                data.IterationDataOfIndividualPopulations
             );
             // onUpdateRouteDataOfIndividualPopulations(
             //     data.RouteDataOfIndividualPopulations
@@ -449,7 +449,7 @@ export default defineComponent({
         const beta_zero = computed(() => input_options.beta_zero);
 
         const max_routes_of_greedy = computed(
-            () => input_options.max_routes_of_greedy,
+            () => input_options.max_routes_of_greedy
         );
         // const 显示每次迭代的统计 = ref(false);
         return {

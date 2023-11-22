@@ -70,7 +70,7 @@ describe("canReach", () => {
             row,
             Array(column)
                 .fill(1)
-                .map(() => Array(row).fill(1)),
+                .map(() => Array(row).fill(1))
         );
         expect(canReach(start, end, grid)).toBe(false);
     });

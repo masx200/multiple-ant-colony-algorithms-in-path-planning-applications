@@ -14,7 +14,7 @@ export function buildRandomGrid(
     // 行数
     row: number,
     // 障碍物出现的概率
-    obstacleProbability: number,
+    obstacleProbability: number
 ): GridMap {
     // 创建一个网格对象
     const grid = new GridMap(column, row);

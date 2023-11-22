@@ -22,7 +22,7 @@ export function isInsideSectorWithRadius(
     // "结束臂"
     sectorEnd: Point,
     // 最小半径
-    min_radius: number,
+    min_radius: number
 ) {
     // 计算相对坐标
     //point即为任意一点,sectorStart即为"start arm", 同理sectorEnd.
@@ -39,7 +39,7 @@ export function isInsideSectorWithRadius(
             sectorStart.x,
             sectorStart.y,
             sectorEnd.x,
-            sectorEnd.y,
+            sectorEnd.y
         ) &&
         // 判断点不在指定半径内
         !isWithinRadius(relPoint, min_radius)

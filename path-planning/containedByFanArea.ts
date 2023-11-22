@@ -15,7 +15,7 @@ export function containedByFanArea(
     o: Point,
     p: Point,
     q: Point,
-    ij: Point,
+    ij: Point
 ): boolean {
     let op = VecFromTo(o, p),
         oq = VecFromTo(o, q),

@@ -9,7 +9,7 @@ import { uniqBy } from "lodash-es";
  */
 export function getPathCoordinates(
     start: [number, number],
-    end: [number, number],
+    end: [number, number]
 ): [number, number][] {
     const path: [number, number][] = [];
     const [x1, y1] = start;
