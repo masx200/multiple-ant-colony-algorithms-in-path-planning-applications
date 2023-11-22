@@ -9,7 +9,7 @@ import { EuclideanDistance } from "./Euclidean-distance";
  */
 export function GridDistanceMatrix(
     column: number,
-    row: number,
+    row: number
 ): number[][][][] {
     // 定义一个四维数组 res，用于存储计算结果
     const res: number[][][][] = Array(column)
@@ -20,8 +20,8 @@ export function GridDistanceMatrix(
                 .map(() =>
                     Array(column)
                         .fill(0)
-                        .map(() => Array(row).fill(0) as number[]),
-                ),
+                        .map(() => Array(row).fill(0) as number[])
+                )
         );
     // console.log(res);
     // 遍历 grid 的列

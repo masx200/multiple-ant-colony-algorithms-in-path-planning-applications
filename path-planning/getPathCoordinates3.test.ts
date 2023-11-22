@@ -32,7 +32,7 @@ test("getPathCoordinates", () => {
             [+7, +2],
             [+7, +1],
             [+7, +0],
-        ].map((a) => a.reverse()),
+        ].map((a) => a.reverse())
     );
     expect(getPathCoordinates([0, 7], [7, 7])).toEqual(
         [
@@ -46,6 +46,6 @@ test("getPathCoordinates", () => {
             [+7, +0],
         ]
             .reverse()
-            .map((a) => a.reverse()),
+            .map((a) => a.reverse())
     );
 });

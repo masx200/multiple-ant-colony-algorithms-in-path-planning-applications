@@ -16,7 +16,7 @@ import { GridMap } from "./grid-map";
 export function findVisibleGrids(
     starti: number,
     startj: number,
-    grid: GridMap,
+    grid: GridMap
 ): [number, number][] {
     const result: [number, number][] = [];
     if (grid.isObstacle(starti, startj)) return [];
@@ -24,7 +24,7 @@ export function findVisibleGrids(
     const distances: number[][] = Array(grid.data.length)
         .fill(0)
         .map(
-            (/* _v, _i */) => Array(grid.data[0].length).fill(Infinity),
+            (/* _v, _i */) => Array(grid.data[0].length).fill(Infinity)
             //.map((_p, j) => EuclideanDistance(starti, startj, i, j))
         );
     // 使用最小堆来存储网格坐标，按照距离的远近进行排序
@@ -45,6 +45,7 @@ export function findVisibleGrids(
         //范围判断,如果范围错误就跳过
         if (x < 0 || x >= grid.data.length) continue;
         if (y < 0 || y >= grid.data[0].length) continue;
+        if (grid.isObstacle(x, y)) continue;
 
         if (visited[x][y]) continue;
         visited[x][y] = true;
@@ -55,19 +56,27 @@ export function findVisibleGrids(
         ) {
             result.push([x, y]);
         }
-        //4个斜方向(左上,右上,左下,右下)遍历
+        //4个方向(上,右，左,下)遍历，不能斜方向
 
         // 上下左右四个方向进行遍历
-        if (x > 0 && !visited[x - 1][y]) {
+        if (x > 0 && !visited[x - 1][y] && grid.isFree(x - 1, y)) {
             minheap.push([x - 1, y]);
         }
-        if (x < grid.data.length - 1 && !visited[x + 1][y]) {
+        if (
+            x < grid.data.length - 1 &&
+            !visited[x + 1][y] &&
+            grid.isFree(x + 1, y)
+        ) {
             minheap.push([x + 1, y]);
         }
-        if (y > 0 && !visited[x][y - 1]) {
+        if (y > 0 && !visited[x][y - 1] && grid.isFree(x, y - 1)) {
             minheap.push([x, y - 1]);
         }
-        if (y < grid.data[0].length - 1 && !visited[x][y + 1]) {
+        if (
+            y < grid.data[0].length - 1 &&
+            !visited[x][y + 1] &&
+            grid.isFree(x, y + 1)
+        ) {
             minheap.push([x, y + 1]);
         }
     }

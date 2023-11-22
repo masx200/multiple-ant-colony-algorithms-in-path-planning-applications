@@ -49,6 +49,6 @@ test("getPathCoordinates", () => {
             [+7, +2],
             [+7, +1],
             [+7, +0],
-        ].reverse(),
+        ].reverse()
     );
 });

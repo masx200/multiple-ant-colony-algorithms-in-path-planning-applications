@@ -30,7 +30,7 @@ describe("buildRandomGrid function", () => {
         }
         expect(obstaclesCount / (column * row)).toBeCloseTo(
             Math.round(column * row * ObstacleProbability) / (column * row),
-            1,
+            1
         );
     });
 });

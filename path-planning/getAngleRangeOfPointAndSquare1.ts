@@ -11,7 +11,7 @@ export function getAngleRangeOfPointAndSquare1(
     a: number,
     b: number,
     x: number,
-    y: number,
+    y: number
 ): [number, number] {
     // 计算四个角度值
     const angles = [
