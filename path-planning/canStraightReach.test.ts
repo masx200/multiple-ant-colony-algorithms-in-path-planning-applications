@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { canStraightReach } from "./canStraightReach";
 import { GridMap } from "./grid-map";
 
-describe("canReach", () => {
+describe("canStraightReach", () => {
     it("should return false when start is on edge of map", () => {
         const start: [number, number] = [0, 3];
         const end: [number, number] = [9, 2];
