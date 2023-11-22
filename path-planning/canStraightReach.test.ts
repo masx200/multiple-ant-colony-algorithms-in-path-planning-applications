@@ -82,7 +82,7 @@ describe("canStraightReach", () => {
         const data = Array(column)
             .fill(1)
             .map(() => Array(row).fill(1));
-        for (let index = 0; index < data.length; index++) {
+        for (let index = 0; index < column; index++) {
             data[index][5] = 1;
         }
         const grid = new GridMap(column, row, data);
@@ -96,7 +96,7 @@ describe("canStraightReach", () => {
         const data = Array(column)
             .fill(1)
             .map(() => Array(row).fill(1));
-        for (let index = 0; index < data.length; index++) {
+        for (let index = 0; index < row; index++) {
             data[5][index] = 1;
         }
         const grid = new GridMap(column, row, data);

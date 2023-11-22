@@ -43,7 +43,7 @@ test("findVisibleGrids", () => {
         .map((_q, x) =>
             Array(row)
                 .fill(0)
-                .map((_p, y) => grid.data[x][y])
+                .map((_p, y) => grid.data[x][y]),
         );
     for (const [x, y] of visibleGrids) {
         res[x][y] += 10;
@@ -65,6 +65,6 @@ test("findVisibleGrids", () => {
             [1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
             [1, 0, 1, 1, 0, 1, 1, 0, 0, 1],
         ],
-        res.map((a) => a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v)))
+        res.map((a) => a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v))),
     );
 });

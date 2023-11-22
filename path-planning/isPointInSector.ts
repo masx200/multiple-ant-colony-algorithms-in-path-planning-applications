@@ -17,13 +17,13 @@ export function isPointInSector(
     x1: number,
     y1: number,
     x2: number,
-    y2: number
+    y2: number,
 ) {
     return containedByFanArea(
         { x: 0, y: 0 },
 
         { x: x1, y: y1 },
         { x: x2, y: y2 },
-        { x: i1, y: j1 }
+        { x: i1, y: j1 },
     );
 }

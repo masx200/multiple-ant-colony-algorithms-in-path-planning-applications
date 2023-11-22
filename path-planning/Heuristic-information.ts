@@ -11,7 +11,7 @@ export function HeuristicInformation(
     current: [number, number],
     next: [number, number],
     destination: [number, number],
-    distanceMatrix: number[][][][]
+    distanceMatrix: number[][][][],
 ): number {
     return (
         // 计算当前节点到下一个节点的距离和目标节点到下一个节点的距离之和的倒数
