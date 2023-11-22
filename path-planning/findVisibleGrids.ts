@@ -1,5 +1,5 @@
 import { MinHeap } from "@datastructures-js/heap";
-import { canReach } from "./canReach";
+import { canStraightReach } from "./canStraightReach";
 import { EuclideanDistance } from "./Euclidean-distance";
 import { GridMap } from "./grid-map";
 
@@ -16,7 +16,7 @@ import { GridMap } from "./grid-map";
 export function findVisibleGrids(
     starti: number,
     startj: number,
-    grid: GridMap
+    grid: GridMap,
 ): [number, number][] {
     const result: [number, number][] = [];
     if (grid.isObstacle(starti, startj)) return [];
@@ -24,7 +24,7 @@ export function findVisibleGrids(
     const distances: number[][] = Array(grid.data.length)
         .fill(0)
         .map(
-            (/* _v, _i */) => Array(grid.data[0].length).fill(Infinity)
+            (/* _v, _i */) => Array(grid.data[0].length).fill(Infinity),
             //.map((_p, j) => EuclideanDistance(starti, startj, i, j))
         );
     // 使用最小堆来存储网格坐标，按照距离的远近进行排序
@@ -52,7 +52,7 @@ export function findVisibleGrids(
         if (
             grid.isFree(x, y) &&
             !(starti == x && startj == y) &&
-            canReach([starti, startj], [x, y], grid)
+            canStraightReach([starti, startj], [x, y], grid)
         ) {
             result.push([x, y]);
         }

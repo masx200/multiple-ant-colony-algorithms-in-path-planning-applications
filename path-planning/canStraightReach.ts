@@ -9,10 +9,10 @@ import { GridMap } from "./grid-map";
  * @param grid 地图数据
  * @returns 布尔值，表示是否能够到达终点
  */
-export function canReach(
+export function canStraightReach(
     start: [number, number],
     end: [number, number],
-    grid: GridMap
+    grid: GridMap,
 ): boolean {
     const [startCol, startRow] = start;
     const [endCol, endRow] = end;
