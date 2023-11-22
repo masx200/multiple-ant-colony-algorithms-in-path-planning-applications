@@ -5,7 +5,7 @@ import { GridMap } from "./grid-map";
 test("findVisibleGrids", () => {
     const column = 10;
     const row = 24;
-    // const obstacleProbability = Math.random();
+
     const grid = new GridMap(column, row, [
         [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
@@ -47,10 +47,10 @@ test("findVisibleGrids", () => {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0,
         ],
-    ]); //uildRandomGrid(column, row, obstacleProbability);
+    ]);
 
-    const startj = 7;
     const starti = 7;
+    const startj = 7;
     const visibleGrids = findVisibleGrids(starti, startj, grid);
 
     const res = Array(column)
@@ -58,24 +58,12 @@ test("findVisibleGrids", () => {
         .map((_q, x) =>
             Array(row)
                 .fill(0)
-                .map((_p, y) => grid.data[x][y])
+                .map((_p, y) => grid.data[x][y]),
         );
     for (const [x, y] of visibleGrids) {
         res[x][y] += 10;
     }
     res[starti][startj] += 100;
-    // console.log(
-    //     JSON.stringify({
-    //         column,
-    //         row,
-    //         starti,
-    //         startj,
-    //         visibleGrids,
-    //         grid,
-    //         // obstacleProbability,
-    //     })
-    // );
-    // console.log(JSON.stringify(res));
 
     assert.deepStrictEqual(
         [
@@ -120,6 +108,6 @@ test("findVisibleGrids", () => {
                 0, 10, 10, 10, 10,
             ],
         ],
-        res
+        res,
     );
 });
