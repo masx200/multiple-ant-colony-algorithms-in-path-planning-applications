@@ -1,7 +1,7 @@
+import { MinHeap } from "@datastructures-js/heap";
 import { canReach } from "./canReach";
 import { EuclideanDistance } from "./Euclidean-distance";
 import { GridMap } from "./grid-map";
-import { MinHeap } from "@datastructures-js/heap";
 
 /**
  * 查找所有可见的网格
@@ -28,12 +28,12 @@ export function findVisibleGrids(
             //.map((_p, j) => EuclideanDistance(starti, startj, i, j))
         );
     // 使用最小堆来存储网格坐标，按照距离的远近进行排序
-    const minheap = new MinHeap<[number, number]>(([x, y]) =>
-        Number.isFinite(distances[x][y])
+    const minheap = new MinHeap<[number, number]>(function ([x, y]) {
+        return Number.isFinite(distances[x][y])
             ? distances[x][y]
             : ((distances[x][y] = EuclideanDistance(starti, startj, x, y)),
-              distances[x][y])
-    );
+              distances[x][y]);
+    });
     minheap.push([starti, startj]);
     // 记录访问过的网格，避免重复访问
     const visited: boolean[][] = Array(grid.data.length)
