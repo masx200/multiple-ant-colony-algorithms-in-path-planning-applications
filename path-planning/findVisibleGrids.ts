@@ -23,13 +23,17 @@ export function findVisibleGrids(
 
     const distances: number[][] = Array(grid.data.length)
         .fill(0)
-        .map((_v, i) =>
-            Array(grid.data[0].length)
-                .fill(Infinity)
-                .map((_p, j) => EuclideanDistance(starti, startj, i, j))
+        .map(
+            (/* _v, _i */) => Array(grid.data[0].length).fill(Infinity)
+            //.map((_p, j) => EuclideanDistance(starti, startj, i, j))
         );
     // 使用最小堆来存储网格坐标，按照距离的远近进行排序
-    const minheap = new MinHeap<[number, number]>(([x, y]) => distances[x][y]);
+    const minheap = new MinHeap<[number, number]>(([x, y]) =>
+        Number.isFinite(distances[x][y])
+            ? distances[x][y]
+            : ((distances[x][y] = EuclideanDistance(starti, startj, x, y)),
+              distances[x][y])
+    );
     minheap.push([starti, startj]);
     // 记录访问过的网格，避免重复访问
     const visited: boolean[][] = Array(grid.data.length)
@@ -38,6 +42,8 @@ export function findVisibleGrids(
 
     while (minheap.size() > 0) {
         const [x, y] = minheap.pop() as [number, number];
+
+        if (visited[x][y]) continue;
         visited[x][y] = true;
         if (
             grid.isFree(x, y) &&
