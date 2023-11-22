@@ -13,7 +13,7 @@ describe("HeuristicInformation", function () {
             current,
             next,
             destination,
-            distanceMatrix
+            distanceMatrix,
         );
         expect(result).to.be.a("number");
     });
@@ -23,7 +23,7 @@ describe("HeuristicInformation", function () {
             current,
             next,
             destination,
-            distanceMatrix
+            distanceMatrix,
         );
         expect(result).to.be.closeTo(0.0005767012687427913, 0.0001);
     });
@@ -45,9 +45,9 @@ function createDistanceMatrix() {
                             () =>
                                 Array(row)
                                     .fill(0)
-                                    .map(() => k++) as number[]
-                        )
-                )
+                                    .map(() => k++) as number[],
+                        ),
+                ),
         );
     // console.log(JSON.stringify(res));
     // console.log(res[1][2][3][4], res[3][4][5][6]);

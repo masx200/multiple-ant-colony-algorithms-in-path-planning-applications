@@ -16,8 +16,8 @@ describe("isInsideSectorWithRadius", () => {
                 center,
                 sectorStart,
                 sectorEnd,
-                min_radius
-            )
+                min_radius,
+            ),
         ).toBe(true);
     });
 
@@ -34,8 +34,8 @@ describe("isInsideSectorWithRadius", () => {
                 center,
                 sectorStart,
                 sectorEnd,
-                min_radius
-            )
+                min_radius,
+            ),
         ).toBe(false);
     });
     test("isInsideSectorWithRadius - case 2", () => {
@@ -51,8 +51,8 @@ describe("isInsideSectorWithRadius", () => {
                 center,
                 sectorStart,
                 sectorEnd,
-                min_radius
-            )
+                min_radius,
+            ),
         ).toBe(false);
     });
     test("isInsideSectorWithRadius - case 2", () => {
@@ -68,8 +68,8 @@ describe("isInsideSectorWithRadius", () => {
                 center,
                 sectorStart,
                 sectorEnd,
-                min_radius
-            )
+                min_radius,
+            ),
         ).toBe(false);
     });
     test("isInsideSectorWithRadius - case 3", () => {
@@ -85,8 +85,8 @@ describe("isInsideSectorWithRadius", () => {
                 center,
                 sectorStart,
                 sectorEnd,
-                min_radius
-            )
+                min_radius,
+            ),
         ).toBe(false);
     });
     test("isInsideSectorWithRadius - case 3", () => {
@@ -102,8 +102,8 @@ describe("isInsideSectorWithRadius", () => {
                 center,
                 sectorStart,
                 sectorEnd,
-                min_radius
-            )
+                min_radius,
+            ),
         ).toBe(true);
     });
     test("isInsideSectorWithRadius - case 3", () => {
@@ -119,8 +119,8 @@ describe("isInsideSectorWithRadius", () => {
                 center,
                 sectorStart,
                 sectorEnd,
-                min_radius
-            )
+                min_radius,
+            ),
         ).toBe(false);
     });
     test("isInsideSectorWithRadius - case 4", () => {
@@ -136,8 +136,8 @@ describe("isInsideSectorWithRadius", () => {
                 center,
                 sectorStart,
                 sectorEnd,
-                min_radius
-            )
+                min_radius,
+            ),
         ).toBe(true);
     });
 });

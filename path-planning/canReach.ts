@@ -12,7 +12,7 @@ import { GridMap } from "./grid-map";
 export function canReach(
     start: [number, number],
     end: [number, number],
-    grid: GridMap
+    grid: GridMap,
 ): boolean {
     const [startCol, startRow] = start;
     const [endCol, endRow] = end;

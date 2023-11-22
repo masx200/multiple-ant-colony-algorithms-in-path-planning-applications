@@ -19,7 +19,7 @@ describe("vectorAngle", () => {
         assert.closeTo(
             vectorAngle([1, 2], [4, 5]),
             -0.21109333322274684,
-            1e-10
+            1e-10,
         );
     });
 
@@ -31,7 +31,7 @@ describe("vectorAngle", () => {
         assert.closeTo(
             vectorAngle([1, -2], [-4, 5]),
             -2.9304993203670464,
-            1e-10
+            1e-10,
         );
     });
 
@@ -39,7 +39,7 @@ describe("vectorAngle", () => {
         assert.closeTo(
             vectorAngle([1, -2], [-4, -5]),
             -1.1383885512243588,
-            1e-10
+            1e-10,
         );
     });
 });

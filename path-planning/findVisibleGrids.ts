@@ -16,7 +16,7 @@ import { GridMap } from "./grid-map";
 export function findVisibleGrids(
     starti: number,
     startj: number,
-    grid: GridMap
+    grid: GridMap,
 ): [number, number][] {
     const result: [number, number][] = [];
     if (grid.isObstacle(starti, startj)) return [];
@@ -24,7 +24,7 @@ export function findVisibleGrids(
     const distances: number[][] = Array(grid.data.length)
         .fill(0)
         .map(
-            (/* _v, _i */) => Array(grid.data[0].length).fill(Infinity)
+            (/* _v, _i */) => Array(grid.data[0].length).fill(Infinity),
             //.map((_p, j) => EuclideanDistance(starti, startj, i, j))
         );
     // 使用最小堆来存储网格坐标，按照距离的远近进行排序
