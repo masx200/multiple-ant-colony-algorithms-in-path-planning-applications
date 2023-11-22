@@ -2,7 +2,7 @@ import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 
 /**
- * 判断从起始点能否到达终点
+ * 判断从起始点能否通过一条直线到达终点
  *
  * @param start 起始点坐标
  * @param end 终点坐标
