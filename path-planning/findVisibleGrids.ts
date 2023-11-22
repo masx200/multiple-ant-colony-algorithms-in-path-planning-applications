@@ -42,6 +42,9 @@ export function findVisibleGrids(
 
     while (minheap.size() > 0) {
         const [x, y] = minheap.pop() as [number, number];
+        //范围判断,如果范围错误就跳过
+        if (x < 0 || x >= grid.data.length) continue;
+        if (y < 0 || y >= grid.data[0].length) continue;
 
         if (visited[x][y]) continue;
         visited[x][y] = true;
@@ -52,6 +55,8 @@ export function findVisibleGrids(
         ) {
             result.push([x, y]);
         }
+        //4个斜方向(左上,右上,左下,右下)遍历
+
         // 上下左右四个方向进行遍历
         if (x > 0 && !visited[x - 1][y]) {
             minheap.push([x - 1, y]);
