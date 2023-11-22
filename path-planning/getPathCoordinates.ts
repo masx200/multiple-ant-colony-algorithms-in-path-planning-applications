@@ -50,7 +50,10 @@ export function getPathCoordinates(
         // 如果 x1 == x2
         for (let i = 0; i < Math.abs(y2 - y1); i++) {
             // 当直线与y轴平行时，输出abs(y2-y1)个点
-            path.push([Math.round(x1), Math.round(y1 + i)]); // 四舍五入，保留整数位
+            path.push([
+                Math.round(x1),
+                Math.round(y1 + i * Math.sign(y2 - y1)),
+            ]); // 四舍五入，保留整数位
         }
     }
 
