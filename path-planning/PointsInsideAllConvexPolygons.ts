@@ -11,7 +11,7 @@ import { GridMap } from "./grid-map";
 export function PointsInsideAllConvexPolygons(
     grid: GridMap,
     visibleGridsMatrix: boolean[][][][],
-): [number, number][] {
+): Set<[number, number]> {
     console.log(grid);
     // 定义四个方向向量
     const dirs = [
@@ -185,5 +185,5 @@ export function PointsInsideAllConvexPolygons(
             }
         }
     }
-    return ans;
+    return new Set(ans);
 }
