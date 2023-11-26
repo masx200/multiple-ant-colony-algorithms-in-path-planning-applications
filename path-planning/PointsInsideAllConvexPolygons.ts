@@ -181,7 +181,10 @@ export function PointsInsideAllConvexPolygons(
                         }
                     });
                 }
-                console.log(pointsInConvexPolygonsToBeSearch);
+                console.log({
+                    AllPointsInConvexPolygons,
+                    pointsInConvexPolygonsToBeSearch,
+                });
             }
         }
     }
