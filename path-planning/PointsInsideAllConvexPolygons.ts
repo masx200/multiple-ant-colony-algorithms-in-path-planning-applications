@@ -9,7 +9,7 @@ export function PointsInsideAllConvexPolygons(
     const visited: boolean[][] = Array(grid.data.length)
         .fill(0)
         .map(() => Array(grid.data[0].length).fill(false));
-    // let ans = 0;
+    const ans: [number, number][] = [];
     for (let i = 0; i < m; i++) {
         for (let j = 0; j < n; j++) {
             if (grid.data[i][j] === 0 && !visited[i][j]) {
