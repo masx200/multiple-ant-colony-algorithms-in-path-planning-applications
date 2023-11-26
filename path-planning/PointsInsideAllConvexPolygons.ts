@@ -1,5 +1,6 @@
 import { GridMap } from "./grid-map";
 
+
 /**
  * 计算所有点被所有凸多边形包围的内部点
  *
@@ -41,7 +42,8 @@ export function PointsInsideAllConvexPolygons(
                 const stack: [number, number][] = [];
 
                 // 创建一个集合来存储当前凸包中的点
-                const pointsInConvexPolygons = new Set<string>();
+                const pointsInConvexPolygonsToBeSearch = new Set<string>();
+                const AllPointsInConvexPolygons = new Set<string>();
 
                 stack.push([i, j]);
 
@@ -49,7 +51,8 @@ export function PointsInsideAllConvexPolygons(
                 // visited[i][j] = true;
 
                 // 将当前格子添加到凸包中
-                pointsInConvexPolygons.add(JSON.stringify([i, j]));
+                pointsInConvexPolygonsToBeSearch.add(JSON.stringify([i, j]));
+                AllPointsInConvexPolygons.add(JSON.stringify([i, j]));
 
                 // 当栈不为空时，继续执行循环
                 while (stack.length) {
@@ -68,10 +71,10 @@ export function PointsInsideAllConvexPolygons(
                     const toBeDeleted = new Set<string>();
 
                     // 计数器，用来计算当前凸包中有多少个点与当前格子相邻
-                    const size = pointsInConvexPolygons.size;
+                    const size = pointsInConvexPolygonsToBeSearch.size;
                     let count = 0;
                     // 遍历当前凸包中的每一个点
-                    for (const point of pointsInConvexPolygons) {
+                    for (const point of pointsInConvexPolygonsToBeSearch) {
                         // 解析点的字符串表示，得到它的坐标
                         const pointArr = JSON.parse(point) as [number, number];
 
@@ -86,7 +89,7 @@ export function PointsInsideAllConvexPolygons(
                                     y >= 0 &&
                                     y < n &&
                                     grid.isFree(x, y) &&
-                                    pointsInConvexPolygons.has(
+                                    AllPointsInConvexPolygons.has(
                                         JSON.stringify([x, y]),
                                     )
                                 );
@@ -96,7 +99,7 @@ export function PointsInsideAllConvexPolygons(
                             ans.push(pointArr);
                         }
                     }
-                    for (const point of pointsInConvexPolygons) {
+                    for (const point of pointsInConvexPolygonsToBeSearch) {
                         const pointArr = JSON.parse(point) as [number, number];
 
                         // 如果这个点与当前格子相邻，并且它们之间没有障碍物
@@ -116,19 +119,22 @@ export function PointsInsideAllConvexPolygons(
                     console.log({ count, size });
                     // 删除所有需要删除的点
                     for (const point of toBeDeleted) {
-                        pointsInConvexPolygons.delete(point);
+                        pointsInConvexPolygonsToBeSearch.delete(point);
                     }
 
                     // 如果当前凸包中的点数量没有发生变化，则跳过当前格子
                     if (count !== size) {
                         continue;
                     } else {
-                        pointsInConvexPolygons.add(
+                        pointsInConvexPolygonsToBeSearch.add(
+                            JSON.stringify([curI, curJ]),
+                        );
+                        AllPointsInConvexPolygons.add(
                             JSON.stringify([curI, curJ]),
                         );
                     }
                     // 遍历当前凸包中的每一个点
-                    for (const point of pointsInConvexPolygons) {
+                    for (const point of pointsInConvexPolygonsToBeSearch) {
                         // 解析点的字符串表示，得到它的坐标
                         const pointArr = JSON.parse(point) as [number, number];
 
@@ -143,7 +149,7 @@ export function PointsInsideAllConvexPolygons(
                                     y >= 0 &&
                                     y < n &&
                                     grid.isFree(x, y) &&
-                                    pointsInConvexPolygons.has(
+                                    AllPointsInConvexPolygons.has(
                                         JSON.stringify([x, y]),
                                     )
                                 );
@@ -155,7 +161,7 @@ export function PointsInsideAllConvexPolygons(
                     }
                     // 删除所有需要删除的点
                     for (const point of toBeDeleted) {
-                        pointsInConvexPolygons.delete(point);
+                        pointsInConvexPolygonsToBeSearch.delete(point);
                     }
                     // 遍历当前格子的四个方向
                     dirs.forEach((dir) => {
@@ -175,7 +181,7 @@ export function PointsInsideAllConvexPolygons(
                         }
                     });
                 }
-                console.log(pointsInConvexPolygons);
+                console.log(pointsInConvexPolygonsToBeSearch);
             }
         }
     }

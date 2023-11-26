@@ -3,6 +3,7 @@ import { GridMap } from "./grid-map";
 import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
+
 describe("PointsInsideAllConvexPolygons", () => {
     test("测试点在一个凸多边形内部", () => {
         const grid = new GridMap(3, 3, [
@@ -38,7 +39,13 @@ describe("PointsInsideAllConvexPolygons", () => {
         const visibleGridsMatrix = VisibleGridsMatrix(grid);
 
         const result = PointsInsideAllConvexPolygons(grid, visibleGridsMatrix);
-        expect(new Set(result)).toEqual(new Set([[1, 2]]));
+        expect(new Set(result)).toEqual(
+            new Set([
+                [1, 2],
+                [1, 1],
+                [1, 3],
+            ]),
+        );
     });
     test("测试点在一个凸多边形内部", () => {
         const grid = new GridMap(3, 5, [
