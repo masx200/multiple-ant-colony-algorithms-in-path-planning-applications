@@ -4,6 +4,12 @@ export function PointsInsideAllConvexPolygons(
     grid: GridMap,
     visibleGridsMatrix: boolean[][][][],
 ): [number, number][] {
+    const dirs = [
+        [-1, 0],
+        [0, 1],
+        [1, 0],
+        [0, -1],
+    ];
     const m = grid.data.length;
     const n = grid.data[0].length;
     const visited: boolean[][] = Array(grid.data.length)
@@ -14,22 +20,18 @@ export function PointsInsideAllConvexPolygons(
         for (let j = 0; j < n; j++) {
             if (grid.data[i][j] === 0 && !visited[i][j]) {
                 const stack: [number, number][] = [];
-
+                //let area = 0;
                 stack.push([i, j]);
 
                 visited[i][j] = true;
                 while (stack.length) {
                     const [curI, curJ] = stack.pop() as [number, number];
                     //  area++;
-                    if (visited[curI][curJ]) {
+                    if (visited[curI][curJ] || grid.data[curI][curJ] === 1) {
                         continue;
                     }
-                    [
-                        [-1, 0],
-                        [0, 1],
-                        [1, 0],
-                        [0, -1],
-                    ].forEach((dir) => {
+
+                    dirs.forEach((dir) => {
                         const x = curI + dir[0];
                         const y = curJ + dir[1];
                         if (
@@ -37,10 +39,11 @@ export function PointsInsideAllConvexPolygons(
                             x < m &&
                             y >= 0 &&
                             y < n &&
-                            grid.data[x][y] === 0
+                            grid.data[x][y] === 0 &&
+                            !visited[x][y]
                         ) {
                             stack.push([x, y]);
-                            visited[i][j] = true;
+                            visited[x][y] = true;
                         }
                     });
                 }
