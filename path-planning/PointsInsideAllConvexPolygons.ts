@@ -82,6 +82,8 @@ export function PointsInsideAllConvexPolygons(
                             ]
                         ) {
                             count++;
+                        } else {
+                            break;
                         }
 
                         // 检查当前点是否满足凸性条件
