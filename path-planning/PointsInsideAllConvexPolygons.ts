@@ -1,5 +1,12 @@
 import { GridMap } from "./grid-map";
 
+/**
+ * 计算所有点被所有凸多边形包围的内部点
+ *
+ * @param grid 网格地图
+ * @param visibleGridsMatrix 可见网格矩阵
+ * @returns 被所有凸多边形包围的点的坐标数组
+ */
 export function PointsInsideAllConvexPolygons(
     grid: GridMap,
     visibleGridsMatrix: boolean[][][][],
