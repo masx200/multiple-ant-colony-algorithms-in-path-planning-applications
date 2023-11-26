@@ -119,6 +119,7 @@ describe("PointsInsideAllConvexPolygons", () => {
         );
         expect(new Set(result2)).toEqual(new Set([]));
     });
+
     test("测试点在一个凸多边形内部", () => {
         const grid = new GridMap(4, 5, [
             [0, 0, 0, 0, 0],
@@ -130,5 +131,35 @@ describe("PointsInsideAllConvexPolygons", () => {
 
         const result = PointsInsideAllConvexPolygons(grid, visibleGridsMatrix);
         expect(new Set(result)).toEqual(new Set([[2, 2]]));
+    });
+    test("测试点在一个凸多边形内部", () => {
+        const grid = new GridMap(4, 5, [
+            [0, 1, 0, 1, 0],
+            [1, 0, 1, 0, 1],
+            [0, 1, 0, 1, 0],
+            [1, 0, 1, 0, 1],
+        ]);
+        const visibleGridsMatrix = VisibleGridsMatrix(grid);
+
+        const result = PointsInsideAllConvexPolygons(grid, visibleGridsMatrix);
+        expect(new Set(result)).toEqual(new Set([]));
+    });
+    test("测试点在一个凸多边形内部", () => {
+        const grid = new GridMap(4, 5, [
+            [0, 1, 0, 0, 0],
+            [1, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0],
+            [1, 0, 1, 0, 1],
+        ]);
+        const visibleGridsMatrix = VisibleGridsMatrix(grid);
+
+        const result = PointsInsideAllConvexPolygons(grid, visibleGridsMatrix);
+        expect(new Set(result)).toEqual(
+            new Set([
+                [1, 2],
+                [1, 3],
+                [2, 3],
+            ]),
+        );
     });
 });
