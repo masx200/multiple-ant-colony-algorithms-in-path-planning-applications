@@ -1,5 +1,6 @@
 import { GridMap } from "./grid-map";
 
+
 /**
  * 计算所有点被所有凸多边形包围的内部点
  *
@@ -11,6 +12,7 @@ export function PointsInsideAllConvexPolygons(
     grid: GridMap,
     visibleGridsMatrix: boolean[][][][],
 ): [number, number][] {
+    console.log(grid);
     // 定义四个方向向量
     const dirs = [
         [-1, 0], // 向左
@@ -67,7 +69,7 @@ export function PointsInsideAllConvexPolygons(
                     const toBeDeleted = new Set<string>();
 
                     // 计数器，用来计算当前凸包中有多少个点与当前格子相邻
-                    let size = pointsInConvexPolygons.size;
+                    const size = pointsInConvexPolygons.size;
                     let count = 0;
 
                     // 遍历当前凸包中的每一个点
@@ -139,6 +141,7 @@ export function PointsInsideAllConvexPolygons(
                         }
                     });
                 }
+                console.log(pointsInConvexPolygons);
             }
         }
     }
