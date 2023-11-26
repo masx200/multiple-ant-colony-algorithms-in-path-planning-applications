@@ -57,7 +57,10 @@ export function PointsInsideAllConvexPolygons(
                                     x < m &&
                                     y >= 0 &&
                                     y < n &&
-                                    grid.isFree(x, y)
+                                    grid.isFree(x, y) &&
+                                    pointsInConvexPolygons.has(
+                                        JSON.stringify([x, y]),
+                                    )
                                 );
                             })
                         ) {
