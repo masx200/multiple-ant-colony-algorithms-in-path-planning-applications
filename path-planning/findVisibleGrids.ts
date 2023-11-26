@@ -66,9 +66,12 @@ export function findVisibleGrids(
         //4个方向(上,右，左,下)遍历，不能斜方向
 
         // 上下左右四个方向进行遍历
+        // 如果当前位置的x坐标大于0，并且它的左边网格没有被访问过，且左边的网格是自由的（即没有被占据），则将左边的网格加入到最小堆中
         if (x > 0 && !visited[x - 1][y] && grid.isFree(x - 1, y)) {
             minheap.push([x - 1, y]);
         }
+
+        // 如果当前位置的x坐标小于网格的总行数减1，并且它的右边网格没有被访问过，且右边的网格是自由的（即没有被占据），则将右边的网格加入到最小堆中
         if (
             x < grid.data.length - 1 &&
             !visited[x + 1][y] &&
@@ -76,9 +79,13 @@ export function findVisibleGrids(
         ) {
             minheap.push([x + 1, y]);
         }
+
+        // 如果当前位置的y坐标大于0，并且它的上边网格没有被访问过，且上边的网格是自由的（即没有被占据），则将上边的网格加入到最小堆中
         if (y > 0 && !visited[x][y - 1] && grid.isFree(x, y - 1)) {
             minheap.push([x, y - 1]);
         }
+
+        // 如果当前位置的y坐标小于网格的总列数减1，并且它的下边网格没有被访问过，且下边的网格是自由的（即没有被占据），则将下边的网格加入到最小堆中
         if (
             y < grid.data[0].length - 1 &&
             !visited[x][y + 1] &&
