@@ -106,15 +106,19 @@ export function PointsInsideAllConvexPolygons(
                         }
                     }
 
+                    // 删除所有需要删除的点
                     for (const point of toBeDeleted) {
                         pointsInConvexPolygons.delete(point);
                     }
+                    // 如果当前凸包中的点数量没有发生变化，则跳过当前格子
                     if (count !== size) {
                         continue;
                     }
+                    // 遍历当前格子的四个方向
                     dirs.forEach((dir) => {
                         const x = curI + dir[0];
                         const y = curJ + dir[1];
+                        // 如果当前方向上的格子是空的，并且还没有被访问过
                         if (
                             x >= 0 &&
                             x < m &&
