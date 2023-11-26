@@ -77,20 +77,6 @@ export function PointsInsideAllConvexPolygons(
                         // 解析点的字符串表示，得到它的坐标
                         const pointArr = JSON.parse(point) as [number, number];
 
-                        // 如果这个点与当前格子相邻，并且它们之间没有障碍物
-                        if (
-                            (pointArr[0] === curI &&
-                                pointArr[1] === curJ &&
-                                grid.isFree(pointArr[0], pointArr[1])) ||
-                            visibleGridsMatrix[pointArr[0]][pointArr[1]][curI][
-                                curJ
-                            ]
-                        ) {
-                            count++;
-                        } else {
-                            break;
-                        }
-
                         // 检查当前点是否满足凸性条件
                         if (
                             dirs.every((dir) => {
@@ -110,6 +96,19 @@ export function PointsInsideAllConvexPolygons(
                         ) {
                             toBeDeleted.add(point);
                             ans.push(pointArr);
+                        }
+                        // 如果这个点与当前格子相邻，并且它们之间没有障碍物
+                        if (
+                            (pointArr[0] === curI &&
+                                pointArr[1] === curJ &&
+                                grid.isFree(pointArr[0], pointArr[1])) ||
+                            visibleGridsMatrix[pointArr[0]][pointArr[1]][curI][
+                                curJ
+                            ]
+                        ) {
+                            count++;
+                        } else {
+                            break;
                         }
                     }
 
