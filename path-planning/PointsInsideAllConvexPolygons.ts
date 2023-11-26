@@ -115,7 +115,12 @@ export function PointsInsideAllConvexPolygons(
                     // 如果当前凸包中的点数量没有发生变化，则跳过当前格子
                     if (count !== size) {
                         continue;
+                    } else {
+                        pointsInConvexPolygons.add(
+                            JSON.stringify([curI, curJ]),
+                        );
                     }
+
                     // 遍历当前格子的四个方向
                     dirs.forEach((dir) => {
                         const x = curI + dir[0];
