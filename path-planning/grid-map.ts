@@ -8,11 +8,13 @@ export class GridMap {
      * @returns 是障碍物返回true，否则返回false
      */
     isObstacle(i: number, j: number) {
+        // 判断当前位置是否为障碍物，若数据为1则表示是障碍物
         return this.data[i][j] === 1;
     }
 
     //判断指定单元格是否是空闲
     isFree(i: number, j: number) {
+        // 判断二维数组中指定位置的值是否为0
         return this.data[i][j] === 0;
     }
 

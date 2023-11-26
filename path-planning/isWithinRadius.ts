@@ -10,5 +10,6 @@ import { Point } from "./Point";
 export function isWithinRadius(v: Point, radius: number) {
     const radiusSquared = radius * radius;
     // 判断点v是否在半径为radiusSquared的圆内
+    // 返回判断结果，如果点v的x平方加上y平方小于等于radiusSquared，则表示在圆内
     return v.x * v.x + v.y * v.y <= radiusSquared;
 }

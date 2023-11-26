@@ -19,11 +19,15 @@ export function isPointInSector(
     x2: number,
     y2: number,
 ) {
+    // 判断点 (i1, j1) 是否在扇形区域中，该扇形区域由 (x1, y1) 和 (x2, y2) 两个端点以及原点 (0, 0) 确定
     return containedByFanArea(
+        // 原点坐标为 (0, 0)
         { x: 0, y: 0 },
-
+        // 第一个端点坐标为 (x1, y1)
         { x: x1, y: y1 },
+        // 第二个端点坐标为 (x2, y2)
         { x: x2, y: y2 },
+        // 待判断的点坐标为 (i1, j1)
         { x: i1, y: j1 },
     );
 }
