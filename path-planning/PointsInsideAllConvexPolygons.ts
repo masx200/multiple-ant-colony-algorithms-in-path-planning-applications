@@ -97,6 +97,10 @@ export function PointsInsideAllConvexPolygons(
                             toBeDeleted.add(point);
                             ans.push(pointArr);
                         }
+                    }
+                    for (const point of pointsInConvexPolygons) {
+                        const pointArr = JSON.parse(point) as [number, number];
+
                         // 如果这个点与当前格子相邻，并且它们之间没有障碍物
                         if (
                             (pointArr[0] === curI &&
