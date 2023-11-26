@@ -1,5 +1,6 @@
-import { GridMap } from "./grid-map";
 import { findVisibleGrids } from "./findVisibleGrids";
+import { GridMap } from "./grid-map";
+
 
 /**
  * 生成一个布尔类型的四维数组，表示网格地图中每个格子与其可视的格子之间的连通关系
