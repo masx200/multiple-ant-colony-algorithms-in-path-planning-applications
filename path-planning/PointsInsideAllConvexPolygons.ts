@@ -1,6 +1,5 @@
 import { GridMap } from "./grid-map";
 
-
 /**
  * 计算所有点被所有凸多边形包围的内部点
  *
@@ -71,7 +70,6 @@ export function PointsInsideAllConvexPolygons(
                     // 计数器，用来计算当前凸包中有多少个点与当前格子相邻
                     const size = pointsInConvexPolygons.size;
                     let count = 0;
-
                     // 遍历当前凸包中的每一个点
                     for (const point of pointsInConvexPolygons) {
                         // 解析点的字符串表示，得到它的坐标
@@ -129,7 +127,36 @@ export function PointsInsideAllConvexPolygons(
                             JSON.stringify([curI, curJ]),
                         );
                     }
+                    // 遍历当前凸包中的每一个点
+                    for (const point of pointsInConvexPolygons) {
+                        // 解析点的字符串表示，得到它的坐标
+                        const pointArr = JSON.parse(point) as [number, number];
 
+                        // 检查当前点是否满足凸性条件
+                        if (
+                            dirs.every((dir) => {
+                                const x = pointArr[0] + dir[0];
+                                const y = pointArr[1] + dir[1];
+                                return (
+                                    x >= 0 &&
+                                    x < m &&
+                                    y >= 0 &&
+                                    y < n &&
+                                    grid.isFree(x, y) &&
+                                    pointsInConvexPolygons.has(
+                                        JSON.stringify([x, y]),
+                                    )
+                                );
+                            })
+                        ) {
+                            toBeDeleted.add(point);
+                            ans.push(pointArr);
+                        }
+                    }
+                    // 删除所有需要删除的点
+                    for (const point of toBeDeleted) {
+                        pointsInConvexPolygons.delete(point);
+                    }
                     // 遍历当前格子的四个方向
                     dirs.forEach((dir) => {
                         const x = curI + dir[0];
