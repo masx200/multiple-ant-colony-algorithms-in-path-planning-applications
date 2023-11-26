@@ -11,42 +11,71 @@ export function PointsInsideAllConvexPolygons(
     grid: GridMap,
     visibleGridsMatrix: boolean[][][][],
 ): [number, number][] {
+    // 定义四个方向向量
     const dirs = [
-        [-1, 0],
-        [0, 1],
-        [1, 0],
-        [0, -1],
+        [-1, 0], // 向左
+        [0, 1], // 向上
+        [1, 0], // 向右
+        [0, -1], // 向下
     ];
+
+    // 获取网格的宽度和高度
     const m = grid.data.length;
     const n = grid.data[0].length;
+
+    // 创建一个二维数组来记录哪些格子已经访问过
     const visited: boolean[][] = Array(grid.data.length)
         .fill(0)
         .map(() => Array(grid.data[0].length).fill(false));
+
+    // 创建一个空数组来存储所有的结果点
     const ans: [number, number][] = [];
+
+    // 遍历每一个格子
     for (let i = 0; i < m; i++) {
         for (let j = 0; j < n; j++) {
+            // 如果当前格子是空的，并且还没有被访问过
             if (grid.data[i][j] === 0 && !visited[i][j]) {
+                // 将当前格子压入栈中
                 const stack: [number, number][] = [];
 
+                // 创建一个集合来存储当前凸包中的点
                 const pointsInConvexPolygons = new Set<string>();
+
                 stack.push([i, j]);
 
+                // 标记当前格子已经被访问过
                 visited[i][j] = true;
+
+                // 将当前格子添加到凸包中
                 pointsInConvexPolygons.add(JSON.stringify([i, j]));
+
+                // 当栈不为空时，继续执行循环
                 while (stack.length) {
+                    // 弹出栈顶的格子
                     const [curI, curJ] = stack.pop() as [number, number];
 
+                    // 如果当前格子已经被访问过，或者它是障碍物，则跳过它
                     if (visited[curI][curJ] || grid.data[curI][curJ] === 1) {
                         continue;
                     }
+
+                    // 标记当前格子已经被访问过
                     visited[curI][curJ] = true;
 
+                    // 创建一个集合来存储需要删除的点
                     const toBeDeleted = new Set<string>();
+
+                    // 计数器，用来计算当前凸包中有多少个点与当前格子相邻
                     let size = pointsInConvexPolygons.size;
                     let count = 0;
+
+                    // 遍历当前凸包中的每一个点
                     for (const point of pointsInConvexPolygons) {
+                        // 解析点的字符串表示，得到它的坐标
                         const pointArr = JSON.parse(point) as [number, number];
 
+                        // 如果这个点与当前格子相邻，并且它们之间没有障碍物
                         if (
                             visibleGridsMatrix[pointArr[0]][pointArr[1]][curI][
                                 curJ
@@ -55,6 +84,7 @@ export function PointsInsideAllConvexPolygons(
                             count++;
                         }
 
+                        // 检查当前点是否满足凸性条件
                         if (
                             dirs.every((dir) => {
                                 const x = pointArr[0] + dir[0];
