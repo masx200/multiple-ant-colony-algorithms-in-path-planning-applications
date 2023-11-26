@@ -47,7 +47,7 @@ export function PointsInsideAllConvexPolygons(
                 stack.push([i, j]);
 
                 // 标记当前格子已经被访问过
-                visited[i][j] = true;
+                // visited[i][j] = true;
 
                 // 将当前格子添加到凸包中
                 pointsInConvexPolygons.add(JSON.stringify([i, j]));
@@ -56,7 +56,7 @@ export function PointsInsideAllConvexPolygons(
                 while (stack.length) {
                     // 弹出栈顶的格子
                     const [curI, curJ] = stack.pop() as [number, number];
-
+                    // console.log(curI, curJ);
                     // 如果当前格子已经被访问过，或者它是障碍物，则跳过它
                     if (visited[curI][curJ] || grid.data[curI][curJ] === 1) {
                         continue;
@@ -111,11 +111,12 @@ export function PointsInsideAllConvexPolygons(
                             break;
                         }
                     }
-
+                    console.log({ count, size });
                     // 删除所有需要删除的点
                     for (const point of toBeDeleted) {
                         pointsInConvexPolygons.delete(point);
                     }
+
                     // 如果当前凸包中的点数量没有发生变化，则跳过当前格子
                     if (count !== size) {
                         continue;
@@ -139,7 +140,7 @@ export function PointsInsideAllConvexPolygons(
                             !visited[x][y]
                         ) {
                             stack.push([x, y]);
-                            visited[x][y] = true;
+                            // visited[x][y] = true;
                         }
                     });
                 }
