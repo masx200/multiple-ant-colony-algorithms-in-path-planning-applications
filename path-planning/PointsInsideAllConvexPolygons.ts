@@ -12,7 +12,7 @@ export function PointsInsideAllConvexPolygons(
     grid: GridMap,
     visibleGridsMatrix: boolean[][][][],
 ): Set<[number, number]> {
-    console.log(grid);
+    // console.log(grid);
     // 定义四个方向向量
     const dirs = [
         [-1, 0], // 向左
@@ -53,7 +53,8 @@ export function PointsInsideAllConvexPolygons(
                 // 将当前格子添加到凸包中
                 pointsInConvexPolygonsToBeSearch.add(JSON.stringify([i, j]));
                 AllPointsInConvexPolygons.add(JSON.stringify([i, j]));
-
+                //如果一个点失败了,那么应该放回去重新搜索,因为一个点可以重新匹配
+                const failedPoints: [number, number][] = [];
                 // 当栈不为空时，继续执行循环
                 while (stack.length) {
                     // 弹出栈顶的格子
@@ -116,7 +117,7 @@ export function PointsInsideAllConvexPolygons(
                             break;
                         }
                     }
-                    console.log({ count, size });
+                    // console.log({ count, size });
                     // 删除所有需要删除的点
                     for (const point of toBeDeleted) {
                         pointsInConvexPolygonsToBeSearch.delete(point);
@@ -125,6 +126,8 @@ export function PointsInsideAllConvexPolygons(
                     // 如果当前凸包中的点数量没有发生变化，则跳过当前格子
 
                     if (count !== size) {
+                        failedPoints.push([curI, curJ]);
+
                         continue;
                     } else {
                         pointsInConvexPolygonsToBeSearch.add(
@@ -182,9 +185,13 @@ export function PointsInsideAllConvexPolygons(
                         }
                     });
                 }
-                console.log({
-                    AllPointsInConvexPolygons,
-                    pointsInConvexPolygonsToBeSearch,
+                // console.log({
+                //     AllPointsInConvexPolygons,
+                //     pointsInConvexPolygonsToBeSearch,
+                // });
+                //如果一个点失败了,那么应该放回去重新搜索,因为一个点可以重新匹配
+                failedPoints.forEach((point) => {
+                    visited[point[0]][point[1]] = false;
                 });
             }
         }
