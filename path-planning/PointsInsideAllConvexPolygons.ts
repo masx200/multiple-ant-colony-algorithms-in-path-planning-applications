@@ -79,6 +79,9 @@ export function PointsInsideAllConvexPolygons(
 
                         // 如果这个点与当前格子相邻，并且它们之间没有障碍物
                         if (
+                            (pointArr[0] === curI &&
+                                pointArr[1] === curJ &&
+                                grid.isFree(pointArr[0], pointArr[1])) ||
                             visibleGridsMatrix[pointArr[0]][pointArr[1]][curI][
                                 curJ
                             ]
