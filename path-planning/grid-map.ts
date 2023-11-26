@@ -1,3 +1,5 @@
+import { assert } from "vitest";
+
 export class GridMap {
     //判断指定单元格是否是障碍物
     /**
@@ -56,5 +58,10 @@ export class GridMap {
         public data: number[][] = Array(column)
             .fill(0)
             .map(() => Array(row).fill(0)),
-    ) {}
+    ) {
+        assert.isAtLeast(column, 1);
+        assert.isAtLeast(row, 1);
+        assert.equal(data.length, column);
+        assert.equal(data[0].length, row);
+    }
 }
