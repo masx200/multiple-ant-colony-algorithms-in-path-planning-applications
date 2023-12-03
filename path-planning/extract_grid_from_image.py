@@ -5,7 +5,7 @@ import numpy as np
 def extract_grid_from_image(
     image_path: str, grid_size_x: int, grid_size_y: int, offset_x: int, offset_y: int
 ):
-    """_summary_
+    """
         这段代码定义了一个名为 extract_grid 的函数，该函数用于将输入的图像（以路径的形式提供）分割成一个由黑白像素组成的二维网格。参数 grid_size_x 和 grid_size_y 分别表示网格中每个单元格的宽度和高度。offset_x 和 offset_y 是用于调整网格相对于图像原点位置的偏移量。
 
     首先，通过导入PIL库中的Image模块和numpy库，实现图像读取和处理操作。接下来，根据给定的图像路径打开图像，并将其转换为灰度模式。
