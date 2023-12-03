@@ -85,40 +85,44 @@ def main():
         无返回值。
 
     """
-    # 从标准输入读取多个文件和输出目录
+    # 从标准输入读取图片文件名
     print("请输入一个图片文件名：")
-    # 将输入的多个文件名以空格分隔，并去除首尾的空格
+    # 读取用户输入的图片文件名，并去除首尾的空格和双引号
     input_file = sys.stdin.readline().strip().strip('"')
-    # print(input_files)
     print("你输入的一个图片文件名是：", input_file)
+
+    # 从标准输入读取方格参数
     print("请输入方格的宽,方格的高,方格的横坐标偏移量,方格的纵坐标偏移量：")
-    # 将输入的多个文件名以空格分隔，并去除首尾的空格
+    # 读取用户输入的方格参数，并使用逗号分隔，同时去除首尾的空格和双引号
     input_params = sys.stdin.readline().strip().split(",")
-    # print(input_files)
     print("你输入的方格的宽,方格的高,方格的横坐标偏移量,方格的纵坐标偏移量是：", ",".join(input_params))
+
+    # 从标准输入读取输出目录
     print("请输入导出的地图文件夹：")
-    # 获取输出的文件夹路径，并去除首尾的空格
+    # 读取用户输入的输出目录，并去除首尾的空格和双引号
     output_dir = sys.stdin.readline().strip().strip('"')
     print("你输入的导出的地图文件夹是：", output_dir)
-    # 如果输出的文件夹不存在，则创建该文件夹
+
+    # 如果输出目录不存在，则创建该文件夹
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    # 调用extract_grid_from_image函数并传入参数
-    # 调用修改动画函数并传入参数
+
+    # 调用extract_grid_from_image函数生成栅格地图，并传入参数
     grid = extract_grid_from_image(
         input_file, input_params[0], input_params[1], input_params[2], input_params[3]
     )
+
+    # 将栅格地图转换为json格式数据
     json_data = encode_json(grid.tolist())
+
+    # 构造输出文件路径和名称，保存json数据到文件
     outputfile = os.path.join(
         output_dir,
         os.path.splitext(os.path.basename(input_file))[0]
         + os.path.splitext(input_file)[-1]
         + ".json",
     )
-    with open(
-        outputfile,
-        "w",
-    ) as out_f:
+    with open(outputfile, "w") as out_f:
         out_f.write(json_data)
         print(f"地图文件已保存到：{outputfile}")
 
