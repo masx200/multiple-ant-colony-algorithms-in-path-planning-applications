@@ -70,7 +70,7 @@ def extract_grid_from_image(
 
     # 交换行和列的坐标
     img.close()
-    return grid  # .swapaxes(1, 0)
+    return np.flipud(grid)  # .swapaxes(1, 0)
 
 
 def encode_json(data):
