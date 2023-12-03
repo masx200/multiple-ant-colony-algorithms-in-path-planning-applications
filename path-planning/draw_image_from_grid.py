@@ -59,7 +59,7 @@ def draw_image_from_grid(input_file, output_dir, k):
     plt.savefig(
         outputfile,
         bbox_inches="tight",
-        dpi=300,
+        dpi=300 * len(map_data) / 20,
     )
     print(f"图片文件已保存到：{outputfile}")
 
