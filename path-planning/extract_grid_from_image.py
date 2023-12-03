@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 
 
-def extract_grid(
+def extract_grid_from_image(
     image_path: str, grid_size_x: int, grid_size_y: int, offset_x: int, offset_y: int
 ):
     """_summary_
