@@ -7,7 +7,11 @@ from PIL import Image
 
 
 def extract_grid_from_image(
-    image_path: str, grid_size_x: int, grid_size_y: int, offset_x: int, offset_y: int
+    image_path: str,
+    grid_size_x: float,
+    grid_size_y: float,
+    offset_x: float,
+    offset_y: float,
 ):
     """
     这段代码定义了一个名为 extract_grid 的函数，该函数用于将输入的图像（以路径的形式提供）分割成一个由黑白像素组成的二维网格。参数 grid_size_x 和 grid_size_y 分别表示网格中每个单元格的宽度和高度。offset_x 和 offset_y 是用于调整网格相对于图像原点位置的偏移量。
@@ -28,14 +32,17 @@ def extract_grid_from_image(
     img = Image.open(image_path).convert("L")
 
     # 获取图像的宽度和高度
-    width, height = img.size
-
+    # width, height = img.size
+    width = float(img.size[0])
+    height = float(img.size[1])
     # 创建二维数组来存储栅格地图
-    grid = np.zeros((height // grid_size_y, width // grid_size_x), dtype=int)
+    grid = np.zeros((int(height / (grid_size_y)), int(width / grid_size_x)), dtype=int)
 
     # 遍历每个栅格并检查其值
-    for i in range(0 - offset_y, height + offset_y, grid_size_y):
-        for j in range(0 - offset_x, width + offset_x, grid_size_x):
+    for i in np.arange(float(-offset_y), float(height + offset_y), float(grid_size_y)):
+        for j in np.arange(
+            float(-offset_x), float(width + offset_x), float(grid_size_x)
+        ):
             # 检查这个方格是否在图像内
             if (
                 i + grid_size_y <= height
@@ -48,22 +55,22 @@ def extract_grid_from_image(
                     np.mean(
                         img.crop(
                             (
-                                j,
-                                i,
-                                j + grid_size_x,
-                                i + grid_size_y,
+                                int(j),
+                                int(i),
+                                int(j + grid_size_x),
+                                int(i + grid_size_y),
                             )
                         ).getdata()
                     )
                     > 128
                 ):
-                    grid[i // grid_size_y, j // grid_size_x] = 0
+                    grid[int(i / grid_size_y), int(j / grid_size_x)] = 0
                 else:
-                    grid[i // grid_size_y, j // grid_size_x] = 1
+                    grid[int(i / grid_size_y), int(j / grid_size_x)] = 1
 
     # 交换行和列的坐标
     img.close()
-    return grid.swapaxes(1, 0)
+    return grid  # .swapaxes(1, 0)
 
 
 def encode_json(data):
@@ -110,10 +117,10 @@ def main():
     # 调用extract_grid_from_image函数生成栅格地图，并传入参数
     grid = extract_grid_from_image(
         input_file,
-        int(input_params[0]),
-        int(input_params[1]),
-        int(input_params[2]),
-        int(input_params[3]),
+        float(input_params[0]),
+        float(input_params[1]),
+        float(input_params[2]),
+        float(input_params[3]),
     )
 
     # 将栅格地图转换为json格式数据
