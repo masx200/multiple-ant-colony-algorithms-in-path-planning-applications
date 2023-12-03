@@ -2,6 +2,7 @@ import json
 import os
 import sys
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def main():
@@ -43,12 +44,18 @@ def draw_image_from_grid(input_file, output_dir, k):
     # plt.show()
 
     file.close()
+    for i in np.arange(-0.5, len(map_data) + 0.5, 1):
+        plt.axhline(i, linewidth=0.5, color="blue")
+    for i in np.arange(-0.5, len(map_data[0]) + 0.5, 1):
+        plt.axvline(i, linewidth=0.5, color="green")
     outputfile = os.path.join(
         output_dir,
         os.path.splitext(os.path.basename(input_file))[0] + "-" + str(k)
         # + os.path.splitext(input_file)[-1]
         + ".png",
     )
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
     plt.savefig(
         outputfile,
         bbox_inches="tight",
