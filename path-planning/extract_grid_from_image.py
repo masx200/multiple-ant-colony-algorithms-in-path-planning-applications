@@ -39,9 +39,11 @@ def extract_grid_from_image(
     grid = np.zeros((int(height / (grid_size_y)), int(width / grid_size_x)), dtype=int)
 
     # 遍历每个栅格并检查其值
-    for i in np.arange(float(-offset_y), float(height + offset_y), float(grid_size_y)):
+    for i in np.arange(
+        float(-grid_size_y + offset_y), float(height + offset_y), float(grid_size_y)
+    ):
         for j in np.arange(
-            float(-offset_x), float(width + offset_x), float(grid_size_x)
+            float(-grid_size_x + offset_x), float(width + offset_x), float(grid_size_x)
         ):
             # 检查这个方格是否在图像内
             if (
