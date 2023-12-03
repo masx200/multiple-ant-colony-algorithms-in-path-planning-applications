@@ -5,15 +5,24 @@ import matplotlib.pyplot as plt
 
 
 def main():
-    print("请输入一个地图文件名：")
+    print("请输入多个地图文件名：")
     # 读取用户输入的图片文件名，并去除首尾的空格和双引号
-    input_file = sys.stdin.readline().strip().strip('"')
-    print("你输入的一个地图文件名是：", input_file)
+    # input_file = sys.stdin.readline().strip().strip('"')
+    input_files = [s.strip('"') for s in sys.stdin.readline().strip().split(" ")]
+    print("你输入的多个地图文件名是：", " ".join(input_files))
     print("请输入导出的图片文件夹：")
     # 读取用户输入的输出目录，并去除首尾的空格和双引号
     output_dir = sys.stdin.readline().strip().strip('"')
     print("你输入的导出的图片文件夹是：", output_dir)
     # 二维栅格地图数据
+    k = 0
+
+    for input_file in input_files:
+        draw_image_from_grid(input_file, output_dir, k)
+        k = k + 1
+
+
+def draw_image_from_grid(input_file, output_dir, k):
     file = open(input_file, "r")
     map_data = json.loads(file.read())
 
@@ -36,7 +45,7 @@ def main():
     file.close()
     outputfile = os.path.join(
         output_dir,
-        os.path.splitext(os.path.basename(input_file))[0]
+        os.path.splitext(os.path.basename(input_file))[0] + "-" + str(k)
         # + os.path.splitext(input_file)[-1]
         + ".png",
     )
