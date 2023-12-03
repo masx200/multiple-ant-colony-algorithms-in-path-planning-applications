@@ -1,5 +1,9 @@
-from PIL import Image
+import json
+import os
+import sys
+
 import numpy as np
+from PIL import Image
 
 
 def extract_grid_from_image(
@@ -58,4 +62,66 @@ def extract_grid_from_image(
                     grid[i // grid_size_y, j // grid_size_x] = 0
 
     # 交换行和列的坐标
+    img.close()
     return grid.swapaxes(1, 0)
+
+
+def encode_json(data):
+    """
+    将Python对象编码为JSON字符串。
+    """
+    # 使用json模块的dumps函数将Python对象编码为JSON字符串
+    return json.dumps(data)
+
+
+def main():
+    """
+    从标准输入读取一个图片文件和输出目录，调用extract_grid_from_image函数生成栅格地图。
+
+    Args:
+        无参数。
+
+    Returns:
+        无返回值。
+
+    """
+    # 从标准输入读取多个文件和输出目录
+    print("请输入一个图片文件名：")
+    # 将输入的多个文件名以空格分隔，并去除首尾的空格
+    input_file = sys.stdin.readline().strip().strip('"')
+    # print(input_files)
+    print("你输入的一个图片文件名是：", input_file)
+    print("请输入方格的宽,方格的高,方格的横坐标偏移量,方格的纵坐标偏移量：")
+    # 将输入的多个文件名以空格分隔，并去除首尾的空格
+    input_params = sys.stdin.readline().strip().split(",")
+    # print(input_files)
+    print("你输入的方格的宽,方格的高,方格的横坐标偏移量,方格的纵坐标偏移量是：", ",".join(input_params))
+    print("请输入导出的地图文件夹：")
+    # 获取输出的文件夹路径，并去除首尾的空格
+    output_dir = sys.stdin.readline().strip().strip('"')
+    print("你输入的导出的地图文件夹是：", output_dir)
+    # 如果输出的文件夹不存在，则创建该文件夹
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    # 调用extract_grid_from_image函数并传入参数
+    # 调用修改动画函数并传入参数
+    grid = extract_grid_from_image(
+        input_file, input_params[0], input_params[1], input_params[2], input_params[3]
+    )
+    json_data = encode_json(grid.tolist())
+    outputfile = os.path.join(
+        output_dir,
+        os.path.splitext(os.path.basename(input_file))[0]
+        + os.path.splitext(input_file)[-1]
+        + ".json",
+    )
+    with open(
+        outputfile,
+        "w",
+    ) as out_f:
+        out_f.write(json_data)
+        print(f"地图文件已保存到：{outputfile}")
+
+
+if __name__ == "__main__":
+    main()
