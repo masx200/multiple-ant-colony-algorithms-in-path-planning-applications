@@ -130,7 +130,7 @@ def main():
     outputfile = os.path.join(
         output_dir,
         os.path.splitext(os.path.basename(input_file))[0]
-        + os.path.splitext(input_file)[-1]
+        # + os.path.splitext(input_file)[-1]
         + ".json",
     )
     with open(outputfile, "w") as out_f:
