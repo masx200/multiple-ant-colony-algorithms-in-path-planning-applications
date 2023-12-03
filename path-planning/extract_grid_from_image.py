@@ -43,7 +43,7 @@ def extract_grid_from_image(
                 and i >= 0
                 and j >= 0
             ):
-                # 如果这个区域的平均亮度大于某个阈值，那么我们认为这是一个障碍物
+                # 如果这个区域的平均亮度大于某个阈值，那么我们认为这不是一个障碍物
                 if (
                     np.mean(
                         img.crop(
@@ -57,9 +57,9 @@ def extract_grid_from_image(
                     )
                     > 128
                 ):
-                    grid[i // grid_size_y, j // grid_size_x] = 1
-                else:
                     grid[i // grid_size_y, j // grid_size_x] = 0
+                else:
+                    grid[i // grid_size_y, j // grid_size_x] = 1
 
     # 交换行和列的坐标
     img.close()
@@ -109,7 +109,11 @@ def main():
 
     # 调用extract_grid_from_image函数生成栅格地图，并传入参数
     grid = extract_grid_from_image(
-        input_file, input_params[0], input_params[1], input_params[2], input_params[3]
+        input_file,
+        int(input_params[0]),
+        int(input_params[1]),
+        int(input_params[2]),
+        int(input_params[3]),
     )
 
     # 将栅格地图转换为json格式数据
