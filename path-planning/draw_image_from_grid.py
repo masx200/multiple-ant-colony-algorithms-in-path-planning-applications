@@ -37,7 +37,7 @@ def draw_image_from_grid(input_file, output_dir, k):
     # 添加坐标轴标签和标题
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
-    ax.set_title("2D Map")
+    # ax.set_title("2D Map")
     # plt.grid(True)
     # 显示图片
     # plt.show()
@@ -49,7 +49,11 @@ def draw_image_from_grid(input_file, output_dir, k):
         # + os.path.splitext(input_file)[-1]
         + ".png",
     )
-    plt.savefig(outputfile, bbox_inches="tight", dpi=300)
+    plt.savefig(
+        outputfile,
+        bbox_inches="tight",
+        dpi=300,
+    )
     print(f"图片文件已保存到：{outputfile}")
 
 
