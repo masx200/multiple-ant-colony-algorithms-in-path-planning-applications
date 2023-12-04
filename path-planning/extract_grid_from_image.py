@@ -29,12 +29,18 @@ def extract_grid_from_image(
     offset_x = offset_x % grid_size_x
     offset_y = offset_y % grid_size_y
     # 打开图像并转换为灰度模式
-    img = Image.open(image_path).convert("L")
+    img = Image.open(image_path)
+    width = float(img.size[0])
+    height = float(img.size[1])
+    # 将具有透明度的图片转换为不透明图片
+    new_img = Image.new("RGB", size=(int(width), int(height)), color=(255, 255, 255))
+    new_img.paste(img, (0, 0), mask=img)
+    img.close()
+    img = new_img.convert("L")
 
     # 获取图像的宽度和高度
     # width, height = img.size
-    width = float(img.size[0])
-    height = float(img.size[1])
+
     # 创建二维数组来存储栅格地图
     grid = np.zeros((int(height / (grid_size_y)), int(width / grid_size_x)), dtype=int)
 
@@ -72,6 +78,7 @@ def extract_grid_from_image(
 
     # 交换行和列的坐标
     img.close()
+    new_img.close()
     return np.flipud(grid)  # .swapaxes(1, 0)
 
 
