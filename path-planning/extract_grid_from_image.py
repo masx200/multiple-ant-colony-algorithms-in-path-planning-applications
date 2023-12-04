@@ -29,7 +29,7 @@ def extract_grid_from_image(
     offset_x = offset_x % grid_size_x
     offset_y = offset_y % grid_size_y
     # 打开图像并转换为灰度模式
-    img = Image.open(image_path)
+    img = Image.open(image_path).convert("RGBA")
     width = float(img.size[0])
     height = float(img.size[1])
     # 将具有透明度的图片转换为不透明图片
