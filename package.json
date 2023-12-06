@@ -40,7 +40,7 @@
         "babel-plugin-import": "^1.13.5",
         "combinatorial-generators": "^1.1.2",
         "comlink": "^4.3.1",
-        "core-js": "^3.22.8",
+        "core-js": "^3.34.0",
         "echarts": "^5.3.2",
         "element-plus": "^2.4.3",
         "eslint": "^8.55.0",
