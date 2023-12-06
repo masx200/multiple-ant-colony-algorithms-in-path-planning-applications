@@ -68,7 +68,7 @@
         "vite-plugin-html": "^3.2.0",
         "vite-plugin-pwa": "^0.17.2",
         "vue": "3.3.9",
-        "vue-tsc": "^1.8.24"
+        "vue-tsc": "^1.8.25"
     },
     "dependencies": {
         "@babel/core": "^7.23.5",
@@ -90,7 +90,7 @@
         "vite": "5.0.5",
         "vite-plugin-checker": "^0.6.0",
         "vitest": "^0.34.6",
-        "vue-tsc": "^1.8.24",
+        "vue-tsc": "^1.8.25",
         "workbox-window": "^7.0.0"
     }
 }
