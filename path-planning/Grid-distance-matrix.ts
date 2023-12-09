@@ -1,5 +1,6 @@
 import { EuclideanDistance } from "./Euclidean-distance";
 
+
 /**
  * 计算二维网格中任意两点之间的欧几里得距离的矩阵
  *
@@ -32,8 +33,15 @@ export function GridDistanceMatrix(
             for (let k = 0; k < column; k++) {
                 // 遍历 grid 的列
                 for (let l = 0; l < row; l++) {
+                    const distance = EuclideanDistance(i, j, k, l);
                     // 计算欧几里得距离，并赋值给 res[i][j][k][l]
-                    res[i][j][k][l] = EuclideanDistance(i, j, k, l);
+
+                    if (res[k][l][i][j] === 0) {
+                        res[k][l][i][j] = distance;
+                    }
+                    if (res[i][j][k][l] === 0) {
+                        res[i][j][k][l] = distance;
+                    }
                 }
             }
         }
