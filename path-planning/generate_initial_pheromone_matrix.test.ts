@@ -20,7 +20,7 @@ describe("generate_initial_pheromone_matrix", () => {
         expect(result[0]).toHaveLength(5);
         // 根据实际实现，验证结果是否符合预期
 
-        console.log(result);
+        // console.log(result);
         expect([
             [
                 0.00565685424949238, 0.006666666666666667,
