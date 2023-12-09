@@ -18,6 +18,7 @@ export function generate_initial_pheromone_matrix(
     start: Point,
     end: Point,
 ): number[][] {
+    assert.isFalse(start.x === end.x && start.y === end.y);
     assert.isTrue(grid.isFree(start.x, start.y));
     assert.isTrue(grid.isFree(end.x, end.y));
     // 计算地图的行数和列数
