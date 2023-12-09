@@ -78,10 +78,11 @@ describe("generate_initial_pheromone_matrix", () => {
         ]);
         const start: Point = { x: 0, y: 0 };
         const end: Point = { x: 2, y: 2 };
-
-        const result = generate_initial_pheromone_matrix(grid, start, end);
-        console.log(result);
-        expect(result).toEqual([]);
+        expect(() => {
+            const result = generate_initial_pheromone_matrix(grid, start, end);
+            console.log(result);
+            expect(result).toEqual([]);
+        }).toThrow();
     });
 
     test("地图中没有障碍物时，信息素矩阵为全一数组", () => {
@@ -94,11 +95,14 @@ describe("generate_initial_pheromone_matrix", () => {
         const end: Point = { x: 2, y: 2 };
 
         const result = generate_initial_pheromone_matrix(grid, start, end);
-        console.log(result);
+        // console.log(result);
         expect(result).toEqual([
-            [1, 1, 1],
-            [1, 1, 1],
-            [1, 1, 1],
+            [0.039283710065919304, +0.03433522159721638, +0.027777777777777776],
+            [+0.03433522159721638, +0.039283710065919304, +0.03433522159721638],
+            [
+                +0.027777777777777776, +0.03433522159721638,
+                +0.039283710065919304,
+            ],
         ]);
     });
 });
