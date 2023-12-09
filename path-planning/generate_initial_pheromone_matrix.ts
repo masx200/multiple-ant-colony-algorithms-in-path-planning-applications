@@ -5,6 +5,7 @@ import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
 
+
 /**
  * 生成初始信息素矩阵
  *
@@ -18,6 +19,8 @@ export function generate_initial_pheromone_matrix(
     start: Point,
     end: Point,
 ): number[][] {
+    assert.isTrue(grid.isFree(start.x, start.y));
+    assert.isTrue(grid.isFree(end.x, end.y));
     // 计算地图的行数和列数
     const n = grid.row * grid.column;
 
