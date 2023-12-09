@@ -1,5 +1,7 @@
+import { uniqBy } from "lodash-es";
 import { assert } from "vitest";
 import { EuclideanDistance } from "./Euclidean-distance";
+import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
 
@@ -25,10 +27,25 @@ export function generate_initial_pheromone_matrix(
 
     for (let i = 0; i < column; i++) {
         for (let j = 0; j < row; j++) {
+            if (grid.isObstacle(i, j)) {
+                continue;
+            }
             const distance =
                 EuclideanDistance(start.x, start.y, i, j) +
                 EuclideanDistance(i, j, end.x, end.y);
-            res[i][j] = 1 / n / distance;
+
+            const pcds = uniqBy(
+                [
+                    getPathCoordinates([start.x, start.y], [i, j]),
+                    getPathCoordinates([end.x, end.y], [i, j]),
+                ].flat(),
+                (item) => JSON.stringify(item),
+            );
+            const obstacleCount = pcds.filter((item) =>
+                grid.isObstacle(item[0], item[1]),
+            ).length;
+            const freecount = pcds.length - obstacleCount;
+            res[i][j] = 1 / n / distance ** (freecount / pcds.length);
         }
     }
     return res;
