@@ -1,6 +1,5 @@
 import { GridMap } from "./grid-map";
 
-
 /**
  * 计算所有点被所有凸多边形包围的内部点
  *

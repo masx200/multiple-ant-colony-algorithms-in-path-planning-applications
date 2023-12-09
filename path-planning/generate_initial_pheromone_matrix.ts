@@ -5,7 +5,6 @@ import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
 
-
 /**
  * 生成初始信息素矩阵
  *

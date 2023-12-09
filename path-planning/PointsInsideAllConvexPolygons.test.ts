@@ -3,7 +3,6 @@ import { GridMap } from "./grid-map";
 import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
-
 describe("PointsInsideAllConvexPolygons", () => {
     test("测试点在一个凸多边形内部", () => {
         const grid = new GridMap(3, 3, [
