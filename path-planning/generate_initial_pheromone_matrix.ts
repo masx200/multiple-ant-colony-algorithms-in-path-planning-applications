@@ -5,7 +5,6 @@ import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
 
-
 /**
  * 生成初始信息素矩阵
  *
@@ -75,7 +74,7 @@ export function generate_initial_pheromone_matrix(
             const freecount = pcds.length - obstacleCount;
 
             // 计算当前点的信息素矩阵
-            res[i][j] = 1 / n / distance ** (freecount / pcds.length);
+            res[i][j] = (1 / n / distance) * (freecount / pcds.length);
         }
     }
 
