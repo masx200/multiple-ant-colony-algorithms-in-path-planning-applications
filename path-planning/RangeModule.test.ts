@@ -28,4 +28,13 @@ test("RangeModule", () => {
         [10, 20],
         [35, 40],
     ]);
+    rangeModule.addRange(25, 28);
+    // console.log(JSON.stringify(rangeModule));
+    availableRanges = rangeModule.getAvailableRanges();
+    // console.log(availableRanges); // 输出 [[10, 20], [35, 40]]
+    assert.deepEqual(availableRanges, [
+        [10, 20],
+        [25, 28],
+        [35, 40],
+    ]);
 });
