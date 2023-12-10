@@ -1,6 +1,7 @@
 import { findVisibleGrids } from "./findVisibleGrids";
 import { GridMap } from "./grid-map";
 
+
 /**
  * 生成一个布尔类型的四维数组，表示网格地图中每个格子与其可视的格子之间的连通关系
  *
@@ -51,6 +52,7 @@ export function VisibleGridsMatrix(grid: GridMap): boolean[][][][] {
                     const element = VisibleGrids[index];
                     // 将对应位置的值设为 true（表示可见）
                     result[i][j][element[0]][element[1]] = true;
+                    result[element[0]][element[1]][i][j] = true;
                 }
             }
         }
