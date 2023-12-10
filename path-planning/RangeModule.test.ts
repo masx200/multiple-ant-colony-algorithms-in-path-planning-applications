@@ -37,4 +37,11 @@ test("RangeModule", () => {
         [25, 28],
         [35, 40],
     ]);
+
+    assert.isTrue(rangeModule.queryRange(10, 20));
+    assert.isTrue(rangeModule.queryRange(25, 28));
+    assert.isTrue(rangeModule.queryRange(35, 40));
+    assert.isFalse(rangeModule.queryRange(10, 22));
+    assert.isFalse(rangeModule.queryRange(22, 24));
+    assert.isFalse(rangeModule.queryRange(30, 40));
 });
