@@ -2,7 +2,6 @@ import { test } from "vitest";
 import { assert } from "vitest";
 import { RangeModule } from "./RangeModule";
 
-
 test("RangeModule", () => {
     const rangeModule = new RangeModule(10, 40);
     rangeModule.addRange(10, 20);

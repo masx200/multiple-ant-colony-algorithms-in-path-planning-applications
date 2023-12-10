@@ -1,6 +1,28 @@
 import { Float64areEqual } from "./Float64areEqual";
 import { SegmentTreeNode } from "./SegmentTreeNode";
+
 export { RangeModule, SegmentTreeNode };
+/**
+ * RangeModule 类用于处理区间覆盖问题。
+ *
+ * 区间覆盖问题是一种数据结构问题，其中每个节点代表一个闭区间 [start, end]，
+ * 并且包含一个计数器（covered）来表示该区间被覆盖的次数。
+ * 每个节点还可能有左右子节点，分别代表更小的区间。
+ *
+ *
+ * 这段代码定义了一个名为 RangeModule 的类。这个类用于处理区间覆盖问题。它包含一个私有成员变量 root，这是一个 SegmentTreeNode 类型的对象，用于存储整个区
+ * 间树的根节点。
+
+RangeModule 类提供了以下公共方法：
+
+addRange(left: number, right: number): void：添加一个新的范围 [left, right] 到当前树中。
+queryRange(left: number, right: number): boolean：查询指定范围 [left, right] 是否完全在已添加的范围内。如果指定范围完全在已添加的范围内，则返回 true，否则返回 false。
+removeRange(left: number, right: number): void：从当前树中移除指定范围 [left, right]。
+getAvailableRanges(): number[][]：获取所有未被覆盖的可用范围。返回一个二维数组，其中每个元素是一个范围 [start, end]。
+此外，RangeModule 类还包含一些私有辅助方法，如 #addRangeToSegmentTree()、#queryRangeInSegmentTree()、#removeRangeFromSegmentTree() 等，用于处理与区间树相关的操作。
+
+RangeModule 类使用了 SegmentTreeNode 类作为其内部的数据结构。SegmentTreeNode 类表示一个区间覆盖问题中的节点，它包含区间的开始位置、结束位置、覆盖次数等信息，并可能有左右子节点，分别代表更小的区间。
+ */
 class RangeModule {
     private root: SegmentTreeNode;
 
@@ -10,12 +32,17 @@ class RangeModule {
     ) {
         this.root = new SegmentTreeNode(left, right);
     }
-
+    /**
+     * 添加一个新的范围 [left, right] 到当前树中。
+     *
+     * @param {number} left - 范围的开始位置。
+     * @param {number} right - 范围的结束位置。
+     */
     addRange(left: number, right: number): void {
-        this.addRangeToSegmentTree(this.root, left, right);
+        this.#addRangeToSegmentTree(this.root, left, right);
     }
 
-    private addRangeToSegmentTree(
+    /* private */ #addRangeToSegmentTree(
         node: SegmentTreeNode,
         left: number,
         right: number,
@@ -42,20 +69,26 @@ class RangeModule {
                 node.rightChild = new SegmentTreeNode(mid, node.end);
             }
         }
-        this.pushdown(node);
+        this.#pushdown(node);
         // console.log({ node, left, mid, right })
         if (node.leftChild)
-            this.addRangeToSegmentTree(node.leftChild, left, right);
+            this.#addRangeToSegmentTree(node.leftChild, left, right);
         if (node.rightChild)
-            this.addRangeToSegmentTree(node.rightChild, left, right);
-        this.pushup(node);
+            this.#addRangeToSegmentTree(node.rightChild, left, right);
+        this.#pushup(node);
     }
-
+    /**
+     * 查询指定范围 [left, right] 是否完全在已添加的范围内。
+     *
+     * @param {number} left - 要查询的范围的开始位置。
+     * @param {number} right - 要查询的范围的结束位置。
+     * @returns {boolean} 如果指定范围完全在已添加的范围内，则返回 true，否则返回 false。
+     */
     queryRange(left: number, right: number): boolean {
-        return this.queryRangeInSegmentTree(this.root, left, right);
+        return this.#queryRangeInSegmentTree(this.root, left, right);
     }
 
-    private queryRangeInSegmentTree(
+    /* private */ #queryRangeInSegmentTree(
         node: SegmentTreeNode,
         left: number,
         right: number,
@@ -71,17 +104,22 @@ class RangeModule {
 
         return Boolean(
             node.leftChild &&
-                this.queryRangeInSegmentTree(node.leftChild, left, right) &&
+                this.#queryRangeInSegmentTree(node.leftChild, left, right) &&
                 node.rightChild &&
-                this.queryRangeInSegmentTree(node.rightChild, left, right),
+                this.#queryRangeInSegmentTree(node.rightChild, left, right),
         );
     }
-
+    /**
+     * 从当前树中移除指定范围 [left, right]。
+     *
+     * @param {number} left - 要移除的范围的开始位置。
+     * @param {number} right - 要移除的范围的结束位置。
+     */
     removeRange(left: number, right: number): void {
-        this.removeRangeFromSegmentTree(this.root, left, right);
+        this.#removeRangeFromSegmentTree(this.root, left, right);
     }
 
-    private removeRangeFromSegmentTree(
+    /* private */ #removeRangeFromSegmentTree(
         node: SegmentTreeNode,
         left: number,
         right: number,
@@ -110,16 +148,16 @@ class RangeModule {
                 node.rightChild = new SegmentTreeNode(mid, node.end);
             }
         }
-        this.pushdown(node);
+        this.#pushdown(node);
         if (node.leftChild)
-            this.removeRangeFromSegmentTree(node.leftChild, left, right);
+            this.#removeRangeFromSegmentTree(node.leftChild, left, right);
         if (node.rightChild)
-            this.removeRangeFromSegmentTree(node.rightChild, left, right);
+            this.#removeRangeFromSegmentTree(node.rightChild, left, right);
 
-        this.pushup(node);
+        this.#pushup(node);
         // debugger;
     }
-    pushdown(node: SegmentTreeNode) {
+    #pushdown(node: SegmentTreeNode) {
         if (Float64areEqual(1, node.covered) && node.leftChild)
             node.leftChild.covered = 1;
         if (Float64areEqual(1, node.covered) && node.rightChild)
@@ -129,7 +167,7 @@ class RangeModule {
         if (Float64areEqual(0, node.covered) && node.rightChild)
             node.rightChild.covered = 0;
     }
-    pushup(node: SegmentTreeNode) {
+    #pushup(node: SegmentTreeNode) {
         if (node.leftChild?.covered === 1 && node.rightChild?.covered === 1) {
             node.covered = 1;
             node.leftChild = null;
@@ -161,16 +199,21 @@ class RangeModule {
             return;
         }
     }
+    /**
+     * 获取所有未被覆盖的可用范围。
+     *
+     * @returns {number[][]} 返回一个二维数组，其中每个元素是一个范围 [start, end]。
+     */
     getAvailableRanges(): number[][] {
         const result: number[][] = [];
-        this.getAvailableRangesFromSegmentTree(this.root, result);
+        this.#getAvailableRangesFromSegmentTree(this.root, result);
         //需要合并连续的区间
 
-        return this.mergeAvailableRanges(result);
+        return this.#mergeAvailableRanges(result);
     }
 
     /* 合并连续的区间 */
-    private mergeAvailableRanges(ranges: number[][]): number[][] {
+    /* private */ #mergeAvailableRanges(ranges: number[][]): number[][] {
         const result: number[][] = [];
         for (const range of ranges) {
             if (result.length === 0) {
@@ -187,7 +230,7 @@ class RangeModule {
         return result;
     }
 
-    private getAvailableRangesFromSegmentTree(
+    /* private */ #getAvailableRangesFromSegmentTree(
         node: SegmentTreeNode,
         result: number[][],
     ): void {
@@ -208,8 +251,8 @@ class RangeModule {
         }
 
         if (node.leftChild)
-            this.getAvailableRangesFromSegmentTree(node.leftChild, result);
+            this.#getAvailableRangesFromSegmentTree(node.leftChild, result);
         if (node.rightChild)
-            this.getAvailableRangesFromSegmentTree(node.rightChild, result);
+            this.#getAvailableRangesFromSegmentTree(node.rightChild, result);
     }
 }
