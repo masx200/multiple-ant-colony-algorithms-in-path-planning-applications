@@ -22,6 +22,21 @@ getAvailableRanges(): number[][]：获取所有未被覆盖的可用范围。返
 此外，RangeModule 类还包含一些私有辅助方法，如 #addRangeToSegmentTree()、#queryRangeInSegmentTree()、#removeRangeFromSegmentTree() 等，用于处理与区间树相关的操作。
 
 RangeModule 类使用了 SegmentTreeNode 类作为其内部的数据结构。SegmentTreeNode 类表示一个区间覆盖问题中的节点，它包含区间的开始位置、结束位置、覆盖次数等信息，并可能有左右子节点，分别代表更小的区间。
+
+私有辅助方法包括：
+
+#addRangeToSegmentTree(node: SegmentTreeNode, left: number, right: number): void：递归地向树中添加一个范围。
+#queryRangeInSegmentTree(node: SegmentTreeNode, left: number, right: number): boolean：递归地查询指定范围是否完全在已添加的范围内。
+#removeRangeFromSegmentTree(node: SegmentTreeNode, left: number, right: number): void：递归地从树中移除指定范围。
+#pushdown(node: SegmentTreeNode)：向下传递节点的属性值。
+#pushup(node: SegmentTreeNode)：向上合并子节点的信息。
+`#getAvailableRangesFromSegmentTree(node: SegmentTreeNode, result: number[][]
+    ): void`：递归地获取所有未被覆盖的可用范围。
+- `#mergeAvailableRanges(ranges: number[][]): number[][]`：合并连续的可用范围。
+
+这个类的主要功能是处理区间覆盖问题。通过使用区间树的数据结构，可以高效地进行添加、查询和移除操作。同时，它还提供了获取所有未被覆盖的可用范围的方法，并在返回结果时自动合并了连续的可用范围。
+
+需要注意的是，为了简化代码，这里假设输入参数 `left` 和 `right` 始终满足 `left <= right`。如果实际应用中可能有不满足此条件的情况，可以在每个方法的开始处添加检查并调整参数顺序以确保正确性。
  */
 class RangeModule {
     private root: SegmentTreeNode;
