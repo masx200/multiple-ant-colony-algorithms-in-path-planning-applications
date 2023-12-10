@@ -21,7 +21,7 @@ class RangeModule {
         right: number,
     ): void {
         if (left >= right) return;
-        if (node.start > right || node.end < left) {
+        if (node.start >= right || node.end <= left) {
             return; // 当前区间与目标区间无交集，直接返回
         }
 
@@ -61,7 +61,7 @@ class RangeModule {
         right: number,
     ): boolean {
         if (left >= right) return true;
-        if (node.start > right || node.end < left) {
+        if (node.start >= right || node.end <= left) {
             return true; // 当前区间与目标区间无交集，表示目标区间在当前区间之外，返回true
         }
 
@@ -86,8 +86,9 @@ class RangeModule {
         left: number,
         right: number,
     ): void {
+        // if (node.start === 35) debugger;
         if (left >= right) return;
-        if (node.start > right || node.end < left) {
+        if (node.start >= right || node.end <= left) {
             return; // 当前区间与目标区间无交集，直接返回
         }
 
@@ -190,13 +191,19 @@ class RangeModule {
         node: SegmentTreeNode,
         result: number[][],
     ): void {
+        // if (node.start === 35) debugger;
         //需要合并连续的区间
         if (!node || Float64areEqual(node.covered, 0)) {
             return; // 当前节点为空或被覆盖，直接返回
         }
 
-        if (!node.leftChild && !node.rightChild) {
+        if (
+            !node.leftChild &&
+            !node.rightChild &&
+            Float64areEqual(node.covered, 1)
+        ) {
             result.push([node.start, node.end]); // 叶节点，添加到结果中
+            // debugger;
             return;
         }
 
