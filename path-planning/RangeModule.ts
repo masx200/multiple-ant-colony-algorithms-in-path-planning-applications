@@ -57,7 +57,12 @@ class RangeModule {
         this.#addRangeToSegmentTree(this.root, left, right);
     }
 
-    /* private */ #addRangeToSegmentTree(
+    /** private */
+    /**
+    
+    递归地向树中添加一个范围。
+    */
+    #addRangeToSegmentTree(
         node: SegmentTreeNode,
         left: number,
         right: number,
@@ -103,7 +108,9 @@ class RangeModule {
         return this.#queryRangeInSegmentTree(this.root, left, right);
     }
 
-    /* private */ #queryRangeInSegmentTree(
+    /* private */
+    /** 递归地查询指定范围是否完全在已添加的范围内。*/
+    #queryRangeInSegmentTree(
         node: SegmentTreeNode,
         left: number,
         right: number,
@@ -134,7 +141,9 @@ class RangeModule {
         this.#removeRangeFromSegmentTree(this.root, left, right);
     }
 
-    /* private */ #removeRangeFromSegmentTree(
+    /* private */
+    /**递归地从树中移除指定范围。 */
+    #removeRangeFromSegmentTree(
         node: SegmentTreeNode,
         left: number,
         right: number,
@@ -172,6 +181,7 @@ class RangeModule {
         this.#pushup(node);
         // debugger;
     }
+    /**向下传递节点的属性值。 */
     #pushdown(node: SegmentTreeNode) {
         if (Float64areEqual(1, node.covered) && node.leftChild)
             node.leftChild.covered = 1;
@@ -182,6 +192,7 @@ class RangeModule {
         if (Float64areEqual(0, node.covered) && node.rightChild)
             node.rightChild.covered = 0;
     }
+    /**向上合并子节点的信息。 */
     #pushup(node: SegmentTreeNode) {
         if (node.leftChild?.covered === 1 && node.rightChild?.covered === 1) {
             node.covered = 1;
@@ -228,7 +239,9 @@ class RangeModule {
     }
 
     /* 合并连续的区间 */
-    /* private */ #mergeAvailableRanges(ranges: number[][]): number[][] {
+    /* private */
+    /**递归地获取所有未被覆盖的可用范围。 */
+    #mergeAvailableRanges(ranges: number[][]): number[][] {
         const result: number[][] = [];
         for (const range of ranges) {
             if (result.length === 0) {
@@ -245,7 +258,10 @@ class RangeModule {
         return result;
     }
 
-    /* private */ #getAvailableRangesFromSegmentTree(
+    /* private */
+
+    /**合并连续的可用范围。*/
+    #getAvailableRangesFromSegmentTree(
         node: SegmentTreeNode,
         result: number[][],
     ): void {
