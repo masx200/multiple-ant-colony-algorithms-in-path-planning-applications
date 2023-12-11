@@ -243,8 +243,8 @@ class RangeModule {
      *
      * @returns {number[][]} 返回一个二维数组，其中每个元素是一个范围 [start, end]。
      */
-    getAvailableRanges(): number[][] {
-        const result: number[][] = [];
+    getAvailableRanges(): [number, number][] {
+        const result: [number, number][] = [];
         this.#getAvailableRangesFromSegmentTree(this.root, result);
         //需要合并连续的区间
         // console.log("getAvailableRanges", result);
@@ -254,8 +254,8 @@ class RangeModule {
     /* 合并连续的区间 */
     /* private */
     /**递归地获取所有未被覆盖的可用范围。 */
-    #mergeAvailableRanges(ranges: number[][]): number[][] {
-        const result: number[][] = [];
+    #mergeAvailableRanges(ranges: [number, number][]): [number, number][] {
+        const result: [number, number][] = [];
         for (const range of ranges) {
             if (result.length === 0) {
                 result.push(range);

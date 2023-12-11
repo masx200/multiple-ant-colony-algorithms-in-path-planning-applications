@@ -22,7 +22,7 @@ export function findVisibleGridsCircle(
     if (grid.isObstacle(starti, startj)) return [];
     const result: [number, number][] = [];
     const queue = new Queue<[number, number]>();
-    queue.enqueue([starti, startj]);
+    queue.enqueue([-Math.PI, Math.PI]);
     const angleRanges = new RangeModule(-Math.PI, Math.PI, Number.EPSILON);
     angleRanges.addRange(-Math.PI, Math.PI);
     // 记录访问过的网格，避免重复访问
@@ -33,36 +33,44 @@ export function findVisibleGridsCircle(
     // 当最小堆不为空时，循环查找
     while (queue.size() > 0) {
         // 从最小堆中取出一个坐标
-        const [x, y] = queue.pop() as [number, number];
-        // 范围判断,如果范围错误就跳过
+        const size = queue.size();
+        for (let index = 0; index < size; index++) {
+            const [angle_min, angel_max] = queue.pop() as [number, number];
 
-        // 初始化距离数组，距离从近到远，初始值设置为无穷大
+            // 范围判断,如果范围错误就跳过
 
-        // 使用最小堆来存储网格坐标，按照距离的远近进行排序
+            // 初始化距离数组，距离从近到远，初始值设置为无穷大
 
-        // 将起始位置添加到最小堆中
+            // 使用最小堆来存储网格坐标，按照距离的远近进行排序
 
-        // 记录访问过的网格，避免重复访问
+            // 将起始位置添加到最小堆中
 
-        // 当最小堆不为空时，循环查找
+            // 记录访问过的网格，避免重复访问
 
-        // 从最小堆中取出一个坐标
+            // 当最小堆不为空时，循环查找
 
-        // 范围判断,如果范围错误就跳过
-        if (x < 0 || x >= grid.data.length) continue;
-        if (y < 0 || y >= grid.data[0].length) continue;
-        if (grid.isObstacle(x, y)) continue;
+            // 从最小堆中取出一个坐标
 
-        // 如果该位置已被访问过，则跳过
-        if (visited[x][y]) continue;
-        visited[x][y] = true;
-        // 如果该位置是空闲的，且不是起始位置，且可以直接到达，则将其加入结果数组
-        if (
-            grid.isFree(x, y) &&
-            !(starti == x && startj == y) &&
-            canStraightReach([starti, startj], [x, y], grid)
-        ) {
-            result.push([x, y]);
+            // 范围判断,如果范围错误就跳过
+
+            // 如果该位置已被访问过，则跳过
+            if (visited[x][y]) continue;
+            visited[x][y] = true;
+            if (x < 0 || x >= grid.data.length) continue;
+            if (y < 0 || y >= grid.data[0].length) continue;
+            if (grid.isObstacle(x, y)) continue;
+
+            // 如果该位置是空闲的，且不是起始位置，且可以直接到达，则将其加入结果数组
+            if (
+                grid.isFree(x, y) &&
+                !(starti == x && startj == y) &&
+                canStraightReach([starti, startj], [x, y], grid)
+            ) {
+                result.push([x, y]);
+            }
+        }
+        for (const angles of angleRanges.getAvailableRanges()) {
+            queue.push(angles);
         }
         //4个方向(上,右，左,下)遍历，不能斜方向
 
