@@ -1,6 +1,7 @@
 import { Float64areEqual } from "./Float64areEqual";
 import { SegmentTreeNode } from "./SegmentTreeNode";
 
+
 export { RangeModule, SegmentTreeNode };
 /**
  * RangeModule 类用于处理区间覆盖问题。
@@ -78,17 +79,7 @@ class RangeModule {
             node.rightChild = null;
             return;
         }
-        //浮点数可能存在问题
-        const mid = (node.start + node.end) / 2;
 
-        if (node.end > mid && mid > node.start) {
-            if (!node.leftChild) {
-                node.leftChild = new SegmentTreeNode(node.start, mid);
-            }
-            if (!node.rightChild) {
-                node.rightChild = new SegmentTreeNode(mid, node.end);
-            }
-        }
         this.#pushdown(node);
         // console.log({ node, left, mid, right })
         if (node.leftChild)
@@ -164,17 +155,7 @@ class RangeModule {
             return;
         }
         //需要重新创建子节点
-        //浮点数可能存在问题
-        const mid = (node.start + node.end) / 2;
 
-        if (node.end > mid && mid > node.start) {
-            if (!node.leftChild) {
-                node.leftChild = new SegmentTreeNode(node.start, mid);
-            }
-            if (!node.rightChild) {
-                node.rightChild = new SegmentTreeNode(mid, node.end);
-            }
-        }
         this.#pushdown(node);
         if (node.leftChild)
             this.#removeRangeFromSegmentTree(node.leftChild, left, right);
@@ -186,6 +167,17 @@ class RangeModule {
     }
     /**向下传递节点的属性值。 */
     #pushdown(node: SegmentTreeNode) {
+        //浮点数可能存在问题
+        const mid = (node.start + node.end) / 2;
+
+        if (node.end > mid && mid > node.start) {
+            if (!node.leftChild) {
+                node.leftChild = new SegmentTreeNode(node.start, mid);
+            }
+            if (!node.rightChild) {
+                node.rightChild = new SegmentTreeNode(mid, node.end);
+            }
+        }
         if (Float64areEqual(1, node.covered) && node.leftChild)
             node.leftChild.covered = 1;
         if (Float64areEqual(1, node.covered) && node.rightChild)
