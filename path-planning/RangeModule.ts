@@ -237,7 +237,7 @@ class RangeModule {
         const result: number[][] = [];
         this.#getAvailableRangesFromSegmentTree(this.root, result);
         //需要合并连续的区间
-
+        // console.log(result);
         return this.#mergeAvailableRanges(result);
     }
 

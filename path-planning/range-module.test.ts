@@ -6,6 +6,15 @@ describe("RangeModule", () => {
         const rangeModule = new RangeModule(10, 20);
         rangeModule.addRange(10, 20);
         rangeModule.removeRange(14, 16);
+        const availableRanges = rangeModule.getAvailableRanges();
+
+        assert.deepEqual(
+            [
+                [10, 14],
+                [16, 20],
+            ],
+            availableRanges,
+        );
         assert(rangeModule.queryRange(10, 14));
         assert.isFalse(rangeModule.queryRange(13, 15));
         assert(rangeModule.queryRange(16, 17));
