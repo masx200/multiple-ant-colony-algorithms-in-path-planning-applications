@@ -44,6 +44,8 @@ export function findVisibleGridsCircle(
             let yfloat = startj;
             let x = starti;
             let y = startj;
+            let lastx = x;
+            let lasty = y;
             let dx =
                 Math.cos(current_angle) /
                 Math.max(Math.cos(current_angle), Math.sin(current_angle));
@@ -58,6 +60,12 @@ export function findVisibleGridsCircle(
 
                 if (visited[x][y]) continue;
                 visited[x][y] = true;
+                // 如果相邻点之间的横坐标差为1且纵坐标差为1
+                if (Math.abs(-lastx + x) == 1 && Math.abs(y - lasty) == 1) {
+                    // 如果横坐标为x1的纵坐标位置和横坐标为x2的纵坐标位置都是障碍物，则返回false
+                    if (grid.isObstacle(lastx, y) && grid.isObstacle(x, lasty))
+                        break;
+                }
                 if (
                     grid.isFree(x, y) &&
                     !(starti == x && startj == y) //&&
@@ -68,6 +76,8 @@ export function findVisibleGridsCircle(
                 //按照当前角度的射线方向移动一个格子
                 xfloat += dx;
                 yfloat += dy;
+                lastx = x;
+                lasty = y;
                 x = Math.round(xfloat);
                 y = Math.round(yfloat);
             }
