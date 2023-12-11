@@ -111,11 +111,13 @@ class RangeModule {
         if (node.start >= right || node.end <= left) {
             return true; // 当前区间与目标区间无交集，表示目标区间在当前区间之外，返回true
         }
-        if (Float64areEqual(0, node.covered)) {
-            return false;
-        }
-        if (Float64areEqual(1, node.covered)) {
-            return node.start >= left && node.end <= right; // 当前区间被完全覆盖，判断是否在目标区间之内
+        if (node.start >= left && node.end <= right) {
+            if (Float64areEqual(0, node.covered)) {
+                return false;
+            }
+            if (Float64areEqual(1, node.covered)) {
+                return node.start >= left && node.end <= right; // 当前区间被完全覆盖，判断是否在目标区间之内
+            }
         }
 
         return Boolean(
