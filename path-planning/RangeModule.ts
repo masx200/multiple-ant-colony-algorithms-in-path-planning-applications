@@ -1,7 +1,7 @@
 import { Float64areEqual } from "./Float64areEqual";
 import { SegmentTreeNode } from "./SegmentTreeNode";
 
-export { RangeModule, SegmentTreeNode };
+export { RangeModule };
 /**
  * RangeModule 类用于处理区间覆盖问题。
  *
