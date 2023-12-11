@@ -1,7 +1,6 @@
 import { Float64areEqual } from "./Float64areEqual";
 import { SegmentTreeNode } from "./SegmentTreeNode";
 
-
 export { RangeModule, SegmentTreeNode };
 /**
  * RangeModule 类用于处理区间覆盖问题。
@@ -96,7 +95,9 @@ class RangeModule {
      * @returns {boolean} 如果指定范围完全在已添加的范围内，则返回 true，否则返回 false。
      */
     queryRange(left: number, right: number): boolean {
-        return this.#queryRangeInSegmentTree(this.root, left, right);
+        const result = this.#queryRangeInSegmentTree(this.root, left, right);
+        //console.log({ node: this.root, left, right, result });
+        return result;
     }
 
     /* private */
@@ -106,26 +107,34 @@ class RangeModule {
         left: number,
         right: number,
     ): boolean {
+        if (!node) return true;
         // debugger;
         if (left >= right) return true;
         if (node.start >= right || node.end <= left) {
             return true; // 当前区间与目标区间无交集，表示目标区间在当前区间之外，返回true
         }
-        if (node.start >= left && node.end <= right) {
-            if (Float64areEqual(0, node.covered)) {
-                return false;
-            }
-            if (Float64areEqual(1, node.covered)) {
-                return node.start >= left && node.end <= right; // 当前区间被完全覆盖，判断是否在目标区间之内
-            }
+        // if (node.start >= left && node.end <= right) {
+        if (Float64areEqual(0, node.covered)) {
+            return false;
         }
+        if (Float64areEqual(1, node.covered)) {
+            return true; // 当前区间被完全覆盖，判断是否在目标区间之内
+        }
+        // }
 
-        return Boolean(
-            node.leftChild &&
-                this.#queryRangeInSegmentTree(node.leftChild, left, right) &&
-                node.rightChild &&
-                this.#queryRangeInSegmentTree(node.rightChild, left, right),
+        const lr = Boolean(
+            node.leftChild
+                ? this.#queryRangeInSegmentTree(node.leftChild, left, right)
+                : Float64areEqual(1, node.covered),
         );
+        const rr = Boolean(
+            node.rightChild
+                ? this.#queryRangeInSegmentTree(node.rightChild, left, right)
+                : Float64areEqual(1, node.covered),
+        );
+        //console.log({ node: node.leftChild, left, right, result: lr });
+        //  console.log({ node: node.rightChild, left, right, result: rr });
+        return Boolean(lr && rr);
     }
     /**
      * 从当前树中移除指定范围 [left, right]。
