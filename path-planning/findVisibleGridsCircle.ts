@@ -12,6 +12,10 @@ import { RangeModule } from "./RangeModule";
  * @param startj 起始列索引
  * @param grid 网格地图
  * @returns 包含所有可见网格的数组
+ * 
+ * 查找从给定起始位置（starti, startj）出发，在一个二维网格地图（grid）中所有可见的网格。它使用了圆周角度搜索算法，以及范围模块来判断哪些角度被障碍物遮挡。
+
+函数首先检查起始位置是否为障碍物，如果是则返回空数组。然后初始化结果数组（result）、队列（queue）、角度范围模块（angleRanges）和访问过的位置记录（visited）。接下来进入循环，当队列不为空时，从队列中取出一个坐标，并根据当前角度计算射线方向。在射线上进行移动并检查每个格子是否为空闲、是否已访问过，符合条件的格子将被加入到结果数组中。同时，更新被障碍物遮挡的角度范围，并将未被遮挡的角度范围重新加入队列。最后，返回包含所有可见网格坐标的数组。
  */
 export function findVisibleGridsCircle(
     starti: number,
@@ -82,9 +86,19 @@ export function findVisibleGridsCircle(
                 y = Math.round(yfloat);
             }
 
-            blockedAngleRanges.push(
-                getAngleRangeOfPointAndSquare1(starti, startj, x, y),
+            const blockedAngleRange = getAngleRangeOfPointAndSquare1(
+                starti,
+                startj,
+                x,
+                y,
             );
+            if (blockedAngleRange[1] > blockedAngleRange[0])
+                blockedAngleRanges.push(blockedAngleRange);
+            else {
+                //角度范围跨过Math.PI
+                blockedAngleRanges.push([blockedAngleRange[0], Math.PI]);
+                blockedAngleRanges.push([-Math.PI, blockedAngleRange[1]]);
+            }
             // 初始化距离数组，距离从近到远，初始值设置为无穷大
 
             // 使用最小堆来存储网格坐标，按照距离的远近进行排序
