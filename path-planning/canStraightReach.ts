@@ -1,5 +1,6 @@
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
+import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
 
 /**
  * 判断从起始点能否通过一条直线到达终点
@@ -57,7 +58,20 @@ export function canStraightReach(
             // 如果横坐标为x1的纵坐标位置和横坐标为x2的纵坐标位置都是障碍物，则返回false
             if (grid.isObstacle(x1, y2) && grid.isObstacle(x2, y1))
                 return false;
-            //TODO:需要判断如果有一个障碍物时,格子的四条边会不会与路线产生交点,如果有交点,则无法通过.
+            //需要判断如果有一个障碍物时,格子的四条边会不会与路线产生交点,如果有交点,则无法通过.
+
+            if (
+                Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment(
+                    x1,
+                    y1,
+                    x2,
+                    y2,
+                    start,
+                    end,
+                )
+            ) {
+                return false;
+            }
         }
     }
 

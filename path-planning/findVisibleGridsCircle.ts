@@ -2,6 +2,7 @@ import { Queue } from "@datastructures-js/queue";
 import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1";
 import { GridMap } from "./grid-map";
 import { RangeModule } from "./RangeModule";
+import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
 
 /**
  * 查找所有可见的网格
@@ -60,10 +61,10 @@ export function findVisibleGridsCircle(
             // 范围判断,如果范围错误就跳过
             let xfloat = starti;
             let yfloat = startj;
-            let x = starti;
-            let y = startj;
-            let lastx = x;
-            let lasty = y;
+            let x_current = starti;
+            let y_current = startj;
+            let lastx = x_current;
+            let lasty = y_current;
             const max_dx_dy = Math.max(
                 Math.abs(Math.cos(current_angle)),
                 Math.abs(Math.sin(current_angle)),
@@ -75,50 +76,65 @@ export function findVisibleGridsCircle(
             //  1;
             // debugger;
             while (
-                !(y < 0 || y >= grid.data[0].length) &&
-                !(x < 0 || x >= grid.data.length) &&
-                grid.isFree(x, y)
+                !(y_current < 0 || y_current >= grid.data[0].length) &&
+                !(x_current < 0 || x_current >= grid.data.length) &&
+                grid.isFree(x_current, y_current)
             ) {
                 // if (x < 0 || x >= grid.data.length) break;
                 // if (y < 0 || y >= grid.data[0].length) break;
 
-                if (!visited[x][y]) {
-                    visited[x][y] = true;
+                if (!visited[x_current][y_current]) {
+                    visited[x_current][y_current] = true;
                     // 如果相邻点之间的横坐标差为1且纵坐标差为1
-                    if (Math.abs(-lastx + x) == 1 && Math.abs(y - lasty) == 1) {
+                    if (
+                        Math.abs(-lastx + x_current) == 1 &&
+                        Math.abs(y_current - lasty) == 1
+                    ) {
                         // 如果横坐标为x1的纵坐标位置和横坐标为x2的纵坐标位置都是障碍物，则返回false
                         if (
-                            grid.isObstacle(lastx, y) &&
-                            grid.isObstacle(x, lasty)
+                            grid.isObstacle(lastx, y_current) &&
+                            grid.isObstacle(x_current, lasty)
                         )
                             break;
 
-                        //TODO:需要判断如果有一个障碍物时,格子的四条边会不会与路线产生交点,如果有交点,则无法通过.
+                        //需要判断如果有一个障碍物时,格子的四条边会不会与路线产生交点,如果有交点,则无法通过.
+                        if (
+                            Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment(
+                                lastx,
+                                lasty,
+                                x_current,
+                                y_current,
+                                [starti, startj],
+                                [x_current, y_current],
+                            )
+                        ) {
+                            break;
+                        }
                     }
                     if (
-                        grid.isFree(x, y) &&
-                        !(starti == x && startj == y) //&&
+                        grid.isFree(x_current, y_current) &&
+                        !(starti == x_current && startj == y_current) //&&
                         // canStraightReach([starti, startj], [x, y], grid)
                     ) {
-                        result.push([x, y]);
+                        result.push([x_current, y_current]);
                     }
                 }
 
                 //按照当前角度的射线方向移动一个格子
                 xfloat += dx;
                 yfloat += dy;
-                lastx = x;
-                lasty = y;
-                x = Math.round(xfloat);
-                y = Math.round(yfloat);
+                lastx = x_current;
+                lasty = y_current;
+                x_current = Math.round(xfloat);
+                y_current = Math.round(yfloat);
                 // debugger;
             }
 
             const blockedAngleRange = getAngleRangeOfPointAndSquare1(
                 starti,
                 startj,
-                x,
-                y,
+                x_current,
+                y_current,
             );
             if (blockedAngleRange[1] > blockedAngleRange[0])
                 blockedAngleRanges.push(blockedAngleRange);
