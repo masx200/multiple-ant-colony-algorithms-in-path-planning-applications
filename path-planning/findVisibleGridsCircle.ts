@@ -1,6 +1,7 @@
 import { Queue } from "@datastructures-js/queue";
 import { canStraightReach } from "./canStraightReach";
 import { GridMap } from "./grid-map";
+import { RangeModule } from "./RangeModule";
 
 /**
  * 查找所有可见的网格
@@ -17,12 +18,13 @@ export function findVisibleGridsCircle(
     startj: number,
     grid: GridMap,
 ): [number, number][] {
-    const result: [number, number][] = [];
     // 如果起始位置是障碍物，则返回空数组
     if (grid.isObstacle(starti, startj)) return [];
+    const result: [number, number][] = [];
     const queue = new Queue<[number, number]>();
     queue.enqueue([starti, startj]);
-
+    const angleRanges = new RangeModule(-Math.PI, Math.PI, Number.EPSILON);
+    angleRanges.addRange(-Math.PI, Math.PI);
     // 记录访问过的网格，避免重复访问
     const visited: boolean[][] = Array(grid.data.length)
         .fill(0)
