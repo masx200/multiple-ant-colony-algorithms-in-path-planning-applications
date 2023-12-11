@@ -50,6 +50,7 @@ export function findVisibleGridsCircle(
             let y = startj;
             let lastx = x;
             let lasty = y;
+            //每次走一格
             let dx =
                 Math.cos(current_angle) /
                 Math.max(Math.cos(current_angle), Math.sin(current_angle));
