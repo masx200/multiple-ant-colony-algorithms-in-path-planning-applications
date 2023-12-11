@@ -276,7 +276,7 @@ class RangeModule {
     /**合并连续的可用范围。*/
     #getAvailableRangesFromSegmentTree(
         node: SegmentTreeNode,
-        result: number[][],
+        result: [number, number][],
     ): void {
         // if (node.start === 35) debugger;
         //需要合并连续的区间
