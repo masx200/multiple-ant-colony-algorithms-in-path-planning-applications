@@ -24,5 +24,5 @@ export function Float64areEqual(a: number, b: number): boolean {
     let diff = Math.abs(a - b);
 
     // 判断差值是否小于阈值，如果是则认为两个数近似相等
-    return diff < threshold ? true : false;
+    return diff <= threshold ? true : false;
 }
