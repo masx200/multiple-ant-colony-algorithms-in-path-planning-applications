@@ -38,6 +38,7 @@ export function findVisibleGridsCircle(
     /* 添加8个方向的初始可用角度 */
     for (let angle = -Math.PI; angle < Math.PI; angle += Math.PI / 4) {
         queue.push(angle);
+        // console.log(angle);
     }
     const angleRanges = new RangeModule(-Math.PI, Math.PI, Number.EPSILON);
     angleRanges.addRange(-Math.PI, Math.PI);
