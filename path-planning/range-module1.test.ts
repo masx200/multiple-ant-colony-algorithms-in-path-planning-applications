@@ -1,3 +1,7 @@
+//@ts-ignore
+import { assertEquals } from "https://deno.land/std@0.188.0/testing/asserts.ts";
+//@ts-ignore
+import { runScript } from "https://esm.sh/@masx200/leetcode-class@1.2.7/";
 import { assert, describe, expect, test } from "vitest";
 import { RangeModule } from "./RangeModule";
 
@@ -44,4 +48,36 @@ describe("RangeModule", () => {
     //     assert.isFalse(rangeModule.queryRange(13, 15));
     //     assert.isTrue(rangeModule.queryRange(16, 17));
     // });
+});
+test("RangeModule", () => {
+    assertEquals(
+        [null, null, false, null, null, null, true, null, true, null],
+        runScript(
+            [
+                "RangeModule",
+                "addRange",
+                "queryRange",
+                "removeRange",
+                "removeRange",
+                "addRange",
+                "queryRange",
+                "addRange",
+                "queryRange",
+                "removeRange",
+            ],
+            [
+                [],
+                [5, 8],
+                [3, 4],
+                [5, 6],
+                [3, 6],
+                [1, 3],
+                [2, 3],
+                [4, 8],
+                [2, 3],
+                [4, 9],
+            ],
+            RangeModule,
+        ),
+    );
 });
