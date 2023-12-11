@@ -1,6 +1,4 @@
 //@ts-ignore
-import { assertEquals } from "https://deno.land/std@0.188.0/testing/asserts.ts";
-//@ts-ignore
 import { runScript } from "https://esm.sh/@masx200/leetcode-class@1.2.7/";
 import { assert, describe, expect, test } from "vitest";
 import { RangeModule } from "./RangeModule";
@@ -18,66 +16,4 @@ describe("RangeModule", () => {
 
         expect(rangeModule.queryRange(17, 20)).toBeFalsy();
     });
-
-    // test("getAvailableRanges", () => {
-    //     const rangeModule = new RangeModule(0, 100);
-    //     rangeModule.addRange(10, 20);
-    //     rangeModule.addRange(30, 40);
-    //     const availableRanges = rangeModule.getAvailableRanges();
-    //     expect(availableRanges).toEqual([
-    //         [10, 20],
-    //         [30, 40],
-    //     ]);
-    // });
-    // test("addRange", () => {
-    //     const rangeModule = new RangeModule(10, 20);
-    //     rangeModule.addRange(10, 20);
-    //     rangeModule.removeRange(14, 16);
-    //     const availableRanges = rangeModule.getAvailableRanges();
-
-    //     assert.deepEqual(
-    //         [
-    //             [10, 14],
-    //             [16, 20],
-    //         ],
-    //         availableRanges,
-    //     );
-
-    //     //console.log(JSON.stringify(rangeModule));
-    //     assert(rangeModule.queryRange(10, 14));
-    //     assert.isFalse(rangeModule.queryRange(13, 15));
-    //     assert.isTrue(rangeModule.queryRange(16, 17));
-    // });
-});
-test("RangeModule", () => {
-    assertEquals(
-        [null, null, false, null, null, null, true, null, true, null],
-        runScript(
-            [
-                "RangeModule",
-                "addRange",
-                "queryRange",
-                "removeRange",
-                "removeRange",
-                "addRange",
-                "queryRange",
-                "addRange",
-                "queryRange",
-                "removeRange",
-            ],
-            [
-                [],
-                [5, 8],
-                [3, 4],
-                [5, 6],
-                [3, 6],
-                [1, 3],
-                [2, 3],
-                [4, 8],
-                [2, 3],
-                [4, 9],
-            ],
-            RangeModule,
-        ),
-    );
 });

@@ -54,7 +54,10 @@ class RangeModule {
      * @param {number} right - 范围的结束位置。
      */
     addRange(left: number, right: number): void {
+        // console.log("addRange", { left, right });
+        // debugger;
         this.#addRangeToSegmentTree(this.root, left, right);
+        // debugger;
     }
 
     /** private */
@@ -240,7 +243,7 @@ class RangeModule {
         const result: number[][] = [];
         this.#getAvailableRangesFromSegmentTree(this.root, result);
         //需要合并连续的区间
-        // console.log(result);
+        // console.log("getAvailableRanges", result);
         return this.#mergeAvailableRanges(result);
     }
 
