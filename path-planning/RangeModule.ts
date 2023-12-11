@@ -1,7 +1,6 @@
 import { Float64areEqual } from "./Float64areEqual";
 import { SegmentTreeNode } from "./SegmentTreeNode";
 
-
 export { RangeModule };
 /**
  * RangeModule 类用于处理区间覆盖问题。
@@ -45,7 +44,7 @@ class RangeModule {
     constructor(
         public left: number = Number.MIN_SAFE_INTEGER,
         public right: number = Number.MAX_SAFE_INTEGER,
-        public epsilon =1
+        public epsilon = 1,
     ) {
         this.root = new SegmentTreeNode(left, right);
     }

@@ -73,6 +73,7 @@
     "dependencies": {
         "@babel/core": "^7.23.5",
         "@datastructures-js/heap": "^4.3.2",
+        "@datastructures-js/queue": "^4.2.3",
         "@masx200/rollup-plugin-http-resolve": "^5.0.2",
         "@masx200/tsp-lib-test-data": "^2.0.1",
         "@masx200/weighted-randomly-select": "^2.1.1",
