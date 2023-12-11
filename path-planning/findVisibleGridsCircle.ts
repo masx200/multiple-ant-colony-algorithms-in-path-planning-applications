@@ -40,6 +40,7 @@ export function findVisibleGridsCircle(
         const size = queue.size();
 
         const blockedAngleRanges: [number, number][] = [];
+        // debugger;
         for (let index = 0; index < size; index++) {
             const [angle_min, angel_max] = queue.pop() as [number, number];
             const current_angle = (angle_min + angel_max) / 2;
@@ -50,18 +51,23 @@ export function findVisibleGridsCircle(
             let y = startj;
             let lastx = x;
             let lasty = y;
+            const max_dx_dy = Math.max(
+                Math.abs(Math.cos(current_angle)),
+                Math.abs(Math.sin(current_angle)),
+            );
             //每次走一格
-            let dx =
-                Math.cos(current_angle) /
-                Math.max(Math.cos(current_angle), Math.sin(current_angle));
+            let dx = Math.cos(current_angle) / max_dx_dy;
             // 1;
-            let dy =
-                Math.sin(current_angle) /
-                Math.max(Math.cos(current_angle), Math.sin(current_angle));
+            let dy = Math.sin(current_angle) / max_dx_dy;
             //  1;
-            while (grid.isFree(x, y)) {
-                if (x < 0 || x >= grid.data.length) break;
-                if (y < 0 || y >= grid.data[0].length) break;
+            // debugger;
+            while (
+                !(y < 0 || y >= grid.data[0].length) &&
+                !(x < 0 || x >= grid.data.length) &&
+                grid.isFree(x, y)
+            ) {
+                // if (x < 0 || x >= grid.data.length) break;
+                // if (y < 0 || y >= grid.data[0].length) break;
 
                 if (!visited[x][y]) {
                     visited[x][y] = true;
@@ -90,6 +96,7 @@ export function findVisibleGridsCircle(
                 lasty = y;
                 x = Math.round(xfloat);
                 y = Math.round(yfloat);
+                // debugger;
             }
 
             const blockedAngleRange = getAngleRangeOfPointAndSquare1(
