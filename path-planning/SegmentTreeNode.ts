@@ -22,8 +22,8 @@
  */
 export class SegmentTreeNode {
     constructor(
-        public start: number,
-        public end: number,
+        public start: number = Number.MIN_SAFE_INTEGER,
+        public end: number = Number.MAX_SAFE_INTEGER,
         public covered: number = 0,
         public leftChild: SegmentTreeNode | null = null,
         public rightChild: SegmentTreeNode | null = null,
