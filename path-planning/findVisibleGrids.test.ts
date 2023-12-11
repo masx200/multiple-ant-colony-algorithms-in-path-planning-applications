@@ -1,8 +1,8 @@
 import { test } from "vitest";
 import { buildRandomGrid } from "./buildRandomGrid";
-import { findVisibleGrids } from "./findVisibleGrids";
+import { findVisibleGridsBFS } from "./findVisibleGridsBFS";
 
-test.skip("findVisibleGrids", () => {
+test.skip("findVisibleGridsBFS", () => {
     const column = Math.floor(4 + 25 * Math.random());
     const row = Math.floor(3 + 26 * Math.random());
     const obstacleProbability = Math.random();
@@ -10,7 +10,7 @@ test.skip("findVisibleGrids", () => {
 
     const startj = Math.floor(Math.random() * row);
     const starti = Math.floor(Math.random() * column);
-    const visibleGrids = findVisibleGrids(starti, startj, grid);
+    const visibleGrids = findVisibleGridsBFS(starti, startj, grid);
 
     const res = Array(column)
         .fill(0)

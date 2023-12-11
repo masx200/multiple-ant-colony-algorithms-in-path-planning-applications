@@ -1,4 +1,4 @@
-import { findVisibleGrids } from "./findVisibleGrids";
+import { findVisibleGridsBFS } from "./findVisibleGridsBFS";
 import { GridMap } from "./grid-map";
 
 /**
@@ -43,8 +43,8 @@ export function VisibleGridsMatrix(grid: GridMap): boolean[][][][] {
         for (let j = 0; j < grid.data[i].length; ++j) {
             // 如果当前位置是自由位置（isFree 方法判断）
             if (grid.isFree(i, j)) {
-                // 调用 findVisibleGrids 方法找到可见的格子（VisibleGrids）
-                const VisibleGrids = findVisibleGrids(i, j, grid);
+                // 调用 findVisibleGridsBFS 方法找到可见的格子（VisibleGrids）
+                const VisibleGrids = findVisibleGridsBFS(i, j, grid);
                 // 遍历 VisibleGrids 数组
                 for (let index = 0; index < VisibleGrids.length; index++) {
                     // 获取当前元素（VisibleGrids[index]）

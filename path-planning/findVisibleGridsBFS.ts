@@ -13,7 +13,7 @@ import { GridMap } from "./grid-map";
  * @param grid 网格地图
  * @returns 包含所有可见网格的数组
  */
-export function findVisibleGrids(
+export function findVisibleGridsBFS(
     starti: number,
     startj: number,
     grid: GridMap,

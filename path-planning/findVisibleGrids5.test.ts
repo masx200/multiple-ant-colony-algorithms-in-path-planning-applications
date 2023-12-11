@@ -1,8 +1,8 @@
 import { assert, test } from "vitest";
-import { findVisibleGrids } from "./findVisibleGrids";
+import { findVisibleGridsBFS } from "./findVisibleGridsBFS";
 import { GridMap } from "./grid-map";
 
-test("findVisibleGrids", () => {
+test("findVisibleGridsBFS", () => {
     const data = {
         column: 12,
         row: 10,
@@ -36,7 +36,7 @@ test("findVisibleGrids", () => {
 
     const starti = data.starti;
     const startj = data.startj;
-    const visibleGrids = findVisibleGrids(starti, startj, grid);
+    const visibleGrids = findVisibleGridsBFS(starti, startj, grid);
 
     const res = Array(column)
         .fill(0)
