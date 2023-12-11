@@ -27,14 +27,18 @@ export function findVisibleGridsCircle(
     const result: [number, number][] = [];
     /* 队列保存可通行的角度 */
     const queue = new Queue<number>();
-    queue.push((-Math.PI / 4) * 3);
-    queue.push((Math.PI / 4) * 3);
-    queue.enqueue(Math.PI);
-    queue.push(0);
-    queue.push(-Math.PI / 2);
-    queue.push(Math.PI / 2);
-    queue.push(-Math.PI / 4);
-    queue.push(Math.PI / 4);
+    // queue.push((-Math.PI / 4) * 3);
+    // queue.push((Math.PI / 4) * 3);
+    // queue.enqueue(Math.PI);
+    // queue.push(0);
+    // queue.push(-Math.PI / 2);
+    // queue.push(Math.PI / 2);
+    // queue.push(-Math.PI / 4);
+    // queue.push(Math.PI / 4);
+
+    for (let angle = -Math.PI; angle < Math.PI; angle += Math.PI / 4) {
+        queue.push(angle);
+    }
     const angleRanges = new RangeModule(-Math.PI, Math.PI, Number.EPSILON);
     angleRanges.addRange(-Math.PI, Math.PI);
     // 记录访问过的网格，避免重复访问
@@ -87,6 +91,8 @@ export function findVisibleGridsCircle(
                             grid.isObstacle(x, lasty)
                         )
                             break;
+
+                        //TODO:需要判断如果有一个障碍物时,格子的四条边会不会与路线产生交点,如果有交点,则无法通过.
                     }
                     if (
                         grid.isFree(x, y) &&

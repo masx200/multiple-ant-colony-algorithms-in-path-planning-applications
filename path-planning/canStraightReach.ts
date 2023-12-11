@@ -57,6 +57,7 @@ export function canStraightReach(
             // 如果横坐标为x1的纵坐标位置和横坐标为x2的纵坐标位置都是障碍物，则返回false
             if (grid.isObstacle(x1, y2) && grid.isObstacle(x2, y1))
                 return false;
+            //TODO:需要判断如果有一个障碍物时,格子的四条边会不会与路线产生交点,如果有交点,则无法通过.
         }
     }
 
