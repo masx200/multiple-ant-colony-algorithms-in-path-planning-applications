@@ -4,6 +4,8 @@ import { RangeModule } from "./RangeModule";
 
 test("RangeModule", () => {
     const rangeModule = new RangeModule(10, 40);
+    assert.isFalse(rangeModule.queryRange(10, 40));
+
     rangeModule.addRange(10, 20);
     // console.log(JSON.stringify(rangeModule));
     let availableRanges = rangeModule.getAvailableRanges();
@@ -43,4 +45,6 @@ test("RangeModule", () => {
     assert.isFalse(rangeModule.queryRange(10, 22));
     assert.isFalse(rangeModule.queryRange(22, 24));
     assert.isFalse(rangeModule.queryRange(30, 40));
+    rangeModule.addRange(10, 40);
+    assert.isTrue(rangeModule.queryRange(10, 40));
 });
