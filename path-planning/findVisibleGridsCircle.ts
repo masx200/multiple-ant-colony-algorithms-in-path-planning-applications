@@ -106,6 +106,7 @@ export function findVisibleGridsCircle(
                                 y_current,
                                 [starti, startj],
                                 [x_current, y_current],
+                                grid,
                             )
                         ) {
                             break;

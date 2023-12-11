@@ -68,6 +68,7 @@ export function canStraightReach(
                     y2,
                     start,
                     end,
+                    grid,
                 )
             ) {
                 return false;

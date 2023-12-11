@@ -2,6 +2,7 @@
 import { assert } from "vitest";
 // 引入自定义模块robust-segment-intersect，这个模块应该包含了一个函数robustsegmentintersect，用于计算两条线段是否相交
 import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
+import { GridMap } from "./grid-map";
 
 // 定义一个名为Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment的函数，这个函数接收8个参数，其中前四个参数代表两条线段的两个端点，后四个参数代表一个线段的起点和终点
 export function Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment(
@@ -11,6 +12,7 @@ export function Whether_the_four_sides_of_two_beveled_squares_have_an_intersecti
     y2: number, // 第一个线段的终点y坐标
     start: [number, number], // 第二个线段的起点坐标，以数组形式表示
     end: [number, number], // 第二个线段的终点坐标，以数组形式表示
+    gird: GridMap,
 ) {
     // 使用assert.isTrue断言，x1到x2的距离和y1到y2的距离必须相等，即这两条线段是垂直的
     assert.isTrue(Math.abs(x1 - x2) == 1 && Math.abs(y1 - y2) == 1);
@@ -20,6 +22,7 @@ export function Whether_the_four_sides_of_two_beveled_squares_have_an_intersecti
         [x2, y1], // 第二个点，对应于x2和y1坐标
         // 使用数组的some方法，遍历这个二维数组，检查是否存在一个点位于第二个线段上（或者与第二个线段相交）
     ].some(([x, y]) => {
+        if (gird.isFree(x, y)) return false;
         // 定义一个四边形的四个顶点坐标，这个四边形是以当前点为中心，边长为1的正方形，顶点坐标通过当前点的坐标和正方形的方向计算得出
         const four_edges = [
             [
