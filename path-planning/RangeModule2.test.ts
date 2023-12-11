@@ -3,7 +3,7 @@ import { assert } from "vitest";
 import { RangeModule } from "./RangeModule";
 
 test("RangeModule", () => {
-    const rangeModule = new RangeModule(10, 40);
+    const rangeModule = new RangeModule(10, 40, 1);
     assert.isFalse(rangeModule.queryRange(10, 40));
 
     rangeModule.addRange(10, 20);

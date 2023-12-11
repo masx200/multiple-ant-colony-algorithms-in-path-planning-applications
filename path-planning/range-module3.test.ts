@@ -3,6 +3,7 @@ import { runScript } from "https://esm.sh/@masx200/leetcode-class@1.2.7/";
 import { assert, test } from "vitest";
 import { RangeModule } from "./RangeModule";
 
+
 test("RangeModule", () => {
     assert.deepEqual(
         [
@@ -41,7 +42,7 @@ test("RangeModule", () => {
                 "getAvailableRanges",
             ],
             [
-                [1, 9],
+                [1, 9,1],
                 [5, 8],
                 [],
                 [3, 4],

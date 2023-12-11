@@ -44,6 +44,7 @@ class RangeModule {
     constructor(
         public left: number = Number.MIN_SAFE_INTEGER,
         public right: number = Number.MAX_SAFE_INTEGER,
+        public epsilon = Number.EPSILON,
     ) {
         this.root = new SegmentTreeNode(left, right);
     }
@@ -58,6 +59,7 @@ class RangeModule {
         // debugger;
         this.#addRangeToSegmentTree(this.root, left, right);
         // debugger;
+        // console.log(JSON.stringify(this));
     }
 
     /** private */
@@ -182,7 +184,9 @@ class RangeModule {
     /**向下传递节点的属性值。 */
     #pushdown(node: SegmentTreeNode) {
         //浮点数可能存在问题
-        const mid = (node.start + node.end) / 2;
+        const mid =
+            Math.round((node.start + node.end) / 2 / this.epsilon) *
+            this.epsilon;
 
         if (node.end > mid && mid > node.start) {
             if (!node.leftChild) {

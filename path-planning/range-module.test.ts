@@ -16,7 +16,7 @@ describe("RangeModule", () => {
     // });
 
     test("getAvailableRanges", () => {
-        const rangeModule = new RangeModule(0, 100);
+        const rangeModule = new RangeModule(0, 100, 1);
         rangeModule.addRange(10, 20);
         rangeModule.addRange(30, 40);
         const availableRanges = rangeModule.getAvailableRanges();
@@ -26,7 +26,7 @@ describe("RangeModule", () => {
         ]);
     });
     test("addRange", () => {
-        const rangeModule = new RangeModule(10, 20);
+        const rangeModule = new RangeModule(10, 20, 1);
         rangeModule.addRange(10, 20);
         rangeModule.removeRange(14, 16);
         const availableRanges = rangeModule.getAvailableRanges();
