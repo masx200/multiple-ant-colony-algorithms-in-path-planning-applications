@@ -54,30 +54,35 @@ export function findVisibleGridsCircle(
             let dx =
                 Math.cos(current_angle) /
                 Math.max(Math.cos(current_angle), Math.sin(current_angle));
-            1;
+            // 1;
             let dy =
                 Math.sin(current_angle) /
                 Math.max(Math.cos(current_angle), Math.sin(current_angle));
-            1;
+            //  1;
             while (grid.isFree(x, y)) {
                 if (x < 0 || x >= grid.data.length) break;
                 if (y < 0 || y >= grid.data[0].length) break;
 
-                if (visited[x][y]) continue;
-                visited[x][y] = true;
-                // 如果相邻点之间的横坐标差为1且纵坐标差为1
-                if (Math.abs(-lastx + x) == 1 && Math.abs(y - lasty) == 1) {
-                    // 如果横坐标为x1的纵坐标位置和横坐标为x2的纵坐标位置都是障碍物，则返回false
-                    if (grid.isObstacle(lastx, y) && grid.isObstacle(x, lasty))
-                        break;
+                if (!visited[x][y]) {
+                    visited[x][y] = true;
+                    // 如果相邻点之间的横坐标差为1且纵坐标差为1
+                    if (Math.abs(-lastx + x) == 1 && Math.abs(y - lasty) == 1) {
+                        // 如果横坐标为x1的纵坐标位置和横坐标为x2的纵坐标位置都是障碍物，则返回false
+                        if (
+                            grid.isObstacle(lastx, y) &&
+                            grid.isObstacle(x, lasty)
+                        )
+                            break;
+                    }
+                    if (
+                        grid.isFree(x, y) &&
+                        !(starti == x && startj == y) //&&
+                        // canStraightReach([starti, startj], [x, y], grid)
+                    ) {
+                        result.push([x, y]);
+                    }
                 }
-                if (
-                    grid.isFree(x, y) &&
-                    !(starti == x && startj == y) //&&
-                    // canStraightReach([starti, startj], [x, y], grid)
-                ) {
-                    result.push([x, y]);
-                }
+
                 //按照当前角度的射线方向移动一个格子
                 xfloat += dx;
                 yfloat += dy;
