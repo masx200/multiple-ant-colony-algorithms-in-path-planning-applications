@@ -1,10 +1,10 @@
 /**
  * 获取一个点与正方形四个顶点连线形成的角度范围
  *
- * @param a 正方形的中心点x坐标
- * @param b 正方形的中心点y坐标
- * @param x 点的x坐标
- * @param y 点的y坐标
+ * @param 当前a 中心点x坐标
+ * @param 当前b 中心点y坐标
+ * @param 目标格子x 点的x坐标
+ * @param 目标格子y 点的y坐标
  * @returns 返回角度范围，以[最小角度, 最大角度]的形式返回
  */
 export function getAngleRangeOfPointAndSquare1(

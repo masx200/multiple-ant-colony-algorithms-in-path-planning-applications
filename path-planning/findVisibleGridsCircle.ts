@@ -1,5 +1,5 @@
 import { Queue } from "@datastructures-js/queue";
-import { canStraightReach } from "./canStraightReach";
+import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1";
 import { GridMap } from "./grid-map";
 import { RangeModule } from "./RangeModule";
 
@@ -34,11 +34,47 @@ export function findVisibleGridsCircle(
     while (queue.size() > 0) {
         // 从最小堆中取出一个坐标
         const size = queue.size();
+
+        const blockedAngleRanges: [number, number][] = [];
         for (let index = 0; index < size; index++) {
             const [angle_min, angel_max] = queue.pop() as [number, number];
-
+            const current_angle = (angle_min + angel_max) / 2;
             // 范围判断,如果范围错误就跳过
+            let xfloat = starti;
+            let yfloat = startj;
+            let x = starti;
+            let y = startj;
+            let dx =
+                Math.cos(current_angle) /
+                Math.max(Math.cos(current_angle), Math.sin(current_angle));
+            1;
+            let dy =
+                Math.sin(current_angle) /
+                Math.max(Math.cos(current_angle), Math.sin(current_angle));
+            1;
+            while (grid.isFree(x, y)) {
+                if (x < 0 || x >= grid.data.length) break;
+                if (y < 0 || y >= grid.data[0].length) break;
 
+                if (visited[x][y]) continue;
+                visited[x][y] = true;
+                if (
+                    grid.isFree(x, y) &&
+                    !(starti == x && startj == y) //&&
+                    // canStraightReach([starti, startj], [x, y], grid)
+                ) {
+                    result.push([x, y]);
+                }
+                //按照当前角度的射线方向移动一个格子
+                xfloat += dx;
+                yfloat += dy;
+                x = Math.round(xfloat);
+                y = Math.round(yfloat);
+            }
+
+            blockedAngleRanges.push(
+                getAngleRangeOfPointAndSquare1(starti, startj, x, y),
+            );
             // 初始化距离数组，距离从近到远，初始值设置为无穷大
 
             // 使用最小堆来存储网格坐标，按照距离的远近进行排序
@@ -54,20 +90,11 @@ export function findVisibleGridsCircle(
             // 范围判断,如果范围错误就跳过
 
             // 如果该位置已被访问过，则跳过
-            if (visited[x][y]) continue;
-            visited[x][y] = true;
-            if (x < 0 || x >= grid.data.length) continue;
-            if (y < 0 || y >= grid.data[0].length) continue;
-            if (grid.isObstacle(x, y)) continue;
 
             // 如果该位置是空闲的，且不是起始位置，且可以直接到达，则将其加入结果数组
-            if (
-                grid.isFree(x, y) &&
-                !(starti == x && startj == y) &&
-                canStraightReach([starti, startj], [x, y], grid)
-            ) {
-                result.push([x, y]);
-            }
+        }
+        for (const angles of blockedAngleRanges) {
+            angleRanges.removeRange(angles[0], angles[1]);
         }
         for (const angles of angleRanges.getAvailableRanges()) {
             queue.push(angles);
