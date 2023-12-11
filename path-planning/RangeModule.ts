@@ -42,8 +42,8 @@ class RangeModule {
     private root: SegmentTreeNode;
 
     constructor(
-        public left: number,
-        public right: number,
+        public left: number = Number.MIN_SAFE_INTEGER,
+        public right: number = Number.MAX_SAFE_INTEGER,
     ) {
         this.root = new SegmentTreeNode(left, right);
     }
