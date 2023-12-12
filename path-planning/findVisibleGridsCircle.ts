@@ -145,14 +145,8 @@ export function findVisibleGridsCircle(
                     y_current,
                 ),
                 current_angle === -Math.PI || current_angle === Math.PI
-                    ? [
-                          Math.PI - Math.PI / 360 / 360,
-                          -Math.PI + Math.PI / 360 / 360,
-                      ]
-                    : [
-                          current_angle - Math.PI / 360 / 360,
-                          current_angle + Math.PI / 360 / 360,
-                      ],
+                    ? [Math.PI - EPSILON, -Math.PI + EPSILON]
+                    : [current_angle - EPSILON, current_angle + EPSILON],
             ] as const;
             // blockedAngleRanges.push([
             //     current_angle - EPSILON,
