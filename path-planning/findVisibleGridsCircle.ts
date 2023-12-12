@@ -42,7 +42,7 @@ export function findVisibleGridsCircle(
         // console.log(angle);
     }
     // const blocked_angles = new Set<number>();
-    const EPSILON = Number.EPSILON;
+    const EPSILON = Math.PI / 360 / 360;
     const angleRanges = new RangeModule(-Math.PI, Math.PI, EPSILON);
     angleRanges.addRange(-Math.PI, Math.PI);
     // 记录访问过的网格，避免重复访问
@@ -60,9 +60,9 @@ export function findVisibleGridsCircle(
         for (let index = 0; index < size; index++) {
             const current_angle = queue.pop() as number; //, number];
             // if (blocked_angles.has(current_angle)) continue;
-            console.log({
-                current_angle: String(current_angle / Math.PI) + "* Math.PI ",
-            });
+            // console.log({
+            //     current_angle: String(current_angle / Math.PI) + "* Math.PI ",
+            // });
             // const current_angle = (angle_min + angel_max) / 2;
             // 范围判断,如果范围错误就跳过
             let xfloat = starti;
@@ -145,22 +145,25 @@ export function findVisibleGridsCircle(
                     y_current,
                 ),
                 current_angle === -Math.PI || current_angle === Math.PI
-                    ? [Math.PI - 10 * EPSILON, -Math.PI + 10 * EPSILON]
+                    ? [
+                          Math.PI - Math.PI / 360 / 360,
+                          -Math.PI + Math.PI / 360 / 360,
+                      ]
                     : [
-                          current_angle - 10 * EPSILON,
-                          current_angle + 10 * EPSILON,
+                          current_angle - Math.PI / 360 / 360,
+                          current_angle + Math.PI / 360 / 360,
                       ],
             ] as const;
             // blockedAngleRanges.push([
             //     current_angle - EPSILON,
             //     current_angle + EPSILON,
             // ]);
-            console.log({
-                AllBlockedAngleRange: AllBlockedAngleRange.map((a) => [
-                    String(a[0] / Math.PI) + "* Math.PI ", // a[0].toFixed(2),
-                    String(a[1] / Math.PI) + "* Math.PI ", //a[1].toFixed(2),
-                ]),
-            });
+            // console.log({
+            //     AllBlockedAngleRange: AllBlockedAngleRange.map((a) => [
+            //         String(a[0] / Math.PI) + "* Math.PI ", // a[0].toFixed(2),
+            //         String(a[1] / Math.PI) + "* Math.PI ", //a[1].toFixed(2),
+            //     ]),
+            // });
             for (const blockedAngleRange of AllBlockedAngleRange) {
                 if (blockedAngleRange[1] - blockedAngleRange[0] >= 0) {
                     blockedAngleRanges.push([
@@ -200,12 +203,12 @@ export function findVisibleGridsCircle(
             // blocked_angles.add(current_angle);
         }
 
-        console.log({
-            blockedAngleRanges: blockedAngleRanges.map((a) => [
-                String(a[0] / Math.PI) + "* Math.PI ", // a[0].toFixed(2),
-                String(a[1] / Math.PI) + "* Math.PI ", //a[1].toFixed(2),
-            ]),
-        });
+        // console.log({
+        //     blockedAngleRanges: blockedAngleRanges.map((a) => [
+        //         String(a[0] / Math.PI) + "* Math.PI ", // a[0].toFixed(2),
+        //         String(a[1] / Math.PI) + "* Math.PI ", //a[1].toFixed(2),
+        //     ]),
+        // });
         for (const angles of blockedAngleRanges) {
             angleRanges.removeRange(angles[0], angles[1]);
         }
