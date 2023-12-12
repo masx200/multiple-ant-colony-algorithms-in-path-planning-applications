@@ -1,8 +1,7 @@
 import { assert, test } from "vitest";
-
-import { GridMap } from "./grid-map";
 import { findVisibleGridsBFS } from "./findVisibleGridsBFS";
 import { findVisibleGridsCircle } from "./findVisibleGridsCircle";
+import { GridMap } from "./grid-map";
 
 const findVisibleGridsBFSMapOfNameAndImpl = new Map([
     ["findVisibleGridsBFS", findVisibleGridsBFS],
@@ -44,7 +43,7 @@ for (const [fnname, fnimpl] of findVisibleGridsBFSMapOfNameAndImpl) {
         const formattedResult = res.map((a) =>
             a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v)),
         );
-        // console.log(formattedResult);
+        console.log(formattedResult);
 
         // debugger;
         assert.equal(visibleGrids.length, 33);

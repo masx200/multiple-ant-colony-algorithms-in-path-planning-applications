@@ -71,6 +71,10 @@ for (const [fnname, fnimpl] of findVisibleGridsBFSMapOfNameAndImpl) {
             res[x][y] += 10;
         }
         res[starti][startj] += 100;
+        const formattedResult = res.map((a) =>
+            a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v)),
+        );
+        console.log(formattedResult);
         assert.equal(visibleGrids.length, 183);
         assert.deepStrictEqual(
             [
@@ -115,7 +119,7 @@ for (const [fnname, fnimpl] of findVisibleGridsBFSMapOfNameAndImpl) {
                     0, 0, 0, 10, 10, 10, 10,
                 ],
             ].map((a) => a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v))),
-            res.map((a) => a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v))),
+            formattedResult,
         );
     });
 }
