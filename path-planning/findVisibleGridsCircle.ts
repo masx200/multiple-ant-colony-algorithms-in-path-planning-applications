@@ -58,6 +58,9 @@ export function findVisibleGridsCircle(
         // debugger;
         for (let index = 0; index < size; index++) {
             const current_angle = queue.pop() as number; //, number];
+            console.log({
+                current_angle: String(current_angle / Math.PI) + "* Math.PI ",
+            });
             // const current_angle = (angle_min + angel_max) / 2;
             // 范围判断,如果范围错误就跳过
             let xfloat = starti;
@@ -139,8 +142,11 @@ export function findVisibleGridsCircle(
                     y_current,
                 ),
                 current_angle === -Math.PI || current_angle === Math.PI
-                    ? [Math.PI - EPSILON, -Math.PI + EPSILON]
-                    : [current_angle - EPSILON, current_angle + EPSILON],
+                    ? [Math.PI - 1 * EPSILON, -Math.PI + 1 * EPSILON]
+                    : [
+                          current_angle - 1 * EPSILON,
+                          current_angle + 1 * EPSILON,
+                      ],
             ] as const;
             // blockedAngleRanges.push([
             //     current_angle - EPSILON,
@@ -184,6 +190,12 @@ export function findVisibleGridsCircle(
 
             // 如果该位置是空闲的，且不是起始位置，且可以直接到达，则将其加入结果数组
         }
+        console.log({
+            blockedAngleRanges: blockedAngleRanges.map((a) => [
+                String(a[0] / Math.PI) + "* Math.PI ", // a[0].toFixed(2),
+                String(a[1] / Math.PI) + "* Math.PI ", //a[1].toFixed(2),
+            ]),
+        });
         for (const angles of blockedAngleRanges) {
             angleRanges.removeRange(angles[0], angles[1]);
         }
