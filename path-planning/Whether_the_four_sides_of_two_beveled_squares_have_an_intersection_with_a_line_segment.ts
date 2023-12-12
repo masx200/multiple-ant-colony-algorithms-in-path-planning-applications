@@ -1,8 +1,10 @@
 // 引入vitest库中的assert模块，用于断言测试
+
 import { assert } from "vitest";
-// 引入自定义模块robust-segment-intersect，这个模块应该包含了一个函数robustsegmentintersect，用于计算两条线段是否相交
 import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
 import { GridMap } from "./grid-map";
+
+// 引入自定义模块robust-segment-intersect，这个模块应该包含了一个函数robustsegmentintersect，用于计算两条线段是否相交
 
 // 定义一个名为Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment的函数，这个函数接收8个参数，其中前四个参数代表两条线段的两个端点，后四个参数代表一个线段的起点和终点
 export function Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment(
@@ -26,20 +28,22 @@ export function Whether_the_four_sides_of_two_beveled_squares_have_an_intersecti
         // 定义一个四边形的四个顶点坐标，这个四边形是以当前点为中心，边长为1的正方形，顶点坐标通过当前点的坐标和正方形的方向计算得出
         const four_edges = [
             [
-                [x - 0.5, y - 0.5], // 第一个顶点坐标
-                [x + 0.5, y - 0.5], // 第二个顶点坐标
+                /* 忽略四个角的坐标 */
+                [x - 0.4, y - 0.4], // 第一个顶点坐标
+                [x + 0.4, y - 0.4], // 第二个顶点坐标
             ],
             [
-                [x + 0.5, y - 0.5], // 第三个顶点坐标
-                [x + 0.5, y + 0.5], // 第四个顶点坐标
+                //长宽缩到80%
+                [x + 0.4, y - 0.4], // 第三个顶点坐标
+                [x + 0.4, y + 0.4], // 第四个顶点坐标
             ],
             [
-                [x + 0.5, y + 0.5], // 第五个顶点坐标
-                [x - 0.5, y + 0.5], // 第六个顶点坐标
+                [x + 0.4, y + 0.4], // 第五个顶点坐标
+                [x - 0.4, y + 0.4], // 第六个顶点坐标
             ],
             [
-                [x - 0.5, y + 0.5], // 第七个顶点坐标
-                [x - 0.5, y - 0.5], // 第八个顶点坐标
+                [x - 0.4, y + 0.4], // 第七个顶点坐标
+                [x - 0.4, y - 0.4], // 第八个顶点坐标
             ],
         ] as const; // 将数组标记为只读，防止后续更改这个数组的内容
         // 使用数组的some方法，遍历这个四边形的四个边，检查是否存在一条边与第二个线段相交
