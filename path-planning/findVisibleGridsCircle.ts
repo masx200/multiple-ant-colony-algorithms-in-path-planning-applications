@@ -41,7 +41,8 @@ export function findVisibleGridsCircle(
         queue.push(angle);
         // console.log(angle);
     }
-    const angleRanges = new RangeModule(-Math.PI, Math.PI, Number.EPSILON);
+    const EPSILON = Number.EPSILON;
+    const angleRanges = new RangeModule(-Math.PI, Math.PI, EPSILON);
     angleRanges.addRange(-Math.PI, Math.PI);
     // 记录访问过的网格，避免重复访问
     const visited: boolean[][] = Array(grid.data.length)
@@ -130,20 +131,39 @@ export function findVisibleGridsCircle(
                 y_current = Math.round(yfloat);
                 // debugger;
             }
+            const AllBlockedAngleRange = [
+                getAngleRangeOfPointAndSquare1(
+                    starti,
+                    startj,
+                    x_current,
+                    y_current,
+                ),
+                [current_angle - EPSILON, current_angle + EPSILON],
+            ] as const;
+            // blockedAngleRanges.push([
+            //     current_angle - EPSILON,
+            //     current_angle + EPSILON,
+            // ]);
 
-            const blockedAngleRange = getAngleRangeOfPointAndSquare1(
-                starti,
-                startj,
-                x_current,
-                y_current,
-            );
-            if (blockedAngleRange[1] > blockedAngleRange[0])
-                blockedAngleRanges.push(blockedAngleRange);
-            else {
-                //角度范围跨过Math.PI
-                blockedAngleRanges.push([blockedAngleRange[0], Math.PI]);
-                blockedAngleRanges.push([-Math.PI, blockedAngleRange[1]]);
+            for (const blockedAngleRange of AllBlockedAngleRange) {
+                if (blockedAngleRange[1] > blockedAngleRange[0])
+                    blockedAngleRanges.push([
+                        blockedAngleRange[0],
+                        blockedAngleRange[1],
+                    ]);
+                else {
+                    //角度范围跨过Math.PI
+                    blockedAngleRanges.push([blockedAngleRange[0], Math.PI]);
+                    blockedAngleRanges.push([-Math.PI, blockedAngleRange[1]]);
+                }
             }
+            // const blockedAngleRange = getAngleRangeOfPointAndSquare1(
+            //     starti,
+            //     startj,
+            //     x_current,
+            //     y_current,
+            // );
+
             // 初始化距离数组，距离从近到远，初始值设置为无穷大
 
             // 使用最小堆来存储网格坐标，按照距离的远近进行排序
