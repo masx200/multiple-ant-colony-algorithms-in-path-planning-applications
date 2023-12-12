@@ -38,6 +38,7 @@ export function Whether_the_four_sides_of_two_beveled_squares_have_an_intersecti
                 [x + 0.4, y + 0.4], // 第四个顶点坐标
             ],
             [
+                //处理斜45度的情况
                 [x + 0.4, y + 0.4], // 第五个顶点坐标
                 [x - 0.4, y + 0.4], // 第六个顶点坐标
             ],
