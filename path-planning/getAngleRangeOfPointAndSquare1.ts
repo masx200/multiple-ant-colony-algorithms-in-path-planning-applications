@@ -15,10 +15,11 @@ export function getAngleRangeOfPointAndSquare1(
 ): [number, number] {
     // 计算四个角度值
     const angles = [
-        Math.atan2(y + 0.5 - b, x + 0.5 - a),
-        Math.atan2(y + 0.5 - b, x - 0.5 - a),
-        Math.atan2(y - 0.5 - b, x + 0.5 - a),
-        Math.atan2(y - 0.5 - b, x - 0.5 - a),
+        //格子缩小到95%,为了减小误差
+        Math.atan2(y + 0.5 * 0.95 - b, x + 0.5 * 0.95 - a),
+        Math.atan2(y + 0.5 * 0.95 - b, x - 0.5 * 0.95 - a),
+        Math.atan2(y - 0.5 * 0.95 - b, x + 0.5 * 0.95 - a),
+        Math.atan2(y - 0.5 * 0.95 - b, x - 0.5 * 0.95 - a),
     ];
 
     // 找到最大值和最小值
