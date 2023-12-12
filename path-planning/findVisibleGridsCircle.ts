@@ -42,7 +42,7 @@ export function findVisibleGridsCircle(
         // console.log(angle);
     }
     // const blocked_angles = new Set<number>();
-    const EPSILON = Math.PI / 360 / 360;
+    const EPSILON = Math.PI / 1000000;
     const angleRanges = new RangeModule(-Math.PI, Math.PI, EPSILON);
     angleRanges.addRange(-Math.PI, Math.PI);
     // 记录访问过的网格，避免重复访问
