@@ -1,7 +1,8 @@
 import { assert, test } from "vitest";
+
+import { GridMap } from "./grid-map";
 import { findVisibleGridsBFS } from "./findVisibleGridsBFS";
 import { findVisibleGridsCircle } from "./findVisibleGridsCircle";
-import { GridMap } from "./grid-map";
 
 const findVisibleGridsBFSMapOfNameAndImpl = new Map([
     ["findVisibleGridsBFS", findVisibleGridsBFS],
