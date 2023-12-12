@@ -13,7 +13,7 @@ import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with
  * @param startj 起始列索引
  * @param grid 网格地图
  * @returns 包含所有可见网格的数组
- * 
+ *
  * 查找从给定起始位置（starti, startj）出发，在一个二维网格地图（grid）中所有可见的网格。它使用了圆周角度搜索算法，以及范围模块来判断哪些角度被障碍物遮挡。
 
 函数首先检查起始位置是否为障碍物，如果是则返回空数组。然后初始化结果数组（result）、队列（queue）、角度范围模块（angleRanges）和访问过的位置记录（visited）。接下来进入循环，当队列不为空时，从队列中取出一个坐标，并根据当前角度计算射线方向。在射线上进行移动并检查每个格子是否为空闲、是否已访问过，符合条件的格子将被加入到结果数组中。同时，更新被障碍物遮挡的角度范围，并将未被遮挡的角度范围重新加入队列。最后，返回包含所有可见网格坐标的数组。
@@ -98,8 +98,9 @@ export function findVisibleGridsCircle(
                         if (
                             grid.isObstacle(lastx, y_current) &&
                             grid.isObstacle(x_current, lasty)
-                        )
+                        ) {
                             break;
+                        }
 
                         //需要判断如果有一个障碍物时,格子的四条边会不会与路线产生交点,如果有交点,则无法通过.
                         if (
@@ -141,25 +142,30 @@ export function findVisibleGridsCircle(
                     x_current,
                     y_current,
                 ),
-                current_angle === -Math.PI || current_angle === Math.PI
-                    ? [Math.PI - 1 * EPSILON, -Math.PI + 1 * EPSILON]
-                    : [
-                          current_angle - 1 * EPSILON,
-                          current_angle + 1 * EPSILON,
-                      ],
+                // current_angle === -Math.PI || current_angle === Math.PI
+                //     ? [Math.PI - 2 * EPSILON, -Math.PI + 2 * EPSILON]
+                //     : [
+                //           current_angle - 2 * EPSILON,
+                //           current_angle + 2 * EPSILON,
+                //       ],
             ] as const;
             // blockedAngleRanges.push([
             //     current_angle - EPSILON,
             //     current_angle + EPSILON,
             // ]);
-
+            console.log({
+                AllBlockedAngleRange: AllBlockedAngleRange.map((a) => [
+                    String(a[0] / Math.PI) + "* Math.PI ", // a[0].toFixed(2),
+                    String(a[1] / Math.PI) + "* Math.PI ", //a[1].toFixed(2),
+                ]),
+            });
             for (const blockedAngleRange of AllBlockedAngleRange) {
-                if (blockedAngleRange[1] > blockedAngleRange[0])
+                if (blockedAngleRange[1] - blockedAngleRange[0] >= 0) {
                     blockedAngleRanges.push([
                         blockedAngleRange[0],
                         blockedAngleRange[1],
                     ]);
-                else {
+                } else {
                     //角度范围跨过Math.PI
                     blockedAngleRanges.push([blockedAngleRange[0], Math.PI]);
                     blockedAngleRanges.push([-Math.PI, blockedAngleRange[1]]);
