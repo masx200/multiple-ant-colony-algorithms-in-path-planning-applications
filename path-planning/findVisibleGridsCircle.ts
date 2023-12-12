@@ -41,6 +41,7 @@ export function findVisibleGridsCircle(
         queue.push(angle);
         // console.log(angle);
     }
+    const blocked_angles = new Set<number>();
     const EPSILON = Number.EPSILON;
     const angleRanges = new RangeModule(-Math.PI, Math.PI, EPSILON);
     angleRanges.addRange(-Math.PI, Math.PI);
@@ -58,6 +59,7 @@ export function findVisibleGridsCircle(
         // debugger;
         for (let index = 0; index < size; index++) {
             const current_angle = queue.pop() as number; //, number];
+            if (blocked_angles.has(current_angle)) continue;
             console.log({
                 current_angle: String(current_angle / Math.PI) + "* Math.PI ",
             });
@@ -195,7 +197,9 @@ export function findVisibleGridsCircle(
             // 如果该位置已被访问过，则跳过
 
             // 如果该位置是空闲的，且不是起始位置，且可以直接到达，则将其加入结果数组
+            blocked_angles.add(current_angle);
         }
+
         console.log({
             blockedAngleRanges: blockedAngleRanges.map((a) => [
                 String(a[0] / Math.PI) + "* Math.PI ", // a[0].toFixed(2),
@@ -206,7 +210,7 @@ export function findVisibleGridsCircle(
             angleRanges.removeRange(angles[0], angles[1]);
         }
         for (const angles of angleRanges.getAvailableRanges()) {
-            queue.push((angles[0] + angles[1]) / 2);
+            queue.push(angles[0] + (angles[1] - angles[0]) * Math.random());
         }
         //4个方向(上,右，左,下)遍历，不能斜方向
 
