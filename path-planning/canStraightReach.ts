@@ -91,7 +91,8 @@ export function canStraightReach(
     const visited = new Array(mapColumn)
         .fill(0)
         .map(() => Array(mapRow).fill(false)) as Array<Array<boolean>>;
-
+    visited[startCol][startRow] = true;
+    visited[endCol][endRow] = true;
     for (const [i, j] of pcd) {
         for (let k = -1; k <= 1; k++) {
             for (let l = -1; l <= 1; l++) {
@@ -101,7 +102,8 @@ export function canStraightReach(
                     ii < grid.column &&
                     jj >= 0 &&
                     jj < grid.row &&
-                    grid.isFree(ii, jj) &&
+                    grid.isFree(i, j) &&
+                    grid.isObstacle(ii, jj) &&
                     !visited[ii][jj]
                 ) {
                     visited[ii][jj] = true;
