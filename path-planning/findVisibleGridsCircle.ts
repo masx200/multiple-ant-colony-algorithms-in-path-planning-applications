@@ -1,6 +1,4 @@
 import { Queue } from "@datastructures-js/queue";
-import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
-import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { canStraightReach } from "./canStraightReach";
 import { formatSmallArcsAngleRange } from "./formatSmallArcsAngleRange";
 import { getAngle } from "./getAngle";
@@ -9,6 +7,9 @@ import { GridMap } from "./grid-map";
 import { RangeModule } from "./RangeModule";
 import { Vec } from "./Vec";
 import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
+
+// import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
+// import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 
 /**
  * 查找所有可见的网格
@@ -127,55 +128,55 @@ export function findVisibleGridsCircle(
                         }
                     }
 
-                    for (let k = -1; k <= 1; k++) {
-                        for (let l = -1; l <= 1; l++) {
-                            const [ii, jj] = [x_current + k, y_current + l];
-                            if (
-                                ii >= 0 &&
-                                ii < grid.column &&
-                                jj >= 0 &&
-                                jj < grid.row &&
-                                grid.isFree(x_current, y_current) &&
-                                grid.isObstacle(ii, jj) &&
-                                !visited[ii][jj]
-                            ) {
-                                visited[ii][jj] = true;
-                                const [x, y] = [ii, jj];
-                                const four_edges = [
-                                    [x - 0.5, y + 0.475],
-                                    [x - 0.475, y + 0.5],
-                                    [x + 0.475, y + 0.5],
-                                    [x + 0.5, y + 0.475],
-                                    [x + 0.5, y - 0.475],
-                                    [x + 0.475, y - 0.5],
-                                    [x - 0.475, y - 0.5],
-                                    [x - 0.5, y - 0.475],
-                                ] as Array<[number, number]>; // 将数组标记为只读，防止后续更改这个数组的内容
-                                const segments =
-                                    cycle_route_to_segments(four_edges);
-                                // 使用数组的some方法，遍历这个四边形的四个边，检查是否存在一条边与第二个线段相交
+                    // for (let k = -1; k <= 1; k++) {
+                    //     for (let l = -1; l <= 1; l++) {
+                    //         const [ii, jj] = [x_current + k, y_current + l];
+                    //         if (
+                    //             ii >= 0 &&
+                    //             ii < grid.column &&
+                    //             jj >= 0 &&
+                    //             jj < grid.row &&
+                    //             grid.isFree(x_current, y_current) &&
+                    //             grid.isObstacle(ii, jj) &&
+                    //             !visited[ii][jj]
+                    //         ) {
+                    //             visited[ii][jj] = true;
+                    //             const [x, y] = [ii, jj];
+                    //             const four_edges = [
+                    //                 [x - 0.5, y + 0.475],
+                    //                 [x - 0.475, y + 0.5],
+                    //                 [x + 0.475, y + 0.5],
+                    //                 [x + 0.5, y + 0.475],
+                    //                 [x + 0.5, y - 0.475],
+                    //                 [x + 0.475, y - 0.5],
+                    //                 [x - 0.475, y - 0.5],
+                    //                 [x - 0.5, y - 0.475],
+                    //             ] as Array<[number, number]>; // 将数组标记为只读，防止后续更改这个数组的内容
+                    //             const segments =
+                    //                 cycle_route_to_segments(four_edges);
+                    //             // 使用数组的some方法，遍历这个四边形的四个边，检查是否存在一条边与第二个线段相交
 
-                                if (
-                                    segments.some(([point1, point2]) => {
-                                        const end = [x_current, y_current] as [
-                                            number,
-                                            number,
-                                        ];
-                                        // 使用自定义函数robustsegmentintersect，检查一条边是否与第二个线段相交，如果相交返回true，否则返回false
-                                        return robustsegmentintersect(
-                                            [point1[0], point1[1]], // 第一条边的起点坐标
-                                            [point2[0], point2[1]], // 第一条边的终点坐标
-                                            start, // 第二条边的起点坐标
-                                            end, // 第二条边的终点坐标
-                                        );
-                                    })
-                                ) {
-                                    break loop1;
-                                    // return false;
-                                }
-                            }
-                        }
-                    }
+                    //             if (
+                    //                 segments.some(([point1, point2]) => {
+                    //                     const end = [x_current, y_current] as [
+                    //                         number,
+                    //                         number,
+                    //                     ];
+                    //                     // 使用自定义函数robustsegmentintersect，检查一条边是否与第二个线段相交，如果相交返回true，否则返回false
+                    //                     return robustsegmentintersect(
+                    //                         [point1[0], point1[1]], // 第一条边的起点坐标
+                    //                         [point2[0], point2[1]], // 第一条边的终点坐标
+                    //                         start, // 第二条边的起点坐标
+                    //                         end, // 第二条边的终点坐标
+                    //                     );
+                    //                 })
+                    //             ) {
+                    //                 break loop1;
+                    //                 // return false;
+                    //             }
+                    //         }
+                    //     }
+                    // }
                     if (
                         grid.isFree(x_current, y_current) &&
                         !(starti == x_current && startj == y_current) //&&
@@ -302,7 +303,13 @@ export function findVisibleGridsCircle(
 
     /* 为了减少角度搜索的误差,可以在搜索完成后,在所有可直线达到的格子的周围一圈八个格子中的未访问过的格子上,再判断一次格子是否可到达. */
 
-    const extendedResults = Array.from<[number, number]>(result);
+    const extendedResults = Array<[number, number]>();
+
+    for (const [i, j] of result) {
+        if (canStraightReach(start, [i, j], grid)) {
+            extendedResults.push([i, j]);
+        }
+    }
     for (const [i, j] of result) {
         for (let k = -1; k <= 1; k++) {
             for (let l = -1; l <= 1; l++) {
