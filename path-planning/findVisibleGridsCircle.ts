@@ -1,11 +1,12 @@
 import { Queue } from "@datastructures-js/queue";
+import { canStraightReach } from "./canStraightReach";
+import { formatSmallArcsAngleRange } from "./formatSmallArcsAngleRange";
+import { getAngle } from "./getAngle";
 import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1";
 import { GridMap } from "./grid-map";
 import { RangeModule } from "./RangeModule";
-import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
-import { formatSmallArcsAngleRange } from "./formatSmallArcsAngleRange";
-import { getAngle } from "./getAngle";
 import { Vec } from "./Vec";
+import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
 
 /**
  * 查找所有可见的网格
@@ -245,5 +246,30 @@ export function findVisibleGridsCircle(
     }
 
     // 返回结果数组，即所有符合条件的网格坐标
-    return result;
+
+    /* 为了减少角度搜索的误差,可以在搜索完成后,在所有可直线达到的格子的周围一圈八个格子中的未访问过的格子上,再判断一次格子是否可到达. */
+
+    const extendedResults = Array.from<[number, number]>(result);
+    for (const [i, j] of result) {
+        for (let k = -1; k <= 1; k++) {
+            for (let l = -1; l <= 1; l++) {
+                const [ii, jj] = [i + k, j + l];
+
+                if (
+                    ii >= 0 &&
+                    ii < grid.column &&
+                    jj >= 0 &&
+                    jj < grid.row &&
+                    grid.isFree(ii, jj) &&
+                    !visited[ii][jj]
+                ) {
+                    visited[ii][jj] = true;
+                    if (canStraightReach([starti, startj], [ii, jj], grid)) {
+                        extendedResults.push([ii, jj]);
+                    }
+                }
+            }
+        }
+    }
+    return extendedResults;
 }

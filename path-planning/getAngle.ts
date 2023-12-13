@@ -10,9 +10,7 @@
  * @param vec{{ x: number; y: number }}
  * 
  * @returns {number}
- * 
- * 
- * 
+
  *
  */
 
