@@ -74,8 +74,8 @@ for (const [fnname, fnimpl] of findVisibleGridsBFSMapOfNameAndImpl) {
         const formattedResult = res.map((a) =>
             a.map((v) => (v == 10 ? 2 : v == 100 ? 3 : v)),
         );
-        console.log({ visibleGridsLength: visibleGrids.length });
-        console.log(formattedResult);
+        // console.log({ visibleGridsLength: visibleGrids.length });
+        // console.log(formattedResult);
         assert.equal(visibleGrids.length, 183);
         assert.deepStrictEqual(
             [

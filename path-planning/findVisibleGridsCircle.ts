@@ -3,6 +3,9 @@ import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1
 import { GridMap } from "./grid-map";
 import { RangeModule } from "./RangeModule";
 import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
+import { formatSmallArcsAngleRange } from "./formatSmallArcsAngleRange";
+import { getAngle } from "./getAngle";
+import { Vec } from "./Vec";
 
 /**
  * 查找所有可见的网格
@@ -137,17 +140,37 @@ export function findVisibleGridsCircle(
                 y_current = Math.round(yfloat);
                 // debugger;
             }
-            const AllBlockedAngleRange = [
-                getAngleRangeOfPointAndSquare1(
+            const current_vector = new Vec(xfloat, yfloat).subtract(
+                new Vec(starti, startj),
+            );
+            const normal = current_vector.normal().unit();
+            const AllBlockedAngleRange: [number, number][] = [
+                ...getAngleRangeOfPointAndSquare1(
                     starti,
                     startj,
                     x_current,
                     y_current,
                 ),
-                current_angle === -Math.PI || current_angle === Math.PI
-                    ? [Math.PI - EPSILON, -Math.PI + EPSILON]
-                    : [current_angle - EPSILON, current_angle + EPSILON],
-            ] as const;
+                ...formatSmallArcsAngleRange([
+                    getAngle(
+                        current_vector
+                            .multiply(
+                                (current_vector.length() - 0.5) /
+                                    current_vector.length(),
+                            )
+                            .add(normal.divide(2).multiply(0.95)),
+                    ),
+                    getAngle(
+                        current_vector
+                            .multiply(
+                                (current_vector.length() - 0.5) /
+                                    current_vector.length(),
+                            )
+                            .add(normal.divide(-2).multiply(0.95)),
+                    ),
+                ]),
+            ];
+            // console.log(AllBlockedAngleRange)
             // blockedAngleRanges.push([
             //     current_angle - EPSILON,
             //     current_angle + EPSILON,
@@ -159,16 +182,16 @@ export function findVisibleGridsCircle(
             //     ]),
             // });
             for (const blockedAngleRange of AllBlockedAngleRange) {
-                if (blockedAngleRange[1] - blockedAngleRange[0] >= 0) {
-                    blockedAngleRanges.push([
-                        blockedAngleRange[0],
-                        blockedAngleRange[1],
-                    ]);
-                } else {
-                    //角度范围跨过Math.PI
-                    blockedAngleRanges.push([blockedAngleRange[0], Math.PI]);
-                    blockedAngleRanges.push([-Math.PI, blockedAngleRange[1]]);
-                }
+                // if (blockedAngleRange[1] - blockedAngleRange[0] >= 0) {
+                blockedAngleRanges.push([
+                    blockedAngleRange[0],
+                    blockedAngleRange[1],
+                ]);
+                // } else {
+                //     //角度范围跨过Math.PI
+                //     blockedAngleRanges.push([blockedAngleRange[0], Math.PI]);
+                //     blockedAngleRanges.push([-Math.PI, blockedAngleRange[1]]);
+                // }
             }
             // const blockedAngleRange = getAngleRangeOfPointAndSquare1(
             //     starti,
