@@ -1,3 +1,4 @@
+/** 该代码定义了一个名为Vec的类，该类表示一个二维向量。类中有四个方法：构造函数、length方法、dot方法和cos方法。构造函数用于初始化向量的x和y坐标。length方法计算向量的长度。dot方法计算两个向量的点积。cos方法计算两个向量的余弦值。类中的属性x和y表示向量的横坐标和纵坐标*/  
 export class Vec {
     public x: number;
     public y: number;
