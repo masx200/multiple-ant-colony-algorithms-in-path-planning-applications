@@ -86,7 +86,7 @@ export function canStraightReach(
     ) {
         return false;
     }
-    /* 为了减小误差,应该对于直线路径经过的所有格子的周围一圈八个格子都判断有没有与路径直线有交点,如果没有交点,则可以通过. */
+    /* 为了减小误差,应该对于直线路径经过的所有格子的周围一圈八个格子中的障碍物格子都判断有没有与路径直线有交点,如果没有交点,则可以通过. */
 
     const visited = new Array(mapColumn)
         .fill(0)

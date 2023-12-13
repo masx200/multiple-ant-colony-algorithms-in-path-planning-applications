@@ -76,7 +76,7 @@ for (const [fnname, fnimpl] of findVisibleGridsBFSMapOfNameAndImpl) {
         );
         console.log({ visibleGridsLength: visibleGrids.length });
         console.log(formattedResult);
-        assert.equal(visibleGrids.length, 173);
+        assert.equal(visibleGrids.length, 177);
         assert.deepStrictEqual(
             [
                 [
@@ -97,14 +97,14 @@ for (const [fnname, fnimpl] of findVisibleGridsBFSMapOfNameAndImpl) {
                 ],
                 [
                     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                    2, 0, 0, 1,
+                    2, 2, 0, 1,
                 ],
                 [
-                    0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0,
+                    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0,
                     0, 0, 0, 0,
                 ],
                 [
-                    0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0,
+                    0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0,
                     0, 0, 2, 2,
                 ],
                 [
@@ -112,12 +112,12 @@ for (const [fnname, fnimpl] of findVisibleGridsBFSMapOfNameAndImpl) {
                     2, 2, 2, 2,
                 ],
                 [
-                    1, 0, 0, 0, 2, 2, 2, 2, 1, 0, 1, 0, 0, 0, 2, 2, 2, 2, 2, 2,
+                    1, 0, 0, 2, 2, 2, 2, 2, 1, 0, 1, 0, 0, 0, 2, 2, 2, 2, 2, 2,
                     2, 2, 2, 2,
                 ],
                 [
-                    0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 2, 2, 2,
+                    2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0,
                 ],
             ],
             formattedResult,
