@@ -1,3 +1,5 @@
+import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
+import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
@@ -78,12 +80,61 @@ export function canStraightReach(
 
     // 如果路径上所有点的值都为0，则返回true，否则返回false
     if (
-        pcd.every(([x, y]) => {
+        !pcd.every(([x, y]) => {
             return grid.data[x][y] === 0;
         })
     ) {
-        return true;
+        return false;
     }
+    /* 为了减小误差,应该对于直线路径经过的所有格子的周围一圈八个格子都判断有没有与路径直线有交点,如果没有交点,则可以通过. */
 
-    return false;
+    const visited = new Array(mapColumn)
+        .fill(0)
+        .map(() => Array(mapRow).fill(false)) as Array<Array<boolean>>;
+
+    for (const [i, j] of pcd) {
+        for (let k = -1; k <= 1; k++) {
+            for (let l = -1; l <= 1; l++) {
+                const [ii, jj] = [i + k, j + l];
+                if (
+                    ii >= 0 &&
+                    ii < grid.column &&
+                    jj >= 0 &&
+                    jj < grid.row &&
+                    grid.isFree(ii, jj) &&
+                    !visited[ii][jj]
+                ) {
+                    visited[ii][jj] = true;
+                    const [x, y] = [ii, jj];
+                    const four_edges = [
+                        [x - 0.5, y + 0.475],
+                        [x - 0.475, y + 0.5],
+                        [x + 0.475, y + 0.5],
+                        [x + 0.5, y + 0.475],
+                        [x + 0.5, y - 0.475],
+                        [x + 0.475, y - 0.5],
+                        [x - 0.475, y - 0.5],
+                        [x - 0.5, y - 0.475],
+                    ] as Array<[number, number]>; // 将数组标记为只读，防止后续更改这个数组的内容
+                    const segments = cycle_route_to_segments(four_edges);
+                    // 使用数组的some方法，遍历这个四边形的四个边，检查是否存在一条边与第二个线段相交
+
+                    if (
+                        segments.some(([point1, point2]) => {
+                            // 使用自定义函数robustsegmentintersect，检查一条边是否与第二个线段相交，如果相交返回true，否则返回false
+                            return robustsegmentintersect(
+                                [point1[0], point1[1]], // 第一条边的起点坐标
+                                [point2[0], point2[1]], // 第一条边的终点坐标
+                                start, // 第二条边的起点坐标
+                                end, // 第二条边的终点坐标
+                            );
+                        })
+                    ) {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    return true;
 }
