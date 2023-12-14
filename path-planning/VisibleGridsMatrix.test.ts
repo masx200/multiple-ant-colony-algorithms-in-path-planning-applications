@@ -135,7 +135,7 @@ describe("VisibleGridsMatrix", () => {
             [0, 0, 0],
         ]);
         const visibleGridsMatrix = VisibleGridsMatrix(grid);
-        // console.log(JSON.stringify({ grid, visibleGridsMatrix }));
+        // console.log(JSON.stringify({ /* grid,  */ visibleGridsMatrix }));
         expect(visibleGridsMatrix).toEqual([
             [
                 [
@@ -146,19 +146,19 @@ describe("VisibleGridsMatrix", () => {
                 [
                     [true, false, true],
                     [true, false, true],
-                    [false, false, true],
+                    [false, false, false],
                 ],
                 [
                     [true, true, false],
                     [false, false, true],
-                    [false, true, true],
+                    [false, false, true],
                 ],
             ],
             [
                 [
                     [true, true, false],
                     [false, false, false],
-                    [true, true, true],
+                    [true, true, false],
                 ],
                 [
                     [false, false, false],
@@ -168,23 +168,23 @@ describe("VisibleGridsMatrix", () => {
                 [
                     [false, true, true],
                     [false, false, false],
-                    [true, true, true],
+                    [false, true, true],
                 ],
             ],
             [
                 [
                     [true, false, false],
-                    [true, false, true],
+                    [true, false, false],
                     [false, true, true],
+                ],
+                [
+                    [false, false, false],
+                    [true, false, true],
+                    [true, false, true],
                 ],
                 [
                     [false, false, true],
-                    [true, false, true],
-                    [true, false, true],
-                ],
-                [
-                    [false, true, true],
-                    [true, false, true],
+                    [false, false, true],
                     [true, true, false],
                 ],
             ],
@@ -198,7 +198,7 @@ describe("VisibleGridsMatrix", () => {
             [0, 0, 0],
         ]);
         const visibleGridsMatrix = VisibleGridsMatrix(grid);
-        // console.log(JSON.stringify({ grid, visibleGridsMatrix }));
+        // console.log(JSON.stringify({ /* grid, */ visibleGridsMatrix }));
         expect(visibleGridsMatrix).toEqual([
             [
                 [
@@ -209,19 +209,19 @@ describe("VisibleGridsMatrix", () => {
                 [
                     [false, false, true],
                     [false, false, true],
-                    [false, false, true],
+                    [false, false, false],
                 ],
                 [
                     [false, true, false],
                     [false, false, true],
-                    [false, true, true],
+                    [false, false, true],
                 ],
             ],
             [
                 [
                     [false, false, false],
                     [false, false, false],
-                    [true, true, true],
+                    [true, true, false],
                 ],
                 [
                     [false, false, false],
@@ -231,23 +231,23 @@ describe("VisibleGridsMatrix", () => {
                 [
                     [false, true, true],
                     [false, false, false],
-                    [true, true, true],
+                    [false, true, true],
                 ],
             ],
             [
+                [
+                    [false, false, false],
+                    [true, false, false],
+                    [false, true, true],
+                ],
                 [
                     [false, false, false],
                     [true, false, true],
-                    [false, true, true],
+                    [true, false, true],
                 ],
                 [
                     [false, false, true],
-                    [true, false, true],
-                    [true, false, true],
-                ],
-                [
-                    [false, true, true],
-                    [true, false, true],
+                    [false, false, true],
                     [true, true, false],
                 ],
             ],
