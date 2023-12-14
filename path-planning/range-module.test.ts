@@ -1,0 +1,47 @@
+import { assert, describe, expect, test } from "vitest";
+import { RangeModule } from "./RangeModule";
+
+describe("RangeModule", () => {
+    // test("queryRange", () => {
+    //     const rangeModule = new RangeModule(5, 20);
+    //     rangeModule.addRange(5, 15);
+    //     const availableRanges = rangeModule.getAvailableRanges();
+
+    //     assert.deepEqual([[5, 15]], availableRanges);
+    //     expect(rangeModule.queryRange(6, 8)).toBeTruthy();
+
+    //     expect(rangeModule.queryRange(5, 15)).toBeTruthy();
+
+    //     expect(rangeModule.queryRange(17, 20)).toBeFalsy();
+    // });
+
+    test("getAvailableRanges", () => {
+        const rangeModule = new RangeModule(0, 100, 1);
+        rangeModule.addRange(10, 20);
+        rangeModule.addRange(30, 40);
+        const availableRanges = rangeModule.getAvailableRanges();
+        expect(availableRanges).toEqual([
+            [10, 20],
+            [30, 40],
+        ]);
+    });
+    test("addRange", () => {
+        const rangeModule = new RangeModule(10, 20, 1);
+        rangeModule.addRange(10, 20);
+        rangeModule.removeRange(14, 16);
+        const availableRanges = rangeModule.getAvailableRanges();
+
+        assert.deepEqual(
+            [
+                [10, 14],
+                [16, 20],
+            ],
+            availableRanges,
+        );
+
+        //console.log(JSON.stringify(rangeModule));
+        assert(rangeModule.queryRange(10, 14));
+        assert.isFalse(rangeModule.queryRange(13, 15));
+        assert.isTrue(rangeModule.queryRange(16, 17));
+    });
+});
