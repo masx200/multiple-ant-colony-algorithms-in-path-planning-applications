@@ -286,7 +286,9 @@ export function findVisibleGridsCircle(
         }
         for (const angles of angleRanges.getAvailableRanges()) {
             // queue.push(angles[0] + (angles[1] - angles[0]) * Math.random());
-            queue.push(angles[0] + (angles[1] - angles[0]) / 4);
+            queue.push(angles[0] + ((angles[1] - angles[0]) / 4) * 1);
+            queue.push(angles[0] + ((angles[1] - angles[0]) / 4) * 2);
+            queue.push(angles[0] + ((angles[1] - angles[0]) / 4) * 3);
         }
         //4个方向(上,右，左,下)遍历，不能斜方向
 
