@@ -1,10 +1,12 @@
 import { isEqual } from "lodash-es";
+import { test } from "vitest";
 import { euclidean_distance } from "../functions/euclidean_distance";
 import { getalldistancesofnodes } from "../functions/getalldistancesofnodes";
 import { geteuclideandistancebyindex } from "../functions/geteuclideandistancebyindex";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { assert_true } from "./assert_true";
-export function testgeteuclideandistance() {
+
+test("testgeteuclideandistance", function testgeteuclideandistance() {
     assert_true(euclidean_distance([3, 4], [0, 0]) === 5);
 
     const node_coordinates1: NodeCoordinates = [
@@ -37,4 +39,4 @@ export function testgeteuclideandistance() {
         ),
     );
     assert_true(10 === Math.max(...node1distances));
-}
+});

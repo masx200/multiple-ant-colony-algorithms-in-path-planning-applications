@@ -58,6 +58,9 @@ export function get_length_of_one_route_on_grid_map(
     // 遍历路径中的每个点，计算相邻两点之间的距离并累加到length变量中
     for (let i = 0; i < route.length - 1; i++) {
         // 使用距离矩阵获取相邻两点的距离，并累加到length变量中
+        // console.log(length);
+        // console.log(DistanceMatrix);
+        // console.log(route[i], route[i + 1]);
         length +=
             DistanceMatrix[route[i][0]][route[i][1]][route[i + 1][0]][
                 route[i + 1][1]

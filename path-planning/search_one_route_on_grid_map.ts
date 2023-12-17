@@ -1,7 +1,7 @@
 import { assert } from "vitest";
-import { Point } from "./Point";
-import { GridMap } from "./grid-map";
 import { canStraightReach } from "./canStraightReach";
+import { GridMap } from "./grid-map";
+import { Point } from "./Point";
 
 export function search_one_route_on_grid_map(
     grid: GridMap,
@@ -9,6 +9,7 @@ export function search_one_route_on_grid_map(
     end: Point,
     PheromoneMatrix: number[][],
     visibleGridsList: Iterable<[number, number]>[][],
+    pointsInsideAllConvexPolygons: Iterable<[number, number]>,
 ): [number, number][] {
     assert.isTrue(grid.isFree(end.x, end.y));
 
