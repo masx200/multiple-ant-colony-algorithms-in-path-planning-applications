@@ -1,9 +1,10 @@
 import { assert, test } from "vitest";
-import { Vec } from "./Vec";
+import { Vector } from "./Vector";
+
 
 test("vector", () => {
-    const vec1 = new Vec(3, 4);
-    const vec2 = new Vec(1, 2);
+    const vec1 = new Vector(3, 4);
+    const vec2 = new Vector(1, 2);
 
     assert.equal('{"x":-0.8,"y":0.6}', JSON.stringify(vec1.normal())); // 输出：(-0.8, 0.6)
     assert.equal('{"x":0.6,"y":0.8}', JSON.stringify(vec1.unit())); // 输出：(0.6, 0.8)

@@ -14,7 +14,7 @@
  *
  */
 
-export function getAngle(vec: { x: number; y: number }): number {
+export function getAngleOfVector(vec: { x: number; y: number }): number {
     // 将向量转换为角度
     const angleInRadians = Math.atan2(vec.y, vec.x);
 

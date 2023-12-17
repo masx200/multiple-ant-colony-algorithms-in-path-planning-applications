@@ -1,12 +1,13 @@
 import { Queue } from "@datastructures-js/queue";
 import { canStraightReach } from "./canStraightReach";
 import { formatSmallArcsAngleRange } from "./formatSmallArcsAngleRange";
-import { getAngle } from "./getAngle";
+import { getAngleOfVector } from "./getAngleOfVector";
 import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1";
 import { GridMap } from "./grid-map";
 import { RangeModule } from "./RangeModule";
-import { Vec } from "./Vec";
+import { Vector } from "./Vector";
 import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
+
 
 // import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
 // import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
@@ -195,8 +196,8 @@ export function findVisibleGridsCircle(
                 y_current = Math.round(yfloat);
                 // debugger;
             }
-            const current_vector = new Vec(xfloat, yfloat).subtract(
-                new Vec(starti, startj),
+            const current_vector = new Vector(xfloat, yfloat).subtract(
+                new Vector(starti, startj),
             );
             const normal = current_vector.normal().unit();
             const AllBlockedAngleRange: [number, number][] = [
@@ -207,7 +208,7 @@ export function findVisibleGridsCircle(
                     y_current,
                 ),
                 ...formatSmallArcsAngleRange([
-                    getAngle(
+                    getAngleOfVector(
                         current_vector
                             .multiply(
                                 (current_vector.length() - 0.5) /
@@ -215,7 +216,7 @@ export function findVisibleGridsCircle(
                             )
                             .add(normal.divide(2).multiply(0.95)),
                     ),
-                    getAngle(
+                    getAngleOfVector(
                         current_vector
                             .multiply(
                                 (current_vector.length() - 0.5) /

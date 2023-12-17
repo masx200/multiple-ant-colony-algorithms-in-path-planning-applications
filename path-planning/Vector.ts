@@ -1,5 +1,5 @@
 /** 该代码定义了一个名为Vec的类，该类表示一个二维向量。类中有四个方法：构造函数、length方法、dot方法和cos方法。构造函数用于初始化向量的x和y坐标。length方法计算向量的长度。dot方法计算两个向量的点积。cos方法计算两个向量的余弦值。类中的属性x和y表示向量的横坐标和纵坐标*/
-export class Vec {
+export class Vector {
     public x: number;
     public y: number;
 
@@ -42,7 +42,7 @@ export class Vec {
      * @param v 向量
      * @returns 点积结果
      */
-    dot(v: Vec): number {
+    dot(v: Vector): number {
         // 计算向量与自身的点积
         return v.x * this.x + v.y * this.y;
     }
@@ -53,36 +53,36 @@ export class Vec {
      * @param v 向量
      * @returns 余弦值
      */
-    cos(v: Vec): number {
+    cos(v: Vector): number {
         // 计算两个向量的点积 / 两个向量的模的乘积
         return this.dot(v) / Math.sqrt(this.siz() * v.siz());
     }
     /**
      * 法向量
      *
-     * @returns {Vec} 法向量
+     * @returns {Vector} 法向量
      */
-    normal(): Vec {
+    normal(): Vector {
         const len = this.length();
         if (len === 0) {
             throw new Error(
                 "Cannot compute the normal vector of a zero-length vector",
             );
         }
-        return new Vec(-this.y / len, this.x / len);
+        return new Vector(-this.y / len, this.x / len);
     }
 
     /**
      * 单位向量
      *
-     * @returns {Vec} 单位向量
+     * @returns {Vector} 单位向量
      */
-    unit(): Vec {
+    unit(): Vector {
         const len = this.length();
         if (len === 0) {
             throw new Error("Cannot normalize a zero-length vector");
         }
-        return new Vec(this.x / len, this.y / len);
+        return new Vector(this.x / len, this.y / len);
     }
 
     /**
@@ -91,8 +91,8 @@ export class Vec {
      * @param v 向量
      * @returns 新的向量
      */
-    add(v: Vec): Vec {
-        return new Vec(this.x + v.x, this.y + v.y);
+    add(v: Vector): Vector {
+        return new Vector(this.x + v.x, this.y + v.y);
     }
 
     /**
@@ -101,8 +101,8 @@ export class Vec {
      * @param v 向量
      * @returns 新的向量
      */
-    subtract(v: Vec): Vec {
-        return new Vec(this.x - v.x, this.y - v.y);
+    subtract(v: Vector): Vector {
+        return new Vector(this.x - v.x, this.y - v.y);
     }
 
     /**
@@ -111,8 +111,8 @@ export class Vec {
      * @param scalar 标量
      * @returns 新的向量
      */
-    multiply(scalar: number): Vec {
-        return new Vec(this.x * scalar, this.y * scalar);
+    multiply(scalar: number): Vector {
+        return new Vector(this.x * scalar, this.y * scalar);
     }
 
     /**
@@ -121,10 +121,10 @@ export class Vec {
      * @param scalar 标量
      * @returns 新的向量
      */
-    divide(scalar: number): Vec {
+    divide(scalar: number): Vector {
         if (scalar === 0) {
             throw new Error("Cannot divide by zero");
         }
-        return new Vec(this.x / scalar, this.y / scalar);
+        return new Vector(this.x / scalar, this.y / scalar);
     }
 }
