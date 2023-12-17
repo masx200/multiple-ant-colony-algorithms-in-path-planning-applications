@@ -33,7 +33,7 @@ export function getVisibleGridsList(grid: GridMap): Set<[number, number]>[][] {
             // 如果当前位置是自由位置（isFree 方法判断）
             if (grid.isFree(i, j)) {
                 // 调用 findVisibleGridsBFS 方法找到可见的格子（VisibleGrids）
-                const VisibleGrids = findVisibleGridsCircle(i, j, grid);
+                const VisibleGrids = findVisibleGridsCircle([i, j], grid);
                 // 遍历 VisibleGrids 数组
                 result[i][j] = new Set(VisibleGrids);
             }

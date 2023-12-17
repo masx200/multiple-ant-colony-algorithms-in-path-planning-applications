@@ -17,7 +17,7 @@ for (const [fnname, fnimpl] of findVisibleGridsBFSMapOfNameAndImpl) {
 
         const startj = Math.floor(Math.random() * row);
         const starti = Math.floor(Math.random() * column);
-        const visibleGrids = fnimpl(starti, startj, grid);
+        const visibleGrids = fnimpl([starti, startj], grid);
 
         const res = Array(column)
             .fill(0)
