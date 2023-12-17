@@ -7,7 +7,7 @@ export function search_one_route_on_grid_map(
     start: Point,
     end: Point,
     PheromoneMatrix: number[][],
-    visibleGridsList: Array<[number, number]>[][],
+    visibleGridsList: Iterable<[number, number]>[][],
 ): number[] {
     throw new Error("Not Implemented");
 }

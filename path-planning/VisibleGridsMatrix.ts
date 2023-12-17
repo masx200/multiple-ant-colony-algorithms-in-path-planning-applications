@@ -5,7 +5,7 @@
  * @returns 布尔类型的四维数组，表示网格地图中每个格子与其可视的格子之间的连通关系
  */
 export function VisibleGridsMatrix(
-    visibleGridsList: Array<[number, number]>[][],
+    visibleGridsList: Iterable<[number, number]>[][],
 ): boolean[][][][] {
     const column = visibleGridsList.length;
     const row = visibleGridsList[0].length;
@@ -47,9 +47,8 @@ export function VisibleGridsMatrix(
             // 调用 findVisibleGridsBFS 方法找到可见的格子（VisibleGrids）
             const VisibleGrids = visibleGridsList[i][j];
             // 遍历 VisibleGrids 数组
-            for (let index = 0; index < VisibleGrids.length; index++) {
+            for (const element of VisibleGrids) {
                 // 获取当前元素（VisibleGrids[index]）
-                const element = VisibleGrids[index];
                 // 将对应位置的值设为 true（表示可见）
                 result[i][j][element[0]][element[1]] = true;
                 result[element[0]][element[1]][i][j] = true;
