@@ -14,8 +14,7 @@ import { GridMap } from "./grid-map";
  * @returns 包含所有可见网格的数组
  */
 export function findVisibleGridsBFS(
-    starti: number,
-    startj: number,
+    [starti, startj]: [number, number],
     grid: GridMap,
 ): [number, number][] {
     const result: [number, number][] = [];

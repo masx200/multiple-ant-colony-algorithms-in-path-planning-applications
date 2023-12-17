@@ -10,10 +10,8 @@ import { formatSmallArcsAngleRange } from "./formatSmallArcsAngleRange";
  * @returns 返回角度范围，以[最小角度, 最大角度]的形式返回
  */
 export function getAngleRangeOfPointAndSquare1(
-    a: number,
-    b: number,
-    x: number,
-    y: number,
+    [a, b]: [number, number],
+    [x, y]: [number, number],
 ): [number, number][] {
     const four_edges = [
         [x - 0.5, y + 0.475],

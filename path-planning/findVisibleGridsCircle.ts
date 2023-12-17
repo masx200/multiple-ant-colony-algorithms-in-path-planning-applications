@@ -26,8 +26,7 @@ import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with
 函数首先检查起始位置是否为障碍物，如果是则返回空数组。然后初始化结果数组（result）、队列（queue）、角度范围模块（angleRanges）和访问过的位置记录（visited）。接下来进入循环，当队列不为空时，从队列中取出一个坐标，并根据当前角度计算射线方向。在射线上进行移动并检查每个格子是否为空闲、是否已访问过，符合条件的格子将被加入到结果数组中。同时，更新被障碍物遮挡的角度范围，并将未被遮挡的角度范围重新加入队列。最后，返回包含所有可见网格坐标的数组。
  */
 export function findVisibleGridsCircle(
-    starti: number,
-    startj: number,
+    [starti, startj]: [number, number],
     grid: GridMap,
 ): [number, number][] {
     const start = [starti, startj] as [number, number];
@@ -115,10 +114,8 @@ export function findVisibleGridsCircle(
                         //需要判断如果有一个障碍物时,格子的四条边会不会与路线产生交点,如果有交点,则无法通过.
                         if (
                             Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment(
-                                lastx,
-                                lasty,
-                                x_current,
-                                y_current,
+                                [lastx, lasty],
+                                [x_current, y_current],
                                 [starti, startj],
                                 [x_current, y_current],
                                 grid,
@@ -201,10 +198,8 @@ export function findVisibleGridsCircle(
             const normal = current_vector.normal().unit();
             const AllBlockedAngleRange: [number, number][] = [
                 ...getAngleRangeOfPointAndSquare1(
-                    starti,
-                    startj,
-                    x_current,
-                    y_current,
+                    [starti, startj],
+                    [x_current, y_current],
                 ),
                 ...formatSmallArcsAngleRange([
                     getAngleOfVector(

@@ -12,12 +12,9 @@ import { containedByFanArea } from "./containedByFanArea";
  * @returns 如果点在扇形区域内则返回true，否则返回false
  */
 export function isPointInSector(
-    i1: number,
-    j1: number,
-    x1: number,
-    y1: number,
-    x2: number,
-    y2: number,
+    [i1, j1]: [number, number],
+    [x1, y1]: [number, number],
+    [x2, y2]: [number, number],
 ) {
     // 判断点 (i1, j1) 是否在扇形区域中，该扇形区域由 (x1, y1) 和 (x2, y2) 两个端点以及原点 (0, 0) 确定
     return containedByFanArea(

@@ -9,10 +9,14 @@ import { GridMap } from "./grid-map";
 
 // 定义一个名为Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment的函数，这个函数接收8个参数，其中前四个参数代表两条线段的两个端点，后四个参数代表一个线段的起点和终点
 export function Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment(
-    x1: number, // 第一个线段的起点x坐标
-    y1: number, // 第一个线段的起点y坐标
-    x2: number, // 第一个线段的终点x坐标
-    y2: number, // 第一个线段的终点y坐标
+    [
+        x1, // 第一个线段的起点x坐标
+        y1,
+    ]: [number, number], // 第一个线段的起点y坐标
+    [
+        x2, // 第一个线段的终点x坐标
+        y2,
+    ]: [number, number], // 第一个线段的终点y坐标
     start: [number, number], // 第二个线段的起点坐标，以数组形式表示
     end: [number, number], // 第二个线段的终点坐标，以数组形式表示
     gird: GridMap,

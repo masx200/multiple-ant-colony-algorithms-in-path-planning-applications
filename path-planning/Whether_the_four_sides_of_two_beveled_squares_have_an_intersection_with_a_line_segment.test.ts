@@ -16,10 +16,8 @@ describe("Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_wit
         // Act
         const result =
             Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment(
-                x1,
-                y1,
-                x2,
-                y2,
+                [x1, y1],
+                [x2, y2],
                 start,
                 end,
                 gird,
@@ -42,10 +40,8 @@ describe("Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_wit
             // Act
             const result =
                 Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment(
-                    x1,
-                    y1,
-                    x2,
-                    y2,
+                    [x1, y1],
+                    [x2, y2],
                     start,
                     end,
                     gird,
@@ -73,10 +69,8 @@ describe("Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_wit
         // Act
         const result =
             Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment(
-                x1,
-                y1,
-                x2,
-                y2,
+                [x1, y1],
+                [x2, y2],
                 start,
                 end,
                 gird,
