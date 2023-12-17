@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { GridMap } from "./grid-map";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
+import { getVisibleGridsList } from "./getVisibleGridsList";
 
 describe("VisibleGridsMatrix", () => {
     it("所有正常情况应该被覆盖到", () => {
@@ -9,7 +10,9 @@ describe("VisibleGridsMatrix", () => {
             [0, 0, 0],
             [0, 0, 0],
         ]);
-        const visibleGridsMatrix = VisibleGridsMatrix(grid);
+        const visibleGridsMatrix = VisibleGridsMatrix(
+            getVisibleGridsList(grid),
+        );
         // console.log(JSON.stringify({ grid, visibleGridsMatrix }));
         expect(visibleGridsMatrix).toEqual([
             [
@@ -71,7 +74,9 @@ describe("VisibleGridsMatrix", () => {
             [1, 1, 1],
             [1, 1, 1],
         ]);
-        const visibleGridsMatrix = VisibleGridsMatrix(grid);
+        const visibleGridsMatrix = VisibleGridsMatrix(
+            getVisibleGridsList(grid),
+        );
         // console.log(JSON.stringify({ grid, visibleGridsMatrix }));
         expect(visibleGridsMatrix).toEqual([
             [
@@ -134,7 +139,9 @@ describe("VisibleGridsMatrix", () => {
             [0, 1, 0],
             [0, 0, 0],
         ]);
-        const visibleGridsMatrix = VisibleGridsMatrix(grid);
+        const visibleGridsMatrix = VisibleGridsMatrix(
+            getVisibleGridsList(grid),
+        );
         // console.log(JSON.stringify({ /* grid,  */ visibleGridsMatrix }));
         expect(visibleGridsMatrix).toEqual([
             [
@@ -197,7 +204,9 @@ describe("VisibleGridsMatrix", () => {
             [0, 1, 0],
             [0, 0, 0],
         ]);
-        const visibleGridsMatrix = VisibleGridsMatrix(grid);
+        const visibleGridsMatrix = VisibleGridsMatrix(
+            getVisibleGridsList(grid),
+        );
         // console.log(JSON.stringify({ /* grid, */ visibleGridsMatrix }));
         expect(visibleGridsMatrix).toEqual([
             [
@@ -260,7 +269,9 @@ describe("VisibleGridsMatrix", () => {
             [0, 1, 0],
             [0, 0, 1],
         ]);
-        const visibleGridsMatrix = VisibleGridsMatrix(grid);
+        const visibleGridsMatrix = VisibleGridsMatrix(
+            getVisibleGridsList(grid),
+        );
         // console.log(JSON.stringify({ grid, visibleGridsMatrix }));
         expect(visibleGridsMatrix).toEqual([
             [
@@ -329,7 +340,9 @@ describe("VisibleGridsMatrix", () => {
             [0, 0, 1, 1, 1, 1, 0, 1, 1, 0],
             [0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
         ]);
-        const visibleGridsMatrix = VisibleGridsMatrix(grid);
+        const visibleGridsMatrix = VisibleGridsMatrix(
+            getVisibleGridsList(grid),
+        );
         // console.log(JSON.stringify({ grid, visibleGridsMatrix }));
         expect(visibleGridsMatrix).toEqual([
             [
