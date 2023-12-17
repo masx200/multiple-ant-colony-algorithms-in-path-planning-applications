@@ -27,7 +27,7 @@ export function containedByFanArea(
         oq = VecFromTo(o, q),
         // 从o到ij的向量
         ox = VecFromTo(o, ij);
-    // 如果从op到oq的夹角大于90度，则说明点o在扇形区域外部，递归调用containedByFanArea函数判断点o、q、p和ij是否满足要求
+    // 如果从op到oq的夹角大于PI，则说明点o在扇形区域外部，递归调用containedByFanArea函数判断点o、q、p和ij是否满足要求
     if (0 > vectorAngle([op.x, op.y], [oq.x, oq.y]))
         return !containedByFanArea(o, q, p, ij);
     // 如果ox为零向量（ox.x和ox.y都为0），则说明点o与点ij共线，此时无法确定点o是否在扇形区域内，返回true

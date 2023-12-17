@@ -34,12 +34,9 @@ export function isInsideSectorWithRadius(
     return (
         // 判断点不在扇形的起始臂并且在扇形的结束臂内
         isPointInSector(
-            relPoint.x,
-            relPoint.y,
-            sectorStart.x,
-            sectorStart.y,
-            sectorEnd.x,
-            sectorEnd.y,
+            [relPoint.x, relPoint.y],
+            [sectorStart.x, sectorStart.y],
+            [sectorEnd.x, sectorEnd.y],
         ) &&
         // 判断点不在指定半径内
         !isWithinRadius(relPoint, min_radius)
