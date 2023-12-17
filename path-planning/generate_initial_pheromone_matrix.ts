@@ -54,8 +54,8 @@ export function generate_initial_pheromone_matrix(
 
             // 计算当前点到起始点和结束点的距离
             const distance =
-                EuclideanDistance(start.x, start.y, i, j) +
-                EuclideanDistance(i, j, end.x, end.y);
+                EuclideanDistance([start.x, start.y], [i, j]) +
+                EuclideanDistance([i, j], [end.x, end.y]);
 
             // 获取当前点到起始点和结束点的路径坐标
             const pcds = uniqBy(

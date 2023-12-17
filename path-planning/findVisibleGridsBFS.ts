@@ -33,7 +33,7 @@ export function findVisibleGridsBFS(
     const minheap = new MinHeap<[number, number]>(function ([x, y]) {
         return Number.isFinite(distances[x][y])
             ? distances[x][y]
-            : ((distances[x][y] = EuclideanDistance(starti, startj, x, y)),
+            : ((distances[x][y] = EuclideanDistance([starti, startj], [x, y])),
               distances[x][y]);
     });
     // 将起始位置添加到最小堆中
