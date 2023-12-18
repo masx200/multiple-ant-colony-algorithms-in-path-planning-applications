@@ -78,6 +78,7 @@
         "@masx200/tsp-lib-test-data": "^2.0.1",
         "@masx200/weighted-randomly-select": "^2.1.1",
         "@types/chai": "^4.3.10",
+        "@types/core-js": "^2.5.8",
         "@types/node": "^20.10.5",
         "@types/robust-segment-intersect": "^1.0.0",
         "@vue/eslint-config-prettier": "^8.0.0",
