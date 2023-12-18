@@ -1,7 +1,6 @@
 import { Point } from "./Point";
 import { Vector } from "./Vector";
 
-
 /**
  * 根据起始点和终点生成向量
  *

@@ -1,5 +1,5 @@
+import assert from "assert";
 import { test } from "vitest";
-import { assert } from "vitest";
 import { RangeModule } from "./RangeModule";
 
 test("RangeModule", () => {
@@ -39,14 +39,14 @@ test("RangeModule", () => {
         [35, 40],
     ]);
 
-    assert.isTrue(rangeModule.queryRange(10, 20));
-    assert.isTrue(rangeModule.queryRange(25, 28));
-    assert.isTrue(rangeModule.queryRange(35, 40));
+    assert(rangeModule.queryRange(10, 20));
+    assert(rangeModule.queryRange(25, 28));
+    assert(rangeModule.queryRange(35, 40));
     assert.isFalse(rangeModule.queryRange(10, 22));
     assert.isFalse(rangeModule.queryRange(22, 24));
     assert.isFalse(rangeModule.queryRange(30, 40));
     rangeModule.addRange(10, 40);
-    assert.isTrue(rangeModule.queryRange(10, 40));
+    assert(rangeModule.queryRange(10, 40));
     availableRanges = rangeModule.getAvailableRanges();
     assert.deepEqual(availableRanges, [[10, 40]]);
 });

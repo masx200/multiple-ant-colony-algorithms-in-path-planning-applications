@@ -1,7 +1,6 @@
 import { assert, test } from "vitest";
 import { Vector } from "./Vector";
 
-
 test("vector", () => {
     const vec1 = new Vector(3, 4);
     const vec2 = new Vector(1, 2);

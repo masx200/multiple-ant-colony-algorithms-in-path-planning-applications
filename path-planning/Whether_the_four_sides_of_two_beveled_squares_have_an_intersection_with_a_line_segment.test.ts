@@ -77,6 +77,6 @@ describe("Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_wit
             );
 
         // Assert
-        assert.isTrue(result);
+        assert(result);
     });
 });

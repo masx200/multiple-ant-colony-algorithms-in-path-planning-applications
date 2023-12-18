@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { assert } from "vitest";
+import assert from "assert";
 import { canStraightReach } from "./canStraightReach";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
@@ -18,9 +18,9 @@ export function search_one_route_on_grid_map(
     partial_Local_pheromone_volatility: number,
     rou_Global_pheromone_volatility: number,
 ): [number, number][] {
-    assert.isTrue(grid.isFree(end.x, end.y));
+    assert(grid.isFree(end.x, end.y));
     assert.isFalse(start.x === end.x && start.y === end.y);
-    assert.isTrue(grid.isFree(start.x, start.y));
+    assert(grid.isFree(start.x, start.y));
     if (canStraightReach([start.x, start.y], [end.x, end.y], grid)) {
         return [
             [start.x, start.y],

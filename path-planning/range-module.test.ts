@@ -42,6 +42,6 @@ describe("RangeModule", () => {
         //console.log(JSON.stringify(rangeModule));
         assert(rangeModule.queryRange(10, 14));
         assert.isFalse(rangeModule.queryRange(13, 15));
-        assert.isTrue(rangeModule.queryRange(16, 17));
+        assert(rangeModule.queryRange(16, 17));
     });
 });

@@ -1,5 +1,5 @@
+import assert from "assert";
 import { uniqBy } from "lodash-es";
-import { assert } from "vitest";
 import { EuclideanDistance } from "./Euclidean-distance";
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
@@ -19,8 +19,8 @@ export function generate_initial_pheromone_matrix(
     end: Point,
 ): number[][] {
     assert.isFalse(start.x === end.x && start.y === end.y);
-    assert.isTrue(grid.isFree(start.x, start.y));
-    assert.isTrue(grid.isFree(end.x, end.y));
+    assert(grid.isFree(start.x, start.y));
+    assert(grid.isFree(end.x, end.y));
     // 计算地图的行数和列数
     const n = grid.row * grid.column;
 

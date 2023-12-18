@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getAngleOfVector } from "./getAngleOfVector";
 
-
 describe("getAngle", () => {
     it("should return the correct angle in radians", () => {
         const vec1 = { x: 1, y: 0 };

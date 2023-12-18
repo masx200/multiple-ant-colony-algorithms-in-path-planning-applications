@@ -1,6 +1,6 @@
+import assert from "assert";
 import { describe, expect, it } from "vitest";
 import { Float64areEqual } from "./Float64areEqual";
-import { assert } from "vitest";
 
 describe("Float64areEqual", () => {
     it("should return true when two numbers are equal", () => {

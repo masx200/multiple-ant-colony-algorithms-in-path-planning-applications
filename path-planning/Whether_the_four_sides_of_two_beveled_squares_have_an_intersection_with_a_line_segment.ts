@@ -1,6 +1,6 @@
 // 引入vitest库中的assert模块，用于断言测试
 
-import { assert } from "vitest";
+import assert from "assert";
 import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
 import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { GridMap } from "./grid-map";
@@ -21,8 +21,8 @@ export function Whether_the_four_sides_of_two_beveled_squares_have_an_intersecti
     end: [number, number], // 第二个线段的终点坐标，以数组形式表示
     gird: GridMap,
 ) {
-    // 使用assert.isTrue断言，x1到x2的距离和y1到y2的距离必须相等，即这两条线段是垂直的
-    assert.isTrue(Math.abs(x1 - x2) == 1 && Math.abs(y1 - y2) == 1);
+    // 使用assert断言，x1到x2的距离和y1到y2的距离必须相等，即这两条线段是垂直的
+    assert(Math.abs(x1 - x2) == 1 && Math.abs(y1 - y2) == 1);
     // 返回一个数组，数组的元素是一个子数组，子数组中的元素又是一个数组，这个结构表示一个点的坐标
     return [
         [x1, y2], // 第一个点，对应于x1和y2坐标
