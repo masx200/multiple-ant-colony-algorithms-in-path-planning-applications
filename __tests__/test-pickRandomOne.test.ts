@@ -1,6 +1,7 @@
-import assert from "assert";
-import { pickRandomOne } from "../functions/pickRandomOne";
+import { assert } from "chai";
 import { it } from "vitest";
+import { pickRandomOne } from "../functions/pickRandomOne";
+
 it("pickRandomOne", () => {
     for (let i = 0; i < 50; i++) {
         assert([7].includes(pickRandomOne([7])));

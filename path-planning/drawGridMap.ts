@@ -1,5 +1,6 @@
 import { GridMap } from "./grid-map.ts";
 
+
 export function drawGridMap(gridMap: GridMap, canvas: HTMLCanvasElement) {
     const ctx = canvas.getContext("2d");
 
@@ -15,31 +16,31 @@ export function drawGridMap(gridMap: GridMap, canvas: HTMLCanvasElement) {
     var height = myCanvas_rect.height;
     // 计算每个方格的实际大小（以像素为单位）
     const cellSize = Math.min(width / gridMap.column, height / gridMap.row);
-
-    // 绘制竖直网格线
-    for (let i = 0; i <= gridMap.column; i++) {
+    const data = gridMap.data.toReversed();
+    // 绘制方格
+    for (let col = 0; col < gridMap.column; col++) {
+        for (let row = 0; row < gridMap.row; row++) {
+            const value = data[col][row];
+            ctx.fillStyle = value === 1 ? "black" : "white";
+            ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+        }
+    } // 绘制竖直网格线
+    for (let i = 0; i <= gridMap.row; i++) {
+        const { column } = gridMap;
         ctx.beginPath();
         ctx.strokeStyle = "green";
         ctx.moveTo(i * cellSize, 0);
-        ctx.lineTo(i * cellSize, height);
+        ctx.lineTo(i * cellSize, cellSize * column);
         ctx.stroke();
     }
 
     // 绘制水平网格线
-    for (let i = 0; i <= gridMap.row; i++) {
+    for (let i = 0; i <= gridMap.column; i++) {
+        const { row } = gridMap;
         ctx.beginPath();
         ctx.strokeStyle = "blue";
         ctx.moveTo(0, i * cellSize);
-        ctx.lineTo(width, i * cellSize);
+        ctx.lineTo(cellSize * row, i * cellSize);
         ctx.stroke();
-    }
-
-    // 绘制方格
-    for (let col = 0; col < gridMap.column; col++) {
-        for (let row = 0; row < gridMap.row; row++) {
-            const value = gridMap.data[col][row];
-            ctx.fillStyle = value === 1 ? "black" : "white";
-            ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
-        }
     }
 }

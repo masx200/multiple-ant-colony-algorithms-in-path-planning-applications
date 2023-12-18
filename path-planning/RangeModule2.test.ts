@@ -1,4 +1,4 @@
-import assert from "assert";
+import { assert } from "chai";
 import { test } from "vitest";
 import { RangeModule } from "./RangeModule";
 

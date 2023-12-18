@@ -1,4 +1,4 @@
-import assert from "assert";
+import { assert } from "chai";
 import { uniqBy } from "lodash-es";
 import { EuclideanDistance } from "./Euclidean-distance";
 import { getPathCoordinates } from "./getPathCoordinates";

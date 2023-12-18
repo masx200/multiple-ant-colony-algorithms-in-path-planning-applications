@@ -4,6 +4,8 @@ import "core-js/stable/array/at";
 import { appcontainer } from "./appcontainer";
 import { app } from "./main";
 
+// import "process";
+
 app.config.errorHandler = (e: any) => {
     typeof alert === "function" &&
         alert?.(

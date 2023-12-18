@@ -1,6 +1,7 @@
-import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
-import assert from "assert";
+import { assert } from "chai";
 import { it } from "vitest";
+import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
+
 it("select_available_cities_from_optimal_and_latest-1", () => {
     const result = select_available_cities_from_optimal_and_latest({
         current_city: 1,

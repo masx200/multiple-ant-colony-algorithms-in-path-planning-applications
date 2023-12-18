@@ -1,4 +1,4 @@
-import assert from "assert";
+import { assert } from "chai";
 import { describe, expect, it } from "vitest";
 import { Float64areEqual } from "./Float64areEqual";
 

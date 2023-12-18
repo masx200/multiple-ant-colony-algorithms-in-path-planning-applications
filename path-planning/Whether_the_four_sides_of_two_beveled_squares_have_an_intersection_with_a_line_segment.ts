@@ -1,6 +1,6 @@
 // 引入vitest库中的assert模块，用于断言测试
 
-import assert from "assert";
+import { assert } from "chai";
 import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
 import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { GridMap } from "./grid-map";

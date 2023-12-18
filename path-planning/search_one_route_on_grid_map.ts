@@ -1,5 +1,5 @@
 //@ts-nocheck
-import assert from "assert";
+import { assert } from "chai";
 import { canStraightReach } from "./canStraightReach";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
