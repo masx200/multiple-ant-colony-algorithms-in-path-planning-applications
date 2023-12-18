@@ -19,7 +19,7 @@ export function search_one_route_on_grid_map(
     rou_Global_pheromone_volatility: number,
 ): [number, number][] {
     assert.isTrue(grid.isFree(end.x, end.y));
-
+    assert.isFalse(start.x === end.x && start.y === end.y);
     assert.isTrue(grid.isFree(start.x, start.y));
     if (canStraightReach([start.x, start.y], [end.x, end.y], grid)) {
         return [
