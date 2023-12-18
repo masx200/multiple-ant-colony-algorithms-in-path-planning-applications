@@ -7,8 +7,12 @@ import { GridMapFromArray } from "./GridMapFromArray";
 import { drawGridMap } from "./drawGridMap";
 import { onMounted } from "vue";
 import { ref, effect } from "vue";
+// import { useElementSize } from "@vueuse/core";
+
 import { useWindowSize } from "@vueuse/core";
-const { width, height } = useWindowSize();
+// const { width, height } = useElementSize(document.body);
+
+const windowSize = useWindowSize();
 const grid_map_canvas = ref<HTMLCanvasElement>();
 const gridMap = GridMapFromArray([
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -44,8 +48,15 @@ onMounted(() => {
 effect(() => {
     const canvas = grid_map_canvas.value;
     if (canvas) {
-        canvas.width = width.value;
-        canvas.height = height.value;
+        // console.log(width.value, windowSize.width.value, window.innerWidth);
+        // console.log(height.value, windowSize.height.value, window.innerHeight);
+        canvas.width =
+            /* width.value + */ (windowSize.width.value + window.innerWidth) /
+            2;
+        canvas.height =
+            /* height.value + */ (windowSize.height.value +
+                window.innerHeight) /
+            2;
 
         drawGridMap(gridMap, canvas);
     }
