@@ -10,6 +10,12 @@ export function search_one_route_on_grid_map(
     PheromoneMatrix: number[][],
     visibleGridsList: Iterable<[number, number]>[][],
     pointsInsideAllConvexPolygons: Iterable<[number, number]>,
+    alpha_Pheromone_factor: number,
+    beta_Heuristic_factors: number,
+    q0_Path_selection_parameters: number,
+    PheromoneZeroMatrix: number[][],
+    partial_Local_pheromone_volatility: number,
+    rou_Global_pheromone_volatility: number,
 ): [number, number][] {
     assert.isTrue(grid.isFree(end.x, end.y));
 
