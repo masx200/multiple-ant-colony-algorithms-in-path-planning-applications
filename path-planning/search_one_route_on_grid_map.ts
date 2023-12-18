@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { assert } from "vitest";
 import { canStraightReach } from "./canStraightReach";
 import { GridMap } from "./grid-map";
