@@ -74,5 +74,6 @@ export class GridMap {
         assert.isAtLeast(row, 1);
         assert.equal(data.length, column);
         assert.equal(data[0].length, row);
+        this.data = Array.from(data.map((a) => [...a]));
     }
 }
