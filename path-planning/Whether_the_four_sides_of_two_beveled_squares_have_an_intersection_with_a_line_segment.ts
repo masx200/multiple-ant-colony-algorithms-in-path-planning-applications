@@ -2,7 +2,7 @@
 
 import { GridMap } from "./grid-map";
 import { assert } from "chai";
-import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
+import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
 
 // 引入自定义模块robust-segment-intersect，这个模块应该包含了一个函数robustsegmentintersect，用于计算两条线段是否相交
@@ -41,7 +41,7 @@ export function Whether_the_four_sides_of_two_beveled_squares_have_an_intersecti
             [x - 0.475, y - 0.5],
             [x - 0.5, y - 0.475],
         ] as Array<[number, number]>; // 将数组标记为只读，防止后续更改这个数组的内容
-        const segments = not_cycle_route_to_segments(four_edges);
+        const segments = cycle_route_to_segments(four_edges);
         // 使用数组的some方法，遍历这个四边形的四个边，检查是否存在一条边与第二个线段相交
         return segments.some(([point1, point2]) => {
             // 使用自定义函数robustsegmentintersect，检查一条边是否与第二个线段相交，如果相交返回true，否则返回false
