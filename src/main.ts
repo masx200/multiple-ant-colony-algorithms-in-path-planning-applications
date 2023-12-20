@@ -2,7 +2,8 @@ import "../functions/echarts-line";
 import "./style.css";
 
 import { createApp, h } from "vue";
-import appcom from "../path-planning/drawGridMap.vue";
+
+import appcom from "../path-planning/drawGridMaptest.vue";
 
 document.title = "ant-colony-algorithm-for-multiple-populations";
 
