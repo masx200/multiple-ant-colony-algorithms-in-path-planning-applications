@@ -1,8 +1,8 @@
-import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
-import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
-import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
+import { getPathCoordinates } from "./getPathCoordinates";
+import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
+import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
 
 /**
  * 判断从起始点能否通过一条直线到达终点
@@ -116,7 +116,7 @@ export function canStraightReach(
                         [x - 0.475, y - 0.5],
                         [x - 0.5, y - 0.475],
                     ] as Array<[number, number]>; // 将数组标记为只读，防止后续更改这个数组的内容
-                    const segments = cycle_route_to_segments(four_edges);
+                    const segments = not_cycle_route_to_segments(four_edges);
                     // 使用数组的some方法，遍历这个四边形的四个边，检查是否存在一条边与第二个线段相交
 
                     if (

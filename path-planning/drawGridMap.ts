@@ -1,6 +1,5 @@
 import { GridMap } from "./grid-map.ts";
 
-
 export function drawGridMap(gridMap: GridMap, canvas: HTMLCanvasElement) {
     const ctx = canvas.getContext("2d");
 
