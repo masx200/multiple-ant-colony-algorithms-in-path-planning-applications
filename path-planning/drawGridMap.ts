@@ -20,6 +20,10 @@ export function drawMap(gridMap: GridMap, canvas: HTMLCanvasElement) {
     for (let col = 0; col < gridMap.column; col++) {
         for (let row = 0; row < gridMap.row; row++) {
             const value = data[col][row];
+            ctx.shadowOffsetX = 0; // x轴偏移量
+            ctx.shadowOffsetY = 0; // y轴偏移量
+            ctx.shadowBlur = 0; // 模糊程度
+            ctx.shadowColor = "fully-transparent black"; // 阴影颜色（半透明黑色）
             ctx.fillStyle = value === 1 ? "black" : "white";
             ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
         }
