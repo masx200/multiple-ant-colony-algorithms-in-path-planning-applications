@@ -1,3 +1,10 @@
+/**
+ * 绘制网格
+ *
+ * @param column 栅格地图的列数
+ * @param row 栅格地图的行数
+ * @param canvas 画布元素
+ */
 export function drawGrid(
     column: number,
     row: number,

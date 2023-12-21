@@ -1,5 +1,13 @@
 import { MousePosition } from "./MousePosition";
 
+/**
+ * 显示鼠标在画布上的坐标
+ *
+ * @param canvas - 画布元素
+ * @param mousePositionInElement - 鼠标相对于画布位置的坐标
+ * @param column - 列数
+ * @param row - 行数
+ */
 export function displayMouseCoordinates(
     canvas: HTMLCanvasElement,
     mousePositionInElement: MousePosition,
@@ -17,6 +25,9 @@ export function displayMouseCoordinates(
     var width = myCanvas_rect.width;
     var height = myCanvas_rect.height;
 
+    /**
+     * 计算每个格子的大小
+     */
     const cellSize = Math.min(width / column, height / row);
 
     // let mousePosition: MousePosition | null = null;
@@ -30,6 +41,7 @@ export function displayMouseCoordinates(
     // }
     // function drawCoordinates() {
     if (mousePositionInElement) {
+        // 清空画布样式
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // 设置阴影样式
