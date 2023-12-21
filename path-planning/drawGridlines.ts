@@ -5,7 +5,7 @@
  * @param row 栅格地图的行数
  * @param canvas 画布元素
  */
-export function drawGrid(
+export function drawGridlines(
     column: number,
     row: number,
     canvas: HTMLCanvasElement,
@@ -30,12 +30,12 @@ export function drawGrid(
         ctx.beginPath();
         ctx.strokeStyle = "green";
         ctx.moveTo(i * cellSize, 0);
-        ctx.lineTo(i * cellSize, cellSize * (column + 1));
+        ctx.lineTo(i * cellSize, cellSize * (column - 1));
         ctx.stroke();
     }
 
     // 绘制水平网格线
-    for (let i = 0; i <= column + 1; i++) {
+    for (let i = 0; i <= column - 1; i++) {
         ctx.beginPath();
         ctx.strokeStyle = "blue";
         ctx.moveTo(0, i * cellSize);

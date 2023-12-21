@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { effect, onMounted, ref } from "vue";
 import { GridMapFromArray } from "./GridMapFromArray";
-import { drawGrid } from "./drawGrid";
+import { drawGridlines } from "./drawGridlines.ts";
 import { drawMap } from "./drawGridMap";
 // import { useElementSize } from "@vueuse/core";
 
@@ -54,7 +54,7 @@ const render = debounce(function render() {
 
         const row = gridMap?.row ?? props.row;
         const column = gridMap?.column ?? props.column;
-        if (props.grid && row && column) drawGrid(column, row, canvas);
+        if (props.grid && row && column) drawGridlines(column, row, canvas);
         if (route && row && column) {
             drawGridRoute(route, canvas, column, row);
         }

@@ -64,13 +64,16 @@ export function drawdisplayMouseCoordinates(
         );
         ctx.fillText(
             text,
-            Math.min(
-                mousePositionInElement.x,
-                width - measureTextWidthAndHeightResult.width,
+            Math.max(
+                0,
+                Math.min(
+                    mousePositionInElement.x,
+                    width - measureTextWidthAndHeightResult.width,
+                ),
             ),
-            Math.min(
-                mousePositionInElement.y,
-                height - measureTextWidthAndHeightResult.height,
+            Math.max(
+                measureTextWidthAndHeightResult.height,
+                Math.min(mousePositionInElement.y, height),
             ),
         );
         // }
