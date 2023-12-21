@@ -24,6 +24,12 @@ export function displayMouseCoordinates(
     // function drawCoordinates() {
     if (mousePositionInElement) {
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 设置阴影样式
+        ctx.shadowOffsetX = 2; // x轴偏移量
+        ctx.shadowOffsetY = 2; // y轴偏移量
+        ctx.shadowBlur = 4; // 模糊程度
+        ctx.shadowColor = "blue"; // 阴影颜色（半透明黑色）
         ctx.font = "16px Arial";
         ctx.fillStyle = "yellow";
         ctx.fillText(
