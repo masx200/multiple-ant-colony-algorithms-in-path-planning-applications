@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+//@ts-nocheck
 import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
 import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 // import { GridMapFromArray } from "./GridMapFromArray";
@@ -50,21 +51,7 @@ import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 // ];
 // const { column, row } = gridMap;
-const route: [number, number][] = [
-    [0, 0],
-    [0, 21],
-    [22, 21],
-    [22, 0],
-    [0, 0],
-    [2, 21],
-    [2, 2],
-    [0, 20],
-    [19, 9],
-    [19, 12],
-    [18, 18],
-    [21, 21],
-    [21, 2],
-];
+import route from "./test-route-23-22.json"; //: [number, number][] = ;
 // onMounted(() => {
 //     render();
 // });
