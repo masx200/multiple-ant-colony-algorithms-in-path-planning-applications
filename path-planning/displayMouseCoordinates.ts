@@ -34,8 +34,8 @@ export function displayMouseCoordinates(
         ctx.fillStyle = "yellow";
         ctx.fillText(
             `( ${mousePositionInElement.x},  ${mousePositionInElement.y})`,
-            10,
-            30,
+            mousePositionInElement.x,
+            mousePositionInElement.y,
         );
         // }
     }

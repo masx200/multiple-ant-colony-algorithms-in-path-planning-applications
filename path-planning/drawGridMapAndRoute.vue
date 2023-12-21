@@ -16,6 +16,8 @@ import {
 } from "@vueuse/core";
 import { drawGridRoute } from "./drawGridRoute";
 import { displayMouseCoordinates } from "./displayMouseCoordinates";
+import { debounce } from "lodash-es";
+import { clearCanvas } from "./clearCanvas";
 // const { width, height } = useElementSize(document.body);
 
 const props = defineProps<
@@ -43,12 +45,10 @@ onMounted(() => {
     });
 });
 const mousePositionInElement = useMouseInElement(grid_map_canvas);
-// 使用函数
-// const myCanvas = document.getElementById('myCanvas') as HTMLCanvasElement;
-// displayMouseCoordinates(myCanvas);
-function render() {
+const render = debounce(function render() {
     const canvas = grid_map_canvas.value;
     if (canvas) {
+        clearCanvas(canvas);
         if (gridMap) drawMap(gridMap, canvas);
 
         const row = gridMap?.row ?? props.row;
@@ -63,7 +63,8 @@ function render() {
                 y: mousePositionInElement.elementY.value,
             });
     }
-}
+});
+
 effect(() => {
     const canvas = grid_map_canvas.value;
     if (canvas) {
