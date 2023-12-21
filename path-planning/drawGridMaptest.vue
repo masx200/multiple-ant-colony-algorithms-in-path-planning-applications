@@ -1,8 +1,10 @@
 <template>
     <DrawGridMapAndRoute
         :route="route"
-        :map="map"
+        :column="map.length"
+        :row="map[0].length"
         :grid="true"
+        :map="map"
     ></DrawGridMapAndRoute>
 </template>
 
