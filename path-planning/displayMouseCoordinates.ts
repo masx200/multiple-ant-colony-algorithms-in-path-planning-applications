@@ -1,4 +1,5 @@
 import { MousePosition } from "./MousePosition";
+import { measureTextWidthAndHeight } from "./measureTextWidthAndHeight";
 
 /**
  * 显示鼠标在画布上的坐标
@@ -50,14 +51,26 @@ export function displayMouseCoordinates(
         ctx.shadowOffsetY = 2; // y轴偏移量
         ctx.shadowBlur = 4; // 模糊程度
         ctx.shadowColor = "blue"; // 阴影颜色（半透明黑色）
-        ctx.font = "16px Arial";
+        const font = "16px Arial";
+        ctx.font = font;
         ctx.fillStyle = "yellow";
+        const text = `( ${mousePositionInElement.x / cellSize},  ${
+            mousePositionInElement.y / cellSize
+        })`;
+        const measureTextWidthAndHeightResult = measureTextWidthAndHeight(
+            text,
+            font,
+        );
         ctx.fillText(
-            `( ${mousePositionInElement.x / cellSize},  ${
-                mousePositionInElement.y / cellSize
-            })`,
-            mousePositionInElement.x,
-            mousePositionInElement.y,
+            text,
+            Math.min(
+                mousePositionInElement.x,
+                width - measureTextWidthAndHeightResult.width,
+            ),
+            Math.min(
+                mousePositionInElement.y,
+                height - measureTextWidthAndHeightResult.height,
+            ),
         );
         // }
     }
