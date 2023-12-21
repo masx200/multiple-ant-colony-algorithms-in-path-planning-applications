@@ -9,7 +9,7 @@ import { measureTextWidthAndHeight } from "./measureTextWidthAndHeight";
  * @param column - 列数
  * @param row - 行数
  */
-export function displayMouseCoordinates(
+export function drawdisplayMouseCoordinates(
     canvas: HTMLCanvasElement,
     mousePositionInElement: MousePosition,
     column: number,
