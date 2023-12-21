@@ -3,23 +3,31 @@
 </template>
 
 <script setup lang="ts">
+import { effect, onMounted, ref } from "vue";
 import { GridMapFromArray } from "./GridMapFromArray";
-import { drawMap, drawGrid } from "./drawGridMap";
-import { onMounted } from "vue";
-import { ref, effect } from "vue";
+import { drawGrid } from "./drawGrid";
+import { drawMap } from "./drawGridMap";
 // import { useElementSize } from "@vueuse/core";
 
-import { useWindowSize } from "@vueuse/core";
+import {
+    useWindowSize,
+    useMouseInElement,
+    useEventListener,
+} from "@vueuse/core";
 import { drawGridRoute } from "./drawGridRoute";
+import { displayMouseCoordinates } from "./displayMouseCoordinates";
 // const { width, height } = useElementSize(document.body);
 
-const props = defineProps<{
-    map?: number[][];
-    route?: [number, number][];
-    column?: number;
-    row?: number;
-    grid?: boolean;
-}>();
+const props = defineProps<
+    Partial<{
+        map?: number[][];
+        route?: [number, number][];
+        column?: number;
+        row?: number;
+        grid?: boolean;
+        label: boolean;
+    }>
+>();
 const windowSize = useWindowSize();
 const grid_map_canvas = ref<HTMLCanvasElement>();
 const gridMap = props.map ? GridMapFromArray(props.map) : undefined;
@@ -28,6 +36,16 @@ const route: [number, number][] | undefined = props.route;
 onMounted(() => {
     render();
 });
+onMounted(() => {
+    useEventListener(grid_map_canvas, "mousemove", (/* e */) => {
+        // console.log(e.key);
+        render();
+    });
+});
+const mousePositionInElement = useMouseInElement(grid_map_canvas);
+// 使用函数
+// const myCanvas = document.getElementById('myCanvas') as HTMLCanvasElement;
+// displayMouseCoordinates(myCanvas);
 function render() {
     const canvas = grid_map_canvas.value;
     if (canvas) {
@@ -39,6 +57,11 @@ function render() {
         if (route && row && column) {
             drawGridRoute(route, canvas, column, row);
         }
+        if (mousePositionInElement.isOutside.value === false)
+            displayMouseCoordinates(canvas, {
+                x: mousePositionInElement.elementX.value,
+                y: mousePositionInElement.elementY.value,
+            });
     }
 }
 effect(() => {
