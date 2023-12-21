@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { GridMapFromArray } from "./GridMapFromArray";
-import { drawGridMap } from "./drawGridMap";
+import { drawMap, drawGrid } from "./drawGridMap";
 import { onMounted } from "vue";
 import { ref, effect } from "vue";
 // import { useElementSize } from "@vueuse/core";
@@ -13,20 +13,32 @@ import { useWindowSize } from "@vueuse/core";
 import { drawGridRoute } from "./drawGridRoute";
 // const { width, height } = useElementSize(document.body);
 
-const props = defineProps<{ grid: number[][]; route: [number, number][] }>();
+const props = defineProps<{
+    map?: number[][];
+    route?: [number, number][];
+    column?: number;
+    row?: number;
+    grid?: boolean;
+}>();
 const windowSize = useWindowSize();
 const grid_map_canvas = ref<HTMLCanvasElement>();
-const gridMap = GridMapFromArray(props.grid);
-const { column, row } = gridMap;
-const route: [number, number][] = props.route;
+const gridMap = props.map ? GridMapFromArray(props.map) : undefined;
+
+const route: [number, number][] | undefined = props.route;
 onMounted(() => {
     render();
 });
 function render() {
     const canvas = grid_map_canvas.value;
     if (canvas) {
-        drawGridMap(gridMap, canvas);
-        drawGridRoute(route, canvas, column, row);
+        if (gridMap) drawMap(gridMap, canvas);
+
+        const row = gridMap?.row ?? props.row;
+        const column = gridMap?.column ?? props.column;
+        if (props.grid && row && column) drawGrid(column, row, canvas);
+        if (route && row && column) {
+            drawGridRoute(route, canvas, column, row);
+        }
     }
 }
 effect(() => {

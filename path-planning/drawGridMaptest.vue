@@ -1,9 +1,13 @@
 <template>
-    <DrawGridMapAndRoute :route="route" :grid="grid"></DrawGridMapAndRoute>
+    <DrawGridMapAndRoute
+        :route="route"
+        :map="map"
+        :grid="true"
+    ></DrawGridMapAndRoute>
 </template>
 
 <script setup lang="ts">
-import grid from "./屏幕截图-2023-11-24-162727_结果_结果.json";
+import map from "./屏幕截图-2023-11-24-162727_结果_结果.json";
 import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 // import { GridMapFromArray } from "./GridMapFromArray";
 // import { drawGridMap } from "./drawGridMap";
