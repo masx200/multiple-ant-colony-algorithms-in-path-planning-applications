@@ -45,6 +45,7 @@ onMounted(() => {
     });
 });
 const mousePositionInElement = useMouseInElement(grid_map_canvas);
+
 const render = debounce(function render() {
     const canvas = grid_map_canvas.value;
     if (canvas) {
