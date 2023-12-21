@@ -3,6 +3,8 @@ import { MousePosition } from "./MousePosition";
 export function displayMouseCoordinates(
     canvas: HTMLCanvasElement,
     mousePositionInElement: MousePosition,
+    column: number,
+    row: number,
 ) {
     // console.log("displayMouseCoordinates", mousePositionInElement);
     const ctx = canvas.getContext("2d");
@@ -11,6 +13,11 @@ export function displayMouseCoordinates(
         throw new Error("Failed to get 2D rendering context");
         // return;
     }
+    var myCanvas_rect = canvas.getBoundingClientRect();
+    var width = myCanvas_rect.width;
+    var height = myCanvas_rect.height;
+
+    const cellSize = Math.min(width / column, height / row);
 
     // let mousePosition: MousePosition | null = null;
     // function handleMouseMove(event: MouseEvent) {
@@ -33,7 +40,9 @@ export function displayMouseCoordinates(
         ctx.font = "16px Arial";
         ctx.fillStyle = "yellow";
         ctx.fillText(
-            `( ${mousePositionInElement.x},  ${mousePositionInElement.y})`,
+            `( ${mousePositionInElement.x / cellSize},  ${
+                mousePositionInElement.y / cellSize
+            })`,
             mousePositionInElement.x,
             mousePositionInElement.y,
         );

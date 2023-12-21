@@ -57,11 +57,16 @@ const render = debounce(function render() {
         if (route && row && column) {
             drawGridRoute(route, canvas, column, row);
         }
-        if (mousePositionInElement.isOutside.value === false)
-            displayMouseCoordinates(canvas, {
-                x: mousePositionInElement.elementX.value,
-                y: mousePositionInElement.elementY.value,
-            });
+        if (mousePositionInElement.isOutside.value === false && row && column)
+            displayMouseCoordinates(
+                canvas,
+                {
+                    x: mousePositionInElement.elementX.value,
+                    y: mousePositionInElement.elementY.value,
+                },
+                column,
+                row,
+            );
     }
 });
 
