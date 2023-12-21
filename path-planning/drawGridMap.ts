@@ -6,7 +6,7 @@ export function drawMap(gridMap: GridMap, canvas: HTMLCanvasElement) {
     if (!ctx) {
         throw new Error("Failed to get 2D rendering context");
     }
-
+    ctx.save();
     // 设置canvas的尺寸为栅格地图的尺寸
     // canvas.width = gridMap.column;
     // canvas.height = gridMap.row;
@@ -28,4 +28,5 @@ export function drawMap(gridMap: GridMap, canvas: HTMLCanvasElement) {
             ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
         }
     }
+    ctx.restore();
 }

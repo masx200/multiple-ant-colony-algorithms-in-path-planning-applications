@@ -21,6 +21,7 @@ export function displayMouseCoordinates(
         throw new Error("Failed to get 2D rendering context");
         // return;
     }
+    ctx.save();
     var myCanvas_rect = canvas.getBoundingClientRect();
     var width = myCanvas_rect.width;
     var height = myCanvas_rect.height;
@@ -67,4 +68,5 @@ export function displayMouseCoordinates(
     //     mousePosition = null;
     //     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // });
+    ctx.restore();
 }

@@ -11,7 +11,7 @@ export function drawGridRoute(
     if (!ctx) {
         throw new Error("Failed to get 2D rendering context");
     }
-
+    ctx.save();
     var myCanvas_rect = canvas.getBoundingClientRect();
     var width = myCanvas_rect.width;
     var height = myCanvas_rect.height;
@@ -26,4 +26,5 @@ export function drawGridRoute(
         ctx.lineTo((i2 + 0.5) * cellSize, cellSize * (column - j2 - 0.5));
         ctx.stroke();
     }
+    ctx.restore();
 }
