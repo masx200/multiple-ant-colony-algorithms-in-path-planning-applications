@@ -51,6 +51,10 @@ import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 // ];
 // const { column, row } = gridMap;
 const route: [number, number][] = [
+    [0, 0],
+    [0, 21],
+    [22, 21],
+    [22, 0],
     [2, 21],
     [2, 2],
     [0, 20],
