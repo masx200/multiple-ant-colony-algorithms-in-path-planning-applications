@@ -26,7 +26,7 @@ onMounted(() => {
     const gridmap = GridMapFromArray(map);
     const visibleGrids = findVisibleGridsCircle([start.x, start.y], gridmap);
 
-    console.log(visibleGrids);
+    // console.log(visibleGrids);
     const path: [number, number][] = visibleGrids
         .map(([i, j]) => [
             [i, j],
