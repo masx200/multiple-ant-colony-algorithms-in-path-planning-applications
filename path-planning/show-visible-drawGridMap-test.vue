@@ -14,7 +14,7 @@ import { Point } from "./Point";
 import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
 
-const start = new Point(20, 0);
+const start = new Point(0, 20);
 const end = new Point(22, 1);
 
 const route: Ref<[number, number][]> = ref([

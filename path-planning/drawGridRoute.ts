@@ -33,8 +33,8 @@ export function drawGridRoute(
         const [[i1, j1], [i2, j2]] = segment;
         ctx.beginPath();
         ctx.strokeStyle = "red";
-        ctx.moveTo((i1 + 0.5) * cellSize, cellSize * (j1 + 0.5));
-        ctx.lineTo((i2 + 0.5) * cellSize, cellSize * (j2 + 0.5));
+        ctx.moveTo(cellSize * (j1 + 0.5), (i1 + 0.5) * cellSize);
+        ctx.lineTo(cellSize * (j2 + 0.5), (i2 + 0.5) * cellSize);
         ctx.stroke();
     }
     ctx.restore();
