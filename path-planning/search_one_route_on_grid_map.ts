@@ -1,10 +1,11 @@
-// @ts-nocheck // 告诉 TypeScript 不要进行类型检查
+// 告诉 TypeScript 不要进行类型检查
 
 import { assert } from "chai";
 import { canStraightReach } from "./canStraightReach";
+import { getAvailableNeighbors } from "./getAvailableNeighbors";
+import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
-
 
 // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
 export function search_one_route_on_grid_map(
@@ -19,7 +20,7 @@ export function search_one_route_on_grid_map(
     // 可见网格列表（多维度）
     visibleGridsList: Iterable<[number, number]>[][],
     // 多边形内部点的集合
-    pointsInsideAllConvexPolygons: Iterable<[number, number]>,
+    pointsInsideAllConvexPolygons: Set<number>,
     // 信息素因子 alpha
     alpha_Pheromone_factor: number,
     // 启发式因子 beta
@@ -53,5 +54,59 @@ export function search_one_route_on_grid_map(
     // 解决凹型死路问题的方法：使用回退策略。
     // 将当前节点的格子放入禁止表中，回退到上一步继续搜索，
     // 并将凹型死路区域经过的信息素进行清零。
+
+    const current = start;
+
+    const path = [[start.x, start.y]];
+
+    const blocked = new Set<number>();
+    blocked.add(start.x * grid.row + start.y);
+
+    while (current.x !== end.x || current.y !== end.y) {
+        // 获取当前节点的所有邻居节点
+        const neighbors = getAvailableNeighbors(
+            pointsInsideAllConvexPolygons,
+            blocked,
+            visibleGridsList,
+            grid,
+            [current.x, current.y],
+        );
+        if (neighbors.length === 0) {
+            //如果在起点所有节点都不可达,则返回空路径
+            if (current.x === start.x && current.y === start.y) return [];
+            const last = path[path.length - 1 - 1] ?? current;
+            //由于一步可能跨过多个格子,先把这一步经过的格子都从禁止表中删除
+            for (const [x, y] of getPathCoordinates(
+                [last[0], last[1]],
+                [current.x, current.y],
+            )) {
+                blocked.delete(x * grid.row + y);
+            }
+            blocked.add(current.x * grid.row + current.y);
+
+            // 如果邻居节点在禁止表中，则进行回退
+
+            path.pop();
+            current.x = last[0];
+            current.y = last[1];
+        } else {
+            // 随机选择一个邻居节点
+            const neighbor =
+                neighbors[Math.floor(Math.random() * neighbors.length)];
+
+            current.x = neighbor[0];
+            current.y = neighbor[1];
+            path.push([current.x, current.y]);
+            /* 如果一步跨越多个格子,则经过的格子都需要更新信息素.每走一步时,对于跨越多个格子的直线路径走过的格子都放入禁止表中.蚂蚁禁止选择已经走过的路径. */ const last =
+                path[path.length - 1 - 1] ?? current;
+            for (const [x, y] of getPathCoordinates(
+                [last[0], last[0]],
+                [current.x, current.y],
+            )) {
+                blocked.add(x * grid.row + y);
+            }
+            blocked.add(current.x * grid.row + current.y);
+        }
+    }
     throw new Error("Not Implemented");
 }
