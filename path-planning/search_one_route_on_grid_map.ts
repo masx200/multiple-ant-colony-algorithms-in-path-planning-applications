@@ -111,6 +111,7 @@ export function search_one_route_on_grid_map(
             }
             blocked.add(current.x * grid.row + current.y);
         }
+        return path;
     }
     return path;
 }
