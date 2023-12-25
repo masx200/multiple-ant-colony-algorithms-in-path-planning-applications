@@ -7,6 +7,7 @@ import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
 
+
 // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
 export function search_one_route_on_grid_map(
     // 网格地图对象
@@ -57,7 +58,7 @@ export function search_one_route_on_grid_map(
 
     const current = start;
 
-    const path = [[start.x, start.y]];
+    const path: [number, number][] = [[start.x, start.y]];
 
     const blocked = new Set<number>();
     blocked.add(start.x * grid.row + start.y);
@@ -108,5 +109,5 @@ export function search_one_route_on_grid_map(
             blocked.add(current.x * grid.row + current.y);
         }
     }
-    throw new Error("Not Implemented");
+    return path;
 }
