@@ -22,7 +22,7 @@ export function drawMap(gridMap: GridMap, canvas: HTMLCanvasElement) {
     var height = myCanvas_rect.height;
     // 计算每个方格的实际大小（以像素为单位）
     const cellSize = Math.min(height / gridMap.column, width / gridMap.row);
-    const raw_data = gridMap.data.toReversed();
+    const raw_data = gridMap.data; //.toReversed();
     /* 以左下角为原点 */
     const data = //raw_data;
         Array(raw_data[0].length)

@@ -57,7 +57,7 @@ export function drawdisplayMouseCoordinates(
         ctx.fillStyle = "yellow";
         /* 以左下角为原点 */
         const text = `( ${mousePositionInElement.x / cellSize},  ${
-            column - mousePositionInElement.y / cellSize
+            mousePositionInElement.y / cellSize
         })`;
         const measureTextWidthAndHeightResult = measureTextWidthAndHeight(
             text,
