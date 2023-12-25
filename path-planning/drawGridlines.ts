@@ -23,14 +23,14 @@ export function drawGridlines(
     var width = myCanvas_rect.width;
     var height = myCanvas_rect.height;
     // 计算每个方格的实际大小（以像素为单位）
-    const cellSize = Math.min(width / column, height / row);
+    const cellSize = Math.min(height / column, width / row);
 
     // 绘制竖直网格线
     for (let i = 0; i <= row + 1; i++) {
         ctx.beginPath();
         ctx.strokeStyle = "green";
-        ctx.moveTo(i * cellSize, 0);
-        ctx.lineTo(i * cellSize, cellSize * (column - 1));
+        ctx.moveTo(0, i * cellSize);
+        ctx.lineTo(cellSize * (column - 1), i * cellSize);
         ctx.stroke();
     }
 
@@ -38,8 +38,8 @@ export function drawGridlines(
     for (let i = 0; i <= column - 1; i++) {
         ctx.beginPath();
         ctx.strokeStyle = "blue";
-        ctx.moveTo(0, i * cellSize);
-        ctx.lineTo(cellSize * (row + 1), i * cellSize);
+        ctx.moveTo(i * cellSize, 0);
+        ctx.lineTo(i * cellSize, cellSize * (row + 1));
         ctx.stroke();
     }
     ctx.restore();

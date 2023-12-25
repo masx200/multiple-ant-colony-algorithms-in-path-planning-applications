@@ -1,5 +1,6 @@
-import { MousePosition } from "./MousePosition";
 import { measureTextWidthAndHeight } from "./measureTextWidthAndHeight";
+import { MousePosition } from "./MousePosition";
+
 
 /**
  * 显示鼠标在画布上的坐标
@@ -30,7 +31,7 @@ export function drawdisplayMouseCoordinates(
     /**
      * 计算每个格子的大小
      */
-    const cellSize = Math.min(width / column, height / row);
+    const cellSize = Math.min(height / column, width / row);
 
     // let mousePosition: MousePosition | null = null;
     // function handleMouseMove(event: MouseEvent) {
@@ -56,7 +57,7 @@ export function drawdisplayMouseCoordinates(
         ctx.fillStyle = "yellow";
         /* 以左下角为原点 */
         const text = `( ${mousePositionInElement.x / cellSize},  ${
-            row - mousePositionInElement.y / cellSize
+            column - mousePositionInElement.y / cellSize
         })`;
         const measureTextWidthAndHeightResult = measureTextWidthAndHeight(
             text,
