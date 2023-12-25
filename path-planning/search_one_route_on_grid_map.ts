@@ -1,3 +1,4 @@
+//@ts-nocheck
 // 告诉 TypeScript 不要进行类型检查
 
 import { assert } from "chai";
