@@ -34,7 +34,6 @@ const windowSize = useWindowSize();
 const grid_map_canvas = ref<HTMLCanvasElement>();
 const gridMap = props.map ? GridMapFromArray(props.map) : undefined;
 
-const route: [number, number][] | undefined = props.route;
 onMounted(() => {
     render();
 });
@@ -47,6 +46,7 @@ onMounted(() => {
 const mousePositionInElement = useMouseInElement(grid_map_canvas);
 
 const render = debounce(function render() {
+    const route: [number, number][] | undefined = props.route;
     const canvas = grid_map_canvas.value;
     if (canvas) {
         clearCanvas(canvas);

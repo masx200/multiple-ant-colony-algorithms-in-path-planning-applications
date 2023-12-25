@@ -1,12 +1,13 @@
-import { GridMap } from "./grid-map";
 import { Queue } from "@datastructures-js/queue";
-import { RangeModule } from "./RangeModule";
-import { Vector } from "./Vector";
-import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
 import { canStraightReach } from "./canStraightReach";
 import { formatSmallArcsAngleRange } from "./formatSmallArcsAngleRange";
 import { getAngleOfVector } from "./getAngleOfVector";
 import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1";
+import { GridMap } from "./grid-map";
+import { RangeModule } from "./RangeModule";
+import { Vector } from "./Vector";
+import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment";
+
 
 /**
  * 查找所有可见的网格
@@ -191,5 +192,5 @@ export function findVisibleGridsCircle(
             }
         }
     }
-    return extendedResults;
+    return extendedResults.filter((item) => grid.isFree(item[0], item[1]));
 }

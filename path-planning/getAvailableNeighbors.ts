@@ -1,5 +1,7 @@
+import { canStraightReach } from "./canStraightReach";
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
+
 
 /**
  * 获取可用的邻居节点
@@ -24,12 +26,18 @@ export function getAvailableNeighbors(
         if (
             !blocked.has(nx * grid.row + ny) &&
             !pointsInsideAllConvexPolygons.has(nx * grid.row + ny) &&
-            getPathCoordinates([x, y], [nx, ny]).every(
-                ([ni, nj]) => !blocked.has(ni * grid.row + nj),
-            )
+            getPathCoordinates([x, y], [nx, ny])
+                //不包括自己把自己挡住
+                .filter(([ni, nj]) => !(ni == x && nj == y))
+                .every(([ni, nj]) => !blocked.has(ni * grid.row + nj))
         ) {
             res.push([nx, ny]);
         }
     }
-    return res;
+    return res.filter(
+        (item) =>
+            grid.isFree(item[0], item[1]) &&
+            canStraightReach([item[0], item[1]], [x, y], grid) &&
+            !blocked.has(item[0] * grid.row + item[1]),
+    );
 }

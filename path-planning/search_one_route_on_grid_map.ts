@@ -64,7 +64,8 @@ export function search_one_route_on_grid_map(
     const blocked = new Set<number>();
     blocked.add(start.x * grid.row + start.y);
 
-    while (current.x !== end.x || current.y !== end.y) {
+    while (!(current.x == end.x && current.y == end.y)) {
+        console.log(JSON.stringify(path));
         // 获取当前节点的所有邻居节点
         const neighbors = getAvailableNeighbors(
             pointsInsideAllConvexPolygons,
@@ -73,9 +74,10 @@ export function search_one_route_on_grid_map(
             grid,
             [current.x, current.y],
         );
+        // console.log(neighbors);
         if (neighbors.length === 0) {
             //如果在起点所有节点都不可达,则返回空路径
-            if (current.x === start.x && current.y === start.y) return [];
+            if (current.x === start.x && current.y === start.y) return path; // return [];
             const last = path[path.length - 1 - 1] ?? current;
             //由于一步可能跨过多个格子,先把这一步经过的格子都从禁止表中删除
             for (const [x, y] of getPathCoordinates(
@@ -85,7 +87,7 @@ export function search_one_route_on_grid_map(
                 blocked.delete(x * grid.row + y);
             }
             blocked.add(current.x * grid.row + current.y);
-
+            blocked.add(last[0] * grid.row + last[1]);
             // 如果邻居节点在禁止表中，则进行回退
 
             path.pop();
