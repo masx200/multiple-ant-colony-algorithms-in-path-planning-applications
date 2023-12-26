@@ -1,6 +1,5 @@
-import { measureTextWidthAndHeight } from "./measureTextWidthAndHeight";
 import { MousePosition } from "./MousePosition";
-
+import { measureTextWidthAndHeight } from "./measureTextWidthAndHeight";
 
 /**
  * 显示鼠标在画布上的坐标
@@ -56,9 +55,10 @@ export function drawdisplayMouseCoordinates(
         ctx.font = font;
         ctx.fillStyle = "yellow";
         /* 以左下角为原点 */
-        const text = `( ${mousePositionInElement.x / cellSize},  ${
-            mousePositionInElement.y / cellSize
-        })`;
+        //先显示列数,后显示行数
+        const text = `( 第${mousePositionInElement.y / cellSize}行,  第${
+            mousePositionInElement.x / cellSize
+        })列`;
         const measureTextWidthAndHeightResult = measureTextWidthAndHeight(
             text,
             font,
