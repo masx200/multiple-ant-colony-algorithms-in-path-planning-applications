@@ -1,13 +1,12 @@
 //@ts-nocheck
 // 告诉 TypeScript 不要进行类型检查
 
+import { GridMap } from "./grid-map";
+import { Point } from "./Point";
 import { assert } from "chai";
 import { canStraightReach } from "./canStraightReach";
 import { getAvailableNeighbors } from "./getAvailableNeighbors";
 import { getPathCoordinates } from "./getPathCoordinates";
-import { GridMap } from "./grid-map";
-import { Point } from "./Point";
-
 
 // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
 export function search_one_route_on_grid_map(
@@ -111,7 +110,7 @@ export function search_one_route_on_grid_map(
             }
             blocked.add(current.x * grid.row + current.y);
         }
-        return path;
+        // return path;
     }
     return path;
 }

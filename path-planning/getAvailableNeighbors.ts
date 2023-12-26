@@ -1,7 +1,5 @@
-import { canStraightReach } from "./canStraightReach";
-import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
-
+import { getPathCoordinates } from "./getPathCoordinates";
 
 /**
  * 获取可用的邻居节点
@@ -35,9 +33,8 @@ export function getAvailableNeighbors(
         }
     }
     return res.filter(
-        (item) =>
-            grid.isFree(item[0], item[1]) &&
-            canStraightReach([item[0], item[1]], [x, y], grid) &&
-            !blocked.has(item[0] * grid.row + item[1]),
+        (item) => grid.isFree(item[0], item[1]), // &&
+        // canStraightReach([item[0], item[1]], [x, y], grid) &&
+        // !blocked.has(item[0] * grid.row + item[1]),
     );
 }
