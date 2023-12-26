@@ -57,7 +57,7 @@ export function search_one_route_on_grid_map(
     // 解决凹型死路问题的方法：使用回退策略。
     // 将当前节点的格子放入禁止表中，回退到上一步继续搜索，
     // 并将凹型死路区域经过的信息素进行清零。
-    /* 不能修改起点,需要克隆对象 */
+    /* 不能修改起点,需要克隆对象 */ //终于能够开始回退到上一步
     const current = structuredClone(start);
 
     const path: [number, number][] = [[start.x, start.y]];
