@@ -1,12 +1,13 @@
 //@ts-nocheck
 // 告诉 TypeScript 不要进行类型检查
 
-import { GridMap } from "./grid-map";
-import { Point } from "./Point";
 import { assert } from "chai";
 import { canStraightReach } from "./canStraightReach";
 import { getAvailableNeighbors } from "./getAvailableNeighbors";
 import { getPathCoordinates } from "./getPathCoordinates";
+import { GridMap } from "./grid-map";
+import { Point } from "./Point";
+
 
 // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
 export function search_one_route_on_grid_map(
@@ -44,6 +45,7 @@ export function search_one_route_on_grid_map(
 
     // 如果可以从起点直接到达终点，则返回包含起点和终点的路径
     if (canStraightReach([start.x, start.y], [end.x, end.y], grid)) {
+        console.log("如果可以从起点直接到达终点，则返回包含起点和终点的路径");
         return [
             [start.x, start.y],
             [end.x, end.y],
@@ -55,8 +57,8 @@ export function search_one_route_on_grid_map(
     // 解决凹型死路问题的方法：使用回退策略。
     // 将当前节点的格子放入禁止表中，回退到上一步继续搜索，
     // 并将凹型死路区域经过的信息素进行清零。
-
-    const current = start;
+    /* 不能修改起点,需要克隆对象 */
+    const current = structuredClone(start);
 
     const path: [number, number][] = [[start.x, start.y]];
 
@@ -64,7 +66,16 @@ export function search_one_route_on_grid_map(
     blocked.add(start.x * grid.row + start.y);
 
     while (!(current.x == end.x && current.y == end.y)) {
-        console.log(JSON.stringify(path));
+        // 如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径
+        if (canStraightReach([current.x, current.y], [end.x, end.y], grid)) {
+            console.log(
+                "如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径",
+            );
+            return [...path, [end.x, end.y]];
+        }
+        console.log({ start: JSON.stringify(start) });
+        console.log({ current: JSON.stringify(current) });
+        console.log({ path: JSON.stringify(path) });
         // 获取当前节点的所有邻居节点
         const neighbors = getAvailableNeighbors(
             pointsInsideAllConvexPolygons,
@@ -72,11 +83,16 @@ export function search_one_route_on_grid_map(
             visibleGridsList,
             grid,
             [current.x, current.y],
-        );
+        ).filter((n) => !(n[0] == start.x && n[1] == start.y));
         // console.log(neighbors);
         if (neighbors.length === 0) {
             //如果在起点所有节点都不可达,则返回空路径
-            if (current.x === start.x && current.y === start.y) return path; // return [];
+            if (current.x === start.x && current.y === start.y) {
+                console.log("走到了死路");
+                return path;
+            } // return [];
+
+            console.log("开始回退到上一步");
             const last = path[path.length - 1 - 1] ?? current;
             //由于一步可能跨过多个格子,先把这一步经过的格子都从禁止表中删除
             for (const [x, y] of getPathCoordinates(
@@ -92,11 +108,12 @@ export function search_one_route_on_grid_map(
             path.pop();
             current.x = last[0];
             current.y = last[1];
+            console.log({ path: JSON.stringify(path) });
         } else {
             // 随机选择一个邻居节点
             const neighbor =
                 neighbors[Math.floor(Math.random() * neighbors.length)];
-
+            console.log({ neighbor: JSON.stringify(neighbor) });
             current.x = neighbor[0];
             current.y = neighbor[1];
             path.push([current.x, current.y]);
@@ -109,8 +126,11 @@ export function search_one_route_on_grid_map(
                 blocked.add(x * grid.row + y);
             }
             blocked.add(current.x * grid.row + current.y);
+            console.log({ path: JSON.stringify(path) });
         }
         // return path;
     }
+    console.log("走到了终点");
+    path.push([end.x, end.y]);
     return path;
 }

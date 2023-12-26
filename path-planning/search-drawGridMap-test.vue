@@ -56,21 +56,7 @@ onMounted(() => {
     console.log(path);
     route.value = path;
 });
-// import { GridMapFromArray } from "./GridMapFromArray";
-// import { drawGridMap } from "./drawGridMap";
-// import { onMounted } from "vue";
-// import { ref, effect } from "vue";
-// // import { useElementSize } from "@vueuse/core";
 
-// import { useWindowSize } from "@vueuse/core";
-// import { drawGridRoute } from "./drawGridRoute";
-// // const { width, height } = useElementSize(document.body);
-
-// const windowSize = useWindowSize();
-// const grid_map_canvas = ref<HTMLCanvasElement>();
-
-// const { column, row } = gridMap;
-//import route from "./test-route-23-22.json"; //: [number, number][] = ;
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
@@ -78,31 +64,4 @@ import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
 import { DefaultOptions } from "../src/default_Options";
-// onMounted(() => {
-//     render();
-// });
-// function render() {
-//     const canvas = grid_map_canvas.value;
-//     if (canvas) {
-//         drawGridMap(gridMap, canvas);
-//         drawGridRoute(route, canvas, column, row);
-//     }
-// }
-// effect(() => {
-//     const canvas = grid_map_canvas.value;
-//     if (canvas) {
-//         // console.log(width.value, windowSize.width.value, window.innerWidth);
-//         // console.log(height.value, windowSize.height.value, window.innerHeight);
-//         canvas.width =
-//             /* width.value + */
-
-//             (windowSize.width.value + window.innerWidth) / 2;
-//         canvas.height =
-//             /* height.value + */
-
-//             (windowSize.height.value + window.innerHeight) / 2;
-
-//         render();
-//     }
-// });
 </script>
