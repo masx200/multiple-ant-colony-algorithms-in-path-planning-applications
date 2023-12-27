@@ -88,8 +88,8 @@ export function search_one_route_on_grid_map(
         if (neighbors.length === 0) {
             //如果在起点所有节点都不可达,则返回空路径
             if (current.x === start.x && current.y === start.y) {
-                console.log("走到了死路");
-                return path;
+               // console.log("走到了死路");
+                return [];//path;
             } // return [];
 
             console.log("开始回退到上一步");
@@ -130,7 +130,7 @@ export function search_one_route_on_grid_map(
         }
         // return path;
     }
-    console.log("走到了终点");
+    console.log("正常走到了终点");
     path.push([end.x, end.y]);
     return path;
 }
