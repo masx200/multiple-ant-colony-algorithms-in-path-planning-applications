@@ -1,6 +1,5 @@
 import { GridMap } from "./grid-map.ts";
 
-
 /**
  * 绘制地图
  * @param gridMap - 网格地图对象

@@ -1,6 +1,5 @@
 import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
 
-
 /**
  * 在给定的画布上绘制网格路径
  * @param route 路径的坐标点数组

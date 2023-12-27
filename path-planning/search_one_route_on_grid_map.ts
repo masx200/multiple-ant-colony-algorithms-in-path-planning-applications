@@ -8,7 +8,6 @@ import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
 
-
 // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
 export function search_one_route_on_grid_map(
     // 网格地图对象
@@ -88,8 +87,8 @@ export function search_one_route_on_grid_map(
         if (neighbors.length === 0) {
             //如果在起点所有节点都不可达,则返回空路径
             if (current.x === start.x && current.y === start.y) {
-               // console.log("走到了死路");
-                return [];//path;
+                // console.log("走到了死路");
+                return []; //path;
             } // return [];
 
             console.log("开始回退到上一步");
