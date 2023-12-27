@@ -16,6 +16,11 @@ test("search-drawGridMap-test", () => {
             (a) => a[0] * gridmap.row + a[1],
         ),
     );
+    const visibleGridsListWithOutPointsInsideAllConvexPolygons =
+        FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
+            visibleGridsList,
+            pointsInsideAllConvexPolygons,
+        );
     const PheromoneMatrix = generate_initial_pheromone_matrix(
         gridmap,
         start,
@@ -30,9 +35,9 @@ test("search-drawGridMap-test", () => {
         start,
         end,
         PheromoneMatrix,
-        visibleGridsList,
+        visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
-        pointsInsideAllConvexPolygons,
+        //  pointsInsideAllConvexPolygons,
         DefaultOptions.alpha_zero,
         DefaultOptions.beta_zero,
         q0_Path_selection_parameters,
@@ -54,7 +59,10 @@ test("search-drawGridMap-test", () => {
     assert.equal(path.length, uniqBy(path, JSON.stringify).length);
 });
 
-import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
+import {
+    search_one_route_on_grid_map,
+    FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons,
+} from "./search_one_route_on_grid_map";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 //import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
@@ -83,14 +91,20 @@ test("search-drawGridMap-test", () => {
     const q0_Path_selection_parameters = 0.8;
     //console.log(route.value);
     //const visibleGridsMatrix=VisibleGridsMatrix(visibleGridsList)
+
+    const visibleGridsListWithOutPointsInsideAllConvexPolygons =
+        FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
+            visibleGridsList,
+            pointsInsideAllConvexPolygons,
+        );
     const path = search_one_route_on_grid_map(
         gridmap,
         start,
         end,
         PheromoneMatrix,
-        visibleGridsList,
+        visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
-        pointsInsideAllConvexPolygons,
+        //  pointsInsideAllConvexPolygons,
         DefaultOptions.alpha_zero,
         DefaultOptions.beta_zero,
         q0_Path_selection_parameters,

@@ -12,7 +12,7 @@ import { getPathCoordinates } from "./getPathCoordinates";
  * @returns 可用的邻居节点数组
  */
 export function getAvailableNeighbors(
-    pointsInsideAllConvexPolygons: Set<number>,
+    //    pointsInsideAllConvexPolygons: Set<number>,
     blocked: Set<number>,
     visibleGridsList: Iterable<[number, number]>[][],
     grid: GridMap,
@@ -24,7 +24,8 @@ export function getAvailableNeighbors(
         if (
             grid.isFree(nx, ny) &&
             !blocked.has(nx * grid.row + ny) &&
-            !pointsInsideAllConvexPolygons.has(nx * grid.row + ny) &&
+            //提前筛选，删掉在凸多边形内部的格子，
+            //    !pointsInsideAllConvexPolygons.has(nx * grid.row + ny) &&
             getPathCoordinates([x, y], [nx, ny])
                 //不包括自己把自己挡住
                 .filter(([ni, nj]) => !(ni == x && nj == y))

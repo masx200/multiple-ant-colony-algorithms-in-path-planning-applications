@@ -39,14 +39,20 @@ onMounted(() => {
     const PheromoneZeroMatrix = structuredClone(PheromoneMatrix);
     const q0_Path_selection_parameters = 0.8;
     console.log(route.value);
+
+    const visibleGridsListWithOutPointsInsideAllConvexPolygons =
+        FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
+            visibleGridsList,
+            pointsInsideAllConvexPolygons,
+        );
     const path = search_one_route_on_grid_map(
         gridmap,
         start,
         end,
         PheromoneMatrix,
-        visibleGridsList,
+        visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
-        pointsInsideAllConvexPolygons,
+        //   pointsInsideAllConvexPolygons,
         DefaultOptions.alpha_zero,
         DefaultOptions.beta_zero,
         q0_Path_selection_parameters,
@@ -58,7 +64,10 @@ onMounted(() => {
     route.value = path;
 });
 
-import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
+import {
+    search_one_route_on_grid_map,
+    FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons,
+} from "./search_one_route_on_grid_map";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";

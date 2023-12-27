@@ -6,7 +6,26 @@ import { getAvailableNeighbors } from "./getAvailableNeighbors";
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
-
+export function FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
+    visibleGridsList: Iterable<[number, number]>[][],
+    pointsInsideAllConvexPolygons: Set<number>,
+): Iterable<[number, number]>[][] {
+    const gridrow = visibleGridsList.length;
+    return Array(visibleGridsList.length)
+        .fill(0)
+        .map((_, i) =>
+            Array(visibleGridsList[0].length)
+                .fill(0)
+                .map((_, j) =>
+                    [...visibleGridsList[i][j]].filter(
+                        ([nx, ny]) =>
+                            !pointsInsideAllConvexPolygons.has(
+                                nx * gridrow + ny,
+                            ),
+                    ),
+                ),
+        );
+}
 // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
 export function search_one_route_on_grid_map(
     // 网格地图对象
@@ -19,10 +38,12 @@ export function search_one_route_on_grid_map(
     //@ts-ignore
     PheromoneMatrix: number[][],
     // 可见网格列表（多维度）
-    visibleGridsList: Iterable<[number, number]>[][],
+    visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
+        [number, number]
+    >[][],
     visibleGridsMatrix: boolean[][][][],
     // 多边形内部点的集合
-    pointsInsideAllConvexPolygons: Set<number>,
+    // pointsInsideAllConvexPolygons: Set<number>,
     // 信息素因子 alpha
     //@ts-ignore
     alpha_Pheromone_factor: number,
@@ -84,9 +105,9 @@ export function search_one_route_on_grid_map(
         //console.log({ path: JSON.stringify(path) });
         // 获取当前节点的所有邻居节点
         const neighbors = getAvailableNeighbors(
-            pointsInsideAllConvexPolygons,
+            //  pointsInsideAllConvexPolygons,
             blocked,
-            visibleGridsList,
+            visibleGridsListWithOutPointsInsideAllConvexPolygons,
             grid,
             [current.x, current.y],
         ); //.filter((n) => !(n[0] == start.x && n[1] == start.y));
