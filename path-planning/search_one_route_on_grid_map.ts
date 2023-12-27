@@ -1,4 +1,3 @@
-//@ts-nocheck
 // 告诉 TypeScript 不要进行类型检查
 
 import { assert } from "chai";
@@ -17,6 +16,7 @@ export function search_one_route_on_grid_map(
     // 终点对象
     end: Point,
     // 信息素矩阵
+    //@ts-ignore
     PheromoneMatrix: number[][],
     // 可见网格列表（多维度）
     visibleGridsList: Iterable<[number, number]>[][],
@@ -24,16 +24,22 @@ export function search_one_route_on_grid_map(
     // 多边形内部点的集合
     pointsInsideAllConvexPolygons: Set<number>,
     // 信息素因子 alpha
+    //@ts-ignore
     alpha_Pheromone_factor: number,
     // 启发式因子 beta
+    //@ts-ignore
     beta_Heuristic_factors: number,
     // 路径选择参数 q0
+    //@ts-ignore
     q0_Path_selection_parameters: number,
     // 信息素零矩阵
+    //@ts-ignore
     PheromoneZeroMatrix: number[][],
     // 局部信息素挥发系数
+    //@ts-ignore
     partial_Local_pheromone_volatility: number,
     // 全局信息素挥发系数
+    //@ts-ignore
     rou_Global_pheromone_volatility: number,
 ): [number, number][] {
     // 断言终点在地图上是可到达的
@@ -59,9 +65,9 @@ export function search_one_route_on_grid_map(
     // 并将凹型死路区域经过的信息素进行清零。
     /* 不能修改起点,需要克隆对象 */ //终于能够开始回退到上一步
     const current = structuredClone(start);
-
+    const 经过的所有格子 = new Array<Point>();
     const path: [number, number][] = [[start.x, start.y]];
-
+    经过的所有格子.push(structuredClone(start));
     const blocked = new Set<number>();
     blocked.add(start.x * grid.row + start.y);
 
@@ -83,7 +89,7 @@ export function search_one_route_on_grid_map(
             visibleGridsList,
             grid,
             [current.x, current.y],
-        ).filter((n) => !(n[0] == start.x && n[1] == start.y));
+        ); //.filter((n) => !(n[0] == start.x && n[1] == start.y));
         // console.log(neighbors);
         if (neighbors.length === 0) {
             //如果在起点所有节点都不可达,则返回空路径
@@ -92,23 +98,32 @@ export function search_one_route_on_grid_map(
                 return []; //path;
             } // return [];
 
-            console.log("开始回退到上一步");
+            console.log("走到了死路,开始回退到上一步");
             const last = path[path.length - 1 - 1] ?? current;
-            //由于一步可能跨过多个格子,先把这一步经过的格子都从禁止表中删除
-            for (const [x, y] of getPathCoordinates(
-                [last[0], last[1]],
-                [current.x, current.y],
-            )) {
-                blocked.delete(x * grid.row + y);
-            }
+            //由于一步可能跨过多个格子，只需要退一个格子，不需要退太多格子
+            //   for (const [x, y] of getPathCoordinates(
+            //    [last[0], last[1]],
+            // [current.x, current.y],
+            //  )) {
+            //       blocked.delete(x * grid.row + y);
+            //    }
+
+            //可能之前这里已经被禁止了，不能从禁止表中删除
             blocked.add(current.x * grid.row + current.y);
             blocked.add(last[0] * grid.row + last[1]);
             // 如果邻居节点在禁止表中，则进行回退
 
+            const 经过的上一个格子 = 经过的所有格子[经过的所有格子.length - 1];
+            经过的所有格子.pop();
             path.pop();
-            current.x = last[0];
-            current.y = last[1];
+            path.push([经过的上一个格子.x, 经过的上一个格子.y]);
+            current.x = 经过的上一个格子.x;
+            current.y = 经过的上一个格子.y;
+
             //   console.log({ path: JSON.stringify(path) });
+
+            //console.log(经过的所有格子)
+            //return path
         } else {
             // 随机选择一个邻居节点
             const neighbor =
@@ -117,18 +132,24 @@ export function search_one_route_on_grid_map(
             current.x = neighbor[0];
             current.y = neighbor[1];
             path.push([current.x, current.y]);
-            /* 如果一步跨越多个格子,则经过的格子都需要更新信息素.每走一步时,对于跨越多个格子的直线路径走过的格子都放入禁止表中.蚂蚁禁止选择已经走过的路径. */ const last =
-                path[path.length - 1 - 1] ?? current;
+            /* 如果一步跨越多个格子,则经过的格子都需要更新信息素.每走一步时,对于跨越多个格子的直线路径走过的格子都放入禁止表中.蚂蚁禁止选择已经走过的路径. */
+
+            const last = path[path.length - 1 - 1] ?? current;
             for (const [x, y] of getPathCoordinates(
-                [last[0], last[0]],
+                [last[0], last[1]],
                 [current.x, current.y],
             )) {
-                blocked.add(x * grid.row + y);
+                if (!(x == last[0] && y == last[1])) {
+                    blocked.add(x * grid.row + y);
+
+                    经过的所有格子.push({ x, y });
+                }
             }
-            blocked.add(current.x * grid.row + current.y);
-            //  console.log({ path: JSON.stringify(path) });
+            //console.log(经过的所有格子)
+            //  blocked.add(current.x * grid.row + current.y);
+            //    console.log({ path: JSON.stringify(path) });
         }
-        // return path;
+        // return pa
     }
     console.log("正常走到了终点");
     path.push([end.x, end.y]);

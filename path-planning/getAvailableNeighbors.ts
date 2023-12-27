@@ -22,6 +22,7 @@ export function getAvailableNeighbors(
     const res = new Array<[number, number]>();
     for (const [nx, ny] of visibleGridsList[x][y]) {
         if (
+            grid.isFree(nx, ny) &&
             !blocked.has(nx * grid.row + ny) &&
             !pointsInsideAllConvexPolygons.has(nx * grid.row + ny) &&
             getPathCoordinates([x, y], [nx, ny])
@@ -32,9 +33,10 @@ export function getAvailableNeighbors(
             res.push([nx, ny]);
         }
     }
-    return res.filter(
-        (item) => grid.isFree(item[0], item[1]), // &&
-        // canStraightReach([item[0], item[1]], [x, y], grid) &&
-        // !blocked.has(item[0] * grid.row + item[1]),
-    );
+    return res;
+    //.filter(
+    //   (item) => grid.isFree(item[0], item[1]), // &&
+    // canStraightReach([item[0], item[1]], [x, y], grid) &&
+    // !blocked.has(item[0] * grid.row + item[1]),
+    //  );
 }
