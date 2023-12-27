@@ -2,7 +2,7 @@
 // 告诉 TypeScript 不要进行类型检查
 
 import { assert } from "chai";
-import { canStraightReach } from "./canStraightReach";
+
 import { getAvailableNeighbors } from "./getAvailableNeighbors";
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
@@ -20,6 +20,7 @@ export function search_one_route_on_grid_map(
     PheromoneMatrix: number[][],
     // 可见网格列表（多维度）
     visibleGridsList: Iterable<[number, number]>[][],
+    visibleGridsMatrix: boolean[][][][],
     // 多边形内部点的集合
     pointsInsideAllConvexPolygons: Set<number>,
     // 信息素因子 alpha
@@ -43,7 +44,7 @@ export function search_one_route_on_grid_map(
     assert(grid.isFree(start.x, start.y));
 
     // 如果可以从起点直接到达终点，则返回包含起点和终点的路径
-    if (canStraightReach([start.x, start.y], [end.x, end.y], grid)) {
+    if (visibleGridsMatrix[start.x][start.y][end.x][end.y]) {
         console.log("如果可以从起点直接到达终点，则返回包含起点和终点的路径");
         return [
             [start.x, start.y],
@@ -66,15 +67,15 @@ export function search_one_route_on_grid_map(
 
     while (!(current.x == end.x && current.y == end.y)) {
         // 如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径
-        if (canStraightReach([current.x, current.y], [end.x, end.y], grid)) {
+        if (visibleGridsMatrix[current.x][current.y][end.x][end.y]) {
             console.log(
                 "如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径",
             );
             return [...path, [end.x, end.y]];
         }
-        console.log({ start: JSON.stringify(start) });
-        console.log({ current: JSON.stringify(current) });
-        console.log({ path: JSON.stringify(path) });
+        //   console.log({ start: JSON.stringify(start) });
+        //   console.log({ current: JSON.stringify(current) });
+        //console.log({ path: JSON.stringify(path) });
         // 获取当前节点的所有邻居节点
         const neighbors = getAvailableNeighbors(
             pointsInsideAllConvexPolygons,
@@ -107,12 +108,12 @@ export function search_one_route_on_grid_map(
             path.pop();
             current.x = last[0];
             current.y = last[1];
-            console.log({ path: JSON.stringify(path) });
+            //   console.log({ path: JSON.stringify(path) });
         } else {
             // 随机选择一个邻居节点
             const neighbor =
                 neighbors[Math.floor(Math.random() * neighbors.length)];
-            console.log({ neighbor: JSON.stringify(neighbor) });
+            //  console.log({ neighbor: JSON.stringify(neighbor) });
             current.x = neighbor[0];
             current.y = neighbor[1];
             path.push([current.x, current.y]);
@@ -125,7 +126,7 @@ export function search_one_route_on_grid_map(
                 blocked.add(x * grid.row + y);
             }
             blocked.add(current.x * grid.row + current.y);
-            console.log({ path: JSON.stringify(path) });
+            //  console.log({ path: JSON.stringify(path) });
         }
         // return path;
     }

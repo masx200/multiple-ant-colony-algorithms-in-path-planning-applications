@@ -1,28 +1,13 @@
-<template>
-    <DrawGridMapAndRoute
-        :route="route"
-        :column="map.length"
-        :row="map[0].length"
-        :grid="true"
-        :map="map"
-    ></DrawGridMapAndRoute>
-</template>
-
-<script setup lang="ts">
-import { Ref, onMounted, ref } from "vue";
 import { Point } from "./Point";
-import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
+//import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
+import { assert, test } from "vitest";
+import { uniqBy } from "lodash-es";
+import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
+test("search-drawGridMap-test", () => {
+    const start = new Point(1, 21);
+    const end = new Point(22, 1);
 
-const start = new Point(1, 21);
-const end = new Point(22, 1);
-
-const route: Ref<[number, number][]> = ref([
-    [start.x, start.y],
-    [end.x, end.y],
-]);
-
-onMounted(() => {
     const gridmap = GridMapFromArray(map);
     const visibleGridsList = getVisibleGridsList(gridmap);
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
@@ -38,7 +23,8 @@ onMounted(() => {
     );
     const PheromoneZeroMatrix = structuredClone(PheromoneMatrix);
     const q0_Path_selection_parameters = 0.8;
-    console.log(route.value);
+    //console.log(route.value);
+    //const visibleGridsMatrix=VisibleGridsMatrix(visibleGridsList)
     const path = search_one_route_on_grid_map(
         gridmap,
         start,
@@ -55,14 +41,23 @@ onMounted(() => {
         DefaultOptions.global_pheromone_volatilization_coefficient,
     );
     console.log(path);
-    route.value = path;
+
+    assert(path.length >= 3);
+
+    assert.equal(path[0][0], start.x);
+
+    assert.equal(path[0][1], start.y);
+
+    assert.equal(path[path.length - 1][0], end.x);
+
+    assert.equal(path[path.length - 1][1], end.y);
+    assert.equal(path.length, uniqBy(path, JSON.stringify).length);
 });
 
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
-import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
+//import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
 import { DefaultOptions } from "../src/default_Options";
-</script>
