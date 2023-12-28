@@ -1,4 +1,3 @@
-import { uniqBy } from "lodash-es";
 import { assert, test } from "vitest";
 import { DefaultOptions } from "../src/default_Options";
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
@@ -7,16 +6,16 @@ import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
 import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
-import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
-import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 //import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
-import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
+import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
+import 不可到达的测试 from "./test-2023年12月28日 220552不可到达.json";
+import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
 test("search-drawGridMap-test", () => {
     const start = new Point(1, 21);
     const end = new Point(22, 1);
 
-    const gridmap = GridMapFromArray(map);
+    const gridmap = GridMapFromArray(不可到达的测试);
     const visibleGridsList = getVisibleGridsList(gridmap);
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
     const pointsInsideAllConvexPolygons = new Set(
@@ -24,11 +23,6 @@ test("search-drawGridMap-test", () => {
             (a) => a[0] * gridmap.row + a[1],
         ),
     );
-    const visibleGridsListWithOutPointsInsideAllConvexPolygons =
-        FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
-            visibleGridsList,
-            pointsInsideAllConvexPolygons,
-        );
     const PheromoneMatrix = generate_initial_pheromone_matrix(
         gridmap,
         start,
@@ -38,6 +32,12 @@ test("search-drawGridMap-test", () => {
     const q0_Path_selection_parameters = 0.8;
     //console.log(route.value);
     //const visibleGridsMatrix=VisibleGridsMatrix(visibleGridsList)
+
+    const visibleGridsListWithOutPointsInsideAllConvexPolygons =
+        FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
+            visibleGridsList,
+            pointsInsideAllConvexPolygons,
+        );
     const path = search_one_route_on_grid_map(
         gridmap,
         start,
@@ -55,14 +55,5 @@ test("search-drawGridMap-test", () => {
     );
     // console.log(path);
 
-    assert(path.length >= 3);
-
-    assert.equal(path[0][0], start.x);
-
-    assert.equal(path[0][1], start.y);
-
-    assert.equal(path[path.length - 1][0], end.x);
-
-    assert.equal(path[path.length - 1][1], end.y);
-    assert.equal(path.length, uniqBy(path, JSON.stringify).length);
+    assert(path.length == 0);
 });

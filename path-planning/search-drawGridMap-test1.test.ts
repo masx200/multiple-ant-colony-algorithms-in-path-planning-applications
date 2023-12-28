@@ -56,7 +56,7 @@ test("search-drawGridMap-test", () => {
         DefaultOptions.local_pheromone_volatilization_coefficient,
         DefaultOptions.global_pheromone_volatilization_coefficient,
     );
-    console.log(path);
+    // console.log(path);
 
     assert(path.length >= 3);
 

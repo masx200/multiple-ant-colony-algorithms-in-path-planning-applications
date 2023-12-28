@@ -6,7 +6,6 @@ import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
 
-
 // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
 export function search_one_route_on_grid_map(
     // 网格地图对象
@@ -53,7 +52,7 @@ export function search_one_route_on_grid_map(
 
     // 如果可以从起点直接到达终点，则返回包含起点和终点的路径
     if (visibleGridsMatrix[start.x][start.y][end.x][end.y]) {
-        console.log("如果可以从起点直接到达终点，则返回包含起点和终点的路径");
+        // console.log("如果可以从起点直接到达终点，则返回包含起点和终点的路径");
         return [
             [start.x, start.y],
             [end.x, end.y],
@@ -76,9 +75,9 @@ export function search_one_route_on_grid_map(
     while (!(current.x == end.x && current.y == end.y)) {
         // 如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径
         if (visibleGridsMatrix[current.x][current.y][end.x][end.y]) {
-            console.log(
-                "如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径",
-            );
+            // console.log(
+            //     "如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径",
+            // );
             return [...path, [end.x, end.y]];
         }
         //   console.log({ start: JSON.stringify(start) });
@@ -99,8 +98,8 @@ export function search_one_route_on_grid_map(
                 // console.log("走到了死路");
                 return []; //path;
             } // return [];
-            debugger;
-            console.log("走到了死路,开始回退到上一步");
+            // debugger;
+            // console.log("走到了死路,开始回退到上一步");
             const last = path[path.length - 1 - 1] ?? current;
             //由于一步可能跨过多个格子，只需要退一个格子，不需要退太多格子
             //   for (const [x, y] of getPathCoordinates(
@@ -122,7 +121,7 @@ export function search_one_route_on_grid_map(
             path.push([经过的上一个格子.x, 经过的上一个格子.y]);
             current.x = 经过的上一个格子.x;
             current.y = 经过的上一个格子.y;
-            debugger;
+            // debugger;
             //   console.log({ path: JSON.stringify(path) });
 
             //console.log(经过的所有格子)
@@ -155,23 +154,23 @@ export function search_one_route_on_grid_map(
         // return pa
         /* 为了修复错误的重复路径问题,删除最后的重复点 */
         if (
-            path[path.length - 1][0] === path[path.length - 2][0] &&
-            path[path.length - 1][1] === path[path.length - 2][1]
+            path[path.length - 1][0] === path[path.length - 2]?.[0] &&
+            path[path.length - 1][1] === path[path.length - 2]?.[1]
         ) {
             path.pop();
         }
         if (
             经过的所有格子[经过的所有格子.length - 1].x ===
-                经过的所有格子[经过的所有格子.length - 2].x &&
+                经过的所有格子[经过的所有格子.length - 2]?.x &&
             经过的所有格子[经过的所有格子.length - 1].y ===
-                经过的所有格子[经过的所有格子.length - 2].y
+                经过的所有格子[经过的所有格子.length - 2]?.y
         ) {
             经过的所有格子.pop();
         }
-        console.log({ path: JSON.stringify(path) });
-        console.log({ 经过的所有格子: JSON.stringify(经过的所有格子) });
+        // console.log({ path: JSON.stringify(path) });
+        // console.log({ 经过的所有格子: JSON.stringify(经过的所有格子) });
     }
-    console.log("正常搜索走到了终点");
+    // console.log("正常搜索走到了终点");
     path.push([end.x, end.y]);
     return path;
 }

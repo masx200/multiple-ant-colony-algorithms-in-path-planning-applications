@@ -1,16 +1,14 @@
 import { assert, test } from "vitest";
-
 import { DefaultOptions } from "../src/default_Options";
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
-import { GridMapFromArray } from "./GridMapFromArray";
-import { Point } from "./Point";
-//import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
-import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
-import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
 import { getVisibleGridsList } from "./getVisibleGridsList";
+import { GridMapFromArray } from "./GridMapFromArray";
+import { Point } from "./Point";
+import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 //import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
+import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import 不可到达的测试 from "./不可到达的测试.json";
 
 test("search-drawGridMap-test", () => {
@@ -55,7 +53,7 @@ test("search-drawGridMap-test", () => {
         DefaultOptions.local_pheromone_volatilization_coefficient,
         DefaultOptions.global_pheromone_volatilization_coefficient,
     );
-    console.log(path);
+    // console.log(path);
 
     assert(path.length == 0);
 });
