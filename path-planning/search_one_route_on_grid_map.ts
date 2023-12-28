@@ -1,10 +1,11 @@
 // 告诉 TypeScript 不要进行类型检查
 
-import { GridMap } from "./grid-map";
-import { Point } from "./Point";
 import { assert } from "chai";
 import { getAvailableNeighbors } from "./getAvailableNeighbors";
 import { getPathCoordinates } from "./getPathCoordinates";
+import { GridMap } from "./grid-map";
+import { Point } from "./Point";
+
 
 // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
 export function search_one_route_on_grid_map(
@@ -98,7 +99,7 @@ export function search_one_route_on_grid_map(
                 // console.log("走到了死路");
                 return []; //path;
             } // return [];
-
+            debugger;
             console.log("走到了死路,开始回退到上一步");
             const last = path[path.length - 1 - 1] ?? current;
             //由于一步可能跨过多个格子，只需要退一个格子，不需要退太多格子
@@ -114,13 +115,14 @@ export function search_one_route_on_grid_map(
             blocked.add(last[0] * grid.row + last[1]);
             // 如果邻居节点在禁止表中，则进行回退
 
-            const 经过的上一个格子 = 经过的所有格子[经过的所有格子.length - 1];
+            const 经过的上一个格子 =
+                经过的所有格子[经过的所有格子.length - 1 - 1];
             经过的所有格子.pop();
             path.pop();
             path.push([经过的上一个格子.x, 经过的上一个格子.y]);
             current.x = 经过的上一个格子.x;
             current.y = 经过的上一个格子.y;
-
+            debugger;
             //   console.log({ path: JSON.stringify(path) });
 
             //console.log(经过的所有格子)
