@@ -1,31 +1,11 @@
 // 告诉 TypeScript 不要进行类型检查
 
-import { assert } from "chai";
-
-import { getAvailableNeighbors } from "./getAvailableNeighbors";
-import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
-export function FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
-    visibleGridsList: Iterable<[number, number]>[][],
-    pointsInsideAllConvexPolygons: Set<number>,
-): Iterable<[number, number]>[][] {
-    const gridrow = visibleGridsList.length;
-    return Array(visibleGridsList.length)
-        .fill(0)
-        .map((_, i) =>
-            Array(visibleGridsList[0].length)
-                .fill(0)
-                .map((_, j) =>
-                    [...visibleGridsList[i][j]].filter(
-                        ([nx, ny]) =>
-                            !pointsInsideAllConvexPolygons.has(
-                                nx * gridrow + ny,
-                            ),
-                    ),
-                ),
-        );
-}
+import { assert } from "chai";
+import { getAvailableNeighbors } from "./getAvailableNeighbors";
+import { getPathCoordinates } from "./getPathCoordinates";
+
 // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
 export function search_one_route_on_grid_map(
     // 网格地图对象
@@ -171,8 +151,25 @@ export function search_one_route_on_grid_map(
             //    console.log({ path: JSON.stringify(path) });
         }
         // return pa
+        /* 为了修复错误的重复路径问题,删除最后的重复点 */
+        if (
+            path[path.length - 1][0] === path[path.length - 2][0] &&
+            path[path.length - 1][1] === path[path.length - 2][1]
+        ) {
+            path.pop();
+        }
+        if (
+            经过的所有格子[经过的所有格子.length - 1].x ===
+                经过的所有格子[经过的所有格子.length - 2].x &&
+            经过的所有格子[经过的所有格子.length - 1].y ===
+                经过的所有格子[经过的所有格子.length - 2].y
+        ) {
+            经过的所有格子.pop();
+        }
+        console.log({ path: JSON.stringify(path) });
+        console.log({ 经过的所有格子: JSON.stringify(经过的所有格子) });
     }
-    console.log("正常走到了终点");
+    console.log("正常搜索走到了终点");
     path.push([end.x, end.y]);
     return path;
 }

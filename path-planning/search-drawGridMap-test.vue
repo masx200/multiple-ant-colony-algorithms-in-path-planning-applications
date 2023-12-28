@@ -63,11 +63,8 @@ onMounted(() => {
     console.log(path);
     route.value = path;
 });
-
-import {
-    search_one_route_on_grid_map,
-    FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons,
-} from "./search_one_route_on_grid_map";
+import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
+import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
