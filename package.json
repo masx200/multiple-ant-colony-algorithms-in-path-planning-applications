@@ -81,7 +81,7 @@
         "@types/core-js": "^2.5.8",
         "@types/node": "^20.10.5",
         "@types/robust-segment-intersect": "^1.0.0",
-        "@vue/eslint-config-prettier": "^8.0.0",
+        "@vue/eslint-config-prettier": "^9.0.0",
         "@vue/eslint-config-typescript": "^12.0.0",
         "@vueuse/core": "^10.7.1",
         "assert": "^2.1.0",
