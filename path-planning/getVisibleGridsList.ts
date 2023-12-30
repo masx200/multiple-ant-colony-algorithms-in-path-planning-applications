@@ -10,6 +10,7 @@ import { GridMap } from "./grid-map";
 export function getVisibleGridsList(
     grid: GridMap,
 ): Iterable<[number, number]>[][] {
+    // debugger;
     // 定义一个四维数组 result，用于存储最终的结果
     const result: Set<[number, number]>[][] = [];
     // 遍历 grid.data 数组
@@ -34,10 +35,13 @@ export function getVisibleGridsList(
         for (let j = 0; j < grid.data[i].length; ++j) {
             // 如果当前位置是自由位置（isFree 方法判断）
             if (grid.isFree(i, j)) {
+                // debugger;
                 // 调用 findVisibleGridsBFS 方法找到可见的格子（VisibleGrids）
                 const VisibleGrids = findVisibleGridsCircle([i, j], grid);
                 // 遍历 VisibleGrids 数组
                 result[i][j] = new Set(VisibleGrids);
+                console.log(i, j, VisibleGrids);
+                // debugger;
             }
         }
     }

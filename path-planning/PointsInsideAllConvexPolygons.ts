@@ -37,6 +37,7 @@ export function PointsInsideAllConvexPolygons(
         for (let j = 0; j < n; j++) {
             // 如果当前格子是空的，并且还没有被访问过
             if (grid.data[i][j] === 0 && !visited[i][j]) {
+                // debugger;
                 // 将当前格子压入栈中
                 const stack: [number, number][] = [];
 
@@ -56,6 +57,7 @@ export function PointsInsideAllConvexPolygons(
                 const failedPoints: [number, number][] = [];
                 // 当栈不为空时，继续执行循环
                 while (stack.length) {
+                    // debugger;
                     // 弹出栈顶的格子
                     const [curI, curJ] = stack.pop() as [number, number];
                     // console.log(curI, curJ);
@@ -183,6 +185,7 @@ export function PointsInsideAllConvexPolygons(
                             // visited[x][y] = true;
                         }
                     });
+                    //    debugger;
                 }
                 // console.log({
                 //     AllPointsInConvexPolygons,
@@ -192,6 +195,7 @@ export function PointsInsideAllConvexPolygons(
                 failedPoints.forEach((point) => {
                     visited[point[0]][point[1]] = false;
                 });
+                //  debugger;
             }
         }
     }

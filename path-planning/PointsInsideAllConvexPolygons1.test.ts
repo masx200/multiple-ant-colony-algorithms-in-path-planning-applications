@@ -9,10 +9,11 @@ import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 describe("PointsInsideAllConvexPolygons", () => {
     test("测试点在一个凸多边形内部", () => {
         const gridmap: GridMap = GridMapFromArray(map);
-        const visibleGridsMatrix = VisibleGridsMatrix(
-            getVisibleGridsList(gridmap),
-        );
-
+        // debugger;
+        const visibleGridsList = getVisibleGridsList(gridmap);
+        // debugger;
+        const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
+        // debugger;
         const result = PointsInsideAllConvexPolygons(
             gridmap,
             visibleGridsMatrix,
