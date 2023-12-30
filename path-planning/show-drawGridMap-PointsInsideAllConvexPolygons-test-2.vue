@@ -13,11 +13,11 @@
 import { Ref, ref } from "vue";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
-import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
+import { FindPointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import { getVisibleGridsList } from "./getVisibleGridsList";
-import map from "./space-findVisibleGrids2-test.json";
+import map from "./test-simple-map-four-obstacle.json";
 
 const start = new Point(0, 0);
 const end = new Point(map.length - 1, map[0].length - 1);
@@ -32,7 +32,7 @@ const gridmap = GridMapFromArray(map);
 const visibleGridsList = getVisibleGridsList(gridmap);
 const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
 const pointsInsideAllConvexPolygons = [
-    ...PointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix),
+    ...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix),
 ];
 // });
 </script>
