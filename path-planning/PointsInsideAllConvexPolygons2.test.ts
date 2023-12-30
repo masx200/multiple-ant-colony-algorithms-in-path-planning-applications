@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMap } from "./grid-map";
 import { GridMapFromArray } from "./GridMapFromArray";
-import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
+import { FindPointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
 
@@ -13,7 +13,7 @@ describe("PointsInsideAllConvexPolygons", () => {
             getVisibleGridsList(gridmap),
         );
 
-        const result = PointsInsideAllConvexPolygons(
+        const result = FindPointsInsideAllConvexPolygons(
             gridmap,
             visibleGridsMatrix,
         );

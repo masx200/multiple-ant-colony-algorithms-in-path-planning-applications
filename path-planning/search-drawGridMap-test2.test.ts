@@ -5,7 +5,7 @@ import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
-import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
+import { FindPointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 //import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
@@ -19,7 +19,7 @@ test("search-drawGridMap-test", () => {
     const visibleGridsList = getVisibleGridsList(gridmap);
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
     const pointsInsideAllConvexPolygons = new Set(
-        [...PointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
+        [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
             (a) => a[0] * gridmap.row + a[1],
         ),
     );

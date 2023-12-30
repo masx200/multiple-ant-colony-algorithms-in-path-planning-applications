@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMap } from "./grid-map";
 import { GridMapFromArray } from "./GridMapFromArray";
-import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
+import { FindPointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 import map from "./space-findVisibleGrids2-test-two-line-Obstacle.json";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
@@ -14,7 +14,7 @@ describe("PointsInsideAllConvexPolygons", () => {
         // debugger;
         const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
         // debugger;
-        const result = PointsInsideAllConvexPolygons(
+        const result = FindPointsInsideAllConvexPolygons(
             gridmap,
             visibleGridsMatrix,
         );
