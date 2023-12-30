@@ -1,4 +1,6 @@
 import { GridMap } from "./grid-map";
+import { oneDimensionToTwoDimensions } from "./oneDimensionToTwoDimensions";
+import { twoDimensionsToOneDimension } from "./twoDimensionsToOneDimension";
 
 /**
  * 计算所有点被所有凸多边形包围的内部点
@@ -42,8 +44,8 @@ export function PointsInsideAllConvexPolygons(
                 const stack: [number, number][] = [];
 
                 // 创建一个集合来存储当前凸包中的点
-                const pointsInConvexPolygonsToBeSearch = new Set<string>();
-                const AllPointsInConvexPolygons = new Set<string>();
+                const pointsInConvexPolygonsToBeSearch = new Set<number>();
+                const AllPointsInConvexPolygons = new Set<number>();
 
                 stack.push([i, j]);
 
@@ -51,8 +53,12 @@ export function PointsInsideAllConvexPolygons(
                 // visited[i][j] = true;
 
                 // 将当前格子添加到凸包中
-                pointsInConvexPolygonsToBeSearch.add(JSON.stringify([i, j]));
-                AllPointsInConvexPolygons.add(JSON.stringify([i, j]));
+                pointsInConvexPolygonsToBeSearch.add(
+                    twoDimensionsToOneDimension(i, j, n),
+                );
+                AllPointsInConvexPolygons.add(
+                    twoDimensionsToOneDimension(i, j, n),
+                );
                 //如果一个点失败了,那么应该放回去重新搜索,因为一个点可以重新匹配
                 const failedPoints: [number, number][] = [];
                 // 当栈不为空时，继续执行循环
@@ -70,7 +76,7 @@ export function PointsInsideAllConvexPolygons(
                     visited[curI][curJ] = true;
 
                     // 创建一个集合来存储需要删除的点
-                    const toBeDeleted = new Set<string>();
+                    const toBeDeleted = new Set<number>();
 
                     // 计数器，用来计算当前凸包中有多少个点与当前格子相邻
                     const size = pointsInConvexPolygonsToBeSearch.size;
@@ -78,7 +84,10 @@ export function PointsInsideAllConvexPolygons(
                     // 遍历当前凸包中的每一个点
                     for (const point of pointsInConvexPolygonsToBeSearch) {
                         // 解析点的字符串表示，得到它的坐标
-                        const pointArr = JSON.parse(point) as [number, number];
+                        const pointArr = oneDimensionToTwoDimensions(
+                            point,
+                            n,
+                        ) as [number, number];
 
                         // 检查当前点是否满足凸性条件
                         if (
@@ -92,7 +101,7 @@ export function PointsInsideAllConvexPolygons(
                                     y < n &&
                                     grid.isFree(x, y) &&
                                     AllPointsInConvexPolygons.has(
-                                        JSON.stringify([x, y]),
+                                        twoDimensionsToOneDimension(x, y, n),
                                     )
                                 );
                             })
@@ -102,7 +111,10 @@ export function PointsInsideAllConvexPolygons(
                         }
                     }
                     for (const point of pointsInConvexPolygonsToBeSearch) {
-                        const pointArr = JSON.parse(point) as [number, number];
+                        const pointArr = oneDimensionToTwoDimensions(
+                            point,
+                            n,
+                        ) as [number, number];
 
                         // 如果这个点与当前格子相邻，并且它们之间没有障碍物
                         if (
@@ -132,16 +144,19 @@ export function PointsInsideAllConvexPolygons(
                         continue;
                     } else {
                         pointsInConvexPolygonsToBeSearch.add(
-                            JSON.stringify([curI, curJ]),
+                            twoDimensionsToOneDimension(curI, curJ, n),
                         );
                         AllPointsInConvexPolygons.add(
-                            JSON.stringify([curI, curJ]),
+                            twoDimensionsToOneDimension(curI, curJ, n),
                         );
                     }
                     // 遍历当前凸包中的每一个点
                     for (const point of pointsInConvexPolygonsToBeSearch) {
                         // 解析点的字符串表示，得到它的坐标
-                        const pointArr = JSON.parse(point) as [number, number];
+                        const pointArr = oneDimensionToTwoDimensions(
+                            point,
+                            n,
+                        ) as [number, number];
 
                         // 检查当前点是否满足凸性条件
                         if (
@@ -155,7 +170,7 @@ export function PointsInsideAllConvexPolygons(
                                     y < n &&
                                     grid.isFree(x, y) &&
                                     AllPointsInConvexPolygons.has(
-                                        JSON.stringify([x, y]),
+                                        twoDimensionsToOneDimension(x, y, n),
                                     )
                                 );
                             })
