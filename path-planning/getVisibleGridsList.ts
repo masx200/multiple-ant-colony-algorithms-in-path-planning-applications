@@ -40,7 +40,7 @@ export function getVisibleGridsList(
                 const VisibleGrids = findVisibleGridsCircle([i, j], grid);
                 // 遍历 VisibleGrids 数组
                 result[i][j] = new Set(VisibleGrids);
-                console.log(i, j, VisibleGrids);
+                // console.log(i, j, VisibleGrids);
                 // debugger;
             }
         }
