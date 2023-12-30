@@ -1,8 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { GridMap } from "./grid-map";
-import { FindPointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
-import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
+import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
 import { getVisibleGridsList } from "./getVisibleGridsList";
+import { GridMap } from "./grid-map";
+import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
+
 
 describe("PointsInsideAllConvexPolygons", () => {
     test("测试点在一个凸多边形内部", () => {

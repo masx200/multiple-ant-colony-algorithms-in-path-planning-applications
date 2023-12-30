@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
+import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMap } from "./grid-map";
 import { GridMapFromArray } from "./GridMapFromArray";
-import { FindPointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
 

@@ -13,7 +13,7 @@
 import { Ref, ref } from "vue";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
-import { FindPointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
+import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import { getVisibleGridsList } from "./getVisibleGridsList";
