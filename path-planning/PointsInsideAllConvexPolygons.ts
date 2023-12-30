@@ -10,7 +10,7 @@ import { GridMap } from "./grid-map";
 export function PointsInsideAllConvexPolygons(
     grid: GridMap,
     visibleGridsMatrix: boolean[][][][],
-): Set<[number, number]> {
+): Iterable<[number, number]> {
     // console.log(grid);
     // 定义四个方向向量
     const dirs = [

@@ -18,6 +18,7 @@ import { drawGridRoute } from "./drawGridRoute";
 import { drawdisplayMouseCoordinates } from "./drawdisplayMouseCoordinates";
 import { debounce } from "lodash-es";
 import { clearCanvas } from "./clearCanvas";
+import { draw_PointsInsideAllConvexPolygons } from "./draw_PointsInsideAllConvexPolygons";
 // const { width, height } = useElementSize(document.body);
 
 const props = defineProps<
@@ -28,6 +29,7 @@ const props = defineProps<
         row?: number;
         grid?: boolean;
         label: boolean;
+        pointsInsideAllConvexPolygons: Iterable<[number, number]>;
     }>
 >();
 const windowSize = useWindowSize();
@@ -55,6 +57,15 @@ const render = debounce(function render() {
         const row = gridMap?.row ?? props.row;
         const column = gridMap?.column ?? props.column;
         if (props.grid && row && column) drawGridlines(column, row, canvas);
+
+        if (props.pointsInsideAllConvexPolygons && row && column) {
+            draw_PointsInsideAllConvexPolygons(
+                column,
+                row,
+                canvas,
+                props.pointsInsideAllConvexPolygons,
+            );
+        }
         if (route && row && column) {
             drawGridRoute(route, canvas, column, row);
         }
