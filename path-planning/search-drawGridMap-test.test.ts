@@ -12,7 +12,6 @@ import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 //import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
 
-
 test("search-drawGridMap-test", () => {
     const start = new Point(1, 21);
     const end = new Point(22, 1);

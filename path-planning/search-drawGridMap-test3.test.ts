@@ -11,7 +11,6 @@ import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import 不可到达的测试 from "./test-2023年12月28日 220552不可到达.json";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
-
 test("search-drawGridMap-test", () => {
     const start = new Point(1, 21);
     const end = new Point(22, 1);

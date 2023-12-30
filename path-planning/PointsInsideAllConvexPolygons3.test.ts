@@ -6,7 +6,6 @@ import { GridMapFromArray } from "./GridMapFromArray";
 import map from "./space-findVisibleGrids2-test-two-line-Obstacle.json";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
-
 describe("PointsInsideAllConvexPolygons", () => {
     test("测试点在一个凸多边形内部", () => {
         const gridmap: GridMap = GridMapFromArray(map);

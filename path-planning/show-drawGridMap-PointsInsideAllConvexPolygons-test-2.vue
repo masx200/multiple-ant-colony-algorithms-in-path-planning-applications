@@ -35,4 +35,6 @@ const pointsInsideAllConvexPolygons = [
     ...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix),
 ];
 // });
+
+console.log(pointsInsideAllConvexPolygons);
 </script>

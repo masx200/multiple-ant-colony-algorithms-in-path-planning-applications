@@ -4,7 +4,6 @@ import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMap } from "./grid-map";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
-
 describe("PointsInsideAllConvexPolygons", () => {
     test("测试点在一个凸多边形内部", () => {
         const grid = new GridMap(3, 3, [

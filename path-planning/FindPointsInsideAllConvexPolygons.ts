@@ -3,7 +3,6 @@ import { GridMap } from "./grid-map";
 import { oneDimensionToTwoDimensions } from "./oneDimensionToTwoDimensions";
 import { twoDimensionsToOneDimension } from "./twoDimensionsToOneDimension";
 
-
 /**
  * 计算所有点被所有凸多边形包围的内部点
  *算法类似于岛屿问题

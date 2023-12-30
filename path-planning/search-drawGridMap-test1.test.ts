@@ -11,7 +11,6 @@ import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import map from "./test-2023年12月28日 220552.json";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
-
 //import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
 //import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
