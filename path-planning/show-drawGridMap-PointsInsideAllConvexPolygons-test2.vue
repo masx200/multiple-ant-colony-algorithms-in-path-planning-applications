@@ -20,7 +20,7 @@ import { getVisibleGridsList } from "./getVisibleGridsList";
 import map from "./findVisibleGrids2-test.json";
 
 const start = new Point(0, 0);
-const end = new Point(10, 23);
+const end = new Point(map.length - 1, map[0].length - 1);
 
 const route: Ref<[number, number][]> = ref([
     [start.x, start.y],
