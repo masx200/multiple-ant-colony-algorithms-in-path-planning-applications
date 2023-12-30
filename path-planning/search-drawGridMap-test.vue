@@ -27,7 +27,7 @@ onMounted(() => {
     const visibleGridsList = getVisibleGridsList(gridmap);
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
     const pointsInsideAllConvexPolygons = new Set(
-        [...PointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
+        [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
             (a) => a[0] * gridmap.row + a[1],
         ),
     );
@@ -68,7 +68,7 @@ import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
-import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
+import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
 import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
 import { DefaultOptions } from "../src/default_Options";
 </script>
