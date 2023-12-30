@@ -26,20 +26,20 @@ export function drawGridlines(
     const cellSize = Math.min(height / column, width / row);
 
     // 绘制竖直网格线
-    for (let i = 0; i <= row + 1; i++) {
+    for (let i = 0; i <= column + 1; i++) {
         ctx.beginPath();
         ctx.strokeStyle = "green";
         ctx.moveTo(0, i * cellSize);
-        ctx.lineTo(cellSize * (column - 1), i * cellSize);
+        ctx.lineTo(cellSize * (row + 1), i * cellSize);
         ctx.stroke();
     }
 
     // 绘制水平网格线
-    for (let i = 0; i <= column - 1; i++) {
+    for (let i = 0; i <= row + 1; i++) {
         ctx.beginPath();
         ctx.strokeStyle = "blue";
         ctx.moveTo(i * cellSize, 0);
-        ctx.lineTo(i * cellSize, cellSize * (row + 1));
+        ctx.lineTo(i * cellSize, cellSize * (column + 1));
         ctx.stroke();
     }
     ctx.restore();
