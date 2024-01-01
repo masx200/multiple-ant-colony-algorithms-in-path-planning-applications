@@ -18,7 +18,7 @@
         "format": " prettier --write */*.json *.ts */*.html */*.ts */*.css *.md  */*.vue *.json *.cjs"
     },
     "devDependencies": {
-        "@babel/core": "^7.23.6",
+        "@babel/core": "^7.23.7",
         "@babel/generator": "^7.23.6",
         "@babel/plugin-proposal-async-generator-functions": "^7.17.12",
         "@babel/plugin-syntax-typescript": "^7.17.12",
@@ -32,10 +32,10 @@
         "@types/find": "^0.2.1",
         "@types/html-minifier-terser": "^7.0.0",
         "@types/lodash-es": "^4.17.6",
-        "@types/node": "^20.10.5",
+        "@types/node": "^20.10.6",
         "@typescript-eslint/eslint-plugin": "^6.16.0",
         "@typescript-eslint/parser": "^6.16.0",
-        "@vitejs/plugin-vue": "^5.0.0",
+        "@vitejs/plugin-vue": "^5.0.2",
         "babel-plugin-clean-code": "^0.0.3",
         "babel-plugin-import": "^1.13.5",
         "combinatorial-generators": "^1.1.2",
@@ -67,11 +67,11 @@
         "vite-plugin-checker": "^0.6.0",
         "vite-plugin-html": "^3.2.1",
         "vite-plugin-pwa": "^0.17.4",
-        "vue": "3.4.0",
+        "vue": "3.4.3",
         "vue-tsc": "^1.8.27"
     },
     "dependencies": {
-        "@babel/core": "^7.23.6",
+        "@babel/core": "^7.23.7",
         "@datastructures-js/heap": "^4.3.2",
         "@datastructures-js/queue": "^4.2.3",
         "@masx200/rollup-plugin-http-resolve": "^5.0.2",
@@ -79,7 +79,7 @@
         "@masx200/weighted-randomly-select": "^2.1.1",
         "@types/chai": "^4.3.10",
         "@types/core-js": "^2.5.8",
-        "@types/node": "^20.10.5",
+        "@types/node": "^20.10.6",
         "@types/robust-segment-intersect": "^1.0.0",
         "@vue/eslint-config-prettier": "^9.0.0",
         "@vue/eslint-config-typescript": "^12.0.0",
@@ -95,7 +95,7 @@
         "unplugin-vue-components": "^0.26.0",
         "vite": "5.0.10",
         "vite-plugin-checker": "^0.6.0",
-        "vitest": "^1.1.0",
+        "vitest": "^1.1.1",
         "vue-tsc": "^1.8.27",
         "workbox-window": "^7.0.0"
     }
