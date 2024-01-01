@@ -1,19 +1,15 @@
 import { uniqBy } from "lodash-es";
 import { assert, test } from "vitest";
-import {
-FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons
-} from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
+import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
 import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
-import {
-getVisibleGridsList
-} from "./getVisibleGridsList";
+import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
 import { random_next_point_selector } from "./random_next_point_selector";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import map from "./test-2023年12月28日 220552.json";
+import { twoDimensionsToOneDimension } from "./twoDimensionsToOneDimension";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
-
 
 //import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
@@ -24,6 +20,8 @@ test("search-drawGridMap-test", () => {
     const end = new Point(22, 1);
 
     const gridmap = GridMapFromArray(map);
+
+    const n = gridmap.data[0].length;
     const visibleGridsList = getVisibleGridsList(gridmap);
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
     const pointsInsideAllConvexPolygons = new Set(
@@ -59,7 +57,8 @@ test("search-drawGridMap-test", () => {
         // PheromoneZeroMatrix,
         // DefaultOptions.local_pheromone_volatilization_coefficient,
         // DefaultOptions.global_pheromone_volatilization_coefficient,
-        random_next_point_selector  );
+        random_next_point_selector,
+    );
     // console.log(path);
 
     assert(path.length >= 3);
@@ -71,5 +70,10 @@ test("search-drawGridMap-test", () => {
     assert.equal(path[path.length - 1][0], end.x);
 
     assert.equal(path[path.length - 1][1], end.y);
-    assert.equal(path.length, uniqBy(path, JSON.stringify).length);
+    assert.equal(
+        path.length,
+        uniqBy(path, ([i, j]) => {
+            return twoDimensionsToOneDimension(i, j, n);
+        }).length,
+    );
 });

@@ -4,6 +4,7 @@ import { EuclideanDistance } from "./Euclidean-distance";
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
+import { twoDimensionsToOneDimension } from "./twoDimensionsToOneDimension";
 
 /**
  * 生成初始信息素矩阵
@@ -22,7 +23,7 @@ export function generate_initial_pheromone_matrix(
     assert(grid.isFree(start.x, start.y));
     assert(grid.isFree(end.x, end.y));
     // 计算地图的行数和列数
-    const n = grid.row * grid.column;
+    const number_of_all_points = grid.row * grid.column;
 
     // 检查起始点是否在地图范围内
     assert.isAtLeast(start.x, 0);
@@ -38,7 +39,7 @@ export function generate_initial_pheromone_matrix(
 
     // 获取地图的列数和行数
     const { column, row } = grid;
-
+    const n = grid.data[0].length;
     // 初始化一个二维数组，用于存储初始信息素矩阵
     const res: number[][] = Array(column)
         .fill(0)
@@ -63,7 +64,10 @@ export function generate_initial_pheromone_matrix(
                     getPathCoordinates([start.x, start.y], [i, j]),
                     getPathCoordinates([end.x, end.y], [i, j]),
                 ].flat(),
-                (item) => JSON.stringify(item),
+                ([i, j]) => {
+                    return twoDimensionsToOneDimension(i, j, n);
+                },
+                // (item) => JSON.stringify(item),
             );
 
             // 计算当前点是障碍物的次数
@@ -75,7 +79,9 @@ export function generate_initial_pheromone_matrix(
             const freecount = pcds.length - obstacleCount;
 
             // 计算当前点的信息素矩阵
-            res[i][j] = (1 / n / distance) * (freecount / pcds.length);
+            res[i][j] =
+                (1 / number_of_all_points / distance) *
+                (freecount / pcds.length);
         }
     }
 

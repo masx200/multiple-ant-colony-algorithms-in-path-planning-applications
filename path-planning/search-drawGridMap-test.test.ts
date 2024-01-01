@@ -7,6 +7,7 @@ import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
 import { random_next_point_selector } from "./random_next_point_selector";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
+import { twoDimensionsToOneDimension } from "./twoDimensionsToOneDimension";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 //import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
@@ -64,5 +65,11 @@ test("search-drawGridMap-test", () => {
     assert.equal(path[path.length - 1][0], end.x);
 
     assert.equal(path[path.length - 1][1], end.y);
-    assert.equal(path.length, uniqBy(path, JSON.stringify).length);
+    const n = gridmap.data[0].length;
+    assert.equal(
+        path.length,
+        uniqBy(path, ([i, j]) => {
+            return twoDimensionsToOneDimension(i, j, n);
+        }).length,
+    );
 });

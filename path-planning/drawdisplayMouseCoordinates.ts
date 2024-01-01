@@ -1,7 +1,6 @@
 import { measureTextWidthAndHeight } from "./measureTextWidthAndHeight";
 import { MousePosition } from "./MousePosition";
 
-
 /**
  * 显示鼠标在画布上的坐标
  *
