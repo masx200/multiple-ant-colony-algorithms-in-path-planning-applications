@@ -14,8 +14,8 @@ import { Point } from "./Point";
 import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import map from "./screen-capture-2023-11-24-162727_result-result-test.json";
 
-const start = new Point(1, 21);
-const end = new Point(22, 1);
+const start = new Point(22, 1);
+const end = new Point(1, 21);
 
 const route: Ref<[number, number][]> = ref([
     [start.x, start.y],

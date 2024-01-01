@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 //@ts-nocheck
-import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
+import map from "./screen-capture-2023-11-24-162727_result-result-test.json";
 import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 // import { GridMapFromArray } from "./GridMapFromArray";
 // import { drawGridMap } from "./drawGridMap";

@@ -3,8 +3,8 @@ import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPo
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMap } from "./grid-map";
 import { GridMapFromArray } from "./GridMapFromArray";
+import map from "./screen-capture-2023-11-24-162727_result-result-test.json";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
-import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
 
 describe("PointsInsideAllConvexPolygons", () => {
     test("测试点在一个凸多边形内部", () => {

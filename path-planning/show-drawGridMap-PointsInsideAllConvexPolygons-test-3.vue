@@ -17,7 +17,7 @@ import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPo
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import { getVisibleGridsList } from "./getVisibleGridsList";
-import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
+import map from "./screen-capture-2023-11-24-162727_result-result-test.json";
 
 const start = new Point(1, 21);
 const end = new Point(22, 1);

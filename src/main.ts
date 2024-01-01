@@ -2,7 +2,9 @@ import "../functions/echarts-line";
 import "./style.css";
 
 import { createApp, h } from "vue";
-import appcom from "../path-planning/search-drawGridMap-test-greedy.vue";
+import appcom from "../path-planning/search-drawGridMap-test-greedy-reverse.vue";
+
+// import appcom from "../path-planning/search-drawGridMap-test-greedy.vue";
 
 // import appcom from "../path-planning/search-drawGridMap-test.vue";
 

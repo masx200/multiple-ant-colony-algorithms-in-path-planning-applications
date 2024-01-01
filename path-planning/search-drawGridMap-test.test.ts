@@ -6,11 +6,11 @@ import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
 import { random_next_point_selector } from "./random_next_point_selector.ts";
+//import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
+import map from "./screen-capture-2023-11-24-162727_result-result-test.json";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import { twoDimensionsToOneDimension } from "./twoDimensionsToOneDimension";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
-//import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
-import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
 
 test("search-drawGridMap-test", () => {
     const start = new Point(1, 21);
