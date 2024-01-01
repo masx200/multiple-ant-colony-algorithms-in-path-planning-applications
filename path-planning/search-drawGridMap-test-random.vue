@@ -77,4 +77,3 @@ import { random_next_point_selector } from "./random_next_point_selector";
 // import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
 // import { DefaultOptions } from "../src/default_Options";
 </script>
-<!-- import { random_next_point_selector } from "./random_next_point_selector"; -->

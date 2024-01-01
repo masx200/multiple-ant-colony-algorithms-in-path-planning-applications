@@ -1,19 +1,18 @@
-import { ConfigEnv, PluginOption, UserConfig, defineConfig } from "vite";
-
+import { PluginItem } from "@babel/core";
+import { babel } from "@rollup/plugin-babel";
+import vuePlugin from "@vitejs/plugin-vue";
+import path from "path";
+import { resolve } from "path";
 import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 import ElementPlus from "unplugin-element-plus/dist/vite.js";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-import { PluginItem } from "@babel/core";
-import { VitePWA } from "vite-plugin-pwa";
-import { babel } from "@rollup/plugin-babel";
+import Components from "unplugin-vue-components/vite";
+import { ConfigEnv, defineConfig, PluginOption, UserConfig } from "vite";
 import checker from "vite-plugin-checker";
 import { createHtmlPlugin } from "vite-plugin-html";
-import path from "path";
-import { resolve } from "path";
-import vuePlugin from "@vitejs/plugin-vue";
+import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
     const isdrop = mode === "production" && command === "build";
@@ -28,14 +27,14 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
                         exclude: [/node_modules/],
                         extensions: [".ts", ".js"],
                         plugins: [
-                            [
-                                "babel-plugin-import",
-                                {
-                                    libraryName: "lodash",
-                                    libraryDirectory: "",
-                                    camel2DashComponentName: false,
-                                },
-                            ],
+                            // [
+                            //     "babel-plugin-import",
+                            //     {
+                            //         libraryName: "lodash",
+                            //         libraryDirectory: "",
+                            //         camel2DashComponentName: false,
+                            //     },
+                            // ],
                             [
                                 "@babel/plugin-proposal-async-generator-functions",
                             ],
@@ -73,14 +72,14 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
 
                 plugins: [
                     ["@babel/plugin-proposal-async-generator-functions"],
-                    [
-                        "babel-plugin-import",
-                        {
-                            libraryName: "lodash",
-                            libraryDirectory: "",
-                            camel2DashComponentName: false,
-                        },
-                    ],
+                    // [
+                    //     "babel-plugin-import",
+                    //     {
+                    //         libraryName: "lodash",
+                    //         libraryDirectory: "",
+                    //         camel2DashComponentName: false,
+                    //     },
+                    // ],
                     isdrop && "babel-plugin-clean-code",
                 ].filter(Boolean) as PluginItem[],
             }),

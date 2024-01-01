@@ -5,7 +5,7 @@ import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPo
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
-import { random_next_point_selector } from "./random_next_point_selector";
+import { random_next_point_selector } from "./random_next_point_selector.ts";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import map from "./test-2023年12月28日 220552.json";
 import { twoDimensionsToOneDimension } from "./twoDimensionsToOneDimension";

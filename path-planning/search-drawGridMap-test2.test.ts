@@ -4,7 +4,7 @@ import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPo
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
-import { random_next_point_selector } from "./random_next_point_selector";
+import { random_next_point_selector } from "./random_next_point_selector.ts";
 //import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
