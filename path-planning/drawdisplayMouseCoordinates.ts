@@ -1,6 +1,7 @@
 import { measureTextWidthAndHeight } from "./measureTextWidthAndHeight";
 import { MousePosition } from "./MousePosition";
 
+
 /**
  * 显示鼠标在画布上的坐标
  *
@@ -9,7 +10,7 @@ import { MousePosition } from "./MousePosition";
  * @param column - 列数
  * @param row - 行数
  */
-export function drawdisplayMouseCoordinates(
+export function drawMouseCoordinatesText(
     canvas: HTMLCanvasElement,
     mousePositionInElement: MousePosition,
     column: number,

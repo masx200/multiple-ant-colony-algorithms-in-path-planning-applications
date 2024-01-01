@@ -15,7 +15,7 @@ import {
     useEventListener,
 } from "@vueuse/core";
 import { drawGridRoute } from "./drawGridRoute";
-import { drawdisplayMouseCoordinates } from "./drawdisplayMouseCoordinates";
+import { drawMouseCoordinatesText } from "./drawdisplayMouseCoordinates";
 import { debounce } from "lodash-es";
 import { clearCanvas } from "./clearCanvas";
 import { draw_PointsInsideAllConvexPolygons } from "./draw_PointsInsideAllConvexPolygons";
@@ -70,7 +70,7 @@ const render = debounce(function render() {
             drawGridRoute(route, canvas, column, row);
         }
         if (mousePositionInElement.isOutside.value === false && row && column)
-            drawdisplayMouseCoordinates(
+            drawMouseCoordinatesText(
                 canvas,
                 {
                     x: mousePositionInElement.elementX.value,

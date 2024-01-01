@@ -5,6 +5,8 @@ import { getAvailableNeighbors } from "./getAvailableNeighbors";
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";
+import { PointFromArray } from "./PointFromArray";
+import { PointToArray } from "./PointToArray";
 
 // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
 export function search_one_route_on_grid_map(
@@ -15,8 +17,8 @@ export function search_one_route_on_grid_map(
     // 终点对象
     end: Point,
     // 信息素矩阵
-    //@ts-ignore
-    PheromoneMatrix: number[][],
+
+    //PheromoneMatrix: number[][],
     // 可见网格列表（多维度）
     visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
         [number, number]
@@ -25,23 +27,24 @@ export function search_one_route_on_grid_map(
     // 多边形内部点的集合
     // pointsInsideAllConvexPolygons: Set<number>,
     // 信息素因子 alpha
-    //@ts-ignore
-    alpha_Pheromone_factor: number,
+
+    // alpha_Pheromone_factor: number,
     // 启发式因子 beta
-    //@ts-ignore
-    beta_Heuristic_factors: number,
+    //
+    // beta_Heuristic_factors: number,
     // 路径选择参数 q0
-    //@ts-ignore
-    q0_Path_selection_parameters: number,
+
+    // q0_Path_selection_parameters: number,
     // 信息素零矩阵
-    //@ts-ignore
-    PheromoneZeroMatrix: number[][],
+
+    // PheromoneZeroMatrix: number[][],
     // 局部信息素挥发系数
-    //@ts-ignore
-    partial_Local_pheromone_volatility: number,
+
+    //  partial_Local_pheromone_volatility: number,
     // 全局信息素挥发系数
-    //@ts-ignore
-    rou_Global_pheromone_volatility: number,
+
+    //  rou_Global_pheromone_volatility: number,
+    next_point_selector: (neighbors: Array<Point>, current: Point) => Point,
 ): [number, number][] {
     // 断言终点在地图上是可到达的
     assert(grid.isFree(end.x, end.y));
@@ -64,7 +67,8 @@ export function search_one_route_on_grid_map(
     // 解决凹型死路问题的方法：使用回退策略。
     // 将当前节点的格子放入禁止表中，回退到上一步继续搜索，
     // 并将凹型死路区域经过的信息素进行清零。
-    /* 不能修改起点,需要克隆对象 */ //终于能够开始回退到上一步
+    /* 不能修改起点,需要克隆对象 */
+    //终于能够开始回退到上一步
     const current = structuredClone(start);
     const 经过的所有格子 = new Array<Point>();
     const path: [number, number][] = [[start.x, start.y]];
@@ -128,8 +132,15 @@ export function search_one_route_on_grid_map(
             //return path
         } else {
             // 随机选择一个邻居节点
-            const neighbor =
-                neighbors[Math.floor(Math.random() * neighbors.length)];
+            // const neighbor =
+            //     neighbors[Math.floor(Math.random() * neighbors.length)];
+            const neighbor = PointToArray(
+                next_point_selector(
+                    neighbors.map((n) => ({ x: n[0], y: n[1] })),
+                    PointFromArray([current.x, current.y]),
+                ),
+            );
+
             //  console.log({ neighbor: JSON.stringify(neighbor) });
             current.x = neighbor[0];
             current.y = neighbor[1];

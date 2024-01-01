@@ -31,13 +31,13 @@ onMounted(() => {
             (a) => a[0] * gridmap.row + a[1],
         ),
     );
-    const PheromoneMatrix = generate_initial_pheromone_matrix(
-        gridmap,
-        start,
-        end,
-    );
-    const PheromoneZeroMatrix = structuredClone(PheromoneMatrix);
-    const q0_Path_selection_parameters = 0.8;
+    // const PheromoneMatrix = generate_initial_pheromone_matrix(
+    //     gridmap,
+    //     start,
+    //     end,
+    // );
+    // const PheromoneZeroMatrix = structuredClone(PheromoneMatrix);
+    // const q0_Path_selection_parameters = 0.8;
     console.log(route.value);
 
     const visibleGridsListWithOutPointsInsideAllConvexPolygons =
@@ -49,26 +49,32 @@ onMounted(() => {
         gridmap,
         start,
         end,
-        PheromoneMatrix,
+        // PheromoneMatrix,
         visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
         //   pointsInsideAllConvexPolygons,
-        DefaultOptions.alpha_zero,
-        DefaultOptions.beta_zero,
-        q0_Path_selection_parameters,
-        PheromoneZeroMatrix,
-        DefaultOptions.local_pheromone_volatilization_coefficient,
-        DefaultOptions.global_pheromone_volatilization_coefficient,
+        // DefaultOptions.alpha_zero,
+        // DefaultOptions.beta_zero,
+        // q0_Path_selection_parameters,
+        // PheromoneZeroMatrix,
+        // DefaultOptions.local_pheromone_volatilization_coefficient,
+        // DefaultOptions.global_pheromone_volatilization_coefficient,
+        random_next_point_selector,
     );
     console.log(path);
     route.value = path;
 });
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
-import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
+import {
+    // random_next_point_selector,
+    search_one_route_on_grid_map,
+} from "./search_one_route_on_grid_map";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
-import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
-import { DefaultOptions } from "../src/default_Options";
+import { random_next_point_selector } from "./random_next_point_selector";
+// import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
+// import { DefaultOptions } from "../src/default_Options";
 </script>
+<!-- import { random_next_point_selector } from "./random_next_point_selector"; -->

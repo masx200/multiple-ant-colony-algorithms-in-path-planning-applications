@@ -1,15 +1,19 @@
 import { uniqBy } from "lodash-es";
 import { assert, test } from "vitest";
-import { DefaultOptions } from "../src/default_Options";
-import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
+import {
+FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons
+} from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
 import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
-import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
-import { getVisibleGridsList } from "./getVisibleGridsList";
+import {
+getVisibleGridsList
+} from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
+import { random_next_point_selector } from "./random_next_point_selector";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import map from "./test-2023年12月28日 220552.json";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
+
 
 //import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
@@ -32,30 +36,30 @@ test("search-drawGridMap-test", () => {
             visibleGridsList,
             pointsInsideAllConvexPolygons,
         );
-    const PheromoneMatrix = generate_initial_pheromone_matrix(
-        gridmap,
-        start,
-        end,
-    );
-    const PheromoneZeroMatrix = structuredClone(PheromoneMatrix);
-    const q0_Path_selection_parameters = 0.8;
+    // const PheromoneMatrix = generate_initial_pheromone_matrix(
+    //     gridmap,
+    //     start,
+    //     end,
+    // );
+    // const PheromoneZeroMatrix = structuredClone(PheromoneMatrix);
+    // const q0_Path_selection_parameters = 0.8;
     //console.log(route.value);
     //const visibleGridsMatrix=VisibleGridsMatrix(visibleGridsList)
     const path = search_one_route_on_grid_map(
         gridmap,
         start,
         end,
-        PheromoneMatrix,
+        // PheromoneMatrix,
         visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
         //  pointsInsideAllConvexPolygons,
-        DefaultOptions.alpha_zero,
-        DefaultOptions.beta_zero,
-        q0_Path_selection_parameters,
-        PheromoneZeroMatrix,
-        DefaultOptions.local_pheromone_volatilization_coefficient,
-        DefaultOptions.global_pheromone_volatilization_coefficient,
-    );
+        // DefaultOptions.alpha_zero,
+        // DefaultOptions.beta_zero,
+        // q0_Path_selection_parameters,
+        // PheromoneZeroMatrix,
+        // DefaultOptions.local_pheromone_volatilization_coefficient,
+        // DefaultOptions.global_pheromone_volatilization_coefficient,
+        random_next_point_selector  );
     // console.log(path);
 
     assert(path.length >= 3);
