@@ -1,6 +1,6 @@
 <template>
     <div :class="{ 'container-top': navbar_float }">
-        <Progress-element
+        <ProgressElement
             :class="{ 'fixed-top-navbar': navbar_float }"
             :percentage="percentage"
             :indeterminate="indeterminate"
@@ -15,7 +15,7 @@
         <hr />
         <!-- <span>当前地图:{{ selected_value }}</span> -->
         <br />
-        <GridMapSelector></GridMapSelector>
+        <GridMapSelector :options="GridMapSelectorOptions"></GridMapSelector>
         <!-- <select
             v-model="selected_value"
             ref="selecteleref"
@@ -41,12 +41,12 @@
             >
                 <summary>全局最优路径的展示</summary>
                 <!-- 全局最优解的图 -->
-                <LineChart
+                <!-- <LineChart
                     v-if="show_routes_of_best"
                     class="single-chart"
                     style=""
                     :options="options_of_best_route_chart"
-                ></LineChart>
+                ></LineChart> -->
             </details>
 
             <!-- 最近一条路径的图 -->
@@ -246,7 +246,7 @@
         <hr />
 
         <!-- //汇总结果 -->
-        <Data-table
+        <DataTable
             style="margin: 0 auto"
             title="最优解的统计"
             :tableheads="summary_best_TableHeads"
@@ -254,7 +254,7 @@
         />
         <!-- 拆分表格 -->
         <hr />
-        <Data-table
+        <DataTable
             style="margin: 0 auto"
             title="总体的统计"
             :tableheads="summary_total_TableHeads"
@@ -267,7 +267,7 @@
             @toggle="show_summary_of_similarity = $event.target.open"
         >
             <summary>总体的相似度和种群交流的方式</summary>
-            <Data-table
+            <DataTable
                 style="margin: 0 auto"
                 title="总体的相似度和种群交流的方式"
                 :tableheads="similarityOfAllPopulationsTableHeads"
@@ -284,7 +284,7 @@
             @toggle="show_array_routes_of_best = $event.target.open"
         >
             <summary>最优路径的数组展示</summary>
-            <Data-table
+            <DataTable
                 style="margin: 0 auto"
                 title="全局最优路径"
                 :tableheads="global_best_routeHeads"
@@ -299,7 +299,7 @@
             @toggle="show_history_routes_of_best = $event.target.open"
         >
             <summary>最优路径的变化历史</summary>
-            <Data-table
+            <DataTable
                 style="margin: 0 auto"
                 title="最优路径的变化"
                 :tableheads="TableHeadsOfHistoryOfBest"
@@ -308,7 +308,7 @@
             <hr />
         </details>
 
-        <Data-table
+        <DataTable
             style="margin: 0 auto"
             title="贪心路径统计"
             :tableheads="greedy_iteration_table_heads"
@@ -325,7 +325,7 @@
         >
             <summary>每次迭代的统计</summary>
             <!-- 迭代结果 -->
-            <Data-table
+            <DataTable
                 v-if="显示每次迭代的统计"
                 style="margin: 0 auto"
                 title="每次迭代的统计"

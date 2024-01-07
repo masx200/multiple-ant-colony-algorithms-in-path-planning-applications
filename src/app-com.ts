@@ -1,3 +1,4 @@
+import { ECBasicOption } from "echarts/types/dist/shared";
 import {
     computed,
     defineComponent,
@@ -5,29 +6,34 @@ import {
     reactive,
     readonly,
     ref,
+    Ref,
     watch,
 } from "vue";
 import { MultiPopulationOutput } from "../classic-acs/MultiPopulationOutput";
 import { MultiPopulationSchedulerRemote } from "../classic-acs/MultiPopulationSchedulerRemote";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
+import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions.ts";
 import GridMapSelector from "../path-planning/GridMapSelector.vue";
 import { assert_number } from "../test/assert_number";
-import Data_table from "./Data_table.vue";
+import DataTable from "./Data_table.vue";
 import {
     default_search_rounds,
     default_search_time_seconds,
     DefaultOptions,
 } from "./default_Options";
 import { 迭代次数和相对信息熵 } from "./get_options_iterations_and_information_entropy_chart";
-import { 迭代次数和迭代最优路径长度 } from "./get_options_route_number_and_best_length_chart";
+import {
+    get_options_route_number_and_best_length_chart,
+    迭代次数和迭代最优路径长度,
+} from "./get_options_route_number_and_best_length_chart";
 import { 迭代次数和迭代平均路径长度 } from "./get_options_route_number_and_current_length_chart";
-import { get_options_route_of_node_coordinates } from "./get_options_route_of_node_coordinates";
 import { 迭代次数和种群相似度 } from "./getOptionsOfIterationsAndPopulationSimilarityChart";
 import { 迭代次数和迭代最差路径长度 } from "./getOptionsOfRouteNumberAndBestLengthChartOfIndividualPopulations";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
+import { GridMapSelectorOptions } from "./GridMapSelectorOptions.ts";
+// import { NodeCoordinates } from "../functions/NodeCoordinates";
 import LineChart from "./LineChart.vue";
 import MultiplePopulationsConfigs from "./multiple-populations-configs.vue";
-import Progress_element from "./Progress-element.vue";
+import ProgressElement from "./Progress-element.vue";
 import { run_tsp_by_search_time } from "./run_tsp_by_search_time";
 import { run_tsp_by_search_rounds } from "./run_tsp-by-search-rounds";
 import { RunWay } from "./RunWay";
@@ -44,36 +50,33 @@ import { useDateOfPopulationCommunication } from "./useDateOfPopulationCommunica
 import { useOptionsOfIterationsAndInformationEntropyChart } from "./useOptionsOfIterationsAndInformationEntropyChart";
 import { useOptionsOfRoutesAndRouteLengthChart } from "./useOptionsOfRoutesAndRouteLengthChart";
 
-// import {
-// TSP_cities_map
-// } from "./TSP_cities_map";
 
 export const 迭代次数和全局最优路径长度 = "迭代次数和全局最优路径长度";
 export default defineComponent({
     components: {
         GridMapSelector,
         MultiplePopulationsConfigs,
-        "Data-table": Data_table,
-        "Progress-element": Progress_element,
+        DataTable: DataTable,
+        ProgressElement: ProgressElement,
         LineChart,
     },
     setup() {
-        // const optionsOfIterationAndGlobalBestLength = computed<ECBasicOption>(
-        //     () => {
-        //         const IterationDataOfIndividualPopulations =
-        //             IterationDataOfIndividualPopulationsRef.value;
-        //         const title_text = 迭代次数和全局最优路径长度;
-        //         const datas: [number, number][][] =
-        //             IterationDataOfIndividualPopulations.map((a) =>
-        //                 a.map((d, i) => [i + 1, d.global_best_length]),
-        //             );
-        //         return createMultipleLinesChartOptions({
-        //             yAxis_min: 0,
-        //             title_text,
-        //             datas: datas,
-        //         });
-        //     },
-        // );
+        const optionsOfIterationAndGlobalBestLength = computed<ECBasicOption>(
+            () => {
+                const IterationDataOfIndividualPopulations =
+                    IterationDataOfIndividualPopulationsRef.value;
+                const title_text = 迭代次数和全局最优路径长度;
+                const datas: [number, number][][] =
+                    IterationDataOfIndividualPopulations.map((a) =>
+                        a.map((d, i) => [i + 1, d.global_best_length]),
+                    );
+                return createMultipleLinesChartOptions({
+                    yAxis_min: 0,
+                    title_text,
+                    datas: datas,
+                });
+            },
+        );
         const count_of_populations = computed(
             () =>
                 input_options.number_of_the_second_type_of_population +
@@ -109,7 +112,7 @@ export default defineComponent({
             IterationDataOfIndividualPopulationsRef,
         );
         // const selected_value = ref(TSP_cities_data[0]);
-        const selected_node_coordinates = ref<NodeCoordinates>();
+        // const selected_node_coordinates = ref<NodeCoordinates>();
 
         const input_options = reactive(structuredClone(DefaultOptions));
 
@@ -239,18 +242,18 @@ export default defineComponent({
 
         // const options_of_best_route_chart: Ref<ECBasicOption> = ref({});
 
-        // const optionsOfIterationAndIterationBestLength: Ref<ECBasicOption> =
-        //     computed(() => {
-        //         return get_options_route_number_and_best_length_chart(
-        //             IterationDataOfIndividualPopulationsRef.value,
-        //         );
-        //     });
+        const optionsOfIterationAndIterationBestLength: Ref<ECBasicOption> =
+            computed(() => {
+                return get_options_route_number_and_best_length_chart(
+                    IterationDataOfIndividualPopulationsRef.value,
+                );
+            });
         const submit = async () => {
             // const options = await generate_greedy_preview_echarts_options({
             //     selected_node_coordinates,
             //     selecteleref,
             // });
-            options_of_best_route_chart.value = options;
+            // options_of_best_route_chart.value = options;
         };
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {
@@ -275,16 +278,15 @@ export default defineComponent({
         });
 
         const onGlobal_best_routeChange = (route: number[]) => {
-            const node_coordinates = selected_node_coordinates.value;
-            if (!node_coordinates) {
-                return;
-            }
-
-            const options = get_options_route_of_node_coordinates({
-                route,
-                node_coordinates,
-            });
-            options_of_best_route_chart.value = options;
+            // const node_coordinates = selected_node_coordinates.value;
+            // if (!node_coordinates) {
+            //     return;
+            // }
+            // const options = get_options_route_of_node_coordinates({
+            //     route,
+            //     node_coordinates,
+            // });
+            // options_of_best_route_chart.value = options;
         };
         // onMounted(() => {
         //     watch(dataOfAllIterations, () => {
@@ -481,7 +483,7 @@ export default defineComponent({
             similarityOfAllPopulationsTableHeads,
             show_routes_of_best,
             show_summary_of_routes,
-            options_of_best_route_chart,
+            // options_of_best_route_chart,
             navbar_float,
             show_chart_of_best_individual,
             run_way_round,
@@ -497,7 +499,7 @@ export default defineComponent({
             stop_handler,
             global_best_routeBody,
             global_best_routeHeads,
-
+            // GridMapSelectorOptions
             is_running,
             options_of_iterations_and_information_entropy_chart,
             resethandler: resethandler,
@@ -520,6 +522,7 @@ export default defineComponent({
             optionsOfIterationAndIterationBestLength,
             迭代次数和迭代最差路径长度,
             迭代次数和相对信息熵,
+            GridMapSelectorOptions,
         };
     },
 });

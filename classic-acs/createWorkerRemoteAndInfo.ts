@@ -1,9 +1,7 @@
-// import {
-create_TSP_Worker_comlink
-} from "../src/create_TSP_Worker_comlink";
+import { NodeCoordinates } from "../functions/NodeCoordinates";
+import { create_TSP_Worker_comlink } from "../src/create_TSP_Worker_comlink";
 import { TSPDefaultOptions } from "../src/TSPRunnerOptions";
 import { WorkerRemoteAndInfo } from "./MultiPopulationSchedulerCreate";
-
 
 export async function createWorkerRemoteAndInfo(
     number_of_populations_of_the_first_category: number,
