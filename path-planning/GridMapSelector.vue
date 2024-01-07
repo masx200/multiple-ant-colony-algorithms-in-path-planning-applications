@@ -1,12 +1,14 @@
 <template>
-    <div>
+    <div style="width: 100%">
         <el-select
+            style="width: 100%"
             :disabled="disabled"
             :value="value"
             v-model="value"
             class="m-2"
             placeholder="Select"
             size="large"
+            @change="handleChange"
         >
             <el-option
                 v-for="item in options"
@@ -26,4 +28,10 @@ const { options, disabled } = defineProps<
 >();
 
 const value = defineModel<string>();
+
+const emit = defineEmits<{ change: [value: any] }>();
+
+function handleChange(value: string) {
+    emit("change", value);
+}
 </script>

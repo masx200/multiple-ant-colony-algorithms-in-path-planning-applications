@@ -1,11 +1,13 @@
 import { GridMap } from "./grid-map.ts";
 
+
 /**
  * 绘制地图
  * @param gridMap - 网格地图对象
  * @param canvas - HTMLCanvasElement对象
  */
 export function drawMap(gridMap: GridMap, canvas: HTMLCanvasElement) {
+    if (gridMap.column === 0 || gridMap.row === 0) return;
     // console.log(gridMap.data.toReversed());
     const ctx = canvas.getContext("2d");
 

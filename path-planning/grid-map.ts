@@ -1,5 +1,6 @@
 import { assert } from "chai";
 
+
 export class GridMap {
     //判断指定单元格是否是障碍物
     /**
@@ -70,10 +71,10 @@ export class GridMap {
             .fill(0)
             .map(() => Array(row).fill(0)),
     ) {
-        assert.isAtLeast(column, 1);
-        assert.isAtLeast(row, 1);
+        assert.isAtLeast(column, 0);
+        assert.isAtLeast(row, 0);
         assert.equal(data.length, column);
-        assert.equal(data[0].length, row);
+        assert.equal(data[0]?.length ?? 0, row);
         this.data = Array.from(data.map((a) => [...a]));
     }
 }

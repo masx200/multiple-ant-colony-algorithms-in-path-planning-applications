@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { effect, onMounted, ref } from "vue";
+import { effect, onMounted, ref, watch } from "vue";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { drawGridlines } from "./drawGridlines.ts";
 import { drawMap } from "./drawGridMap";
@@ -19,6 +19,7 @@ import { drawMouseCoordinatesText } from "./drawdisplayMouseCoordinates";
 import { debounce } from "lodash-es";
 import { clearCanvas } from "./clearCanvas";
 import { draw_PointsInsideAllConvexPolygons } from "./draw_PointsInsideAllConvexPolygons";
+import { debounce_animation_frame } from "../src/debounce_animation_frame";
 // const { width, height } = useElementSize(document.body);
 
 const props = defineProps<
@@ -34,7 +35,6 @@ const props = defineProps<
 >();
 const windowSize = useWindowSize();
 const grid_map_canvas = ref<HTMLCanvasElement>();
-const gridMap = props.map ? GridMapFromArray(props.map) : undefined;
 
 onMounted(() => {
     render();
@@ -47,41 +47,49 @@ onMounted(() => {
 });
 const mousePositionInElement = useMouseInElement(grid_map_canvas);
 
-const render = debounce(function render() {
-    const route: [number, number][] | undefined = props.route;
-    const canvas = grid_map_canvas.value;
-    if (canvas) {
-        clearCanvas(canvas);
-        if (gridMap) drawMap(gridMap, canvas);
+const render = debounce_animation_frame(
+    debounce(function render() {
+        const route: [number, number][] | undefined = props.route;
+        const canvas = grid_map_canvas.value;
+        if (canvas) {
+            clearCanvas(canvas);
+            const gridMap = props.map ? GridMapFromArray(props.map) : undefined;
+            if (gridMap) drawMap(gridMap, canvas);
 
-        const row = gridMap?.row ?? props.row;
-        const column = gridMap?.column ?? props.column;
-        if (props.grid && row && column) drawGridlines(column, row, canvas);
+            const row = gridMap?.row ?? props.row;
+            const column = gridMap?.column ?? props.column;
+            if (props.grid && row && column) drawGridlines(column, row, canvas);
 
-        if (props.pointsInsideAllConvexPolygons && row && column) {
-            draw_PointsInsideAllConvexPolygons(
-                column,
-                row,
-                canvas,
-                props.pointsInsideAllConvexPolygons,
-            );
+            if (props.pointsInsideAllConvexPolygons && row && column) {
+                draw_PointsInsideAllConvexPolygons(
+                    column,
+                    row,
+                    canvas,
+                    props.pointsInsideAllConvexPolygons,
+                );
+            }
+            if (route && row && column) {
+                drawGridRoute(route, canvas, column, row);
+            }
+            if (
+                props.label &&
+                mousePositionInElement.isOutside.value === false &&
+                row &&
+                column
+            )
+                drawMouseCoordinatesText(
+                    canvas,
+                    {
+                        x: mousePositionInElement.elementX.value,
+                        y: mousePositionInElement.elementY.value,
+                    },
+                    column,
+                    row,
+                );
         }
-        if (route && row && column) {
-            drawGridRoute(route, canvas, column, row);
-        }
-        if (mousePositionInElement.isOutside.value === false && row && column)
-            drawMouseCoordinatesText(
-                canvas,
-                {
-                    x: mousePositionInElement.elementX.value,
-                    y: mousePositionInElement.elementY.value,
-                },
-                column,
-                row,
-            );
-    }
-});
-
+    }),
+);
+watch(() => props, render);
 effect(() => {
     const canvas = grid_map_canvas.value;
     if (canvas) {

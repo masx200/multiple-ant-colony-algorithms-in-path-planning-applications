@@ -9,9 +9,11 @@ import {
     Ref,
     watch,
 } from "vue";
+import allGridMaps from "../all-grid-maps/index.ts";
 import { MultiPopulationOutput } from "../classic-acs/MultiPopulationOutput";
 import { MultiPopulationSchedulerRemote } from "../classic-acs/MultiPopulationSchedulerRemote";
 import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions.ts";
+import drawGridMapAndRoute from "../path-planning/drawGridMapAndRoute.vue";
 import GridMapSelector from "../path-planning/GridMapSelector.vue";
 import { assert_number } from "../test/assert_number";
 import DataTable from "./Data_table.vue";
@@ -54,6 +56,7 @@ import { useOptionsOfRoutesAndRouteLengthChart } from "./useOptionsOfRoutesAndRo
 export const 迭代次数和全局最优路径长度 = "迭代次数和全局最优路径长度";
 export default defineComponent({
     components: {
+        drawGridMapAndRoute,
         GridMapSelector,
         MultiplePopulationsConfigs,
         DataTable: DataTable,
@@ -111,7 +114,7 @@ export default defineComponent({
         } = useOptionsOfRoutesAndRouteLengthChart(
             IterationDataOfIndividualPopulationsRef,
         );
-        // const selected_value = ref(TSP_cities_data[0]);
+        const selected_grid_map_value = ref<string>("");
         // const selected_node_coordinates = ref<NodeCoordinates>();
 
         const input_options = reactive(structuredClone(DefaultOptions));
@@ -240,7 +243,7 @@ export default defineComponent({
         const count_of_ants_ref = computed(() => input_options.count_of_ants);
         // const selecteleref = ref<HTMLSelectElement>();
 
-        // const options_of_best_route_chart: Ref<ECBasicOption> = ref({});
+        // const options_of_best_route_map: Ref<ECBasicOption> = ref({});
 
         const optionsOfIterationAndIterationBestLength: Ref<ECBasicOption> =
             computed(() => {
@@ -248,12 +251,27 @@ export default defineComponent({
                     IterationDataOfIndividualPopulationsRef.value,
                 );
             });
+
+        const selected_grid_map_scale = ref(0);
         const submit = async () => {
+            const getMap = allGridMaps[selected_grid_map_value.value];
+
+            if (!getMap) return;
+            const mapData = await getMap();
             // const options = await generate_greedy_preview_echarts_options({
             //     selected_node_coordinates,
             //     selecteleref,
             // });
-            // options_of_best_route_chart.value = options;
+            const options = mapData?.map ?? [];
+            options_of_best_route_map.value = options;
+            // console.log(
+            //     allGridMaps,
+            //     selected_grid_map_value.value,
+            //     allGridMaps[selected_grid_map_value.value],
+            //     mapData,
+            //     options,
+            // );
+            selected_grid_map_scale.value = mapData.scale;
         };
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {
@@ -286,7 +304,7 @@ export default defineComponent({
             //     route,
             //     node_coordinates,
             // });
-            // options_of_best_route_chart.value = options;
+            // options_of_best_route_map.value = options;
         };
         // onMounted(() => {
         //     watch(dataOfAllIterations, () => {
@@ -447,15 +465,18 @@ export default defineComponent({
         const max_routes_of_greedy = computed(
             () => input_options.max_routes_of_greedy,
         );
+        const options_of_best_route_map = ref([]);
         // const 显示每次迭代的统计 = ref(false);
         return {
+            options_of_best_route_map,
+            selected_grid_map_scale,
             显示每次迭代的统计,
             optionsOfIterationAndGlobalBestLength,
             show_chart_of_best2,
             迭代次数和迭代最优路径长度,
             迭代次数和种群相似度,
             迭代次数和迭代平均路径长度,
-            // selected_value,
+            selected_grid_map_value,
             show_history_routes_of_best,
             similarityOfAllPopulationsHistoryRef,
             迭代次数和全局最优路径长度,
@@ -483,7 +504,7 @@ export default defineComponent({
             similarityOfAllPopulationsTableHeads,
             show_routes_of_best,
             show_summary_of_routes,
-            // options_of_best_route_chart,
+            // options_of_best_route_map,
             navbar_float,
             show_chart_of_best_individual,
             run_way_round,

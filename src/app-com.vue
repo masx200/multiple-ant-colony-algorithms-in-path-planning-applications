@@ -13,11 +13,19 @@
         <span>选择城市地图</span>
         <br />
         <hr />
-        <!-- <span>当前地图:{{ selected_value }}</span> -->
+        <span>当前地图:{{ selected_grid_map_value }}</span>
+
         <br />
-        <GridMapSelector :options="GridMapSelectorOptions"></GridMapSelector>
+        <span>当前规模:{{ selected_grid_map_scale }}</span>
+        <hr />
+        <GridMapSelector
+            v-model="selected_grid_map_value"
+            :disabled="disable_switching"
+            :options="GridMapSelectorOptions"
+            @change="submit_select_node_coordinates"
+        ></GridMapSelector>
         <!-- <select
-            v-model="selected_value"
+            v-model="selected_grid_map_value"
             ref="selecteleref"
             :disabled="disable_switching"
             @change="submit_select_node_coordinates"
@@ -40,12 +48,20 @@
                 @toggle="show_routes_of_best = $event.target.open"
             >
                 <summary>全局最优路径的展示</summary>
+                <drawGridMapAndRoute
+                    v-if="show_routes_of_best"
+                    class="single-chart"
+                    style=""
+                    :map="options_of_best_route_map"
+                    :grid="true"
+                    :label="true"
+                ></drawGridMapAndRoute>
                 <!-- 全局最优解的图 -->
                 <!-- <LineChart
                     v-if="show_routes_of_best"
                     class="single-chart"
                     style=""
-                    :options="options_of_best_route_chart"
+                    :options="options_of_best_route_map"
                 ></LineChart> -->
             </details>
 
