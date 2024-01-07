@@ -63,6 +63,7 @@
                     :map="options_of_best_route_map"
                     :grid="true"
                     :label="true"
+                    :route="options_of_best_route_route"
                 ></drawGridMapAndRoute>
             </details>
 

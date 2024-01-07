@@ -295,7 +295,8 @@ export default defineComponent({
             await submit_select_node_coordinates();
         });
 
-        const onGlobal_best_routeChange = (route: number[]) => {
+        function onGlobal_best_routeChange(global_best_route: number[][]) {
+            options_of_best_route_route.value = global_best_route;
             // const node_coordinates = selected_node_coordinates.value;
             // if (!node_coordinates) {
             //     return;
@@ -305,7 +306,7 @@ export default defineComponent({
             //     node_coordinates,
             // });
             // options_of_best_route_map.value = options;
-        };
+        }
         // onMounted(() => {
         //     watch(dataOfAllIterations, () => {
         //         data_change_listener();
@@ -465,9 +466,15 @@ export default defineComponent({
         const max_routes_of_greedy = computed(
             () => input_options.max_routes_of_greedy,
         );
-        const options_of_best_route_map = ref([]);
+        const options_of_best_route_map: Ref<number[][]> = ref<
+            Array<Array<number>>
+        >([]);
+        const options_of_best_route_route: Ref<number[][]> = ref<
+            Array<Array<number>>
+        >([]);
         // const 显示每次迭代的统计 = ref(false);
         return {
+            options_of_best_route_route,
             options_of_best_route_map,
             selected_grid_map_scale,
             显示每次迭代的统计,
