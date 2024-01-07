@@ -1,8 +1,10 @@
-import { similarityOfTwoRoutes } from "./similarityOfTwoRoutes";
 import { assert_true } from "../test/assert_true";
+import { similarityOfTwoRoutes } from "./similarityOfTwoRoutes";
+
+
 export function similarityOfMultipleRoutes(
-    routes: number[][],
-    bestRoute: number[],
+    routes: number[][][],
+    bestRoute: number[][],
 ): number {
     assert_true(routes.every((r) => r.length === bestRoute.length));
     return (
