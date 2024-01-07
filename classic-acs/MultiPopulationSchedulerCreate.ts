@@ -1,17 +1,17 @@
-import { zip } from "lodash-es";
-import { extractCommonRoute } from "../common/extractCommonRoute";
-import { generateUniqueArrayOfCircularPath } from "../functions/generateUniqueArrayOfCircularPath";
-import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
+import { COMMON_DataOfOneIteration, COMMON_TSP_Output } from "./tsp-interface";
+
 import { CommunicationStrategy } from "../src/CommunicationStrategy";
 import { DefaultOptions } from "../src/default_Options";
-import { TSP_Worker_Remote } from "../src/TSP_Worker_Remote";
-import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
-import { initializeRemoteWorkers } from "./initializeRemoteWorkers";
 import { MultiPopulationOutput } from "./MultiPopulationOutput";
 import { MultiPopulationScheduler } from "./MultiPopulationScheduler";
 import { ProbabilityOfPerformingTheFirstCommunication } from "./ProbabilityOfPerformingTheFirstCommunication";
-import { COMMON_DataOfOneIteration, COMMON_TSP_Output } from "./tsp-interface";
-
+import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
+import { TSP_Worker_Remote } from "../src/TSP_Worker_Remote";
+import { extractCommonRoute } from "../common/extractCommonRoute";
+import { generateUniqueArrayOfCircularPath } from "../functions/generateUniqueArrayOfCircularPath";
+import { initializeRemoteWorkers } from "./initializeRemoteWorkers";
+import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
+import { zip } from "lodash-es";
 
 export type WorkerRemoteAndInfo = TSP_Worker_Remote["remote"] & {
     ClassOfPopulation: string;
@@ -123,11 +123,11 @@ export async function MultiPopulationSchedulerCreate(
     }
     const global_best: {
         length: number;
-        route: number[][];
+        route: number[];
     } = { length: Infinity, route: [] };
 
     async function DetermineWhetherToPerformMultiPopulationCommunication(
-        routesAndLengths: { length: number; route: number[][] }[],
+        routesAndLengths: { length: number; route: number[] }[],
         latestIterateBestRoutesInPeriod: number[][],
     ) {
         if (remoteWorkers.length > 1) {
@@ -169,7 +169,7 @@ export async function MultiPopulationSchedulerCreate(
     function getBestRoute() {
         return global_best.route;
     }
-    function set_global_best(route: number[][], length: number) {
+    function set_global_best(route: number[], length: number) {
         if (length < global_best.length) {
             const formatted_route = generateUniqueArrayOfCircularPath(route);
 
@@ -179,7 +179,7 @@ export async function MultiPopulationSchedulerCreate(
             search_count_of_best = current_search_count + 1;
         }
     }
-    function onRouteCreated(route: number[][], length: number) {
+    function onRouteCreated(route: number[], length: number) {
         if (length < getBestLength()) {
             set_global_best(route, length);
         }
@@ -438,7 +438,7 @@ async function CallSecondCommunication(
     HistoryOfTheWayPopulationsCommunicate: WayPopulationsCommunicate[],
     remoteWorkers: WorkerRemoteAndInfo[],
     lengths: number[],
-    getBestRoute: () => number[][],
+    getBestRoute: () => number[],
     getBestLength: () => number,
 ) {
     HistoryOfTheWayPopulationsCommunicate.push("提高收敛速度");

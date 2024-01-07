@@ -1,6 +1,5 @@
 import { COMMON_TSP_Output } from "./tsp-interface";
 
-
 export interface CommonTspRunner {
     getTimeOfBest(): number;
     getSearchCountOfBest(): number;
@@ -11,5 +10,5 @@ export interface CommonTspRunner {
     getCurrentSearchCount(): number;
     getBestLength: () => number;
     getTotalTimeMs: () => number;
-    getBestRoute: () => number[][];
+    getBestRoute: () => number[];
 }
