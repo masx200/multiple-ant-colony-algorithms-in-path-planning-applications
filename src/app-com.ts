@@ -408,7 +408,16 @@ export default defineComponent({
             const count_of_ants_value = count_of_ants_ref.value;
             // const element = selecteleref.value;
             // const node_coordinates = TSP_cities_map.get(element?.value || "");
+            const getMap = allGridMaps[selected_grid_map_value.value];
 
+            if (!getMap) throw Error("no map");
+            const mapData = await getMap();
+            // const options = await generate_greedy_preview_echarts_options({
+            //     selected_node_coordinates,
+            //     selecteleref,
+            // });
+            const options = mapData?.map ?? [];
+            const node_coordinates = options;
             const alpha_value = alpha_zero.value;
             const max_routes_of_greedy_value = max_routes_of_greedy.value;
             const beta_value = beta_zero.value;
@@ -432,7 +441,7 @@ export default defineComponent({
                     alpha_zero: alpha_value,
                     beta_zero: beta_value,
 
-                    node_coordinates: await node_coordinates(),
+                    node_coordinates: node_coordinates,
                     count_of_ants,
                 });
 
