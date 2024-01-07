@@ -48,6 +48,14 @@
                 @toggle="show_routes_of_best = $event.target.open"
             >
                 <summary>全局最优路径的展示</summary>
+
+                <!-- 全局最优解的图 -->
+                <!-- <LineChart
+                    v-if="show_routes_of_best"
+                    class="single-chart"
+                    style=""
+                    :options="options_of_best_route_map"
+                ></LineChart> -->
                 <drawGridMapAndRoute
                     v-if="show_routes_of_best"
                     class="single-chart"
@@ -56,13 +64,6 @@
                     :grid="true"
                     :label="true"
                 ></drawGridMapAndRoute>
-                <!-- 全局最优解的图 -->
-                <!-- <LineChart
-                    v-if="show_routes_of_best"
-                    class="single-chart"
-                    style=""
-                    :options="options_of_best_route_map"
-                ></LineChart> -->
             </details>
 
             <!-- 最近一条路径的图 -->
@@ -370,7 +371,7 @@
     left: 0;
 }
 .single-chart {
-    min-height: 300px;
+    min-height: 700px;
     max-width: 100%;
     width: 100%;
     min-width: 300px;
@@ -415,7 +416,7 @@
 /* 大于600 */
 @media screen and (min-width: 600px) {
     .single-chart {
-        max-height: 600px;
+        max-height: 700px;
     }
 }
 /* 大于1000 */
