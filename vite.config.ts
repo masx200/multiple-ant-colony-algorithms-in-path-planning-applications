@@ -14,7 +14,6 @@ import checker from "vite-plugin-checker";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { VitePWA } from "vite-plugin-pwa";
 
-
 export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
     const isdrop = mode === "production" && command === "build";
     const config: UserConfig = {

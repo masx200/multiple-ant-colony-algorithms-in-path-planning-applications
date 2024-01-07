@@ -24,9 +24,7 @@ dependencies:
   '@masx200/rollup-plugin-http-resolve':
     specifier: ^5.0.2
     version: 5.0.2
-  '@masx200/tsp-lib-test-data':
-    specifier: ^2.0.1
-    version: 2.0.1
+
   '@masx200/weighted-randomly-select':
     specifier: ^2.1.1
     version: 2.1.1
@@ -1812,9 +1810,6 @@ packages:
     resolution: {integrity: sha512-ivte+bl/CTYiwutUYx6AN+2pP5HP7z7WuqRsVibu4Q7X1nITwnvH5GeMDV4K8SlCM1tTe6scFcY+4paRPRpSSA==}
     dev: true
 
-  /@masx200/tsp-lib-test-data@2.0.1:
-    resolution: {integrity: sha512-BPHdekgg8+ddLtV5/J7RhY/fN9hyuzH2NmR/65IXUjjB7c6T/yPqDxC/YMnaH9bVjJfkxLraH60FUgTFCCQV8Q==}
-    dev: false
 
   /@masx200/universal-thread-pool@1.0.6:
     resolution: {integrity: sha512-w5z3jvZhD53G0FUNDEBB34YPtjW7CmrhNU95eMiBcRFL/HWVtBhRMu7WDkURIRkYQDTkT7XyIXGIEkz3mLA3Vg==}

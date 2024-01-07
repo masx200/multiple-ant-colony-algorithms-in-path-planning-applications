@@ -1,7 +1,10 @@
 import { TSPDefaultOptions } from "../src/TSPRunnerOptions";
 import { createWorkerRemoteAndInfo } from "./createWorkerRemoteAndInfo";
-import { NodeCoordinates } from "@masx200/tsp-lib-test-data";
-import { WorkerRemoteAndInfo } from "./MultiPopulationSchedulerCreate";
+
+
+// import {
+WorkerRemoteAndInfo
+} from "./MultiPopulationSchedulerCreate";
 
 export async function initializeRemoteWorkers(
     number_of_populations_of_the_first_category: number,

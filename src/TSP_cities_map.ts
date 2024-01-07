@@ -1,10 +1,9 @@
-import {
-    getDimension,
-    getNames,
-    getNodeCoordinates,
-} from "@masx200/tsp-lib-test-data";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
+// import {
+NodeCoordinates
+} from "../functions/NodeCoordinates";
 import { assert_true } from "../test/assert_true";
+
+
 const TSP_cords: Record<string, () => Promise<NodeCoordinates>> =
     Object.fromEntries(
         getNames()

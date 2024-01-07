@@ -44,7 +44,6 @@ import { useDateOfPopulationCommunication } from "./useDateOfPopulationCommunica
 import { useOptionsOfIterationsAndInformationEntropyChart } from "./useOptionsOfIterationsAndInformationEntropyChart";
 import { useOptionsOfRoutesAndRouteLengthChart } from "./useOptionsOfRoutesAndRouteLengthChart";
 
-
 // import {
 // TSP_cities_map
 // } from "./TSP_cities_map";
