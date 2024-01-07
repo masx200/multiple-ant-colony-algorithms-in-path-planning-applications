@@ -1,5 +1,5 @@
 <template>
-    <canvas id="grid-map-canvas" ref="grid_map_canvas"></canvas>
+    <div><canvas id="grid-map-canvas" ref="grid_map_canvas"></canvas></div>
 </template>
 
 <script setup lang="ts">

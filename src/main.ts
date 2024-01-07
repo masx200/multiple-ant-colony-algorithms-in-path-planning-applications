@@ -3,9 +3,9 @@ import "./style.css";
 
 import { createApp, h } from "vue";
 // import appcom from "../path-planning/show-drawGridMap-PointsInsideAllConvexPolygons-test-3.vue";
-import appcom from "./app-com.vue"
+import appcom from "./app-com.vue";
 
-
+// import AllGridMap from "../all-grid-maps/index.ts";
 // import appcom from "../path-planning/search-drawGridMap-test-random-reverse.vue";
 
 // import appcom from "../path-planning/search-drawGridMap-test-greedy.vue";
@@ -19,3 +19,4 @@ export const app = createApp({
         return h(appcom);
     },
 });
+// console.log(AllGridMap);

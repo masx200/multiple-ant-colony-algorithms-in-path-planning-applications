@@ -6,7 +6,9 @@
             :indeterminate="indeterminate"
         />
         <!-- v-show="show_progress" -->
-        <h1>多种群:自适应+蚁群+k-opt+动态计算信息素-TSP-测试+种群相似度</h1>
+        <h1>
+            多种群路径规划:自适应+蚁群+k-opt+动态计算信息素-TSP-测试+种群相似度
+        </h1>
         <hr />
         <span>选择城市地图</span>
         <br />
@@ -28,6 +30,37 @@
             </option>
         </select>
         <br />
+
+        <hr />
+        <div class="chart-container" style="">
+            <details
+                class="width-100-percent"
+                :open="show_routes_of_best"
+                @toggle="show_routes_of_best = $event.target.open"
+            >
+                <summary>全局最优路径的展示</summary>
+                <!-- 全局最优解的图 -->
+                <LineChart
+                    v-if="show_routes_of_best"
+                    class="single-chart"
+                    style=""
+                    :options="options_of_best_route_chart"
+                ></LineChart>
+            </details>
+
+            <!-- 最近一条路径的图 -->
+        </div>
+        <hr />
+        <div>
+            <span v-text="'进度:'"></span> <span> {{ percentage }}%</span>
+        </div>
+
+        <!-- <el-switch
+            v-model="show_progress"
+            active-text="Open"
+            inactive-text="Close"
+        /> -->
+        <hr />
         <el-row>
             <el-col :span="12"
                 ><el-button @click="resethandler"> 重置 </el-button><br
@@ -39,15 +72,6 @@
             >
         </el-row>
 
-        <hr />
-        <span v-text="'进度:'"></span>
-        <span> {{ percentage }}%</span>
-        <!-- <el-switch
-            v-model="show_progress"
-            active-text="Open"
-            inactive-text="Close"
-        /> -->
-        <hr />
         <div>
             <span>显示每次迭代的统计</span>
             <el-radio-group
@@ -126,26 +150,7 @@
                 :disabled="!can_run || is_running"
             />
         </div>
-        <hr />
 
-        <div class="chart-container" style="">
-            <details
-                class="width-100-percent"
-                :open="show_routes_of_best"
-                @toggle="show_routes_of_best = $event.target.open"
-            >
-                <summary>全局最优路径的展示</summary>
-                <!-- 全局最优解的图 -->
-                <LineChart
-                    v-if="show_routes_of_best"
-                    class="single-chart"
-                    style=""
-                    :options="options_of_best_route_chart"
-                ></LineChart>
-            </details>
-
-            <!-- 最近一条路径的图 -->
-        </div>
         <hr />
         <details
             class="width-100-percent"
