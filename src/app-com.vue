@@ -13,9 +13,10 @@
         <span>选择城市地图</span>
         <br />
         <hr />
-        <span>当前地图:{{ selected_value }}</span>
+        <!-- <span>当前地图:{{ selected_value }}</span> -->
         <br />
-        <select
+        <GridMapSelector></GridMapSelector>
+        <!-- <select
             v-model="selected_value"
             ref="selecteleref"
             :disabled="disable_switching"
@@ -28,7 +29,7 @@
             >
                 {{ item }}
             </option>
-        </select>
+        </select> -->
         <br />
 
         <hr />

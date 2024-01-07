@@ -14,6 +14,7 @@ import checker from "vite-plugin-checker";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { VitePWA } from "vite-plugin-pwa";
 
+
 export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
     const isdrop = mode === "production" && command === "build";
     const config: UserConfig = {
@@ -62,7 +63,12 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
             }),
 
             ElementPlus({}),
-            vuePlugin(),
+            vuePlugin({
+                script: {
+                    // 开启defineModel
+                    defineModel: true,
+                },
+            }),
 
             babel({
                 babelHelpers: "bundled",
