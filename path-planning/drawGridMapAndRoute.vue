@@ -93,16 +93,30 @@ watch(() => props, render);
 effect(() => {
     const canvas = grid_map_canvas.value;
     if (canvas) {
+        var width = (windowSize.width.value + window.innerWidth) / 2;
+        var height = (windowSize.height.value + window.innerHeight) / 2;
+        const gridMap = props.map ? GridMapFromArray(props.map) : undefined;
+
+        if (gridMap) {
+            const cellSize = Math.min(
+                height / gridMap.column,
+                width / gridMap.row,
+            );
+
+            canvas.width = cellSize * gridMap.row;
+            canvas.height = cellSize * gridMap.column;
+        } else {
+            canvas.width =
+                /* width.value + */
+
+                (windowSize.width.value + window.innerWidth) / 2;
+            canvas.height =
+                /* height.value + */
+
+                (windowSize.height.value + window.innerHeight) / 2;
+        }
         // console.log(width.value, windowSize.width.value, window.innerWidth);
         // console.log(height.value, windowSize.height.value, window.innerHeight);
-        canvas.width =
-            /* width.value + */
-
-            (windowSize.width.value + window.innerWidth) / 2;
-        canvas.height =
-            /* height.value + */
-
-            (windowSize.height.value + window.innerHeight) / 2;
 
         render();
     }
