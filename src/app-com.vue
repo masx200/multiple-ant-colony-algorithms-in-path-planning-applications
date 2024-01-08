@@ -14,8 +14,9 @@
         <br />
         <hr />
         <span>当前地图:{{ selected_grid_map_value }}</span>
-
         <br />
+        <hr />
+
         <span>当前规模:{{ selected_grid_map_scale }}</span>
         <hr />
         <GridMapSelector
