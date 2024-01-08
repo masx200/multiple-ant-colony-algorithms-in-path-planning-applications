@@ -375,12 +375,13 @@
     left: 0;
 }
 .single-chart {
-    min-height: 700px;
+    min-height: 500px;
     max-width: 100%;
     width: 100%;
     min-width: 300px;
     /* max-height: 100%; */
-    height: 600px;
+
+    max-height: 800px;
 }
 .chart-container {
     max-width: 100%;
@@ -420,7 +421,7 @@
 /* 大于600 */
 @media screen and (min-width: 600px) {
     .single-chart {
-        max-height: 700px;
+        max-height: 800px;
     }
 }
 /* 大于1000 */
