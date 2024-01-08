@@ -16,8 +16,8 @@ dependencies:
     specifier: ^7.23.7
     version: 7.23.7
   '@datastructures-js/heap':
-    specifier: ^4.3.2
-    version: 4.3.2
+    specifier: ^4.3.3
+    version: 4.3.3
   '@datastructures-js/queue':
     specifier: ^4.2.3
     version: 4.2.3
@@ -1486,8 +1486,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /@datastructures-js/heap@4.3.2:
-    resolution: {integrity: sha512-7/9QSsIZ+wMG3C9++mz9iOjdtTp9C036PISHvNjG3eyFO8nXOBJQFKgeV7M6/+EPl+oXXFRGBb8Ue60LsqTqGw==}
+  /@datastructures-js/heap@4.3.3:
+    resolution: {integrity: sha512-UcUu/DLh/aM4W3C8zZfwxxm6/6FIZUlm3mcAXuNOCa6Aj4iizNvNXQyb8DjZQH2jKSQbMRyNlngP6TPimuGjpQ==}
     dev: false
 
   /@datastructures-js/queue@4.2.3:
