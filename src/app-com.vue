@@ -147,7 +147,8 @@
                 :disabled="!can_run || is_running"
             />
             <br />
-            <button
+            <hr />
+            <el-button
                 v-text="'运行'"
                 @click="create_and_run_tsp_by_search_rounds"
                 :disabled="!can_run || is_running"
@@ -164,7 +165,8 @@
                 :disabled="!can_run || is_running"
             />
             <br />
-            <button
+            <hr />
+            <el-button
                 v-text="'运行'"
                 @click="create_and_run_tsp_by_search_time"
                 :disabled="!can_run || is_running"
