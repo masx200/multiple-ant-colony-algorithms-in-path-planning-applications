@@ -5,53 +5,31 @@
 <script setup lang="ts">
 import { effect, onMounted, ref, watch } from "vue";
 import { GridMapFromArray } from "./GridMapFromArray";
-import { drawGridlines } from "./drawGridlines.ts";
 import { drawMap } from "./drawGridMap";
+import { drawGridlines } from "./drawGridlines.ts";
 // import { useElementSize } from "@vueuse/core";
-
 import {
-    useWindowSize,
-    useMouseInElement,
     useEventListener,
+    useMouseInElement,
+    useWindowSize,
 } from "@vueuse/core";
-import { drawGridRoute } from "./drawGridRoute";
-import { drawMouseCoordinatesText } from "./drawdisplayMouseCoordinates";
 import { debounce } from "lodash-es";
-import { clearCanvas } from "./clearCanvas";
-import { draw_PointsInsideAllConvexPolygons } from "./draw_PointsInsideAllConvexPolygons";
 import { debounce_animation_frame } from "../src/debounce_animation_frame";
+import { clearCanvas } from "./clearCanvas";
+import { drawGridRoute } from "./drawGridRoute";
+import { draw_PointsInsideAllConvexPolygons } from "./draw_PointsInsideAllConvexPolygons";
+import { drawMouseCoordinatesText } from "./drawdisplayMouseCoordinates";
 // const { width, height } = useElementSize(document.body);
-
-const props = defineProps<
-    Partial<{
-        map?: number[][];
-        route?: [number, number][];
-        column?: number;
-        row?: number;
-        grid?: boolean;
-        label: boolean;
-        pointsInsideAllConvexPolygons: Iterable<[number, number]>;
-    }>
->();
-const windowSize = useWindowSize();
-const grid_map_canvas = ref<HTMLCanvasElement>();
-
-onMounted(() => {
-    render();
-});
-onMounted(() => {
-    useEventListener(grid_map_canvas, "mousemove", (/* e */) => {
-        // console.log(e.key);
-        render();
-    });
-});
-const mousePositionInElement = useMouseInElement(grid_map_canvas);
-
+import { useIntersectionObserver } from "@vueuse/core";
 const render = debounce_animation_frame(
     debounce(function render() {
+        if (!targetIsVisible.value) {
+            return;
+        }
         const route: [number, number][] | undefined = props.route;
         const canvas = grid_map_canvas.value;
         if (canvas) {
+            console.log("render");
             clearCanvas(canvas);
             const gridMap = props.map ? GridMapFromArray(props.map) : undefined;
             if (gridMap) drawMap(gridMap, canvas);
@@ -89,6 +67,45 @@ const render = debounce_animation_frame(
         }
     }),
 );
+const targetIsVisible = ref(false);
+onMounted(() => {
+    useIntersectionObserver(
+        grid_map_canvas,
+        ([{ isIntersecting }] /* observerElement */) => {
+            targetIsVisible.value = isIntersecting;
+        },
+    );
+});
+const props = defineProps<
+    Partial<{
+        map?: number[][];
+        route?: [number, number][];
+        column?: number;
+        row?: number;
+        grid?: boolean;
+        label: boolean;
+        pointsInsideAllConvexPolygons: Iterable<[number, number]>;
+    }>
+>();
+const windowSize = useWindowSize();
+const grid_map_canvas = ref<HTMLCanvasElement>();
+
+onMounted(() => {
+    render();
+    useEventListener(window, "scroll", (/* e */) => {
+        // console.log(e.key);
+        render();
+    });
+});
+onMounted(() => {
+    useEventListener(grid_map_canvas, "mousemove", (/* e */) => {
+        // console.log(e.key);
+        render();
+    });
+});
+
+const mousePositionInElement = useMouseInElement(grid_map_canvas);
+
 watch(() => props, render);
 effect(() => {
     const canvas = grid_map_canvas.value;
