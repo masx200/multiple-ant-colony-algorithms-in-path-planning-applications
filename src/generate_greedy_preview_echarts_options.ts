@@ -6,7 +6,6 @@ import { DefaultOptions } from "./default_Options";
 import { get_options_of_random_greedy_of_tsp } from "./get_options_of_random_greedy_of_tsp";
 import { get_distance_round } from "./set_distance_round";
 
-
 export async function generate_greedy_preview_echarts_options({
     selected_node_coordinates,
     node_coordinates,
