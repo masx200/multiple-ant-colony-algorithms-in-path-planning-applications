@@ -1,9 +1,8 @@
-import { DataOfFinishOneIteration } from '../functions/DataOfFinishOneIteration';
-import { NodeCoordinates } from '../functions/NodeCoordinates';
-import { TSP_Output_Data } from '../functions/TSP_Output_Data';
-import { RunnerMultipleCommunicative } from '../src/RunnerMultipleCommunicative';
-import { TSPRunnerOptions } from '../src/TSPRunnerOptions';
-
+import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
+import { NodeCoordinates } from "../functions/NodeCoordinates";
+import { TSP_Output_Data } from "../functions/TSP_Output_Data";
+import { RunnerMultipleCommunicative } from "../src/RunnerMultipleCommunicative";
+import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
 
 export type COMMON_TSP_EXECUTION = {
     runOneIteration: () => Promise<void>;
@@ -16,7 +15,7 @@ export type COMMON_TSP_Output = {
     // data_of_routes: COMMON_dataOfAllIterations[];
     delta_data_of_iterations: COMMON_DataOfOneIteration[];
     time_of_best_ms: number;
-    global_best_route: number[][];
+    global_best_route: number[];
     global_best_length: number;
     search_count_of_best: number;
 } & TSP_Output_Data;

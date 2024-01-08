@@ -15,6 +15,7 @@ import { MultiPopulationSchedulerRemote } from "../classic-acs/MultiPopulationSc
 import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions.ts";
 import drawGridMapAndRoute from "../path-planning/drawGridMapAndRoute.vue";
 import GridMapSelector from "../path-planning/GridMapSelector.vue";
+import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions.ts";
 import { assert_number } from "../test/assert_number";
 import DataTable from "./Data_table.vue";
 import {
@@ -51,7 +52,6 @@ import { use_initialize_tsp_runner } from "./use_initialize_tsp_runner";
 import { useDateOfPopulationCommunication } from "./useDateOfPopulationCommunication";
 import { useOptionsOfIterationsAndInformationEntropyChart } from "./useOptionsOfIterationsAndInformationEntropyChart";
 import { useOptionsOfRoutesAndRouteLengthChart } from "./useOptionsOfRoutesAndRouteLengthChart";
-
 
 export const 迭代次数和全局最优路径长度 = "迭代次数和全局最优路径长度";
 export default defineComponent({
@@ -295,8 +295,14 @@ export default defineComponent({
             await submit_select_node_coordinates();
         });
 
-        function onGlobal_best_routeChange(global_best_route: number[][]) {
-            options_of_best_route_route.value = global_best_route;
+        function onGlobal_best_routeChange(global_best_route: number[]) {
+            const gridmap = options_of_best_route_map.value ?? [];
+
+            const n = gridmap[0]?.length ?? 0;
+
+            options_of_best_route_route.value = global_best_route.map((i) =>
+                oneDimensionToTwoDimensions(i, n),
+            );
             // const node_coordinates = selected_node_coordinates.value;
             // if (!node_coordinates) {
             //     return;
