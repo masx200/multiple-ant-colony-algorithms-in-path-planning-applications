@@ -116,7 +116,9 @@ export default defineComponent({
         );
         const selected_grid_map_value = ref<string>("");
         // const selected_node_coordinates = ref<NodeCoordinates>();
-
+        onMounted(() => {
+            selected_grid_map_value.value = GridMapSelectorOptions[0].value;
+        });
         const input_options = reactive(structuredClone(DefaultOptions));
 
         const round_result = computed(() => input_options.distance_round);
