@@ -1,6 +1,5 @@
 import { assert } from "chai";
 
-
 export class GridMap {
     //判断指定单元格是否是障碍物
     /**
