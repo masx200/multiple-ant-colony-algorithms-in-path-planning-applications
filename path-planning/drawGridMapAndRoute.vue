@@ -29,7 +29,7 @@ const render = debounce_animation_frame(
         const route: [number, number][] | undefined = props.route;
         const canvas = grid_map_canvas.value;
         if (canvas) {
-            console.log("render");
+            // console.log("render");
             clearCanvas(canvas);
             const gridMap = props.map ? GridMapFromArray(props.map) : undefined;
             if (gridMap) drawMap(gridMap, canvas);
