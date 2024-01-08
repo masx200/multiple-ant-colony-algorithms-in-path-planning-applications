@@ -1,6 +1,5 @@
 import { GridMap } from "./grid-map.ts";
 
-
 /**
  * 绘制地图
  * @param gridMap - 网格地图对象
@@ -15,6 +14,9 @@ export function drawMap(gridMap: GridMap, canvas: HTMLCanvasElement) {
         throw new Error("Failed to get 2D rendering context");
     }
     ctx.save();
+    //上下翻转
+    ctx.translate(0, canvas.height);
+    ctx.scale(1, -1);
     // 设置canvas的尺寸为栅格地图的尺寸
     // canvas.width = gridMap.column;
     // canvas.height = gridMap.row;
