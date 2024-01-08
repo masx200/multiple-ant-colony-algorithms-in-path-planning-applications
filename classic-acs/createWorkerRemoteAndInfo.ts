@@ -1,4 +1,4 @@
-import { NodeCoordinates } from "@masx200/tsp-lib-test-data";
+import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { create_TSP_Worker_comlink } from "../src/create_TSP_Worker_comlink";
 import { TSPDefaultOptions } from "../src/TSPRunnerOptions";
 import { WorkerRemoteAndInfo } from "./MultiPopulationSchedulerCreate";

@@ -62,7 +62,12 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
             }),
 
             ElementPlus({}),
-            vuePlugin(),
+            vuePlugin({
+                script: {
+                    // 开启defineModel
+                    defineModel: true,
+                },
+            }),
 
             babel({
                 babelHelpers: "bundled",

@@ -9,7 +9,7 @@
         />
     </div>
 </template>
-<script lang="ts" src="./Progress-element.ts"></script>
+<script lang="ts" src="./ProgressElement.ts"></script>
 <style scoped>
 .progress-bar {
     /* z-index: 10; */

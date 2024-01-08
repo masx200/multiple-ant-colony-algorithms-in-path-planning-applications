@@ -1,21 +1,20 @@
 import { ECBasicOption } from "echarts/types/dist/shared";
 import { Ref } from "vue";
-import { DefaultOptions } from "./default_Options";
-import { get_distance_round } from "./set_distance_round";
-import { get_options_of_random_greedy_of_tsp } from "./get_options_of_random_greedy_of_tsp";
-import { TSP_cities_map } from "./TSP_cities_map";
 import { ECOption } from "../functions/echarts-line";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
+import { DefaultOptions } from "./default_Options";
+import { get_options_of_random_greedy_of_tsp } from "./get_options_of_random_greedy_of_tsp";
+import { get_distance_round } from "./set_distance_round";
 
 export async function generate_greedy_preview_echarts_options({
     selected_node_coordinates,
-    selecteleref,
+    node_coordinates,
 }: {
     selected_node_coordinates: Ref<NodeCoordinates | undefined>;
-    selecteleref: Ref<HTMLSelectElement | undefined>;
+    node_coordinates: () => Promise<NodeCoordinates>;
 }): Promise<ECBasicOption & ECOption> {
-    const element = selecteleref.value;
-    const node_coordinates = TSP_cities_map.get(element?.value || "");
+    // const element = selecteleref.value;
+    // const node_coordinates = TSP_cities_map.get(element?.value || "");
     if (node_coordinates) {
         const selected = await node_coordinates();
         selected_node_coordinates.value = selected;
