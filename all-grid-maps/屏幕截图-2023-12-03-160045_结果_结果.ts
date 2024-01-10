@@ -1,4 +1,4 @@
 export default {
-    start: [],
-    end: [],
+    start: [32, 6],
+    end: [19, 51],
 };
