@@ -1,16 +1,18 @@
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { NodeCoordinates } from "./NodeCoordinates";
-import { run_greedy_once_thread_with_time } from "./run_greedy_once_thread_with_time";
 import { SharedOptions } from "./SharedOptions";
+import { run_greedy_once_thread_with_time } from "./run_greedy_once_thread_with_time";
 
 export async function* greedy_first_search_routes_parallel({
-    max_cities_of_greedy,
+    // max_cities_of_greedy,
     max_routes_of_greedy,
     node_coordinates,
     count_of_nodes,
-    round = false,
+    start,
+    end,
+    // round = false,
 }: {
-    round?: boolean;
+    // round?: boolean;
     node_coordinates: NodeCoordinates;
     count_of_nodes: number;
 } & SharedOptions): AsyncGenerator<
@@ -20,9 +22,9 @@ export async function* greedy_first_search_routes_parallel({
 > {
     const routes_of_greedy = Math.min(max_routes_of_greedy, count_of_nodes);
 
-    const inputindexs = Array(node_coordinates.length)
-        .fill(0)
-        .map((_v, i) => i);
+    // const inputindexs = Array(node_coordinates.length)
+    //     .fill(0)
+    //     .map((_v, i) => i);
     const max_current =
         Greedy_algorithm_to_solve_tsp_with_selected_start_pool.maxThreads;
     let rest_count = routes_of_greedy;
@@ -31,10 +33,12 @@ export async function* greedy_first_search_routes_parallel({
         const parallel_results = await Promise.all(
             Array.from({ length: current_threads }).map(() =>
                 run_greedy_once_thread_with_time({
-                    inputindexs,
+                    // inputindexs,
                     node_coordinates,
-                    round,
-                    max_cities_of_greedy,
+                    start,
+                    end,
+                    // round,
+                    // max_cities_of_greedy,
                 }),
             ),
         );

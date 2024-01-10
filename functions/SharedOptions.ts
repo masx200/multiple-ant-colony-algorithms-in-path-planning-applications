@@ -1,6 +1,6 @@
-import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
 import { NodeCoordinates } from "./NodeCoordinates";
 import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
+import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
 
 export type SharedOptions = Required<TSPRunnerOptions> & {
     get_convergence_coefficient: () => number;
@@ -25,4 +25,4 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     count_of_ants: number;
     node_coordinates: NodeCoordinates;
     pheromoneStore: ReadOnlyPheromone;
-};
+} & { start: number; end: number };
