@@ -1,18 +1,16 @@
+import { uniqBy } from "lodash-es";
 import { assert, test } from "vitest";
-
-import { DefaultOptions } from "../src/default_Options";
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
+import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
+import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
-//import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
-import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
-import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
-import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
-import { getVisibleGridsList } from "./getVisibleGridsList";
+import { random_next_point_selector } from "./random_next_point_selector.ts";
 //import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
-import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
+import map from "./screen-capture-2023-11-24-162727_result-result-test.json";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
-import { uniqBy } from "lodash-es";
+import { twoDimensionsToOneDimension } from "./twoDimensionsToOneDimension";
+import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 
 test("search-drawGridMap-test", () => {
     const start = new Point(1, 21);
@@ -22,7 +20,7 @@ test("search-drawGridMap-test", () => {
     const visibleGridsList = getVisibleGridsList(gridmap);
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
     const pointsInsideAllConvexPolygons = new Set(
-        [...PointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
+        [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
             (a) => a[0] * gridmap.row + a[1],
         ),
     );
@@ -31,31 +29,32 @@ test("search-drawGridMap-test", () => {
             visibleGridsList,
             pointsInsideAllConvexPolygons,
         );
-    const PheromoneMatrix = generate_initial_pheromone_matrix(
-        gridmap,
-        start,
-        end,
-    );
-    const PheromoneZeroMatrix = structuredClone(PheromoneMatrix);
-    const q0_Path_selection_parameters = 0.8;
+    // const PheromoneMatrix = generate_initial_pheromone_matrix(
+    //     gridmap,
+    //     start,
+    //     end,
+    // );
+    // const PheromoneZeroMatrix = structuredClone(PheromoneMatrix);
+    // const q0_Path_selection_parameters = 0.8;
     //console.log(route.value);
     //const visibleGridsMatrix=VisibleGridsMatrix(visibleGridsList)
     const path = search_one_route_on_grid_map(
         gridmap,
         start,
         end,
-        PheromoneMatrix,
+        // PheromoneMatrix,
         visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
         //  pointsInsideAllConvexPolygons,
-        DefaultOptions.alpha_zero,
-        DefaultOptions.beta_zero,
-        q0_Path_selection_parameters,
-        PheromoneZeroMatrix,
-        DefaultOptions.local_pheromone_volatilization_coefficient,
-        DefaultOptions.global_pheromone_volatilization_coefficient,
+        // DefaultOptions.alpha_zero,
+        // DefaultOptions.beta_zero,
+        // q0_Path_selection_parameters,
+        // PheromoneZeroMatrix,
+        // DefaultOptions.local_pheromone_volatilization_coefficient,
+        // DefaultOptions.global_pheromone_volatilization_coefficient,
+        random_next_point_selector,
     );
-    console.log(path);
+    // console.log(path);
 
     assert(path.length >= 3);
 
@@ -66,5 +65,11 @@ test("search-drawGridMap-test", () => {
     assert.equal(path[path.length - 1][0], end.x);
 
     assert.equal(path[path.length - 1][1], end.y);
-    assert.equal(path.length, uniqBy(path, JSON.stringify).length);
+    const n = gridmap.data[0].length;
+    assert.equal(
+        path.length,
+        uniqBy(path, ([i, j]) => {
+            return twoDimensionsToOneDimension(i, j, n);
+        }).length,
+    );
 });

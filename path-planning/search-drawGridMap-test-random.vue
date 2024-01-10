@@ -12,7 +12,7 @@
 import { Ref, onMounted, ref } from "vue";
 import { Point } from "./Point";
 import DrawGridMapAndRoute from "./drawGridMapAndRoute.vue";
-import map from "./屏幕截图-2023-11-24-162727_结果_结果test.json";
+import map from "./screen-capture-2023-11-24-162727_result-result-test.json";
 
 const start = new Point(1, 21);
 const end = new Point(22, 1);
@@ -27,17 +27,17 @@ onMounted(() => {
     const visibleGridsList = getVisibleGridsList(gridmap);
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
     const pointsInsideAllConvexPolygons = new Set(
-        [...PointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
+        [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
             (a) => a[0] * gridmap.row + a[1],
         ),
     );
-    const PheromoneMatrix = generate_initial_pheromone_matrix(
-        gridmap,
-        start,
-        end,
-    );
-    const PheromoneZeroMatrix = structuredClone(PheromoneMatrix);
-    const q0_Path_selection_parameters = 0.8;
+    // const PheromoneMatrix = generate_initial_pheromone_matrix(
+    //     gridmap,
+    //     start,
+    //     end,
+    // );
+    // const PheromoneZeroMatrix = structuredClone(PheromoneMatrix);
+    // const q0_Path_selection_parameters = 0.8;
     console.log(route.value);
 
     const visibleGridsListWithOutPointsInsideAllConvexPolygons =
@@ -49,29 +49,34 @@ onMounted(() => {
         gridmap,
         start,
         end,
-        PheromoneMatrix,
+        // PheromoneMatrix,
         visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
         //   pointsInsideAllConvexPolygons,
-        DefaultOptions.alpha_zero,
-        DefaultOptions.beta_zero,
-        q0_Path_selection_parameters,
-        PheromoneZeroMatrix,
-        DefaultOptions.local_pheromone_volatilization_coefficient,
-        DefaultOptions.global_pheromone_volatilization_coefficient,
+        // DefaultOptions.alpha_zero,
+        // DefaultOptions.beta_zero,
+        // q0_Path_selection_parameters,
+        // PheromoneZeroMatrix,
+        // DefaultOptions.local_pheromone_volatilization_coefficient,
+        // DefaultOptions.global_pheromone_volatilization_coefficient,
+        random_next_point_selector,
     );
     console.log(path);
     route.value = path;
     assert.equal(path.length, uniqBy(path, JSON.stringify).length);
 });
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
-import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
+import {
+    // random_next_point_selector,
+    search_one_route_on_grid_map,
+} from "./search_one_route_on_grid_map";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
-import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
-import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
-import { DefaultOptions } from "../src/default_Options";
+import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
+import { random_next_point_selector } from "./random_next_point_selector";
 import { assert } from "chai";
 import { uniqBy } from "lodash-es";
+// import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
+// import { DefaultOptions } from "../src/default_Options";
 </script>

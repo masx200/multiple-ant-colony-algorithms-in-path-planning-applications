@@ -1,66 +1,66 @@
+import { ECBasicOption } from "echarts/types/dist/shared";
 import {
-    DefaultOptions,
-    default_search_rounds,
-    default_search_time_seconds,
-} from "./default_Options";
-import {
-    Ref,
     computed,
     defineComponent,
     onMounted,
     reactive,
     readonly,
     ref,
+    Ref,
     watch,
 } from "vue";
+import allGridMaps from "../all-grid-maps/index.ts";
+import { MultiPopulationOutput } from "../classic-acs/MultiPopulationOutput";
+import { MultiPopulationSchedulerRemote } from "../classic-acs/MultiPopulationSchedulerRemote";
+import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions.ts";
+import drawGridMapAndRoute from "../path-planning/drawGridMapAndRoute.vue";
+import GridMapSelector from "../path-planning/GridMapSelector.vue";
+import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions.ts";
+import { assert_number } from "../test/assert_number";
+import DataTable from "./Data_table.vue";
+import {
+    default_search_rounds,
+    default_search_time_seconds,
+    DefaultOptions,
+} from "./default_Options";
+import { 迭代次数和相对信息熵 } from "./get_options_iterations_and_information_entropy_chart";
 import {
     get_options_route_number_and_best_length_chart,
     迭代次数和迭代最优路径长度,
 } from "./get_options_route_number_and_best_length_chart";
-
-import Data_table from "./Data_table.vue";
-import { ECBasicOption } from "echarts/types/dist/shared";
+import { 迭代次数和迭代平均路径长度 } from "./get_options_route_number_and_current_length_chart";
+import { 迭代次数和种群相似度 } from "./getOptionsOfIterationsAndPopulationSimilarityChart";
+import { 迭代次数和迭代最差路径长度 } from "./getOptionsOfRouteNumberAndBestLengthChartOfIndividualPopulations";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
+import { GridMapSelectorOptions } from "./GridMapSelectorOptions.ts";
+// import { NodeCoordinates } from "../functions/NodeCoordinates";
 import LineChart from "./LineChart.vue";
-import { MultiPopulationOutput } from "../classic-acs/MultiPopulationOutput";
-import { MultiPopulationSchedulerRemote } from "../classic-acs/MultiPopulationSchedulerRemote";
 import MultiplePopulationsConfigs from "./multiple-populations-configs.vue";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
-import Progress_element from "./Progress-element.vue";
+import ProgressElement from "./Progress-element.vue";
+import { run_tsp_by_search_time } from "./run_tsp_by_search_time";
+import { run_tsp_by_search_rounds } from "./run_tsp-by-search-rounds";
 import { RunWay } from "./RunWay";
+import { set_distance_round } from "./set_distance_round";
 import { Stop_TSP_Worker } from "./Stop_TSP_Worker";
 import { TSP_Reset } from "./TSP_Reset";
 import { TSP_RunnerRef } from "./TSP_workerRef";
-import { TSP_cities_data } from "./TSP_cities_data";
-import { TSP_cities_map } from "./TSP_cities_map";
-import { assert_number } from "../test/assert_number";
-import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions";
-import { generate_greedy_preview_echarts_options } from "./generate_greedy_preview_echarts_options";
-import { get_options_route_of_node_coordinates } from "./get_options_route_of_node_coordinates";
-import { run_tsp_by_search_rounds } from "./run_tsp-by-search-rounds";
-import { run_tsp_by_search_time } from "./run_tsp_by_search_time";
-import { set_distance_round } from "./set_distance_round";
-import { useDateOfPopulationCommunication } from "./useDateOfPopulationCommunication";
-import { useOptionsOfIterationsAndInformationEntropyChart } from "./useOptionsOfIterationsAndInformationEntropyChart";
-import { useOptionsOfRoutesAndRouteLengthChart } from "./useOptionsOfRoutesAndRouteLengthChart";
 import { use_data_of_greedy_iteration } from "./use_data_of_greedy_iteration";
 import { use_data_of_one_iteration } from "./use_data_of_one_iteration";
-// import { use_data_of_one_route } from "./use_data_of_one_route";
 import { use_data_of_summary } from "./use_data_of_summary";
 import { use_history_of_best } from "./use_history_of_best";
 import { use_initialize_tsp_runner } from "./use_initialize_tsp_runner";
-import { 迭代次数和相对信息熵 } from "./get_options_iterations_and_information_entropy_chart";
-import { 迭代次数和种群相似度 } from "./getOptionsOfIterationsAndPopulationSimilarityChart";
-import { 迭代次数和迭代平均路径长度 } from "./get_options_route_number_and_current_length_chart";
-import { 迭代次数和迭代最差路径长度 } from "./getOptionsOfRouteNumberAndBestLengthChartOfIndividualPopulations";
+import { useDateOfPopulationCommunication } from "./useDateOfPopulationCommunication";
+import { useOptionsOfIterationsAndInformationEntropyChart } from "./useOptionsOfIterationsAndInformationEntropyChart";
+import { useOptionsOfRoutesAndRouteLengthChart } from "./useOptionsOfRoutesAndRouteLengthChart";
 
 export const 迭代次数和全局最优路径长度 = "迭代次数和全局最优路径长度";
-
 export default defineComponent({
     components: {
+        drawGridMapAndRoute,
+        GridMapSelector,
         MultiplePopulationsConfigs,
-        "Data-table": Data_table,
-        "Progress-element": Progress_element,
+        DataTable: DataTable,
+        ProgressElement: ProgressElement,
         LineChart,
     },
     setup() {
@@ -114,9 +114,11 @@ export default defineComponent({
         } = useOptionsOfRoutesAndRouteLengthChart(
             IterationDataOfIndividualPopulationsRef,
         );
-        const selected_value = ref(TSP_cities_data[0]);
-        const selected_node_coordinates = ref<NodeCoordinates>();
-
+        const selected_grid_map_value = ref<string>("");
+        // const selected_node_coordinates = ref<NodeCoordinates>();
+        onMounted(() => {
+            selected_grid_map_value.value = GridMapSelectorOptions[0].value;
+        });
         const input_options = reactive(structuredClone(DefaultOptions));
 
         const round_result = computed(() => input_options.distance_round);
@@ -241,9 +243,9 @@ export default defineComponent({
         const disable_switching = ref(false);
         const searchrounds = ref(default_search_rounds);
         const count_of_ants_ref = computed(() => input_options.count_of_ants);
-        const selecteleref = ref<HTMLSelectElement>();
+        // const selecteleref = ref<HTMLSelectElement>();
 
-        const options_of_best_route_chart: Ref<ECBasicOption> = ref({});
+        // const options_of_best_route_map: Ref<ECBasicOption> = ref({});
 
         const optionsOfIterationAndIterationBestLength: Ref<ECBasicOption> =
             computed(() => {
@@ -251,12 +253,27 @@ export default defineComponent({
                     IterationDataOfIndividualPopulationsRef.value,
                 );
             });
+
+        const selected_grid_map_scale = ref(0);
         const submit = async () => {
-            const options = await generate_greedy_preview_echarts_options({
-                selected_node_coordinates,
-                selecteleref,
-            });
-            options_of_best_route_chart.value = options;
+            const getMap = allGridMaps[selected_grid_map_value.value];
+
+            if (!getMap) return;
+            const mapData = await getMap();
+            // const options = await generate_greedy_preview_echarts_options({
+            //     selected_node_coordinates,
+            //     selecteleref,
+            // });
+            const options = mapData?.map ?? [];
+            options_of_best_route_map.value = options;
+            // console.log(
+            //     allGridMaps,
+            //     selected_grid_map_value.value,
+            //     allGridMaps[selected_grid_map_value.value],
+            //     mapData,
+            //     options,
+            // );
+            selected_grid_map_scale.value = mapData.scale;
         };
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {
@@ -271,27 +288,33 @@ export default defineComponent({
         }
         onMounted(async () => {
             reset();
-            const element = selecteleref.value;
-            if (element) {
-                element.selectedIndex = 0;
-            }
+            // const element = selecteleref.value;
+            // if (element) {
+            //     element.selectedIndex = 0;
+            // }
             // data_change_listener();
 
             await submit_select_node_coordinates();
         });
 
-        const onGlobal_best_routeChange = (route: number[]) => {
-            const node_coordinates = selected_node_coordinates.value;
-            if (!node_coordinates) {
-                return;
-            }
+        function onGlobal_best_routeChange(global_best_route: number[]) {
+            const gridmap = options_of_best_route_map.value ?? [];
 
-            const options = get_options_route_of_node_coordinates({
-                route,
-                node_coordinates,
-            });
-            options_of_best_route_chart.value = options;
-        };
+            const n = gridmap[0]?.length ?? 0;
+
+            options_of_best_route_route.value = global_best_route.map((i) =>
+                oneDimensionToTwoDimensions(i, n),
+            );
+            // const node_coordinates = selected_node_coordinates.value;
+            // if (!node_coordinates) {
+            //     return;
+            // }
+            // const options = get_options_route_of_node_coordinates({
+            //     route,
+            //     node_coordinates,
+            // });
+            // options_of_best_route_map.value = options;
+        }
         // onMounted(() => {
         //     watch(dataOfAllIterations, () => {
         //         data_change_listener();
@@ -391,9 +414,18 @@ export default defineComponent({
 
         async function create_runner(): Promise<MultiPopulationSchedulerRemote> {
             const count_of_ants_value = count_of_ants_ref.value;
-            const element = selecteleref.value;
-            const node_coordinates = TSP_cities_map.get(element?.value || "");
+            // const element = selecteleref.value;
+            // const node_coordinates = TSP_cities_map.get(element?.value || "");
+            const getMap = allGridMaps[selected_grid_map_value.value];
 
+            if (!getMap) throw Error("no map");
+            const mapData = await getMap();
+            // const options = await generate_greedy_preview_echarts_options({
+            //     selected_node_coordinates,
+            //     selecteleref,
+            // });
+            const options = mapData?.map ?? [];
+            const node_coordinates = options;
             const alpha_value = alpha_zero.value;
             const max_routes_of_greedy_value = max_routes_of_greedy.value;
             const beta_value = beta_zero.value;
@@ -417,7 +449,7 @@ export default defineComponent({
                     alpha_zero: alpha_value,
                     beta_zero: beta_value,
 
-                    node_coordinates: await node_coordinates(),
+                    node_coordinates: node_coordinates,
                     count_of_ants,
                 });
 
@@ -451,15 +483,24 @@ export default defineComponent({
         const max_routes_of_greedy = computed(
             () => input_options.max_routes_of_greedy,
         );
+        const options_of_best_route_map: Ref<number[][]> = ref<
+            Array<Array<number>>
+        >([]);
+        const options_of_best_route_route: Ref<number[][]> = ref<
+            Array<Array<number>>
+        >([]);
         // const 显示每次迭代的统计 = ref(false);
         return {
+            options_of_best_route_route,
+            options_of_best_route_map,
+            selected_grid_map_scale,
             显示每次迭代的统计,
             optionsOfIterationAndGlobalBestLength,
             show_chart_of_best2,
             迭代次数和迭代最优路径长度,
             迭代次数和种群相似度,
             迭代次数和迭代平均路径长度,
-            selected_value,
+            selected_grid_map_value,
             show_history_routes_of_best,
             similarityOfAllPopulationsHistoryRef,
             迭代次数和全局最优路径长度,
@@ -487,7 +528,7 @@ export default defineComponent({
             similarityOfAllPopulationsTableHeads,
             show_routes_of_best,
             show_summary_of_routes,
-            options_of_best_route_chart,
+            // options_of_best_route_map,
             navbar_float,
             show_chart_of_best_individual,
             run_way_round,
@@ -503,7 +544,7 @@ export default defineComponent({
             stop_handler,
             global_best_routeBody,
             global_best_routeHeads,
-
+            // GridMapSelectorOptions
             is_running,
             options_of_iterations_and_information_entropy_chart,
             resethandler: resethandler,
@@ -516,9 +557,9 @@ export default defineComponent({
 
             create_and_run_tsp_by_search_rounds,
             searchrounds,
-            TSP_cities_data,
+            // TSP_cities_data,
             submit_select_node_coordinates,
-            selecteleref,
+            // selecteleref,
 
             percentage,
             optionsOfIterationAndIterationAverageLength:
@@ -526,6 +567,7 @@ export default defineComponent({
             optionsOfIterationAndIterationBestLength,
             迭代次数和迭代最差路径长度,
             迭代次数和相对信息熵,
+            GridMapSelectorOptions,
         };
     },
 });

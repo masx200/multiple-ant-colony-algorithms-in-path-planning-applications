@@ -1,20 +1,32 @@
 <template>
     <div :class="{ 'container-top': navbar_float }">
-        <Progress-element
+        <ProgressElement
             :class="{ 'fixed-top-navbar': navbar_float }"
             :percentage="percentage"
             :indeterminate="indeterminate"
         />
         <!-- v-show="show_progress" -->
-        <h1>多种群:自适应+蚁群+k-opt+动态计算信息素-TSP-测试+种群相似度</h1>
+        <h1>
+            多种群路径规划:自适应+蚁群+k-opt+动态计算信息素-TSP-测试+种群相似度
+        </h1>
         <hr />
         <span>选择城市地图</span>
         <br />
         <hr />
-        <span>当前地图:{{ selected_value }}</span>
+        <span>当前地图:{{ selected_grid_map_value }}</span>
         <br />
-        <select
-            v-model="selected_value"
+        <hr />
+
+        <span>当前规模:{{ selected_grid_map_scale }}</span>
+        <hr />
+        <GridMapSelector
+            v-model="selected_grid_map_value"
+            :disabled="disable_switching"
+            :options="GridMapSelectorOptions"
+            @change="submit_select_node_coordinates"
+        ></GridMapSelector>
+        <!-- <select
+            v-model="selected_grid_map_value"
             ref="selecteleref"
             :disabled="disable_switching"
             @change="submit_select_node_coordinates"
@@ -26,8 +38,49 @@
             >
                 {{ item }}
             </option>
-        </select>
+        </select> -->
         <br />
+
+        <hr />
+        <div class="chart-container" style="">
+            <details
+                class="width-100-percent"
+                :open="show_routes_of_best"
+                @toggle="show_routes_of_best = $event.target.open"
+            >
+                <summary>全局最优路径的展示</summary>
+
+                <!-- 全局最优解的图 -->
+                <!-- <LineChart
+                    v-if="show_routes_of_best"
+                    class="single-chart"
+                    style=""
+                    :options="options_of_best_route_map"
+                ></LineChart> -->
+                <drawGridMapAndRoute
+                    v-if="show_routes_of_best"
+                    class="single-chart"
+                    style=""
+                    :map="options_of_best_route_map"
+                    :grid="true"
+                    :label="true"
+                    :route="options_of_best_route_route"
+                ></drawGridMapAndRoute>
+            </details>
+
+            <!-- 最近一条路径的图 -->
+        </div>
+        <hr />
+        <div>
+            <span v-text="'进度:'"></span> <span> {{ percentage }}%</span>
+        </div>
+
+        <!-- <el-switch
+            v-model="show_progress"
+            active-text="Open"
+            inactive-text="Close"
+        /> -->
+        <hr />
         <el-row>
             <el-col :span="12"
                 ><el-button @click="resethandler"> 重置 </el-button><br
@@ -39,15 +92,6 @@
             >
         </el-row>
 
-        <hr />
-        <span v-text="'进度:'"></span>
-        <span> {{ percentage }}%</span>
-        <!-- <el-switch
-            v-model="show_progress"
-            active-text="Open"
-            inactive-text="Close"
-        /> -->
-        <hr />
         <div>
             <span>显示每次迭代的统计</span>
             <el-radio-group
@@ -103,7 +147,8 @@
                 :disabled="!can_run || is_running"
             />
             <br />
-            <button
+            <hr />
+            <el-button
                 v-text="'运行'"
                 @click="create_and_run_tsp_by_search_rounds"
                 :disabled="!can_run || is_running"
@@ -120,32 +165,14 @@
                 :disabled="!can_run || is_running"
             />
             <br />
-            <button
+            <hr />
+            <el-button
                 v-text="'运行'"
                 @click="create_and_run_tsp_by_search_time"
                 :disabled="!can_run || is_running"
             />
         </div>
-        <hr />
 
-        <div class="chart-container" style="">
-            <details
-                class="width-100-percent"
-                :open="show_routes_of_best"
-                @toggle="show_routes_of_best = $event.target.open"
-            >
-                <summary>全局最优路径的展示</summary>
-                <!-- 全局最优解的图 -->
-                <LineChart
-                    v-if="show_routes_of_best"
-                    class="single-chart"
-                    style=""
-                    :options="options_of_best_route_chart"
-                ></LineChart>
-            </details>
-
-            <!-- 最近一条路径的图 -->
-        </div>
         <hr />
         <details
             class="width-100-percent"
@@ -240,7 +267,7 @@
         <hr />
 
         <!-- //汇总结果 -->
-        <Data-table
+        <DataTable
             style="margin: 0 auto"
             title="最优解的统计"
             :tableheads="summary_best_TableHeads"
@@ -248,7 +275,7 @@
         />
         <!-- 拆分表格 -->
         <hr />
-        <Data-table
+        <DataTable
             style="margin: 0 auto"
             title="总体的统计"
             :tableheads="summary_total_TableHeads"
@@ -261,7 +288,7 @@
             @toggle="show_summary_of_similarity = $event.target.open"
         >
             <summary>总体的相似度和种群交流的方式</summary>
-            <Data-table
+            <DataTable
                 style="margin: 0 auto"
                 title="总体的相似度和种群交流的方式"
                 :tableheads="similarityOfAllPopulationsTableHeads"
@@ -278,7 +305,7 @@
             @toggle="show_array_routes_of_best = $event.target.open"
         >
             <summary>最优路径的数组展示</summary>
-            <Data-table
+            <DataTable
                 style="margin: 0 auto"
                 title="全局最优路径"
                 :tableheads="global_best_routeHeads"
@@ -293,7 +320,7 @@
             @toggle="show_history_routes_of_best = $event.target.open"
         >
             <summary>最优路径的变化历史</summary>
-            <Data-table
+            <DataTable
                 style="margin: 0 auto"
                 title="最优路径的变化"
                 :tableheads="TableHeadsOfHistoryOfBest"
@@ -302,7 +329,7 @@
             <hr />
         </details>
 
-        <Data-table
+        <DataTable
             style="margin: 0 auto"
             title="贪心路径统计"
             :tableheads="greedy_iteration_table_heads"
@@ -319,7 +346,7 @@
         >
             <summary>每次迭代的统计</summary>
             <!-- 迭代结果 -->
-            <Data-table
+            <DataTable
                 v-if="显示每次迭代的统计"
                 style="margin: 0 auto"
                 title="每次迭代的统计"
@@ -348,12 +375,13 @@
     left: 0;
 }
 .single-chart {
-    min-height: 300px;
+    min-height: 500px;
     max-width: 100%;
     width: 100%;
     min-width: 300px;
     /* max-height: 100%; */
-    height: 600px;
+
+    max-height: 800px;
 }
 .chart-container {
     max-width: 100%;
@@ -393,7 +421,7 @@
 /* 大于600 */
 @media screen and (min-width: 600px) {
     .single-chart {
-        max-height: 600px;
+        max-height: 800px;
     }
 }
 /* 大于1000 */

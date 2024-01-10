@@ -144,3 +144,4 @@ vite.config.ts.js
 yarn.lock
 .vscode/extensions.json
 checks.json
+*.mjs

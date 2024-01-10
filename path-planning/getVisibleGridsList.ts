@@ -1,5 +1,5 @@
-import { GridMap } from "./grid-map";
 import { findVisibleGridsCircle } from "./findVisibleGridsCircle";
+import { GridMap } from "./grid-map";
 
 /**
  * 生成一个布尔类型的四维数组，表示网格地图中每个格子与其可视的格子之间的连通关系
@@ -7,7 +7,10 @@ import { findVisibleGridsCircle } from "./findVisibleGridsCircle";
  * @param grid - GridMap类型，表示网格地图对象
  * @returns 布尔类型的四维数组，表示网格地图中每个格子与其可视的格子之间的连通关系
  */
-export function getVisibleGridsList(grid: GridMap): Set<[number, number]>[][] {
+export function getVisibleGridsList(
+    grid: GridMap,
+): Iterable<[number, number]>[][] {
+    // debugger;
     // 定义一个四维数组 result，用于存储最终的结果
     const result: Set<[number, number]>[][] = [];
     // 遍历 grid.data 数组
@@ -32,10 +35,13 @@ export function getVisibleGridsList(grid: GridMap): Set<[number, number]>[][] {
         for (let j = 0; j < grid.data[i].length; ++j) {
             // 如果当前位置是自由位置（isFree 方法判断）
             if (grid.isFree(i, j)) {
+                // debugger;
                 // 调用 findVisibleGridsBFS 方法找到可见的格子（VisibleGrids）
                 const VisibleGrids = findVisibleGridsCircle([i, j], grid);
                 // 遍历 VisibleGrids 数组
                 result[i][j] = new Set(VisibleGrids);
+                // console.log(i, j, VisibleGrids);
+                // debugger;
             }
         }
     }

@@ -19,6 +19,9 @@ export function drawGridRoute(
         throw new Error("Failed to get 2D rendering context");
     }
     ctx.save();
+    //上下翻转
+    ctx.translate(0, canvas.height);
+    ctx.scale(1, -1);
     var myCanvas_rect = canvas.getBoundingClientRect();
     var width = myCanvas_rect.width;
     var height = myCanvas_rect.height;

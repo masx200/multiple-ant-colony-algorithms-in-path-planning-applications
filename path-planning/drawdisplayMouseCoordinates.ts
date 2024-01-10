@@ -9,7 +9,7 @@ import { MousePosition } from "./MousePosition";
  * @param column - 列数
  * @param row - 行数
  */
-export function drawdisplayMouseCoordinates(
+export function drawMouseCoordinatesText(
     canvas: HTMLCanvasElement,
     mousePositionInElement: MousePosition,
     column: number,
@@ -42,43 +42,43 @@ export function drawdisplayMouseCoordinates(
     //     drawCoordinates();
     // }
     // function drawCoordinates() {
-    if (mousePositionInElement) {
-        // 清空画布样式
-        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // if (mousePositionInElement) {
+    // 清空画布样式
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // 设置阴影样式
-        ctx.shadowOffsetX = 2; // x轴偏移量
-        ctx.shadowOffsetY = 2; // y轴偏移量
-        ctx.shadowBlur = 4; // 模糊程度
-        ctx.shadowColor = "blue"; // 阴影颜色（半透明黑色）
-        const font = "16px Arial";
-        ctx.font = font;
-        ctx.fillStyle = "yellow";
-        /* 以左下角为原点 */
-        //先显示列数,后显示行数
-        const text = `( 第${mousePositionInElement.y / cellSize}行,  第${
-            mousePositionInElement.x / cellSize
-        }列)`;
-        const measureTextWidthAndHeightResult = measureTextWidthAndHeight(
-            text,
-            font,
-        );
-        ctx.fillText(
-            text,
-            Math.max(
-                0,
-                Math.min(
-                    mousePositionInElement.x,
-                    width - measureTextWidthAndHeightResult.width,
-                ),
+    // 设置阴影样式
+    ctx.shadowOffsetX = 2; // x轴偏移量
+    ctx.shadowOffsetY = 2; // y轴偏移量
+    ctx.shadowBlur = 4; // 模糊程度
+    ctx.shadowColor = "blue"; // 阴影颜色（半透明黑色）
+    const font = "16px Arial";
+    ctx.font = font;
+    ctx.fillStyle = "yellow";
+    /* 以左下角为原点 */
+    //先显示列数,后显示行数
+    const text = `( 第${(height - mousePositionInElement.y) / cellSize}行,  第${
+        mousePositionInElement.x / cellSize
+    }列)`;
+    const measureTextWidthAndHeightResult = measureTextWidthAndHeight(
+        text,
+        font,
+    );
+    ctx.fillText(
+        text,
+        Math.max(
+            0,
+            Math.min(
+                mousePositionInElement.x,
+                width - measureTextWidthAndHeightResult.width,
             ),
-            Math.max(
-                measureTextWidthAndHeightResult.height,
-                Math.min(mousePositionInElement.y, height),
-            ),
-        );
-        // }
-    }
+        ),
+        Math.max(
+            measureTextWidthAndHeightResult.height,
+            Math.min(mousePositionInElement.y, height),
+        ),
+    );
+    // }
+    // }
 
     // canvas.addEventListener("mousemove", handleMouseMove);
     // 当鼠标离开canvas时，清除坐标显示

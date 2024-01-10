@@ -1,6 +1,6 @@
+import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { TSPDefaultOptions } from "../src/TSPRunnerOptions";
 import { createWorkerRemoteAndInfo } from "./createWorkerRemoteAndInfo";
-import { NodeCoordinates } from "@masx200/tsp-lib-test-data";
 import { WorkerRemoteAndInfo } from "./MultiPopulationSchedulerCreate";
 
 export async function initializeRemoteWorkers(
