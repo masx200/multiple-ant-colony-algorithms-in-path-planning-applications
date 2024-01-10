@@ -261,6 +261,8 @@ export default defineComponent({
             const getMap = allGridMaps[selected_grid_map_value.value];
             if (!getMap) return;
             if (!startAndEnds[selected_grid_map_value.value]) return;
+            map_start_and_end.value =
+                await startAndEnds[selected_grid_map_value.value]();
             const mapData = await getMap();
             // const options = await generate_greedy_preview_echarts_options({
             //     selected_node_coordinates,
@@ -276,8 +278,6 @@ export default defineComponent({
             //     options,
             // );
             selected_grid_map_scale.value = mapData.scale;
-            map_start_and_end.value =
-                await startAndEnds[selected_grid_map_value.value]();
 
             options_of_best_route_route.value = [
                 map_start_and_end.value.start,
