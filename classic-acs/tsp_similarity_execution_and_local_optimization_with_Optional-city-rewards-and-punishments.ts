@@ -52,6 +52,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         alpha_zero = DefaultOptions.alpha_for_the_second_type_of_population,
         path_selection_parameter_q0_max = DefaultOptions.path_selection_parameter_q0_max,
         path_selection_parameter_q0_min = DefaultOptions.path_selection_parameter_q0_min,
+        start,
+        end,
     } = options;
 
     let Intra_population_similarity = 0;
@@ -250,7 +252,9 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 time_ms,
             } = await run_greedy_once_thread_with_time({
                 node_coordinates,
-                round: distance_round,
+                start,
+                end,
+                // round: distance_round,
             });
             Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
             set_global_best(best_route, best_length);
