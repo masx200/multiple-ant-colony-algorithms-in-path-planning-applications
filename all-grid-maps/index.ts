@@ -1,7 +1,12 @@
-const modules = import.meta.glob("./*.json");
+const modules = import.meta.glob("./*/*.json");
 export default Object.fromEntries(
     Object.entries(modules).map(([key, value]) => {
-        const name = key.slice(2).replace(".json", "").replace(".jpg", "");
+        const name = key
+            .slice(2)
+            .replace(".json", "")
+            .replace(".jpg", "")
+            .slice(key.lastIndexOf("/") + 1);
+
         return [
             name,
             async () => {
@@ -10,9 +15,19 @@ export default Object.fromEntries(
                 return {
                     map: data,
                     scale: data.length * data[0].length,
-                    name: name,
                 };
             },
         ];
     }),
 );
+const nametodimention = new Map<string, number>(
+    Object.keys(modules).map((name) => {
+        const dimension = Number(name.split("/").at(-2));
+        // assertnumber(dimension);
+        const nameformat = name
+            .slice(0, name.lastIndexOf("."))
+            .slice(name.lastIndexOf("/") + 1);
+        return [nameformat, dimension];
+    }),
+);
+export { nametodimention };
