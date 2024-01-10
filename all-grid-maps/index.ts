@@ -4,7 +4,7 @@ export default Object.fromEntries(
         const name = key
 
             .replace(".json", "")
-            .replace(".jpg", "")
+
             .slice(key.lastIndexOf("/") + 1);
 
         return [
@@ -31,3 +31,28 @@ const nametodimention = new Map<string, number>(
     }),
 );
 export { nametodimention };
+const startAndEndsmodules = import.meta.glob("./*/*.ts");
+
+export const startAndEnds = Object.fromEntries(
+    Object.entries(startAndEndsmodules).map(([key, value]) => {
+        const name = key
+
+            .replace(".ts", "")
+
+            .slice(key.lastIndexOf("/") + 1);
+
+        return [
+            name,
+            async () => {
+                //@ts-ignore
+                const { default: data } = await value();
+                return {
+                    // map: data,
+                    start: data.start,
+                    end: data.end,
+                };
+            },
+        ];
+    }),
+);
+console.log(startAndEnds);
