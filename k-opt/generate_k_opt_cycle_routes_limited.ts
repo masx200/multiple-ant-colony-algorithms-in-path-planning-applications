@@ -1,8 +1,8 @@
+import { reversearray } from "../functions/reversearray";
+import { whether_k_sections_reverse_opt } from "../k-opt/whether_k_sections_reverse-opt";
 import { assert_true } from "../test/assert_true";
 import { divide_route_to_k_opt_random } from "./divide_route_to_k-opt-random";
 
-import { whether_k_sections_reverse_opt } from "../k-opt/whether_k_sections_reverse-opt";
-import { reversearray } from "../functions/reversearray";
 export function generate_k_opt_cycle_routes_limited({
     oldRoute,
     k,

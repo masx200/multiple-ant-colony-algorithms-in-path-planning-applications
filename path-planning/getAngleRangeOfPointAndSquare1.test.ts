@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
-import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1";
+
 import { formatSmallArcsAngleRange } from "./formatSmallArcsAngleRange";
+import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1";
 
 describe("getAngleRangeOfPointAndSquare1", () => {
     test("case1", () => {

@@ -1,10 +1,11 @@
-import { use_escharts_container_pair } from "./use_escharts_container_pair";
+import { ECBasicOption } from "echarts/types/dist/shared";
 import { throttle } from "lodash-es";
 import { defineComponent, onMounted, PropType, watch } from "vue";
-import { ECBasicOption } from "echarts/types/dist/shared";
+
 import { run_idle_work } from "../functions/run_idle_work";
 import { debounce_animation_frame } from "./debounce_animation_frame";
 import { drawChartWait } from "./drawChartMaxWait";
+import { use_escharts_container_pair } from "./use_escharts_container_pair";
 
 export default defineComponent({
     props: {

@@ -1,5 +1,5 @@
-import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start } from "./Greedy_algorithm_to_solve_tsp_with_selected_start";
+import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 
 export function Greedy_solve_tsp_with_selected_start_length_time_ms({
     node_coordinates,

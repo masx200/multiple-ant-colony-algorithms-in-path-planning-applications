@@ -1,5 +1,6 @@
 import { CommunicationStrategy } from "./CommunicationStrategy";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
+
 export interface TSPDefaultOptions {
     CommunicationStrategy: CommunicationStrategy;
     max_results_of_k_exchange?: number;
@@ -37,4 +38,4 @@ export interface TSPDefaultOptions {
 
 export type TSPRunnerOptions = {
     node_coordinates: NodeCoordinates;
-} & Partial<TSPDefaultOptions>;
+} & Partial<TSPDefaultOptions> & { start: number; end: number };

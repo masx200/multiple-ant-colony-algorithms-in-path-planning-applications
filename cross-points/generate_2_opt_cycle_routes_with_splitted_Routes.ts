@@ -1,5 +1,6 @@
-import { assert_true } from "../test/assert_true";
 import { reversearray } from "../functions/reversearray";
+import { assert_true } from "../test/assert_true";
+
 export function generate_2_opt_cycle_routes_with_splitted_Routes(
     oldRoute: number[],
     splitted_Routes: [number[], number[]],

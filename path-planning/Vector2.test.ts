@@ -1,4 +1,5 @@
 import { assert, test } from "vitest";
+
 import { Vector } from "./Vector";
 
 test("vector", () => {

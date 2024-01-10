@@ -1,4 +1,5 @@
 import crosses from "robust-segment-intersect";
+
 export type Coordinate = [number, number];
 export function robustsegmentintersect(
     a0: Coordinate,

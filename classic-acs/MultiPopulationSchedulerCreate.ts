@@ -1,17 +1,17 @@
-import { COMMON_DataOfOneIteration, COMMON_TSP_Output } from "./tsp-interface";
+import { zip } from "lodash-es";
 
+import { extractCommonRoute } from "../common/extractCommonRoute";
+import { generateUniqueArrayOfCircularPath } from "../functions/generateUniqueArrayOfCircularPath";
+import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
 import { CommunicationStrategy } from "../src/CommunicationStrategy";
 import { DefaultOptions } from "../src/default_Options";
+import { TSP_Worker_Remote } from "../src/TSP_Worker_Remote";
+import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
+import { initializeRemoteWorkers } from "./initializeRemoteWorkers";
 import { MultiPopulationOutput } from "./MultiPopulationOutput";
 import { MultiPopulationScheduler } from "./MultiPopulationScheduler";
 import { ProbabilityOfPerformingTheFirstCommunication } from "./ProbabilityOfPerformingTheFirstCommunication";
-import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
-import { TSP_Worker_Remote } from "../src/TSP_Worker_Remote";
-import { extractCommonRoute } from "../common/extractCommonRoute";
-import { generateUniqueArrayOfCircularPath } from "../functions/generateUniqueArrayOfCircularPath";
-import { initializeRemoteWorkers } from "./initializeRemoteWorkers";
-import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
-import { zip } from "lodash-es";
+import { COMMON_DataOfOneIteration, COMMON_TSP_Output } from "./tsp-interface";
 
 export type WorkerRemoteAndInfo = TSP_Worker_Remote["remote"] & {
     ClassOfPopulation: string;

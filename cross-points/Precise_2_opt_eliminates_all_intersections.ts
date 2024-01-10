@@ -1,11 +1,11 @@
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
 import { getBestRoute_Of_Series_routes_and_lengths } from "../functions/getBestRoute_Of_Series_routes_and_lengths";
+import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { default_max_results_of_2_opt } from "../src/default_Options";
+import { get_distance_round } from "../src/set_distance_round";
 import { assert_true as assert_true } from "../test/assert_true";
 import { generate_2_opt_routes_by_intersection_all } from "./generate_2_opt_routes_by_intersection_all";
-import { get_distance_round } from "../src/set_distance_round";
 
 export function Precise_2_opt_eliminates_all_intersections({
     max_results_of_2_opt = default_max_results_of_2_opt,

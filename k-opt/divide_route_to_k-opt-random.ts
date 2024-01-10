@@ -1,9 +1,9 @@
 import { random, sum } from "lodash-es";
-import { assert_true } from "../test/assert_true";
-import { cycle_reorganize } from "../functions/cycle_reorganize";
 
+import { cycle_reorganize } from "../functions/cycle_reorganize";
 import { pickRandomOne } from "../functions/pickRandomOne";
 import { reversearray } from "../functions/reversearray";
+import { assert_true } from "../test/assert_true";
 
 export const divide_route_to_k_opt_random = (
     oldRoute: number[],

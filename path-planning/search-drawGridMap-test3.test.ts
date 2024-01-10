@@ -1,4 +1,5 @@
 import { assert, test } from "vitest";
+
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
 import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
 import { getVisibleGridsList } from "./getVisibleGridsList";

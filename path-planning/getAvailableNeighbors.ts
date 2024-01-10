@@ -1,5 +1,5 @@
-import { GridMap } from "./grid-map";
 import { getPathCoordinates } from "./getPathCoordinates";
+import { GridMap } from "./grid-map";
 
 /**
  * 获取可用的邻居节点

@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import { it } from "vitest";
+
 import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
 
 it("select_available_cities_from_optimal_and_latest-1", () => {

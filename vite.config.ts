@@ -1,8 +1,4 @@
-import { PluginItem } from "@babel/core";
-import { babel } from "@rollup/plugin-babel";
-import vuePlugin from "@vitejs/plugin-vue";
-import path from "path";
-import { resolve } from "path";
+import path, { resolve } from "path";
 import AutoImport from "unplugin-auto-import/vite";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
@@ -13,6 +9,10 @@ import { ConfigEnv, defineConfig, PluginOption, UserConfig } from "vite";
 import checker from "vite-plugin-checker";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { VitePWA } from "vite-plugin-pwa";
+
+import { PluginItem } from "@babel/core";
+import { babel } from "@rollup/plugin-babel";
+import vuePlugin from "@vitejs/plugin-vue";
 
 export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
     const isdrop = mode === "production" && command === "build";

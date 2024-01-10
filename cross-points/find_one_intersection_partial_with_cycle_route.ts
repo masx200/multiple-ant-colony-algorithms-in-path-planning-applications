@@ -1,14 +1,14 @@
-import { NodeCoordinates } from "../functions/NodeCoordinates";
-import { assert_true } from "../test/assert_true";
+import { combinations } from "combinatorial-generators";
+
+import { ArrayShuffle } from "../functions/ArrayShuffle";
+import { cycle_reorganize } from "../functions/cycle_reorganize";
 import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { haverepetitions } from "../functions/haverepetitions";
-
-import { combinations } from "combinatorial-generators";
-import { robustsegmentintersect } from "./robust-segment-intersect";
-import { cycle_reorganize } from "../functions/cycle_reorganize";
-
+import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { pickRandomOne } from "../functions/pickRandomOne";
-import { ArrayShuffle } from "../functions/ArrayShuffle";
+import { assert_true } from "../test/assert_true";
+import { robustsegmentintersect } from "./robust-segment-intersect";
+
 export function find_one_intersection_partial_with_cycle_route({
     max_of_segments,
     cycle_route,

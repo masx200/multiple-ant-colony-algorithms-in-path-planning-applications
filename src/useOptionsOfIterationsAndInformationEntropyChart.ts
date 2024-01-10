@@ -1,9 +1,9 @@
-import { Ref, computed, ref } from "vue";
+import { ECBasicOption } from "echarts/types/dist/shared";
+import { computed, Ref, ref } from "vue";
 
 import { COMMON_DataOfOneIteration } from "../classic-acs/tsp-interface";
-import { ECBasicOption } from "echarts/types/dist/shared";
-import { getOptionsOfIterationsAndPopulationSimilarityChart } from "./getOptionsOfIterationsAndPopulationSimilarityChart";
 import { get_options_iterations_and_information_entropy_chart } from "./get_options_iterations_and_information_entropy_chart";
+import { getOptionsOfIterationsAndPopulationSimilarityChart } from "./getOptionsOfIterationsAndPopulationSimilarityChart";
 
 export function useOptionsOfIterationsAndInformationEntropyChart() {
     const IterationDataOfIndividualPopulationsRef = ref(

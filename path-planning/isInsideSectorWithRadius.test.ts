@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+
 import { isInsideSectorWithRadius } from "./isInsideSectorWithRadius";
 import { Point } from "./Point";
 

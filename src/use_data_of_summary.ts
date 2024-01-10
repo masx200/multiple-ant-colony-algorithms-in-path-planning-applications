@@ -1,4 +1,5 @@
 import { computed, ComputedRef, ref } from "vue";
+
 import { DataOfBestChange } from "../functions/DataOfBestChange";
 import { DataOfTotal } from "../functions/DataOfTotal";
 

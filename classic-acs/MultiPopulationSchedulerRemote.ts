@@ -1,4 +1,5 @@
 import { Remote } from "comlink";
+
 import { MultiPopulationSchedulerAPI } from "./MultiPopulationSchedulerAPI";
 
 export interface MultiPopulationSchedulerRemote {

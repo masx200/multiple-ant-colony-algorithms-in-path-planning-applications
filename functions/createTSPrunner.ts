@@ -1,45 +1,45 @@
+import { sum, uniq } from "lodash-es";
+
+import EventEmitterTargetClass from "@masx200/event-emitter-target";
+
+import { createLatestIterateBestRoutesInPeriod } from "../classic-acs/createLatestIterateBestRoutesInPeriod";
+import { createRewardCommonRoutes } from "../classic-acs/createRewardCommonRoutes";
+import { createSmoothPheromones } from "../classic-acs/createSmoothPheromones";
+import { COMMON_TSP_Output } from "../classic-acs/tsp-interface";
+import { assignOwnKeys } from "../collections/assignOwnKeys";
+import { create_collection_of_optimal_routes } from "../collections/collection-of-optimal-routes";
+import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
 import {
-    Cached_hash_table_of_path_lengths_and_path_segments,
-    update_Cached_hash_table_of_path_lengths_and_path_segments,
-} from "./Cached_hash_table_of_path_lengths_and_path_segments";
-import {
-    DefaultOptions,
     default_alpha,
     default_beta,
     default_count_of_ants,
     default_max_results_of_2_opt,
     default_max_results_of_k_opt,
+    DefaultOptions,
 } from "../src/default_Options";
-
-import { COMMON_TSP_Output } from "../classic-acs/tsp-interface";
+import { set_distance_round } from "../src/set_distance_round";
+import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
+import { assert_number } from "../test/assert_number";
+import { assert_true } from "../test/assert_true";
+import {
+    Cached_hash_table_of_path_lengths_and_path_segments,
+    update_Cached_hash_table_of_path_lengths_and_path_segments,
+} from "./Cached_hash_table_of_path_lengths_and_path_segments";
+import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "./create_get_neighbors_from_optimal_routes_and_latest_routes";
+import { createCachePheromoneCalc } from "./createCachePheromoneCalc";
+import { createEventPair } from "./createEventPair";
+import { cycle_route_to_segments } from "./cycle_route_to_segments";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { DataOfFinishOneIteration } from "./DataOfFinishOneIteration";
 // import { DataOfFinishOneRoute } from "./DataOfFinishOneRoute";
 import { EachIterationHandler } from "./EachIterationHandler";
 import { EachRouteGenerator } from "./EachRouteGenerator";
-import EventEmitterTargetClass from "@masx200/event-emitter-target";
+import { generateUniqueArrayOfCircularPath } from "./generateUniqueArrayOfCircularPath";
 import { GreedyRoutesGenerator } from "./GreedyRoutesGenerator";
 import { PureDataOfFinishOneRoute } from "./PureDataOfFinishOneRoute";
 import { SharedOptions } from "./SharedOptions";
-import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
 import { TSP_Output_Data } from "./TSP_Output_Data";
 import { TSP_Runner } from "./TSP_Runner";
-import { assert_number } from "../test/assert_number";
-import { assert_true } from "../test/assert_true";
-import { assignOwnKeys } from "../collections/assignOwnKeys";
-import { createCachePheromoneCalc } from "./createCachePheromoneCalc";
-import { createEventPair } from "./createEventPair";
-import { createLatestIterateBestRoutesInPeriod } from "../classic-acs/createLatestIterateBestRoutesInPeriod";
-import { createRewardCommonRoutes } from "../classic-acs/createRewardCommonRoutes";
-import { createSmoothPheromones } from "../classic-acs/createSmoothPheromones";
-import { create_collection_of_optimal_routes } from "../collections/collection-of-optimal-routes";
-import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "./create_get_neighbors_from_optimal_routes_and_latest_routes";
-import { cycle_route_to_segments } from "./cycle_route_to_segments";
-import { generateUniqueArrayOfCircularPath } from "./generateUniqueArrayOfCircularPath";
-import { set_distance_round } from "../src/set_distance_round";
-import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
-import { sum } from "lodash-es";
-import { uniq } from "lodash-es";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 
@@ -60,6 +60,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         alpha_zero = default_alpha,
         beta_zero = default_beta,
         count_of_ants = default_count_of_ants,
+        start,
+        end,
     } = input;
 
     const options: Required<TSPRunnerOptions> = Object.fromEntries(
@@ -470,6 +472,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             pheromoneStore,
             count_of_nodes,
             set_global_best,
+            start,
+            end,
         };
     }
 

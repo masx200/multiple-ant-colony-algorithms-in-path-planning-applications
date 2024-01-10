@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { get_length_of_one_route_on_grid_map } from "./get_length_of_one_route_on_grid_map";
 import { GridDistanceMatrix } from "./Grid-distance-matrix";
 

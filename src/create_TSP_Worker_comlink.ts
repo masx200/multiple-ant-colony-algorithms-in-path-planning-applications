@@ -1,9 +1,8 @@
 import { worker_error_listener } from "../functions/worker_error_listener";
 import { create_Worker_comlink } from "./create_Worker_comlink";
-import { TSPRunnerOptions } from "./TSPRunnerOptions";
-
 import { TSP_Worker_API } from "./TSP_Worker_API";
 import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
+import { TSPRunnerOptions } from "./TSPRunnerOptions";
 
 export async function create_TSP_Worker_comlink(
     options: TSPRunnerOptions,

@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import { describe, it } from "vitest";
+
 import { containedByFanArea } from "./containedByFanArea";
 import { Point } from "./Point";
 

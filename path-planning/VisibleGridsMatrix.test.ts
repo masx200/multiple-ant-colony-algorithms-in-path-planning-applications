@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
+
+import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMap } from "./grid-map";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
-import { getVisibleGridsList } from "./getVisibleGridsList";
 
 describe("VisibleGridsMatrix", () => {
     it("所有正常情况应该被覆盖到", () => {

@@ -1,4 +1,5 @@
 import { assert, describe, it, test } from "vitest";
+
 import { GridMap } from "./grid-map";
 import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment } from "./Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with_a_line_segment.ts";
 

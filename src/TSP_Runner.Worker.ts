@@ -1,11 +1,11 @@
 import { expose } from "comlink";
 
-import { ClassOfPopulationToConstructor } from "./ClassOfPopulationToConstructor";
-
-import { TSPRunnerOptions } from "./TSPRunnerOptions";
-import { TSP_Worker_API } from "./TSP_Worker_API";
 import { assert_true } from "../test/assert_true";
+import { ClassOfPopulationToConstructor } from "./ClassOfPopulationToConstructor";
 import { RunnerMultipleCommunicative } from "./RunnerMultipleCommunicative";
+import { TSP_Worker_API } from "./TSP_Worker_API";
+import { TSPRunnerOptions } from "./TSPRunnerOptions";
+
 let runner: RunnerMultipleCommunicative | undefined = undefined;
 function init_runner(options: TSPRunnerOptions) {
     if (runner) {

@@ -1,4 +1,5 @@
 import { reactive } from "vue";
+
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
 
 export function use_data_of_one_iteration(): {

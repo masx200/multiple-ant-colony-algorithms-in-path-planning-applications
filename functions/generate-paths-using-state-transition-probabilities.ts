@@ -5,7 +5,6 @@ import { creategetdistancebyindex } from "./creategetdistancebyindex";
 import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
 import { NodeCoordinates } from "./NodeCoordinates";
 import { picknextnodeRoulette } from "./pick-next-node-Roulette";
-
 import { pickRandomOne } from "./pickRandomOne";
 import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 import { select_available_cities_from_optimal_and_latest } from "./select_available_cities_from_optimal_and_latest";

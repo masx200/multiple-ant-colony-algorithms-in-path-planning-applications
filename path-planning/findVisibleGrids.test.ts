@@ -1,4 +1,5 @@
 import { test } from "vitest";
+
 import { buildRandomGrid } from "./buildRandomGrid";
 import { findVisibleGridsBFS } from "./findVisibleGridsBFS";
 import { findVisibleGridsCircle } from "./findVisibleGridsCircle";

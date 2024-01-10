@@ -6,7 +6,6 @@ import {
     has_Cached_hash_table_of_path_lengths_and_path_segments,
 } from "./Cached_hash_table_of_path_lengths_and_path_segments";
 import { Infinity_to_max_or_min } from "./Infinity_to_max_or_min";
-
 import { nan_to_zero } from "./nan_to_zero";
 
 export function calc_pheromone_dynamic({

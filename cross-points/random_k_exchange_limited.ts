@@ -1,13 +1,12 @@
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
 import { getBestRoute_Of_Series_routes_and_lengths } from "../functions/getBestRoute_Of_Series_routes_and_lengths";
-
-import { assert_true as assert_true } from "../test/assert_true";
-
-import { get_distance_round } from "../src/set_distance_round";
-import { generate_one_k_exchange_route } from "./generate_one_k_exchange_route";
+import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { pickRandomOne } from "../functions/pickRandomOne";
+import { get_distance_round } from "../src/set_distance_round";
+import { assert_true as assert_true } from "../test/assert_true";
+import { generate_one_k_exchange_route } from "./generate_one_k_exchange_route";
+
 export function random_k_exchange_limited({
     max_results_of_k_exchange,
     route,

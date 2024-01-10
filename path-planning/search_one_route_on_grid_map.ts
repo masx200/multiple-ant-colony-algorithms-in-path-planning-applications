@@ -1,6 +1,7 @@
 // 告诉 TypeScript 不要进行类型检查
 
 import { assert } from "chai";
+
 import { getAvailableNeighbors } from "./getAvailableNeighbors";
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";

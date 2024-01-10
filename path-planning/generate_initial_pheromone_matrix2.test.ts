@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import { describe, expect, test } from "vitest";
+
 import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
 import { GridMap } from "./grid-map";
 import { Point } from "./Point";

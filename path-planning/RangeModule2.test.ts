@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import { test } from "vitest";
+
 import { RangeModule } from "./RangeModule";
 
 test("RangeModule", () => {

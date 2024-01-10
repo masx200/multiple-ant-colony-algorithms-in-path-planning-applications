@@ -1,8 +1,8 @@
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
+import { TSP_Output_Data } from "../functions/TSP_Output_Data";
 import { RunnerMultipleCommunicative } from "../src/RunnerMultipleCommunicative";
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
-import { TSP_Output_Data } from "../functions/TSP_Output_Data";
 
 export type COMMON_TSP_EXECUTION = {
     runOneIteration: () => Promise<void>;

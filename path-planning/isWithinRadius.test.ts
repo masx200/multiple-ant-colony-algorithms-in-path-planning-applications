@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import { describe, it } from "vitest";
+
 import { isWithinRadius } from "./isWithinRadius";
 import { Point } from "./Point";
 

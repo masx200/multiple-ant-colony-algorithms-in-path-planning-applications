@@ -1,6 +1,7 @@
 //@ts-ignore
 import { runScript } from "https://esm.sh/@masx200/leetcode-class@1.2.7/";
 import { assert, describe, expect, test } from "vitest";
+
 import { RangeModule } from "./RangeModule";
 
 describe("RangeModule", () => {

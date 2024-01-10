@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { euclidean_distance } from "./euclidean_distance";
 
 describe("euclidean_distance", () => {

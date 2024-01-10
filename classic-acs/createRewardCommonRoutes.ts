@@ -1,5 +1,7 @@
-import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
 import { max } from "lodash-es";
+
+import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
+
 export function createRewardCommonRoutes(
     pheromone_volatilization_coefficient_of_communication: number,
     pheromoneStore: MatrixSymmetry<number>,

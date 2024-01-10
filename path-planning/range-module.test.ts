@@ -1,4 +1,5 @@
 import { assert, describe, expect, test } from "vitest";
+
 import { RangeModule } from "./RangeModule";
 
 describe("RangeModule", () => {

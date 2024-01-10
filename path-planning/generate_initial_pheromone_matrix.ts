@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import { uniqBy } from "lodash-es";
+
 import { EuclideanDistance } from "./Euclidean-distance";
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";

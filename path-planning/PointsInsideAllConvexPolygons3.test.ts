@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+
 import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { GridMap } from "./grid-map";

@@ -7,6 +7,7 @@ import {
     Ref,
     watch,
 } from "vue";
+
 import { DataOfBestChange } from "../functions/DataOfBestChange";
 
 export function use_history_of_best(

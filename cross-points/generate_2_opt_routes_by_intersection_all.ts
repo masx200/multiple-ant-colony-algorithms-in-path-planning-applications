@@ -1,9 +1,11 @@
+import { random } from "lodash-es";
+
 import { NodeCoordinates } from "../functions/NodeCoordinates";
+import { generate_k_opt_cycle_routes_limited } from "../k-opt/generate_k_opt_cycle_routes_limited";
+import { cacheble_intersection_filter_with_cycle_route_find_one } from "./cacheble_intersection_filter_with_cycle_route_find_one";
 import { divide_route_to_2_opt_with_segment } from "./divide_route_to_2-opt-with-segment";
 import { generate_2_opt_cycle_routes_with_splitted_Routes } from "./generate_2_opt_cycle_routes_with_splitted_Routes";
-import { cacheble_intersection_filter_with_cycle_route_find_one } from "./cacheble_intersection_filter_with_cycle_route_find_one";
-import { random } from "lodash-es";
-import { generate_k_opt_cycle_routes_limited } from "../k-opt/generate_k_opt_cycle_routes_limited";
+
 export function generate_2_opt_routes_by_intersection_all({
     route,
     node_coordinates,

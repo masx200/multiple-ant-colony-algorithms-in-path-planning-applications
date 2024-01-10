@@ -45,6 +45,7 @@ import { run_tsp_by_search_time } from "./run_tsp_by_search_time";
 import { set_distance_round } from "./set_distance_round";
 // import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { startAndEnds } from "../all-grid-maps/index";
+import { twoDimensionsToOneDimension } from "../path-planning/twoDimensionsToOneDimension";
 import { useDateOfPopulationCommunication } from "./useDateOfPopulationCommunication";
 import { useOptionsOfIterationsAndInformationEntropyChart } from "./useOptionsOfIterationsAndInformationEntropyChart";
 import { useOptionsOfRoutesAndRouteLengthChart } from "./useOptionsOfRoutesAndRouteLengthChart";
@@ -465,6 +466,17 @@ export default defineComponent({
             // });
             const options = mapData?.map ?? [];
             const node_coordinates = options;
+            const gridmap = GridMapFromArray(options);
+            const n = gridmap.data[0].length;
+            const start = twoDimensionsToOneDimension(
+                ...map_start_and_end.value.start,
+                n,
+            );
+            const end = twoDimensionsToOneDimension(
+                ...map_start_and_end.value.end,
+                n,
+            );
+
             const alpha_value = alpha_zero.value;
             const max_routes_of_greedy_value = max_routes_of_greedy.value;
             const beta_value = beta_zero.value;
@@ -490,6 +502,8 @@ export default defineComponent({
 
                     node_coordinates: node_coordinates,
                     count_of_ants,
+                    start,
+                    end,
                 });
 
                 Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();

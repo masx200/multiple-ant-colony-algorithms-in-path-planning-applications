@@ -1,9 +1,9 @@
 import { random } from "lodash-es";
 
-import { assert_true } from "../test/assert_true";
 import { cycle_reorganize } from "../functions/cycle_reorganize";
-
 import { pickRandomOne } from "../functions/pickRandomOne";
+import { assert_true } from "../test/assert_true";
+
 export function split_cycle_route_to_2_sections(
     oldRoute: number[],
 ): [number[], number[]] {

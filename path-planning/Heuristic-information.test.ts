@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { describe, it } from "vitest";
+
 import { HeuristicInformation } from "./Heuristic-information.ts";
 
 describe("HeuristicInformation", function () {

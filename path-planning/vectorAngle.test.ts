@@ -1,6 +1,7 @@
 import { assert } from "chai";
-import { vectorAngle } from "./vectorAngle";
 import { describe, it } from "vitest";
+
+import { vectorAngle } from "./vectorAngle";
 
 describe("vectorAngle", () => {
     it("should return the angle in radians between the two vectors [1, 0] and [0, 1]", () => {

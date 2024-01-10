@@ -1,5 +1,7 @@
-import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
 import { max, min, uniqBy } from "lodash-es";
+
+import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
+
 import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 
 export function createSmoothPheromones(

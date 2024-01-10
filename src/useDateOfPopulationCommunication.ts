@@ -1,4 +1,5 @@
 import { ref } from "vue";
+
 import { MultiPopulationOutput } from "../classic-acs/MultiPopulationOutput";
 
 export function useDateOfPopulationCommunication() {

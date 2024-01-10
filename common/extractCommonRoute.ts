@@ -1,5 +1,6 @@
-import { assert_true } from "../test/assert_true";
 import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
+import { assert_true } from "../test/assert_true";
+
 export function extractCommonRoute(routes: number[][]): number[][] {
     assert_true(routes.length > 0);
     const n = routes[0].length;

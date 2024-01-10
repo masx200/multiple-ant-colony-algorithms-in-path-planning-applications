@@ -1,4 +1,4 @@
-import { PropType, defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 import { CommunicationStrategy } from "./CommunicationStrategy";
 import { DefaultOptions } from "./default_Options";

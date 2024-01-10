@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
+
 import { EuclideanDistance } from "./Euclidean-distance";
+
 describe("EuclideanDistance", () => {
     it("should calculate euclidian distance between two points", () => {
         expect(EuclideanDistance([1, 2], [5, 2])).toBe(4);

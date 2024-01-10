@@ -1,4 +1,5 @@
 import AllGridMap, { nametodimention } from "../all-grid-maps/index.ts";
+
 // console.log(AllGridMap, nametodimention);
 // import {
 // TSP_cities_map

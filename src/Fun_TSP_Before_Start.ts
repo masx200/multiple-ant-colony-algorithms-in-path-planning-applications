@@ -1,6 +1,6 @@
 import { NodeCoordinates } from "../functions/NodeCoordinates";
-import { TSPRunnerOptions } from "./TSPRunnerOptions";
 import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
+import { TSPRunnerOptions } from "./TSPRunnerOptions";
 
 export type Fun_TSP_Before_Start = ({
     node_coordinates,

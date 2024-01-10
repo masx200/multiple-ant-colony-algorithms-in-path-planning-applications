@@ -1,7 +1,7 @@
-import { Ref, computed } from "vue";
-
 // import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
 import { ECBasicOption } from "echarts/types/dist/shared";
+import { computed, Ref } from "vue";
+
 import { get_options_route_number_and_current_length_chart } from "./get_options_route_number_and_current_length_chart";
 import { getoptionsOfIterationAndIterationWorstLength } from "./getOptionsOfRouteNumberAndBestLengthChartOfIndividualPopulations";
 

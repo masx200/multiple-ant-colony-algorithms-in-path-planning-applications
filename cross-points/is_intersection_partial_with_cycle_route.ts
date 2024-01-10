@@ -1,13 +1,14 @@
-import { assert_true } from "../test/assert_true";
+import { combinations } from "combinatorial-generators";
+
+import { ArrayShuffle } from "../functions/ArrayShuffle";
 import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
+import { getOrCreateMapOfMapFun } from "../functions/getOrCreateMapOfMapFun";
+import { getUniqueStringOfCircularRoute } from "../functions/getUniqueStringOfCircularRoute";
 import { haverepetitions } from "../functions/haverepetitions";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
-import { combinations } from "combinatorial-generators";
-import { robustsegmentintersect } from "./robust-segment-intersect";
-import { ArrayShuffle } from "../functions/ArrayShuffle";
-import { getUniqueStringOfCircularRoute } from "../functions/getUniqueStringOfCircularRoute";
-import { getOrCreateMapOfMapFun } from "../functions/getOrCreateMapOfMapFun";
+import { assert_true } from "../test/assert_true";
 import { node_coordinates_to_intersect_routes_unique } from "./node_coordinates_to_intersect_routes_unique";
+import { robustsegmentintersect } from "./robust-segment-intersect";
 
 export function is_intersection_partial_with_cycle_route({
     cycle_route,

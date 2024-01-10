@@ -1,4 +1,5 @@
 import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
+
 import { Cached_hash_table_of_path_lengths_and_path_segments } from "./Cached_hash_table_of_path_lengths_and_path_segments";
 import { calc_pheromone_dynamic } from "./calc_pheromone_dynamic";
 import { create_pheromone_cache } from "./create_pheromone_cache";

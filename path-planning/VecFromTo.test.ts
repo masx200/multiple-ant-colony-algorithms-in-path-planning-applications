@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import { describe, it } from "vitest";
+
 import { Point } from "./Point";
 import { VecFromTo } from "./VecFromTo";
 

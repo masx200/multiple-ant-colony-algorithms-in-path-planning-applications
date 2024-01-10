@@ -1,4 +1,4 @@
-import { RemoteObject, ProxyMethods } from "comlink";
+import { ProxyMethods, RemoteObject } from "comlink";
 
 import { TSP_Worker_API } from "./TSP_Worker_API";
 

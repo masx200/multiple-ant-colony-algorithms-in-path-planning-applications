@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+
 import { canStraightReach } from "./canStraightReach";
 import { GridMap } from "./grid-map";
 

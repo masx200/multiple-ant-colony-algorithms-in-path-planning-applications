@@ -1,5 +1,7 @@
+import { expect, it } from "vitest";
+
 import { whether_k_sections_reverse_opt } from "../k-opt/whether_k_sections_reverse-opt";
-import { it, expect } from "vitest";
+
 it("whether_k_sections_reverse_opt", () => {
     test1();
 

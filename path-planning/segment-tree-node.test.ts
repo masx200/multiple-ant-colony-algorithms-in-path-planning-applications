@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { SegmentTreeNode } from "./SegmentTreeNode";
 
 describe("SegmentTreeNode", () => {

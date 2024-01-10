@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { GridDistanceMatrix } from "./Grid-distance-matrix";
 
 describe("GridDistanceMatrix", () => {

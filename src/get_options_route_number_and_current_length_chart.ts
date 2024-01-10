@@ -1,8 +1,10 @@
-import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
 // import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
 import { ECBasicOption } from "echarts/types/dist/shared";
-import { ECOption } from "../functions/echarts-line";
+
 import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions";
+import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
+import { ECOption } from "../functions/echarts-line";
+
 export const 迭代次数和迭代平均路径长度 = "迭代次数和迭代平均路径长度";
 export function get_options_route_number_and_current_length_chart(
     RouteDataOfIndividualPopulations: DataOfFinishOneIteration[][],

@@ -1,6 +1,7 @@
+import { expect, it } from "vitest";
+
 import { generateUniqueStringOfArray } from "../functions/generateUniqueStringOfArray";
-import { it } from "vitest";
-import { expect } from "vitest";
+
 it("generateUniqueStringOfArray", () => {
     expect(generateUniqueStringOfArray([{ a: 1, b: 2, c: 3 }, 999])).toBe(
         `[{"a":1,"b":2,"c":3},999]`,

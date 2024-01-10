@@ -2,6 +2,7 @@ import { assert_number } from "../test/assert_number";
 import { assert_true } from "../test/assert_true";
 import { assignOwnKeys } from "./assignOwnKeys";
 import { get_entries_by_max_value } from "./get_entries_by_max_value";
+
 import type { CollectionOfOptimalRoutes } from "./CollectionOfOptimalRoutes";
 export type { CollectionOfOptimalRoutes };
 export function create_collection_of_optimal_routes(

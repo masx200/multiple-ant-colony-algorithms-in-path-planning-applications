@@ -1,6 +1,7 @@
 import { expect } from "chai";
-import { isPointInSector } from "./isPointInSector";
 import { describe, it } from "vitest";
+
+import { isPointInSector } from "./isPointInSector";
 
 describe("isPointInSector", function () {
     it("should return true when point is in the sector", function () {

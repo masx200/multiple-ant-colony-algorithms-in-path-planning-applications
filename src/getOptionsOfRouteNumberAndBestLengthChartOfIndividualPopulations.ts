@@ -1,8 +1,10 @@
-import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
 // import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
 import { ECBasicOption } from "echarts/types/dist/shared";
-import { ECOption } from "../functions/echarts-line";
+
 import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions";
+import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
+import { ECOption } from "../functions/echarts-line";
+
 export const 迭代次数和迭代最差路径长度 = "迭代次数和迭代最差路径长度";
 export function getoptionsOfIterationAndIterationWorstLength(
     RouteDataOfIndividualPopulations: DataOfFinishOneIteration[][],

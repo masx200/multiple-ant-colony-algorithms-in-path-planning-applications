@@ -1,5 +1,7 @@
-import { test, assert } from "vitest";
+import { assert, test } from "vitest";
+
 import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
+
 test("similarityOfMultipleRoutes", () => {
     assert.equal(
         1,

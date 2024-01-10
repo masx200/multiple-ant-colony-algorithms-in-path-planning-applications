@@ -1,4 +1,5 @@
 import { describe, expect, it, test } from "vitest";
+
 import { getPathCoordinates } from "./getPathCoordinates";
 
 describe("getPathCoordinates3", () => {

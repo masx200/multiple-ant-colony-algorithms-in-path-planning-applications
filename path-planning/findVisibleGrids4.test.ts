@@ -1,4 +1,5 @@
 import { assert, test } from "vitest";
+
 import { findVisibleGridsBFS } from "./findVisibleGridsBFS";
 import { findVisibleGridsCircle } from "./findVisibleGridsCircle";
 import { GridMap } from "./grid-map";

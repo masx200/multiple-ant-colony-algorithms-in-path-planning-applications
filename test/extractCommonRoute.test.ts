@@ -1,5 +1,7 @@
 import { assert, test } from "vitest";
+
 import { extractCommonRoute } from "../common/extractCommonRoute";
+
 test("extractCommonRoute", () => {
     assert.deepEqual(
         extractCommonRoute([

@@ -1,6 +1,6 @@
 import { FindPointsInsideAllConvexPolygonsWithMatrixPointIterator } from "./FindPointsInsideAllConvexPolygonsWithMatrixPointIterator";
-import { MatrixPointIteratorRightTop } from "./MatrixPointIteratorRightTop";
 import { GridMap } from "./grid-map";
+import { MatrixPointIteratorRightTop } from "./MatrixPointIteratorRightTop";
 
 /**
  * 计算所有点被所有凸多边形包围的内部点
