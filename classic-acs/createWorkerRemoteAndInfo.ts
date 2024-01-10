@@ -1,13 +1,13 @@
 import { NodeCoordinates } from "../functions/NodeCoordinates";
-import { create_TSP_Worker_comlink } from "../src/create_TSP_Worker_comlink";
 import { TSPDefaultOptions } from "../src/TSPRunnerOptions";
 import { WorkerRemoteAndInfo } from "./MultiPopulationSchedulerCreate";
+import { create_TSP_Worker_comlink } from "../src/create_TSP_Worker_comlink";
 
 export async function createWorkerRemoteAndInfo(
     number_of_populations_of_the_first_category: number,
     options: Required<TSPDefaultOptions> & {
         node_coordinates: NodeCoordinates;
-    } & Partial<TSPDefaultOptions>,
+    } & Partial<TSPDefaultOptions> & { start: number; end: number },
     remoteworkers: WorkerRemoteAndInfo[],
     ClassOfPopulation: string,
 ) {

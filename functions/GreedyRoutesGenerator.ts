@@ -1,13 +1,11 @@
-import { sum } from "lodash-es";
-
-import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
-import { get_distance_round } from "../src/set_distance_round";
-import { assert_true } from "../test/assert_true";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
-import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Series_routes_and_lengths";
-import { greedy_first_search_routes_parallel } from "./greedy_first_search_routes_parallel";
+import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { PureDataOfFinishOneRoute } from "./PureDataOfFinishOneRoute";
 import { SharedOptions } from "./SharedOptions";
+import { assert_true } from "../test/assert_true";
+import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Series_routes_and_lengths";
+import { greedy_first_search_routes_parallel } from "./greedy_first_search_routes_parallel";
+import { sum } from "lodash-es";
 
 export async function GreedyRoutesGenerator(
     options: {
@@ -40,7 +38,7 @@ export async function GreedyRoutesGenerator(
 
     const greedy_results_iter = greedy_first_search_routes_parallel({
         ...options,
-        round: get_distance_round(),
+        // round: get_distance_round(),
     });
     const parallel_results: {
         length: number;
