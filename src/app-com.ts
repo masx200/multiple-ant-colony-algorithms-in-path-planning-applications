@@ -1,57 +1,59 @@
-import { ECBasicOption } from "echarts/types/dist/shared";
 import {
+    DefaultOptions,
+    default_search_rounds,
+    default_search_time_seconds,
+} from "./default_Options";
+import {
+    Ref,
     computed,
     defineComponent,
     onMounted,
     reactive,
     readonly,
     ref,
-    Ref,
     watch,
 } from "vue";
-import allGridMaps from "../all-grid-maps/index.ts";
-import { MultiPopulationOutput } from "../classic-acs/MultiPopulationOutput";
-import { MultiPopulationSchedulerRemote } from "../classic-acs/MultiPopulationSchedulerRemote";
-import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions.ts";
-import drawGridMapAndRoute from "../path-planning/drawGridMapAndRoute.vue";
-import GridMapSelector from "../path-planning/GridMapSelector.vue";
-import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions.ts";
-import { assert_number } from "../test/assert_number";
-import DataTable from "./Data_table.vue";
-import {
-    default_search_rounds,
-    default_search_time_seconds,
-    DefaultOptions,
-} from "./default_Options";
-import { 迭代次数和相对信息熵 } from "./get_options_iterations_and_information_entropy_chart";
 import {
     get_options_route_number_and_best_length_chart,
     迭代次数和迭代最优路径长度,
 } from "./get_options_route_number_and_best_length_chart";
-import { 迭代次数和迭代平均路径长度 } from "./get_options_route_number_and_current_length_chart";
-import { 迭代次数和种群相似度 } from "./getOptionsOfIterationsAndPopulationSimilarityChart";
-import { 迭代次数和迭代最差路径长度 } from "./getOptionsOfRouteNumberAndBestLengthChartOfIndividualPopulations";
+
+import DataTable from "./Data_table.vue";
+import { ECBasicOption } from "echarts/types/dist/shared";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
+import GridMapSelector from "../path-planning/GridMapSelector.vue";
 import { GridMapSelectorOptions } from "./GridMapSelectorOptions.ts";
-// import { NodeCoordinates } from "../functions/NodeCoordinates";
 import LineChart from "./LineChart.vue";
+import { MultiPopulationOutput } from "../classic-acs/MultiPopulationOutput";
+import { MultiPopulationSchedulerRemote } from "../classic-acs/MultiPopulationSchedulerRemote";
 import MultiplePopulationsConfigs from "./multiple-populations-configs.vue";
 import ProgressElement from "./Progress-element.vue";
-import { run_tsp_by_search_time } from "./run_tsp_by_search_time";
-import { run_tsp_by_search_rounds } from "./run_tsp-by-search-rounds";
 import { RunWay } from "./RunWay";
-import { set_distance_round } from "./set_distance_round";
 import { Stop_TSP_Worker } from "./Stop_TSP_Worker";
 import { TSP_Reset } from "./TSP_Reset";
 import { TSP_RunnerRef } from "./TSP_workerRef";
+import allGridMaps from "../all-grid-maps/index.ts";
+import { assert_number } from "../test/assert_number";
+import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions.ts";
+import drawGridMapAndRoute from "../path-planning/drawGridMapAndRoute.vue";
+import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions.ts";
+import { run_tsp_by_search_rounds } from "./run_tsp-by-search-rounds";
+import { run_tsp_by_search_time } from "./run_tsp_by_search_time";
+import { set_distance_round } from "./set_distance_round";
+// import { NodeCoordinates } from "../functions/NodeCoordinates";
+import { startAndEnds } from "../all-grid-maps/index";
+import { useDateOfPopulationCommunication } from "./useDateOfPopulationCommunication";
+import { useOptionsOfIterationsAndInformationEntropyChart } from "./useOptionsOfIterationsAndInformationEntropyChart";
+import { useOptionsOfRoutesAndRouteLengthChart } from "./useOptionsOfRoutesAndRouteLengthChart";
 import { use_data_of_greedy_iteration } from "./use_data_of_greedy_iteration";
 import { use_data_of_one_iteration } from "./use_data_of_one_iteration";
 import { use_data_of_summary } from "./use_data_of_summary";
 import { use_history_of_best } from "./use_history_of_best";
 import { use_initialize_tsp_runner } from "./use_initialize_tsp_runner";
-import { useDateOfPopulationCommunication } from "./useDateOfPopulationCommunication";
-import { useOptionsOfIterationsAndInformationEntropyChart } from "./useOptionsOfIterationsAndInformationEntropyChart";
-import { useOptionsOfRoutesAndRouteLengthChart } from "./useOptionsOfRoutesAndRouteLengthChart";
+import { 迭代次数和相对信息熵 } from "./get_options_iterations_and_information_entropy_chart";
+import { 迭代次数和种群相似度 } from "./getOptionsOfIterationsAndPopulationSimilarityChart";
+import { 迭代次数和迭代平均路径长度 } from "./get_options_route_number_and_current_length_chart";
+import { 迭代次数和迭代最差路径长度 } from "./getOptionsOfRouteNumberAndBestLengthChartOfIndividualPopulations";
 
 export const 迭代次数和全局最优路径长度 = "迭代次数和全局最优路径长度";
 export default defineComponent({
@@ -253,12 +255,12 @@ export default defineComponent({
                     IterationDataOfIndividualPopulationsRef.value,
                 );
             });
-
+        const map_start_and_end = ref({ start: 0, end: 0 });
         const selected_grid_map_scale = ref(0);
         const submit = async () => {
             const getMap = allGridMaps[selected_grid_map_value.value];
-
             if (!getMap) return;
+            if (!startAndEnds[selected_grid_map_value.value]) return;
             const mapData = await getMap();
             // const options = await generate_greedy_preview_echarts_options({
             //     selected_node_coordinates,
@@ -274,6 +276,8 @@ export default defineComponent({
             //     options,
             // );
             selected_grid_map_scale.value = mapData.scale;
+            map_start_and_end.value =
+                await startAndEnds[selected_grid_map_value.value]();
         };
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {
