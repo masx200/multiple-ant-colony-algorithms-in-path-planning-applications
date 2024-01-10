@@ -62,6 +62,7 @@ onMounted(() => {
     );
     console.log(path);
     route.value = path;
+    assert.equal(path.length, uniqBy(path, JSON.stringify).length);
 });
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
@@ -71,4 +72,6 @@ import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import { PointsInsideAllConvexPolygons } from "./PointsInsideAllConvexPolygons";
 import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
 import { DefaultOptions } from "../src/default_Options";
+import { assert } from "chai";
+import { uniqBy } from "lodash-es";
 </script>
