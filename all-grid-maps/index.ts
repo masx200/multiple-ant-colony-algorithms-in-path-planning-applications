@@ -2,7 +2,7 @@ const modules = import.meta.glob("./*/*.json");
 export default Object.fromEntries(
     Object.entries(modules).map(([key, value]) => {
         const name = key
-            .slice(2)
+
             .replace(".json", "")
             .replace(".jpg", "")
             .slice(key.lastIndexOf("/") + 1);
