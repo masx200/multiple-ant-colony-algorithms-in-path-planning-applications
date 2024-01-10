@@ -1,7 +1,7 @@
-import { max_number_of_stagnation } from "../functions/max_number_of_stagnation";
-import { relative_Information_Entropy_Factor } from "../functions/relative_Information_Entropy_Factor";
 import { CommunicationStrategy } from "./CommunicationStrategy";
 import { TSPDefaultOptions } from "./TSPRunnerOptions";
+import { max_number_of_stagnation } from "../functions/max_number_of_stagnation";
+import { relative_Information_Entropy_Factor } from "../functions/relative_Information_Entropy_Factor";
 
 export const default_count_of_ants = 20;
 export const default_search_rounds = 1000;
@@ -28,7 +28,7 @@ const DefaultOptions: Required<TSPDefaultOptions> = {
     count_of_ants: default_count_of_ants,
     max_size_of_collection_of_optimal_routes: 10,
 
-    max_routes_of_greedy: 20,
+    max_routes_of_greedy: 2,
     max_segments_of_cross_point: 40,
 
     max_cities_of_greedy: 300,
