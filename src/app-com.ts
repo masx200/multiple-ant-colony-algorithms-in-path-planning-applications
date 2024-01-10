@@ -255,7 +255,7 @@ export default defineComponent({
                     IterationDataOfIndividualPopulationsRef.value,
                 );
             });
-        const map_start_and_end = ref({ start: 0, end: 0 });
+        const map_start_and_end = ref({ start: [0, 0], end: [0, 0] });
         const selected_grid_map_scale = ref(0);
         const submit = async () => {
             const getMap = allGridMaps[selected_grid_map_value.value];
@@ -278,6 +278,11 @@ export default defineComponent({
             selected_grid_map_scale.value = mapData.scale;
             map_start_and_end.value =
                 await startAndEnds[selected_grid_map_value.value]();
+
+            options_of_best_route_route.value = [
+                map_start_and_end.value.start,
+                map_start_and_end.value.end,
+            ];
         };
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {
