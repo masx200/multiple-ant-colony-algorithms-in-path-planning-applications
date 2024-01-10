@@ -1,27 +1,26 @@
-import { set_distance_round } from "../src/set_distance_round";
-import { get_random_start } from "./get_random_start";
-
-import { Greedy_algorithm_to_solve_tsp_with_selected_start } from "./Greedy_algorithm_to_solve_tsp_with_selected_start";
 import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
+import { Greedy_algorithm_to_solve_tsp_with_selected_start } from "./Greedy_algorithm_to_solve_tsp_with_selected_start";
 
 export function Greedy_solve_tsp_with_selected_start_length_time_ms({
     node_coordinates,
-    start = get_random_start(node_coordinates),
-    round = false,
-    max_cities_of_greedy = Infinity,
+    start,
+    // round = false,
+    // max_cities_of_greedy = Infinity,
+    end,
 }: GreedyWithStartOptions): {
     length: number;
     route: number[];
     time_ms: number;
 } {
-    set_distance_round(round);
+    // set_distance_round(round);
     const start_time = Number(new Date());
     const { route, length } = Greedy_algorithm_to_solve_tsp_with_selected_start(
         {
             node_coordinates,
             start,
-            round,
-            max_cities_of_greedy,
+            // round,
+            // max_cities_of_greedy,
+            end,
         },
     );
     const end_time = Number(new Date());

@@ -1,5 +1,4 @@
 import { NodeCoordinates } from "../functions/NodeCoordinates";
-import { pickRandomOne } from "../functions/pickRandomOne";
 import { thread_Greedy_algorithm_to_solve_tsp_with_selected_start } from "./thread_Greedy_algorithm_to_solve_tsp_with_selected_start";
 
 const node_coordinates_to_greed_random_route = new WeakMap<
@@ -11,12 +10,17 @@ const node_coordinates_to_greed_random_route = new WeakMap<
 >();
 export async function cacheble_greed_random_route({
     node_coordinates,
-    round = false,
-    max_cities_of_greedy = Infinity,
+    start,
+    end,
+    // round = false,
+    // max_cities_of_greedy = Infinity,
 }: {
     node_coordinates: NodeCoordinates;
-    round?: boolean;
-    max_cities_of_greedy?: number;
+    start: number;
+
+    end: number;
+    // round?: boolean;
+    // max_cities_of_greedy?: number;
 }): Promise<{
     route: number[];
     length: number;
@@ -25,16 +29,17 @@ export async function cacheble_greed_random_route({
     if (cache) {
         return cache;
     } else {
-        const inputindexs = Array(node_coordinates.length)
-            .fill(0)
-            .map((_v, i) => i);
-        const start = pickRandomOne(inputindexs);
+        // const inputindexs = Array(node_coordinates.length)
+        //     .fill(0)
+        //     .map((_v, i) => i);
+        // const start = pickRandomOne(inputindexs);
         const route_promise =
             thread_Greedy_algorithm_to_solve_tsp_with_selected_start({
                 node_coordinates,
                 start,
-                round,
-                max_cities_of_greedy,
+                end,
+                // round,
+                // max_cities_of_greedy,
             });
         node_coordinates_to_greed_random_route.set(
             node_coordinates,
