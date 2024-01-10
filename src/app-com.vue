@@ -19,6 +19,9 @@
 
         <span>当前规模:{{ selected_grid_map_scale }}</span>
         <hr />
+
+        <span>当前长度:{{ data_of_best?.global_best_length }}</span>
+        <hr />
         <GridMapSelector
             v-model="selected_grid_map_value"
             :disabled="disable_switching"

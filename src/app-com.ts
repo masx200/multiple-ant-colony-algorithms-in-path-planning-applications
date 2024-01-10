@@ -21,6 +21,8 @@ import {
 import DataTable from "./Data_table.vue";
 import { ECBasicOption } from "echarts/types/dist/shared";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
+import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix.ts";
+import { GridMapFromArray } from "../path-planning/GridMapFromArray.ts";
 import GridMapSelector from "../path-planning/GridMapSelector.vue";
 import { GridMapSelectorOptions } from "./GridMapSelectorOptions.ts";
 import LineChart from "./LineChart.vue";
@@ -36,6 +38,7 @@ import allGridMaps from "../all-grid-maps/index.ts";
 import { assert_number } from "../test/assert_number";
 import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions.ts";
 import drawGridMapAndRoute from "../path-planning/drawGridMapAndRoute.vue";
+import { get_length_of_one_route_on_grid_map } from "../path-planning/get_length_of_one_route_on_grid_map.ts";
 import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions.ts";
 import { run_tsp_by_search_rounds } from "./run_tsp-by-search-rounds";
 import { run_tsp_by_search_time } from "./run_tsp_by_search_time";
@@ -255,7 +258,10 @@ export default defineComponent({
                     IterationDataOfIndividualPopulationsRef.value,
                 );
             });
-        const map_start_and_end = ref({ start: [0, 0], end: [0, 0] });
+        const map_start_and_end: Ref<{
+            start: [number, number];
+            end: [number, number];
+        }> = ref({ start: [0, 0], end: [0, 0] });
         const selected_grid_map_scale = ref(0);
         const submit = async () => {
             const getMap = allGridMaps[selected_grid_map_value.value];
@@ -278,11 +284,35 @@ export default defineComponent({
             //     options,
             // );
             selected_grid_map_scale.value = mapData.scale;
-
-            options_of_best_route_route.value = [
+            const path: [number, number][] = [
                 map_start_and_end.value.start,
                 map_start_and_end.value.end,
             ];
+            const gridmap = GridMapFromArray(options);
+            options_of_best_route_route.value = path;
+            const gridDistanceMatrix = GridDistanceMatrix(
+                gridmap.data.length,
+                gridmap.data[0].length,
+            );
+            const length = get_length_of_one_route_on_grid_map(
+                path,
+                gridDistanceMatrix,
+            );
+            // return;
+            data_of_best.value = Object.assign(
+                { ...data_of_best.value },
+                {
+                    global_best_length: length,
+                    time_of_best_ms: 0,
+                    global_best_route: [],
+                    search_count_of_best: 0,
+                },
+            );
+
+            return;
+            //     ...data_of_best.value,
+            //     global_best_length: length,
+            // };
         };
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {
@@ -500,6 +530,7 @@ export default defineComponent({
         >([]);
         // const 显示每次迭代的统计 = ref(false);
         return {
+            data_of_best,
             options_of_best_route_route,
             options_of_best_route_map,
             selected_grid_map_scale,
