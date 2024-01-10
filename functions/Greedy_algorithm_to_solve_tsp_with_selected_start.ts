@@ -1,16 +1,16 @@
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../path-planning/FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
 import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
-import { get_length_of_one_route_on_grid_map } from "../path-planning/get_length_of_one_route_on_grid_map";
-import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
-import { greedy_next_point_selector } from "../path-planning/greedy_next_point_selector";
+import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
-import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions";
 import { Point } from "../path-planning/Point";
+import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
+import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
+import { get_length_of_one_route_on_grid_map } from "../path-planning/get_length_of_one_route_on_grid_map";
+import { greedy_next_point_selector } from "../path-planning/greedy_next_point_selector";
+import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions";
 import { search_one_route_on_grid_map } from "../path-planning/search_one_route_on_grid_map";
 import { twoDimensionsToOneDimension } from "../path-planning/twoDimensionsToOneDimension";
-import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
-import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 
 export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     node_coordinates,
@@ -19,6 +19,9 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     // max_cities_of_greedy = Infinity,
     end,
 }: GreedyWithStartOptions): { route: number[]; length: number } {
+    if (Math.random() > 0.5) {
+        [start, end] = [end, start];
+    }
     const map = node_coordinates;
     const gridmap = GridMapFromArray(map);
 
