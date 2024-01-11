@@ -48,7 +48,7 @@
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^6.1.1",
-        "eslint-plugin-vue": "^9.19.2",
+        "eslint-plugin-vue": "^9.20.0",
         "find": "^0.3.0",
         "lodash-es": "^4.17.21",
         "mocha": "^10.0.0",
