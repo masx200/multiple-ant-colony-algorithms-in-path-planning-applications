@@ -1,7 +1,6 @@
 import { sum } from "lodash-es";
 
 import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
-import { NodeCoordinates } from "./NodeCoordinates";
 
 export function totalpathlengthwithoutcycle(
     path: number[],

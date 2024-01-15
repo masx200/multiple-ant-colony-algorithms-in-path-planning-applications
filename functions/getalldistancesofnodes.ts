@@ -1,7 +1,6 @@
 import { combinations } from "combinatorial-generators";
 
 import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
-import { NodeCoordinates } from "./NodeCoordinates";
 
 export function getalldistancesofnodes(
     node_coordinates: number[][],

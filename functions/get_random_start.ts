@@ -1,4 +1,3 @@
-import { NodeCoordinates } from "./NodeCoordinates";
 import { pickRandomOne } from "./pickRandomOne";
 
 export function get_random_start(node_coordinates: number[][]): number {

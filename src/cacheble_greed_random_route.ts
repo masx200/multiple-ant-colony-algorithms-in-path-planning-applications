@@ -1,13 +1,6 @@
-import { NodeCoordinates } from "../functions/NodeCoordinates";
+import { node_coordinates_to_greed_random_route } from "./node_coordinates_to_greed_random_route";
 import { thread_Greedy_algorithm_to_solve_tsp_with_selected_start } from "./thread_Greedy_algorithm_to_solve_tsp_with_selected_start";
 
-const node_coordinates_to_greed_random_route = new WeakMap<
-    NodeCoordinates,
-    Promise<{
-        route: number[];
-        length: number;
-    }>
->();
 export async function cacheble_greed_random_route({
     node_coordinates,
     start,
