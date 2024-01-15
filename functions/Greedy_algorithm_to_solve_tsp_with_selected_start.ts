@@ -11,7 +11,13 @@ import { greedy_next_point_selector } from "../path-planning/greedy_next_point_s
 import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions";
 import { search_one_route_on_grid_map } from "../path-planning/search_one_route_on_grid_map";
 import { twoDimensionsToOneDimension } from "../path-planning/twoDimensionsToOneDimension";
-
+/**
+ * Greedy算法，选择指定起始点求解TSP问题
+ * @param node_coordinates 城市坐标
+ * @param start 起始点
+ * @param end 结束点
+ * @returns 包含路径和路径长度的对象
+ */
 export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     node_coordinates,
     start,
@@ -20,8 +26,16 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     end,
 }: GreedyWithStartOptions): { route: number[]; length: number } {
     if (Math.random() > 0.5) {
-        [start, end] = [end, start];
+        // [start, end] = [end, start];
+        const res = Greedy_algorithm_to_solve_tsp_with_selected_start({
+            node_coordinates,
+            start: end,
+            end: start,
+        });
+        res.route = res.route.toReversed();
+        return res;
     }
+
     const map = node_coordinates;
     const gridmap = GridMapFromArray(map);
 
@@ -44,6 +58,9 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     const n = gridmap.data[0].length;
     const startPoint = new Point(...oneDimensionToTwoDimensions(start, n));
     const endPoint = new Point(...oneDimensionToTwoDimensions(end, n));
+    /**
+     * 在网格地图上搜索一条路径
+     */
     const path = search_one_route_on_grid_map(
         gridmap,
         startPoint,
