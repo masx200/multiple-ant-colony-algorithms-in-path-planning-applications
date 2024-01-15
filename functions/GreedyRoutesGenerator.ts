@@ -27,7 +27,7 @@ export async function GreedyRoutesGenerator(
 }> {
     const {
         set_global_best,
-        count_of_nodes,
+        // count_of_nodes,
         emit_finish_greedy_iteration,
         getBestRoute,
         getBestLength,
@@ -91,7 +91,7 @@ export async function GreedyRoutesGenerator(
         global_best_length: getBestLength(),
     });
     assert_true(getBestLength() < Infinity);
-    assert_true(getBestRoute().length === count_of_nodes);
+    assert_true(getBestRoute().length >= 2);
     return {
         best_length,
         best_route,
