@@ -1,6 +1,5 @@
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { totalpathlengthwithoutcycle } from "../functions/totalpathlengthwithoutcycle";
 import { assert_true } from "./assert_true";
 
