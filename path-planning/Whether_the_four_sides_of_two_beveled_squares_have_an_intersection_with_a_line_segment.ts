@@ -3,8 +3,8 @@
 import { assert } from "chai";
 
 import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
-import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { GridMap } from "./grid-map";
+import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 
 // 引入自定义模块robust-segment-intersect，这个模块应该包含了一个函数robustsegmentintersect，用于计算两条线段是否相交
 

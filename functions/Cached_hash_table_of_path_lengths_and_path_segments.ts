@@ -1,4 +1,4 @@
-import { cycle_route_to_segments } from "./cycle_route_to_segments";
+import { not_cycle_route_to_segments } from "./not_cycle_route_to_segments";
 
 export function update_Cached_hash_table_of_path_lengths_and_path_segments(
     map: Cached_hash_table_of_path_lengths_and_path_segments,
@@ -13,7 +13,7 @@ export function update_Cached_hash_table_of_path_lengths_and_path_segments(
             map.set(
                 length,
                 new Set(
-                    cycle_route_to_segments(route).map(([row, column]) => {
+                    not_cycle_route_to_segments(route).map(([row, column]) => {
                         if (row > column) {
                             [row, column] = [column, row];
                         }

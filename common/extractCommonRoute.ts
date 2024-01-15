@@ -1,4 +1,4 @@
-import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
+import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
 import { assert_true } from "../test/assert_true";
 
 export function extractCommonRoute(routes: number[][]): number[][] {
@@ -11,7 +11,7 @@ export function extractCommonRoute(routes: number[][]): number[][] {
 
     let max = 0;
     for (const route of routes) {
-        for (const [x, y] of cycle_route_to_segments(route)) {
+        for (const [x, y] of not_cycle_route_to_segments(route)) {
             result[x][y]++;
             result[y][x]++;
             max = Math.max(max, result[x][y]);

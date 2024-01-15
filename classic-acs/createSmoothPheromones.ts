@@ -2,7 +2,7 @@ import { max, min, uniqBy } from "lodash-es";
 
 import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
 
-import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
+import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
 
 export function createSmoothPheromones(
     pheromoneStore: MatrixSymmetry<number>,
@@ -15,7 +15,7 @@ export function createSmoothPheromones(
         const averageValue = (maxValue + minValue) / 2;
         const segments = uniqBy(
             global_optimal_routes
-                .map(({ route }) => cycle_route_to_segments(route))
+                .map(({ route }) => not_cycle_route_to_segments(route))
                 .flat(),
             function (a) {
                 if (a[0] > a[1]) return JSON.stringify([a[1], a[0]]);

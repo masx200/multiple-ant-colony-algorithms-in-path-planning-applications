@@ -1,4 +1,4 @@
-import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
+import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
 import { assert_true } from "../test/assert_true";
 
 export function similarityOfTwoRoutes(
@@ -12,12 +12,12 @@ export function similarityOfTwoRoutes(
         .map(() => Array(route1.length).fill(0));
     const n = route1.length;
 
-    cycle_route_to_segments(route1).forEach(([x, y]) => {
+    not_cycle_route_to_segments(route1).forEach(([x, y]) => {
         A[x][y] = 1;
         A[y][x] = 1;
     });
     return (
-        cycle_route_to_segments(route2).reduce((p, [x, y]): number => {
+        not_cycle_route_to_segments(route2).reduce((p, [x, y]): number => {
             return p + Number(A[x][y] === 1);
         }, 0) / n
     );

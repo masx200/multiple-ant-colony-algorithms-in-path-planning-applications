@@ -28,7 +28,7 @@ import {
 import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "./create_get_neighbors_from_optimal_routes_and_latest_routes";
 import { createCachePheromoneCalc } from "./createCachePheromoneCalc";
 import { createEventPair } from "./createEventPair";
-import { cycle_route_to_segments } from "./cycle_route_to_segments";
+import { not_cycle_route_to_segments } from "./not_cycle_route_to_segments";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { DataOfFinishOneIteration } from "./DataOfFinishOneIteration";
 // import { DataOfFinishOneRoute } from "./DataOfFinishOneRoute";
@@ -406,9 +406,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     ].map((a) => a.route);
 
                     for (const route of routes_should_update_pheromone) {
-                        for (const [city1, city2] of cycle_route_to_segments(
-                            route,
-                        )) {
+                        for (const [
+                            city1,
+                            city2,
+                        ] of not_cycle_route_to_segments(route)) {
                             pheromoneStore.calc(city1, city2);
                         }
                     }

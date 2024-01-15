@@ -8,7 +8,7 @@ import { calc_state_transition_probabilities } from "../functions/calc_state_tra
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { create_run_iterations } from "../functions/create_run_iterations";
 import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
-import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
+import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
 import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIteration";
 import { generateUniqueArrayOfCircularPath } from "../functions/generateUniqueArrayOfCircularPath";
 import { geteuclideandistancebyindex } from "../functions/geteuclideandistancebyindex";
@@ -31,6 +31,7 @@ import {
     COMMON_TSP_Options,
     COMMON_TSP_Output,
 } from "./tsp-interface";
+import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
 
 export function tsp_similarity_execution_and_local_optimization_with_Optional_city_rewards_and_punishments(
     input: COMMON_TSP_Options,
@@ -221,7 +222,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         return { time_ms, route, length };
     }
     function local_pheromone_update(route: number[]) {
-        for (const [city1, city2] of cycle_route_to_segments(route)) {
+        for (const [city1, city2] of not_cycle_route_to_segments(route)) {
             const changed_pheromone =
                 (1 - local_pheromone_volatilization_coefficient) *
                     pheromoneStore.get(city1, city2) +
@@ -234,7 +235,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         const best_length = get_best_length();
 
         const delta_pheromone = 1 / best_length;
-        for (const [city1, city2] of cycle_route_to_segments(best_route)) {
+        for (const [city1, city2] of not_cycle_route_to_segments(best_route)) {
             const changed_pheromone =
                 (1 - global_pheromone_volatilization_coefficient) *
                     pheromoneStore.get(city1, city2) +
