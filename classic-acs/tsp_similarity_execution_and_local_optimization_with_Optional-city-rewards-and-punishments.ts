@@ -55,6 +55,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         path_selection_parameter_q0_min = DefaultOptions.path_selection_parameter_q0_min,
         start,
         end,
+        显示每次迭代的统计,
     } = options;
 
     let Intra_population_similarity = 0;
@@ -369,19 +370,20 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 endtime_of_process_iteration -
                 starttime_of_process_iteration;
             total_time_ms += time_ms_of_one_iteration;
-            delta_data_of_iterations.push({
-                global_best_length: get_best_length(),
-                current_iterations: getCountOfIterations(),
-                time_ms_of_one_iteration,
-                population_relative_information_entropy,
-                average_length_of_iteration,
-                worst_length_of_iteration,
-                iterate_best_length,
-                Intra_population_similarity,
-                optimal_length_of_iteration,
-                convergence_coefficient: -Infinity,
-                random_selection_probability: -Infinity,
-            });
+            if (显示每次迭代的统计)
+                delta_data_of_iterations.push({
+                    global_best_length: get_best_length(),
+                    current_iterations: getCountOfIterations(),
+                    time_ms_of_one_iteration,
+                    population_relative_information_entropy,
+                    average_length_of_iteration,
+                    worst_length_of_iteration,
+                    iterate_best_length,
+                    Intra_population_similarity,
+                    optimal_length_of_iteration,
+                    convergence_coefficient: -Infinity,
+                    random_selection_probability: -Infinity,
+                });
         }
     }
 

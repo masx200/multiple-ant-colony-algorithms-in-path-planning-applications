@@ -494,7 +494,7 @@ export default defineComponent({
                 assert_number(count_of_ants);
                 const runner = await initializeTSP_runner({
                     ...input_options,
-
+                    显示每次迭代的统计: 显示每次迭代的统计.value,
                     distance_round,
 
                     max_routes_of_greedy: max_routes_of_greedy_value,

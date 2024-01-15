@@ -52,6 +52,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     } = createEventPair<DataOfFinishGreedyIteration>(emitter);
 
     const {
+        显示每次迭代的统计,
         max_results_of_2_opt = default_max_results_of_2_opt,
 
         max_results_of_k_opt = default_max_results_of_k_opt,
@@ -88,7 +89,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     //     data_of_routes.push(data);
     // });
     on_finish_one_iteration((data) => {
-        delta_data_of_iterations.push(data);
+        if (显示每次迭代的统计) delta_data_of_iterations.push(data);
     });
     on_finish_greedy_iteration((data) => {
         data_of_greedy.push(data);
