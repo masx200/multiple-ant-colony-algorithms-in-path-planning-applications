@@ -1,7 +1,6 @@
 import { COMMON_TSP_Output } from "../classic-acs/tsp-interface";
 import { RunnerMultipleCommunicative } from "../src/RunnerMultipleCommunicative";
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
-import { NodeCoordinates } from "./NodeCoordinates";
 import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 import { SharedOptions } from "./SharedOptions";
 
@@ -27,7 +26,7 @@ export type TSP_Runner = Required<TSPRunnerOptions> &
 
         [Symbol.toStringTag]: string;
 
-        node_coordinates: NodeCoordinates;
+        node_coordinates: number[][];
         alpha_zero: number;
         beta_zero: number;
         count_of_ants: number;

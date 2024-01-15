@@ -2,10 +2,9 @@ import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
 
 import { cachenode_coordinatestostore } from "./cachenode_coordinatestostore";
 import { createdistancestore } from "./createdistancestore";
-import { NodeCoordinates } from "./NodeCoordinates";
 
 export function getstoreofnode_coordinates(
-    node_coordinates: NodeCoordinates,
+    node_coordinates: number[][],
     round = false,
 ): MatrixSymmetry<number> {
     return (

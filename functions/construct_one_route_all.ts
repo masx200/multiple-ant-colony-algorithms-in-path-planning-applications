@@ -1,12 +1,11 @@
 import { generate_paths_using_state_transition_probabilities } from "./generate-paths-using-state-transition-probabilities";
-import { NodeCoordinates } from "./NodeCoordinates";
 import { SharedOptions } from "./SharedOptions";
 
 export function construct_one_route_all(
     options: {
         current_search_count: number;
 
-        node_coordinates: NodeCoordinates;
+        node_coordinates: number[][];
         count_of_nodes: number;
 
         alpha_zero: number;

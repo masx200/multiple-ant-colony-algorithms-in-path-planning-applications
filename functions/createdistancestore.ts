@@ -2,10 +2,9 @@ import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
 
 import { cachenode_coordinatestostore } from "./cachenode_coordinatestostore";
 import { createsymmetrymatrixdistancestore } from "./createsymmetrymatrixdistancestore";
-import { NodeCoordinates } from "./NodeCoordinates";
 
 export function createdistancestore(
-    node_coordinates: NodeCoordinates,
+    node_coordinates: number[][],
     round = false,
 ): MatrixSymmetry<number> {
     const euclideandistancerecord = createsymmetrymatrixdistancestore(

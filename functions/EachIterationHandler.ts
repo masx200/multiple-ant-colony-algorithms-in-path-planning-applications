@@ -4,7 +4,6 @@ import { assert_true } from "../test/assert_true";
 import { calc_population_relative_information_entropy } from "./calc_population-relative-information-entropy";
 import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Series_routes_and_lengths";
 import { local_optimization_route_thread } from "./local_optimization_route_thread";
-import { NodeCoordinates } from "./NodeCoordinates";
 import { SharedOptions } from "./SharedOptions";
 
 export async function EachIterationHandler(
@@ -16,7 +15,7 @@ export async function EachIterationHandler(
 
         getBestRoute: () => number[];
         getBestLength: () => number;
-        node_coordinates: NodeCoordinates;
+        node_coordinates: number[][];
     },
 ): Promise<{
     iterate_best_length: number;

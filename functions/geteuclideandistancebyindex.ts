@@ -1,10 +1,9 @@
 import { getstoreofnode_coordinates } from "./getstoreofnode_coordinates";
-import { NodeCoordinates } from "./NodeCoordinates";
 
 export function geteuclideandistancebyindex(
     left: number,
     right: number,
-    node_coordinates: NodeCoordinates,
+    node_coordinates: number[][],
     round = false,
 ): number {
     const euclideandistancerecord = getstoreofnode_coordinates(

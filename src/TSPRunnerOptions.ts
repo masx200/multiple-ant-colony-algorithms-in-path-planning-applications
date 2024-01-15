@@ -1,5 +1,4 @@
 import { CommunicationStrategy } from "./CommunicationStrategy";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 
 export interface TSPDefaultOptions {
     显示每次迭代的统计: boolean;
@@ -38,5 +37,5 @@ export interface TSPDefaultOptions {
 }
 
 export type TSPRunnerOptions = {
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
 } & Partial<TSPDefaultOptions> & { start: number; end: number };

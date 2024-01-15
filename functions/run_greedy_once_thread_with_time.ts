@@ -1,5 +1,4 @@
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
-import { NodeCoordinates } from "./NodeCoordinates";
 
 export async function run_greedy_once_thread_with_time({
     node_coordinates,
@@ -11,7 +10,7 @@ export async function run_greedy_once_thread_with_time({
     // max_cities_of_greedy = Infinity,
 }: {
     // inputindexs?: number[];
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
     start: number;
     end: number;
     // round?: boolean;

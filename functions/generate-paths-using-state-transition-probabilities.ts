@@ -3,7 +3,6 @@ import { assert_true } from "../test/assert_true";
 import { closed_total_path_length } from "./closed-total-path-length";
 import { creategetdistancebyindex } from "./creategetdistancebyindex";
 import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
-import { NodeCoordinates } from "./NodeCoordinates";
 import { picknextnodeRoulette } from "./pick-next-node-Roulette";
 import { pickRandomOne } from "./pickRandomOne";
 import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
@@ -15,7 +14,7 @@ export function generate_paths_using_state_transition_probabilities(
         alpha_zero: number;
         beta_zero: number;
         random_selection_probability: number;
-        node_coordinates: NodeCoordinates;
+        node_coordinates: number[][];
 
         pheromoneStore: ReadOnlyPheromone;
     } & SharedOptions,

@@ -3,7 +3,6 @@ import {
     MatrixSymmetryCreate,
 } from "@masx200/sparse-2d-matrix";
 import { euclidean_distance } from "./euclidean_distance";
-import { NodeCoordinates } from "./NodeCoordinates";
 import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions";
 
 /**
@@ -13,7 +12,7 @@ import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoD
  * @returns 返回不对称矩阵
  */
 export function createsymmetrymatrixdistancestore(
-    node_coordinates: NodeCoordinates,
+    node_coordinates: number[][],
     round = false,
 ): MatrixSymmetry<number> {
     const row = node_coordinates.length;

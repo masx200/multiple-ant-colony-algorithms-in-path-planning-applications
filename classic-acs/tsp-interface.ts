@@ -1,5 +1,4 @@
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { TSP_Output_Data } from "../functions/TSP_Output_Data";
 import { RunnerMultipleCommunicative } from "../src/RunnerMultipleCommunicative";
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
@@ -41,7 +40,7 @@ export type COMMON_TSP_Options = {
     alpha_zero?: number | undefined;
     beta_zero?: number | undefined;
     count_of_ants?: number | undefined;
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
 
     local_pheromone_volatilization_coefficient?: number;
     global_pheromone_volatilization_coefficient?: number;

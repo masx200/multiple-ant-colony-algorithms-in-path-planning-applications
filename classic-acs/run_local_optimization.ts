@@ -1,7 +1,6 @@
 import { uniqBy } from "lodash-es";
 
 import { local_optimization_route_thread } from "../functions/local_optimization_route_thread";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 
 export async function run_local_optimization(
     routes_and_lengths_of_one_iteration: {
@@ -15,7 +14,7 @@ export async function run_local_optimization(
     max_segments_of_cross_point: number,
     distance_round: boolean,
     max_results_of_k_opt: number,
-    node_coordinates: NodeCoordinates,
+    node_coordinates: number[][],
     max_results_of_k_exchange: number,
     max_results_of_2_opt: number,
 ): Promise<{ time_ms: number; length: number; route: number[] }> {

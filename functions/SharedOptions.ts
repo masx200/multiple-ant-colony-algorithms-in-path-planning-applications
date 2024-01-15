@@ -1,5 +1,4 @@
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
-import { NodeCoordinates } from "./NodeCoordinates";
 import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 
 export type SharedOptions = Required<TSPRunnerOptions> & {
@@ -23,6 +22,6 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     alpha_zero: number;
     beta_zero: number;
     count_of_ants: number;
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
     pheromoneStore: ReadOnlyPheromone;
 } & { start: number; end: number };
