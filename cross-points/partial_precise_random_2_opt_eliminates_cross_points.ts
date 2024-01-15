@@ -1,5 +1,5 @@
 import { closed_total_path_length } from "../functions/closed-total-path-length";
-import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
+import { creategetdistancebyIndex } from "../functions/creategetdistancebyIndex";
 import { getBestRoute_Of_Series_routes_and_lengths } from "../functions/getBestRoute_Of_Series_routes_and_lengths";
 import { get_distance_round } from "../src/set_distance_round";
 import { assert_true as assert_true } from "../test/assert_true";
@@ -36,7 +36,7 @@ export function partial_precise_random_2_opt_eliminates_cross_points({
                 const length = closed_total_path_length({
                     round: get_distance_round(),
                     path: route,
-                    getdistancebyindex: creategetdistancebyindex(
+                    getdistancebyIndex: creategetdistancebyIndex(
                         node_coordinates,
                         get_distance_round(),
                     ),

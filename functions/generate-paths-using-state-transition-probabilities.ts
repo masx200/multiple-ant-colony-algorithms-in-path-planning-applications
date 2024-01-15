@@ -1,7 +1,7 @@
 import { get_distance_round } from "../src/set_distance_round";
 import { assert_true } from "../test/assert_true";
 import { closed_total_path_length } from "./closed-total-path-length";
-import { creategetdistancebyindex } from "./creategetdistancebyindex";
+import { creategetdistancebyIndex } from "./creategetdistancebyIndex";
 import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
 import { picknextnodeRoulette } from "./pick-next-node-Roulette";
 import { pickRandomOne } from "./pickRandomOne";
@@ -96,7 +96,7 @@ export function generate_paths_using_state_transition_probabilities(
     const routelength = closed_total_path_length({
         round: get_distance_round(),
         path: route,
-        getdistancebyindex: creategetdistancebyindex(
+        getdistancebyIndex: creategetdistancebyIndex(
             node_coordinates,
             get_distance_round(),
         ),

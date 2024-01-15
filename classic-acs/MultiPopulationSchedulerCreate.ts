@@ -1,7 +1,7 @@
 import { zip } from "lodash-es";
 
 import { extractCommonRoute } from "../common/extractCommonRoute";
-import { generateUniqueArrayOfCircularPath } from "../functions/generateUniqueArrayOfCircularPath";
+
 import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
 import { CommunicationStrategy } from "../src/CommunicationStrategy";
 import { DefaultOptions } from "../src/default_Options";
@@ -171,7 +171,7 @@ export async function MultiPopulationSchedulerCreate(
     }
     function set_global_best(route: number[], length: number) {
         if (length < global_best.length) {
-            const formatted_route = generateUniqueArrayOfCircularPath(route);
+            const formatted_route = Array.from(route);
 
             global_best.length = length;
             global_best.route = formatted_route;

@@ -1,37 +1,38 @@
-import { sum, uniq } from "lodash-es";
-
 import { MatrixFill, MatrixSymmetryCreate } from "@masx200/sparse-2d-matrix";
-
+import { sum, uniq } from "lodash-es";
 import { create_collection_of_optimal_routes } from "../collections/collection-of-optimal-routes";
+import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIteration";
 import { calc_population_relative_information_entropy } from "../functions/calc_population-relative-information-entropy";
 import { calc_state_transition_probabilities } from "../functions/calc_state_transition_probabilities";
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { create_run_iterations } from "../functions/create_run_iterations";
-import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
-import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
-import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIteration";
-import { generateUniqueArrayOfCircularPath } from "../functions/generateUniqueArrayOfCircularPath";
+import { creategetdistancebyIndex } from "../functions/creategetdistancebyIndex";
+
 import { geteuclideandistancebyindex } from "../functions/geteuclideandistancebyindex";
+import {
+    not_cycle_route_to_segments,
+    // not_cycle_route_to_segments,
+} from "../functions/not_cycle_route_to_segments";
 import { pickRandomOne } from "../functions/pickRandomOne";
 import { run_greedy_once_thread_with_time } from "../functions/run_greedy_once_thread_with_time";
 import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
 import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
-import { DefaultOptions } from "../src/default_Options";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
+import { DefaultOptions } from "../src/default_Options";
 import { get_distance_round } from "../src/set_distance_round";
 import { assert_true } from "../test/assert_true";
 import { createLatestIterateBestRoutesInPeriod } from "./createLatestIterateBestRoutesInPeriod";
 import { createRewardCommonRoutes } from "./createRewardCommonRoutes";
 import { createSmoothPheromones } from "./createSmoothPheromones";
 import { run_local_optimization } from "./run_local_optimization";
-/* eslint-disable indent */
 import {
     COMMON_DataOfOneIteration,
     COMMON_TSP_EXECUTION,
     COMMON_TSP_Options,
     COMMON_TSP_Output,
 } from "./tsp-interface";
-import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
+
+/* eslint-disable indent */
 
 export function tsp_similarity_execution_and_local_optimization_with_Optional_city_rewards_and_punishments(
     input: COMMON_TSP_Options,
@@ -107,7 +108,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     let time_of_best_ms = 0;
     function set_global_best(route: number[], length: number) {
         if (length < global_best.length) {
-            const formatted_route = generateUniqueArrayOfCircularPath(route);
+            const formatted_route = Array.from(route);
 
             global_best.length = length;
             global_best.route = formatted_route;
@@ -210,7 +211,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         const routelength = closed_total_path_length({
             round: get_distance_round(),
             path: route,
-            getdistancebyindex: creategetdistancebyindex(
+            getdistancebyIndex: creategetdistancebyIndex(
                 node_coordinates,
                 get_distance_round(),
             ),
