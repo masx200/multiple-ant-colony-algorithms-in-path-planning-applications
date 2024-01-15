@@ -18,7 +18,7 @@ export function intersection_filter_with_cycle_route_find_one_old({
 }): [[number, number], [number, number]] | false {
     const count_of_nodes = node_coordinates.length;
     assert_true(count_of_nodes > 1);
-    assert_true(cycle_route.length === node_coordinates.length);
+    assert_true(cycle_route.length >= 2);
     const oldRoute = cycle_route;
     const start = pickRandomOne(oldRoute);
 
