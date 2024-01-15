@@ -2,7 +2,6 @@ import { IntegerRange } from "../cross-points/IntegerRange";
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
 import { getBestRoute_Of_Series_routes_and_lengths } from "../functions/getBestRoute_Of_Series_routes_and_lengths";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { pickRandomOne } from "../functions/pickRandomOne";
 import { get_distance_round } from "../src/set_distance_round";
 import { generate_k_opt_cycle_routes_limited } from "./generate_k_opt_cycle_routes_limited";
@@ -17,7 +16,7 @@ export function Random_K_OPT_full_limited_find_best({
     count_of_nodes: number;
     route: number[];
     max_results_of_k_opt: number;
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
     length: number;
 }): { route: number[]; length: number } {
     const routes_of_k_opt: number[][] = Array.from({

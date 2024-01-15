@@ -3,7 +3,6 @@ import { combinations } from "combinatorial-generators";
 import { cycle_reorganize } from "../functions/cycle_reorganize";
 import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { haverepetitions } from "../functions/haverepetitions";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { pickRandomOne } from "../functions/pickRandomOne";
 import { assert_true } from "../test/assert_true";
 import { robustsegmentintersect } from "./robust-segment-intersect";
@@ -14,7 +13,7 @@ export function intersection_filter_with_cycle_route_find_one_old({
 }: {
     cycle_route: number[];
 
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
 }): [[number, number], [number, number]] | false {
     const count_of_nodes = node_coordinates.length;
     assert_true(count_of_nodes > 1);

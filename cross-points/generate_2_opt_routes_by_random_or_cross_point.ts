@@ -1,6 +1,5 @@
 import { random } from "lodash-es";
 
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { generate_k_opt_cycle_routes_limited } from "../k-opt/generate_k_opt_cycle_routes_limited";
 import { divide_route_to_2_opt_with_segment } from "./divide_route_to_2-opt-with-segment";
 import { find_one_intersection_partial_with_cycle_route } from "./find_one_intersection_partial_with_cycle_route";
@@ -14,7 +13,7 @@ export function generate_2_opt_routes_by_random_or_cross_point({
 }: {
     max_of_segments: number;
     route: number[];
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
     count_of_nodes: number;
 }): number[][] {
     const intersection = find_one_intersection_partial_with_cycle_route({

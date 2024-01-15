@@ -1,7 +1,6 @@
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
 import { getBestRoute_Of_Series_routes_and_lengths } from "../functions/getBestRoute_Of_Series_routes_and_lengths";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { default_max_results_of_2_opt } from "../src/default_Options";
 import { get_distance_round } from "../src/set_distance_round";
 import { assert_true as assert_true } from "../test/assert_true";
@@ -18,7 +17,7 @@ export function Precise_2_opt_eliminates_all_intersections({
     max_results_of_2_opt?: number;
     route: number[];
     length: number;
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
 }): { length: number; route: number[] } {
     assert_true(max_results_of_2_opt >= 1);
     for (let count = 0; count <= max_results_of_2_opt; count++) {

@@ -7,7 +7,6 @@ import { Random_K_OPT_full_limited_find_best } from "../k-opt/Random_K_OPT_full_
 import { set_distance_round } from "../src/set_distance_round";
 import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Series_routes_and_lengths";
 import { LocalOptimizationRoutesOptions } from "./LocalOptimizationRouteOptions";
-import { NodeCoordinates } from "./NodeCoordinates";
 import { pickRandomOne } from "./pickRandomOne";
 
 export async function local_optimization_routes({
@@ -33,7 +32,7 @@ export interface LocalOptimizationRouteOptions {
     distance_round: boolean;
     route: number[];
     max_results_of_k_opt: number;
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
     length: number;
     max_results_of_k_exchange: number;
     max_results_of_2_opt: number;
