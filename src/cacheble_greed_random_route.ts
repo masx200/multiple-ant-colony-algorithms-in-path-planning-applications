@@ -15,7 +15,7 @@ export async function cacheble_greed_random_route({
     // round = false,
     // max_cities_of_greedy = Infinity,
 }: {
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
     start: number;
 
     end: number;

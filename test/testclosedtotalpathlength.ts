@@ -5,7 +5,7 @@ import { totalpathlengthwithoutcycle } from "../functions/totalpathlengthwithout
 import { assert_true } from "./assert_true";
 
 export function testclosedtotalpathlength() {
-    const node_coordinates: NodeCoordinates = [
+    const node_coordinates: number[][] = [
         [0, 0],
         [0, 3],
         [4, 3],

@@ -17,7 +17,7 @@ export function is_intersection_partial_with_cycle_route({
 }: {
     cycle_route: number[];
 
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
     max_of_segments: number;
 }): boolean {
     const map = getOrCreateMapOfMapFun(
@@ -33,7 +33,7 @@ export function is_intersection_partial_with_cycle_route({
     }
     const count_of_nodes = node_coordinates.length;
     assert_true(count_of_nodes > 1);
-    assert_true(cycle_route.length >=2);
+    assert_true(cycle_route.length >= 2);
     const cyclesegments = ArrayShuffle(
         cycle_route_to_segments(cycle_route),
     ).slice(0, max_of_segments);

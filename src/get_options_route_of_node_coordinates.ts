@@ -14,7 +14,7 @@ export function get_options_route_of_node_coordinates({
     node_coordinates,
 }: {
     route: number[];
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
 }): ECBasicOption & ECOption {
     assert_true(node_coordinates.length === route.length);
     const reorganize_route = cycle_reorganize(route, 0);

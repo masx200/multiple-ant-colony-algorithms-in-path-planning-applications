@@ -4,7 +4,7 @@ import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
 import { NodeCoordinates } from "./NodeCoordinates";
 
 export function getalldistancesofnodes(
-    node_coordinates: NodeCoordinates,
+    node_coordinates: number[][],
     round = false,
 ): number[] {
     const inputarray = Array(node_coordinates.length)

@@ -7,5 +7,5 @@ export type Fun_TSP_Before_Start = ({
     count_of_ants,
 }: TSPRunnerOptions & {
     count_of_ants: number;
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
 }) => Promise<TSP_Worker_Remote>;

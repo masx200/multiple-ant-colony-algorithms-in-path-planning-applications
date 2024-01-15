@@ -3,7 +3,6 @@ import { combinations } from "combinatorial-generators";
 import { robustsegmentintersect } from "../cross-points/robust-segment-intersect";
 import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { haverepetitions } from "../functions/haverepetitions";
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { assert_true } from "../test/assert_true";
 
 export function is_intersection_filter_with_cycle_route_old({
@@ -12,7 +11,7 @@ export function is_intersection_filter_with_cycle_route_old({
 }: {
     cycle_route: number[];
 
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
 }): boolean {
     const count_of_nodes = node_coordinates.length;
     assert_true(count_of_nodes > 1);

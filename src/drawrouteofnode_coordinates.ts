@@ -13,7 +13,7 @@ export function drawrouteofnode_coordinates({
     chart,
 }: {
     route: number[];
-    node_coordinates: NodeCoordinates;
+    node_coordinates: number[][];
 
     chart: Pick<EChartsType, "resize" | "setOption">;
 }) {

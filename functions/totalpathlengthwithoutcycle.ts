@@ -5,7 +5,7 @@ import { NodeCoordinates } from "./NodeCoordinates";
 
 export function totalpathlengthwithoutcycle(
     path: number[],
-    node_coordinates: NodeCoordinates,
+    node_coordinates: number[][],
     round = false,
 ): number {
     if (path.length >= node_coordinates.length) {

@@ -10,7 +10,7 @@ export const draw_best_route_debounced = debounce_animation_frame(
     debounce(
         (
             route: number[],
-            node_coordinates: NodeCoordinates,
+            node_coordinates: number[][],
             chart: Pick<EChartsType, "resize" | "setOption">,
         ) => {
             drawrouteofnode_coordinates({
