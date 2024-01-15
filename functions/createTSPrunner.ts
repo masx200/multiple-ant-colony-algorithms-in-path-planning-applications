@@ -34,7 +34,7 @@ import { DataOfFinishOneIteration } from "./DataOfFinishOneIteration";
 // import { DataOfFinishOneRoute } from "./DataOfFinishOneRoute";
 import { EachIterationHandler } from "./EachIterationHandler";
 import { EachRouteGenerator } from "./EachRouteGenerator";
-import { generateUniqueArrayOfCircularPath } from "./generateUniqueArrayOfCircularPath";
+
 import { GreedyRoutesGenerator } from "./GreedyRoutesGenerator";
 import { PureDataOfFinishOneRoute } from "./PureDataOfFinishOneRoute";
 import { SharedOptions } from "./SharedOptions";
@@ -166,7 +166,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             greedy_length = length;
         }
         if (length < global_best.length) {
-            const formatted_route = generateUniqueArrayOfCircularPath(route);
+            const formatted_route = Array.from(route);
             number_of_stagnation = 0;
             global_best.length = length;
             global_best.route = formatted_route;
