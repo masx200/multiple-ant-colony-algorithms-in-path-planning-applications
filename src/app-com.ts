@@ -554,6 +554,7 @@ export default defineComponent({
             data_of_best,
             options_of_best_route_route,
             options_of_best_route_map,
+            map_start_and_end,
             selected_grid_map_scale,
             显示每次迭代的统计,
             optionsOfIterationAndGlobalBestLength,

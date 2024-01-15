@@ -17,7 +17,9 @@
         <br />
         <hr />
 
-        <span>当前规模:{{ selected_grid_map_scale }}</span>
+        <span>当前规模:{{ selected_grid_map_scale }};</span>
+        <span>当前起点:{{ map_start_and_end.start }};</span>
+        <span>当前终点:{{ map_start_and_end.end }}.</span>
         <hr />
 
         <span>当前长度:{{ data_of_best?.global_best_length }}</span>
