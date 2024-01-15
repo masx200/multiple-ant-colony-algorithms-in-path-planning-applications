@@ -1,4 +1,3 @@
-import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
 import { TSPRunnerOptions } from "./TSPRunnerOptions";
 
