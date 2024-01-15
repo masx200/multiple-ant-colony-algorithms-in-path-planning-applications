@@ -1,4 +1,7 @@
-import { MatrixCreate } from "@masx200/sparse-2d-matrix";
+import {
+    MatrixSymmetry,
+    MatrixSymmetryCreate,
+} from "@masx200/sparse-2d-matrix";
 import { euclidean_distance } from "./euclidean_distance";
 import { NodeCoordinates } from "./NodeCoordinates";
 import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions";
@@ -12,12 +15,12 @@ import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoD
 export function createsymmetrymatrixdistancestore(
     node_coordinates: NodeCoordinates,
     round = false,
-) {
+): MatrixSymmetry<number> {
     const row = node_coordinates.length;
     const column = node_coordinates[0].length;
-    return MatrixCreate({
-        row,
-        column,
+    return MatrixSymmetryCreate({
+        row: row * column,
+
         initializer: (left, right) => {
             const leftpair = oneDimensionToTwoDimensions(left, column);
             const rightpair = oneDimensionToTwoDimensions(right, column);
