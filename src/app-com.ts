@@ -235,7 +235,7 @@ export default defineComponent({
             data_of_best: data_of_best,
             on_receive_Data_Of_Global_Best,
             clear_data_of_best,
-        } = use_data_of_summary();
+        } = use_data_of_summary(renderBestRoute);
         const {
             clearData: clearDataOfHistoryOfBest,
             TableHeads: TableHeadsOfHistoryOfBest,
@@ -264,7 +264,7 @@ export default defineComponent({
             end: [number, number];
         }> = ref({ start: [0, 0], end: [0, 0] });
         const selected_grid_map_scale = ref(0);
-        const submit = async () => {
+        async function submit() {
             const getMap = allGridMaps[selected_grid_map_value.value];
             if (!getMap) return;
             if (!startAndEnds[selected_grid_map_value.value]) return;
@@ -299,22 +299,23 @@ export default defineComponent({
                 path,
                 gridDistanceMatrix,
             );
+            const n = gridmap.data[0].length;
             // return;
-            data_of_best.value = Object.assign(
-                { ...data_of_best.value },
-                {
-                    global_best_length: length,
-                    time_of_best_ms: 0,
-                    global_best_route: [],
-                    search_count_of_best: 0,
-                },
-            );
+            data_of_best.value = {
+                ...data_of_best.value,
+                global_best_length: length,
+                time_of_best_ms: 0,
+                global_best_route: path.map((x) =>
+                    twoDimensionsToOneDimension(x[0], x[1], n),
+                ),
+                search_count_of_best: 0,
+            };
 
             return;
             //     ...data_of_best.value,
             //     global_best_length: length,
             // };
-        };
+        }
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {
             if (indeterminate.value === true) {
@@ -366,7 +367,7 @@ export default defineComponent({
         //     optionsOfIterationAndIterationBestLength.value = options;
         // };
 
-        const onprogress = (p: number) => {
+        function onprogress(p: number) {
             assert_number(p);
             const value = Math.min(100, Math.max(0, p));
             percentage.value = value;
@@ -375,8 +376,8 @@ export default defineComponent({
             } else {
                 navbar_float.value = true;
             }
-        };
-        const create_and_run_tsp_by_search_rounds = async () => {
+        }
+        async function create_and_run_tsp_by_search_rounds() {
             is_running.value = true;
             TSP_RunnerRef.value ||= await create_runner();
             const runner = TSP_RunnerRef.value;
@@ -389,7 +390,7 @@ export default defineComponent({
                 count_of_ants_ref,
                 is_running,
             });
-        };
+        }
         const data_of_greedy_iteration = use_data_of_greedy_iteration();
         const greedy_iteration_table_heads =
             data_of_greedy_iteration.tableheads;
@@ -425,15 +426,15 @@ export default defineComponent({
             ]);
         }
 
-        const resetold = () => {
+        function resetold() {
             TSP_terminate();
             disable_switching.value = false;
             is_running.value = false;
-        };
-        const reset = () => {
+        }
+        function reset() {
             percentage.value = 0;
             resetold();
-        };
+        }
 
         const disable_stop = computed(() => {
             return !is_running.value;
@@ -512,7 +513,7 @@ export default defineComponent({
                 throw new Error("incorrect parameters create_runner");
             }
         }
-        const create_and_run_tsp_by_search_time = async () => {
+        async function create_and_run_tsp_by_search_time() {
             is_running.value = true;
             TSP_RunnerRef.value ||= await create_runner();
             const runner = TSP_RunnerRef.value;
@@ -524,7 +525,7 @@ export default defineComponent({
                 is_running,
                 onprogress,
             });
-        };
+        }
 
         const radio_run_way = ref(RunWay.round);
         const run_way_time = RunWay.time;
@@ -543,6 +544,12 @@ export default defineComponent({
             Array<Array<number>>
         >([]);
         // const 显示每次迭代的统计 = ref(false);
+        function renderBestRoute(
+            route: Array<number>,
+        ): Array<[number, number]> {
+            const n = options_of_best_route_map.value[0].length;
+            return route.map((a) => oneDimensionToTwoDimensions(a, n));
+        }
         return {
             data_of_best,
             options_of_best_route_route,

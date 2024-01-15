@@ -3,7 +3,9 @@ import { computed, ComputedRef, ref } from "vue";
 import { DataOfBestChange } from "../functions/DataOfBestChange";
 import { DataOfTotal } from "../functions/DataOfTotal";
 
-export function use_data_of_summary() {
+export function use_data_of_summary(
+    renderBestRoute: (route: Array<number>) => Array<[number, number]>,
+) {
     const on_receive_Data_Of_Global_Best =
         function on_receive_Data_Of_Global_Best(data: DataOfBestChange) {
             data_of_best.value = data;
@@ -25,7 +27,9 @@ export function use_data_of_summary() {
     const global_best_routeHeads = ["全局最优路径"];
     const global_best_routeBody: ComputedRef<[string][]> = computed(() => {
         const result = data_of_best.value;
-        return result ? [[JSON.stringify(result.global_best_route)]] : [];
+        return result
+            ? [[JSON.stringify(renderBestRoute(result.global_best_route))]]
+            : [];
     });
     const summary_best_TableBody: ComputedRef<[number, number, number][]> =
         computed(() => {
