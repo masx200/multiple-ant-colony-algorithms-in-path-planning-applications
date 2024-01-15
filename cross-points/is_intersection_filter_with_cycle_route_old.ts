@@ -16,7 +16,7 @@ export function is_intersection_filter_with_cycle_route_old({
 }): boolean {
     const count_of_nodes = node_coordinates.length;
     assert_true(count_of_nodes > 1);
-    assert_true(cycle_route.length === node_coordinates.length);
+    assert_true(cycle_route.length >= 2);
     const cyclesegments = cycle_route_to_segments(cycle_route);
 
     for (const [[left1, left2], [right1, right2]] of combinations(
