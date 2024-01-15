@@ -19,7 +19,7 @@ describe("PointsInsideAllConvexPolygons", () => {
             visibleGridsMatrix,
         );
 
-        console.log(JSON.stringify([...result]));
+        // console.log(JSON.stringify([...result]));
         // console.log(result);
         expect(new Set(result)).toEqual(
             new Set([
