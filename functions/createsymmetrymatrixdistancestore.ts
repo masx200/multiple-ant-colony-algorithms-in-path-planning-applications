@@ -1,18 +1,26 @@
-import { MatrixSymmetryCreate } from "@masx200/sparse-2d-matrix";
-
+import { MatrixCreate } from "@masx200/sparse-2d-matrix";
 import { euclidean_distance } from "./euclidean_distance";
 import { NodeCoordinates } from "./NodeCoordinates";
+import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions";
 
+/**
+ * 创建不对称矩阵，用于存储节点之间的距离
+ * @param node_coordinates 节点坐标信息
+ * @param round 是否四舍五入，默认为false
+ * @returns 返回不对称矩阵
+ */
 export function createsymmetrymatrixdistancestore(
     node_coordinates: NodeCoordinates,
     round = false,
 ) {
     const row = node_coordinates.length;
-    return MatrixSymmetryCreate({
+    const column = node_coordinates[0].length;
+    return MatrixCreate({
         row,
+        column,
         initializer: (left, right) => {
-            const leftpair = node_coordinates[left];
-            const rightpair = node_coordinates[right];
+            const leftpair = oneDimensionToTwoDimensions(left, column);
+            const rightpair = oneDimensionToTwoDimensions(right, column);
             const distance = euclidean_distance(leftpair, rightpair, round);
             return distance;
         },

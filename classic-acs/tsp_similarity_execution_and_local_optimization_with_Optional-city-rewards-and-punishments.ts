@@ -260,7 +260,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
             });
             Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
             set_global_best(best_route, best_length);
-
+            console.log({ best_route, best_length });
             time_ms_of_one_iteration += time_ms;
             greedy_length = best_length;
             pheromoneZero = 1 / count_of_nodes / greedy_length;

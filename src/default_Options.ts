@@ -33,7 +33,7 @@ const DefaultOptions: Required<TSPDefaultOptions> = {
     max_segments_of_cross_point: 40,
 
     max_cities_of_greedy: 300,
-    distance_round: true,
+    distance_round: false,
     relative_Information_Entropy_Factor: relative_Information_Entropy_Factor,
     max_number_of_stagnation: max_number_of_stagnation,
     number_of_populations_of_the_first_category: 2,
