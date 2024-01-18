@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [21.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -26,7 +26,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
        
-    - run: npm i --force
+    - run: npx pnpm i --force
 
     - run: npm test
+    
     - run: npm run build
