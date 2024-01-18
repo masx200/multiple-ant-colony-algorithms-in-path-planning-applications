@@ -1,5 +1,5 @@
 //@ts-ignore
-import { runScript } from "https://esm.sh/@masx200/leetcode-class@1.2.7/";
+import { runScript } from "@masx200/leetcode-class";
 import { assert, test } from "vitest";
 
 import { RangeModule } from "./RangeModule";

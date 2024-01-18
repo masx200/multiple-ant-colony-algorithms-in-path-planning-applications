@@ -73,6 +73,7 @@
         "@babel/core": "^7.23.7",
         "@datastructures-js/heap": "^4.3.3",
         "@datastructures-js/queue": "^4.2.3",
+        "@masx200/leetcode-class": "^1.2.7",
         "@masx200/rollup-plugin-http-resolve": "^5.0.2",
         "@masx200/weighted-randomly-select": "^2.1.1",
         "@types/chai": "^4.3.10",

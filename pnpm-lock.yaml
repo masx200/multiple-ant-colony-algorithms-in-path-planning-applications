@@ -21,6 +21,9 @@ dependencies:
   '@datastructures-js/queue':
     specifier: ^4.2.3
     version: 4.2.3
+  '@masx200/leetcode-class':
+    specifier: ^1.2.7
+    version: 1.2.7
   '@masx200/rollup-plugin-http-resolve':
     specifier: ^5.0.2
     version: 5.0.2
@@ -1797,6 +1800,10 @@ packages:
       regenerator-runtime: 0.13.11
     dev: true
 
+  /@masx200/leetcode-class@1.2.7:
+    resolution: {integrity: sha512-1CWquNYaKmurzg56FWC0AeQ/st35ByOE1/563wDGoP68wCoTFbcybVBqSmT3qs40w9zU2ocKif5ge9nz/8cJxQ==}
+    dev: false
+
   /@masx200/rollup-plugin-http-resolve@5.0.2:
     resolution: {integrity: sha512-bWSD8BbDECwELDYJcDODkT8hAnI3/ASCijDocZEGtLMkaTBxKb6yk/ulI6k3Gpq9qb30RxPlkVDQsqZMIF7RsA==}
     dependencies:
@@ -2001,6 +2008,7 @@ packages:
     resolution: {integrity: sha512-dkRscpM+RrR2Ee3eOQmRWFjmV/payHEOrjyq1VZegRUa5OrZJ2MAxBNs05bZuY0YCtpqETDy1Ix4i/hRqX98cA==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -2008,6 +2016,7 @@ packages:
     resolution: {integrity: sha512-QaKFVOzzST2xzY4MAmiDmURagWLFh+zZtttuEnuNn19AiZ0T3fhPyjPPGwLNdiDT82ZE91hnfJsUiDwF9DClIQ==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     optional: true
 
@@ -2015,6 +2024,7 @@ packages:
     resolution: {integrity: sha512-HeGqmRJuyVg6/X6MpE2ur7GbymBPS8Np0S/vQFHDmocfORT+Zt76qu+69NUoxXzGqVP1pzaY6QIi0FJWLC3OPA==}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -2022,6 +2032,7 @@ packages:
     resolution: {integrity: sha512-Dq1bqBdLaZ1Gb/l2e5/+o3B18+8TI9ANlA1SkejZqDgdU/jK/ThYaMPMJpVMMXy2uRHvGKbkz9vheVGdq3cJfA==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -2029,6 +2040,7 @@ packages:
     resolution: {integrity: sha512-ezyFUOwldYpj7AbkwyW9AJ203peub81CaAIVvckdkyH8EvhEIoKzaMFJj0G4qYJ5sw3BpqhFrsCc30t54HV8vg==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     optional: true
 
@@ -2152,12 +2164,6 @@ packages:
     resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
     dev: true
 
-  /@types/node@20.10.8:
-    resolution: {integrity: sha512-f8nQs3cLxbAFc00vEU59yf9UyGUftkPaLGfvbVOIDdx2i1b8epBqj2aNGyP19fiyXWvlmZ7qC1XLjAzw/OKIeA==}
-    dependencies:
-      undici-types: 5.26.5
-    dev: true
-
   /@types/node@20.11.2:
     resolution: {integrity: sha512-cZShBaVa+UO1LjWWBPmWRR4+/eY/JR/UIEcDlVsw3okjWEu+rB7/mH6X3B/L+qJVHDLjk9QW/y2upp9wp1yDXA==}
     dependencies:
@@ -2166,7 +2172,7 @@ packages:
   /@types/resolve@1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 20.10.8
+      '@types/node': 20.11.2
     dev: true
 
   /@types/robust-segment-intersect@1.0.2:
@@ -4420,7 +4426,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.10.8
+      '@types/node': 20.11.2
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
