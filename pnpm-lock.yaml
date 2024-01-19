@@ -159,8 +159,8 @@ devDependencies:
     specifier: ^5.3.2
     version: 5.4.3
   element-plus:
-    specifier: ^2.5.1
-    version: 2.5.1(vue@3.4.15)
+    specifier: ^2.5.2
+    version: 2.5.2(vue@3.4.15)
   eslint-config-standard:
     specifier: ^17.0.0
     version: 17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.3.1)(eslint-plugin-promise@6.1.1)(eslint@8.56.0)
@@ -3291,8 +3291,8 @@ packages:
   /electron-to-chromium@1.4.610:
     resolution: {integrity: sha512-mqi2oL1mfeHYtOdCxbPQYV/PL7YrQlxbvFEZ0Ee8GbDdShimqt2/S6z2RWqysuvlwdOrQdqvE0KZrBTipAeJzg==}
 
-  /element-plus@2.5.1(vue@3.4.15):
-    resolution: {integrity: sha512-ylX9h2U125/nesPlLWgfPkI1rID9EiGROlgf0QkzBUjx+/d4w/YqS+IqZZZC5yvQPhKYu9aMDqEBzOurwn4Cnw==}
+  /element-plus@2.5.2(vue@3.4.15):
+    resolution: {integrity: sha512-0Xbihy5CvpdH+OZeRPnZlfkbZS8uyLvHJiALehvw6n7nvHGrujCmdiw8NXvYhkLpRtwue/N6oBfAvMJvQSPoNA==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
