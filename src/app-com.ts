@@ -20,7 +20,7 @@ import {
 
 import DataTable from "./Data_table.vue";
 import { ECBasicOption } from "echarts/types/dist/shared";
-import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
+// import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix.ts";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray.ts";
 import GridMapSelector from "../path-planning/GridMapSelector.vue";
@@ -507,7 +507,7 @@ export default defineComponent({
                     end,
                 });
 
-                Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
+                // Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
                 return runner;
             } else {
                 throw new Error("incorrect parameters create_runner");

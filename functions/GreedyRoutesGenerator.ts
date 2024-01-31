@@ -1,5 +1,5 @@
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
-import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
+// import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { PureDataOfFinishOneRoute } from "./PureDataOfFinishOneRoute";
 import { SharedOptions } from "./SharedOptions";
 import { assert_true } from "../test/assert_true";
@@ -72,7 +72,7 @@ export async function GreedyRoutesGenerator(
     const { length: best_length, route: optimal_route_of_iteration } =
         getBestRoute_Of_Series_routes_and_lengths(parallel_results);
     const best_route = optimal_route_of_iteration;
-    Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
+    // Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
     const time_ms_of_one_iteration = sum(
         parallel_results.map((r) => r.time_ms),
     );

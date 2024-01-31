@@ -17,7 +17,7 @@ import { pickRandomOne } from "../functions/pickRandomOne";
 import { run_greedy_once_thread_with_time } from "../functions/run_greedy_once_thread_with_time";
 import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
 import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
-import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
+// import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { DefaultOptions } from "../src/default_Options";
 import { get_distance_round } from "../src/set_distance_round";
 import { assert_true } from "../test/assert_true";
@@ -260,7 +260,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 end,
                 // round: distance_round,
             });
-            Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
+            // Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
             set_global_best(best_route, best_length);
             console.log({ best_route, best_length });
             time_ms_of_one_iteration += time_ms;
