@@ -25,7 +25,7 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     // max_cities_of_greedy = Infinity,
     end,
 }: GreedyWithStartOptions): { route: number[]; length: number } {
-    console.log({ start, end, node_coordinates });
+    // console.log({ start, end, node_coordinates });
     if (Math.random() > 0.5) {
         // [start, end] = [end, start];
         const res = Greedy_algorithm_to_solve_tsp_with_selected_start({
@@ -85,6 +85,6 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
         path,
         gridDistanceMatrix,
     );
-    console.log({ route: result, length: length });
+    // console.log({ route: result, length: length });
     return { route: result, length: length };
 }

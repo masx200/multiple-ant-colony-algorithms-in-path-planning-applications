@@ -20,7 +20,7 @@
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "allowImportingTsExtensions": true
+        "allowImportingTsExtensions": true,
     },
     "include": [
         "common",
@@ -36,6 +36,6 @@
         "k-opt",
         "*/*.ts",
         "classic-acs",
-        "path-planning"
-    ]
+        "path-planning",
+    ],
 }

@@ -276,7 +276,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 greedy_length = average_length;
             }
             set_global_best(best_route, best_length);
-            console.log({ best_route, best_length });
+            // console.log({ best_route, best_length });
             update_Cached_hash_table_of_path_lengths_and_path_segments(
                 routes_segments_cache,
                 collection_of_optimal_routes,
