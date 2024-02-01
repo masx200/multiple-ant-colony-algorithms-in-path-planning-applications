@@ -3,6 +3,11 @@ import { construct_one_route_all } from "./construct_one_route_all";
 import { EachRouteGeneratorOptions } from "./Fun_EachRouteGenerator";
 import { SharedOptions } from "./SharedOptions";
 
+/**
+ * 生成一个路由生成器
+ * @param options - 路由生成器选项和共享选项
+ * @returns - 包含路由、长度和时间的元组
+ */
 export function EachRouteGenerator(
     options: EachRouteGeneratorOptions & SharedOptions,
 ): {
