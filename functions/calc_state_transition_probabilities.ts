@@ -14,6 +14,7 @@ import { GetPheromone } from "./GetPheromone";
  * @returns {number} - 状态转换概率
  */
 export function calc_state_transition_probabilities({
+    end,
     getpheromone,
     nextnode,
     currentnode,
@@ -25,6 +26,7 @@ export function calc_state_transition_probabilities({
     nextnode: number;
     currentnode: number;
     alpha: number;
+    end: number;
     getdistancebyserialnumber: GetDistanceBySerialNumber;
     beta: number;
 }): number {
@@ -33,7 +35,12 @@ export function calc_state_transition_probabilities({
 
     const weight =
         Math.pow(pheromone, alpha) /
-        Math.pow(getdistancebyserialnumber(nextnode, currentnode), beta);
+        Math.pow(
+            //启发式信息为:1/(当前节点到下一个节点的距离+下一个节点到终点的距离)
+            getdistancebyserialnumber(nextnode, currentnode) +
+                getdistancebyserialnumber(nextnode, end),
+            beta,
+        );
 
     assert_true(!Number.isNaN(weight), "weight should not be NaN");
 
