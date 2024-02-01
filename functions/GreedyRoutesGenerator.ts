@@ -1,5 +1,4 @@
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
-// import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { PureDataOfFinishOneRoute } from "./PureDataOfFinishOneRoute";
 import { SharedOptions } from "./SharedOptions";
 import { assert_true } from "../test/assert_true";
@@ -7,31 +6,67 @@ import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Ser
 import { greedy_first_search_routes_parallel } from "./greedy_first_search_routes_parallel";
 import { sum } from "lodash-es";
 
+/**
+ * 贪心路径生成器
+ * @param options - 选项参数
+ * @returns - 返回包含最佳长度、最佳路由和平均长度的对象
+ */
 export async function GreedyRoutesGenerator(
     options: {
+        /**
+         * 发出完成贪婪迭代的事件
+         * @param data - 数据参数
+         */
         emit_finish_greedy_iteration: (
             data: DataOfFinishGreedyIteration,
         ) => void;
+        /**
+         * 获取最佳路由
+         * @returns - 返回最佳路由
+         */
         getBestRoute: () => number[];
+        /**
+         * 获取最佳长度
+         * @returns - 返回最佳长度
+         */
         getBestLength: () => number;
 
+        /**
+         * 创建路由事件
+         * @param route - 路由数组
+         * @param length - 路由长度
+         */
         onRouteCreated: (route: number[], length: number) => void;
+        /**
+         * 发出完成一个路由的事件
+         * @param data - 数据参数
+         */
         emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
 
+        /**
+         * 节点数量
+         */
         count_of_nodes: number;
     } & SharedOptions,
 ): Promise<{
+    /**
+     * 最佳长度
+     */
     best_length: number;
+    /**
+     * 最佳路由
+     */
     best_route: number[];
+    /**
+     * 平均长度
+     */
     average_length: number;
 }> {
     const {
         set_global_best,
-        // count_of_nodes,
         emit_finish_greedy_iteration,
         getBestRoute,
         getBestLength,
-
         onRouteCreated,
         emit_finish_one_route,
     } = options;
@@ -64,7 +99,6 @@ export async function GreedyRoutesGenerator(
 
         emit_finish_one_route({
             time_ms_of_one_route: time_ms,
-
             current_route_length: length,
         });
     }
