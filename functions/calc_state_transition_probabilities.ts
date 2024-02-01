@@ -27,7 +27,7 @@ export function calc_state_transition_probabilities({
     alpha: number;
     getdistancebyserialnumber: GetDistanceBySerialNumber;
     beta: number;
-}) {
+}): number {
     const pheromone = getpheromone(nextnode, currentnode);
     assert_true(!Number.isNaN(pheromone), "pheromone should not be NaN");
 
