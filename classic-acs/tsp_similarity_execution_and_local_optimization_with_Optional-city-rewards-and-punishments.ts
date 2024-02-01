@@ -417,6 +417,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                     alpha,
                     getdistancebyserialnumber,
                     beta,
+                    ...options,
                 });
                 return { nextnode, weight };
             });
@@ -437,6 +438,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                     alpha,
                     getdistancebyserialnumber,
                     beta,
+                    ...options,
                 });
 
                 return Math.max(0, weight);
