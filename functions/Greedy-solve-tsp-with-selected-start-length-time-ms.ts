@@ -1,6 +1,11 @@
 import { Greedy_algorithm_to_solve_tsp_with_selected_start } from "./Greedy_algorithm_to_solve_tsp_with_selected_start";
 import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 
+/**
+ * 使用选定的起始节点解决旅行商问题的贪婪算法
+ * @param options - 选项参数
+ * @returns - 返回旅行商问题的解
+ */
 export function Greedy_solve_tsp_with_selected_start_length_time_ms({
     node_coordinates,
     start,
