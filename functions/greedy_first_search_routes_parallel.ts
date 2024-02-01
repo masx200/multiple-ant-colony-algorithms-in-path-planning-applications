@@ -1,17 +1,22 @@
 // import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { run_greedy_once_thread_with_time } from "./run_greedy_once_thread_with_time";
 import { SharedOptions } from "./SharedOptions";
-
+/**
+ * 并行贪心搜索生成最短路径的生成器函数
+ * @param options - 函数参数对象
+ * @param options.node_coordinates - 节点坐标数组
+ * @param options.count_of_nodes - 节点数量
+ * @param options.start - 起始节点
+ * @param options.end - 终止节点
+ * @param options.max_routes_of_greedy - 最大贪心搜索路径数量
+ * @returns 生成器函数，生成最短路径信息
+ */
 export async function* greedy_first_search_routes_parallel({
-    // max_cities_of_greedy,
     max_routes_of_greedy,
     node_coordinates,
-    // count_of_nodes,
     start,
     end,
-    // round = false,
 }: {
-    // round?: boolean;
     node_coordinates: number[][];
     count_of_nodes: number;
 } & SharedOptions): AsyncGenerator<
@@ -24,8 +29,6 @@ export async function* greedy_first_search_routes_parallel({
             node_coordinates,
             start,
             end,
-            // round,
-            // max_cities_of_greedy,
         });
     }
     // const routes_of_greedy = Math.min(max_routes_of_greedy, count_of_nodes);
