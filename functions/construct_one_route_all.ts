@@ -1,6 +1,11 @@
 import { generate_paths_using_state_transition_probabilities } from "./generate-paths-using-state-transition-probabilities";
 import { SharedOptions } from "./SharedOptions";
 
+/**
+ * 构建一条路径
+ * @param options - 选项参数
+ * @returns - 包含路径和长度的对象
+ */
 export function construct_one_route_all(
     options: {
         current_search_count: number;
