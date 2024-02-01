@@ -9,6 +9,11 @@ import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 import { select_available_cities_from_optimal_and_latest } from "./select_available_cities_from_optimal_and_latest";
 import { SharedOptions } from "./SharedOptions";
 
+/**
+ * 使用状态转换概率生成路径
+ * @param options - 选项参数
+ * @returns - 路径和长度
+ */
 export function generate_paths_using_state_transition_probabilities(
     options: {
         alpha_zero: number;
