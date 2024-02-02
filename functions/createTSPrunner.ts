@@ -341,7 +341,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     max_results_of_k_opt,
                     getBestLength,
                     getBestRoute,
+                    visibleGridsMatrix,
                     greedy_length,
+                    visibleGridsListWithOutPointsInsideAllConvexPolygons,
                     pheromone_exceeds_maximum_range: () =>
                         pheromone_exceeds_maximum_range,
                 }),
