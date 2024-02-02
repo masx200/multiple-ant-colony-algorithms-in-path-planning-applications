@@ -44,7 +44,7 @@ test("search-drawGridMap-test-greedy", () => {
         (a, b, end) =>
             greedy_next_point_selector(a, b, gridDistanceMatrix, end),
     );
-    console.log(path);
+    // console.log(path);
     assert.isTrue(
         isEqual(path, [
             [1, 21],
