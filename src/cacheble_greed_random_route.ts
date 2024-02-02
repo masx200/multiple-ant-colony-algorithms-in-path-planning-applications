@@ -1,3 +1,4 @@
+import { GreedyWithStartOptions } from "../functions/GreedyWithStartOptions";
 import { node_coordinates_to_greed_random_route } from "./node_coordinates_to_greed_random_route";
 import { thread_Greedy_algorithm_to_solve_tsp_with_selected_start } from "./thread_Greedy_algorithm_to_solve_tsp_with_selected_start";
 
@@ -5,6 +6,7 @@ export async function cacheble_greed_random_route({
     node_coordinates,
     start,
     end,
+    gridDistanceMatrix,
     // round = false,
     // max_cities_of_greedy = Infinity,
 }: {
@@ -14,7 +16,7 @@ export async function cacheble_greed_random_route({
     end: number;
     // round?: boolean;
     // max_cities_of_greedy?: number;
-}): Promise<{
+} & GreedyWithStartOptions): Promise<{
     route: number[];
     length: number;
 }> {
@@ -30,6 +32,7 @@ export async function cacheble_greed_random_route({
             thread_Greedy_algorithm_to_solve_tsp_with_selected_start({
                 node_coordinates,
                 start,
+                gridDistanceMatrix,
                 end,
                 // round,
                 // max_cities_of_greedy,
