@@ -5,7 +5,18 @@ import { geteuclideandistancebyindex } from "../functions/geteuclideandistanceby
 import { pickRandomOne } from "../functions/pickRandomOne";
 import { get_distance_round } from "../src/set_distance_round";
 import { assert_true } from "../test/assert_true";
-
+/**
+ * 使用网格地图的状态转换概率生成路径
+ * @param node_coordinates 节点坐标数组
+ * @param pheromoneStore 蜂群存储矩阵
+ * @param count_of_nodes 路径节点数量
+ * @param picknextnode 选择下一个节点的函数
+ * @param alpha_zero 路径选择系数
+ * @param beta_zero 路径概率选择系数
+ * @param get_filtered_nodes 获取过滤节点的函数
+ * @param local_pheromone_update 本地蜂群素更新函数
+ * @returns 生成的路径信息
+ */
 export function generate_paths_using_state_transition_probabilities_of_grid_map(
     node_coordinates: number[][],
     pheromoneStore: MatrixSymmetry<number>,
