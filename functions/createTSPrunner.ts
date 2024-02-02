@@ -42,6 +42,8 @@ import { TSP_Output_Data } from "./TSP_Output_Data";
 import { TSP_Runner } from "./TSP_Runner";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
+import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
+import { GridMapFromArray } from "../path-planning/GridMapFromArray";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let greedy_length = Infinity;
@@ -258,10 +260,17 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     const { max_number_of_stagnation, relative_Information_Entropy_Factor } =
         options;
+    const map = node_coordinates;
+    const gridmap = GridMapFromArray(map);
+    const gridDistanceMatrix = GridDistanceMatrix(
+        gridmap.data.length,
+        gridmap.data[0].length,
+    );
     async function runOneIteration() {
         if (current_search_count === 0) {
             const { best_length, best_route, average_length } =
                 await GreedyRoutesGenerator({
+                    gridDistanceMatrix,
                     ...shared,
                     getBestRoute,
                     getBestLength,
