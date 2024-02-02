@@ -4,7 +4,7 @@ import { create_collection_of_optimal_routes } from "../collections/collection-o
 import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIteration";
 import { calc_population_relative_information_entropy } from "../functions/calc_population-relative-information-entropy";
 import { calc_state_transition_probabilities } from "../functions/calc_state_transition_probabilities";
-import { closed_total_path_length } from "../functions/closed-total-path-length";
+import { total_path_length_of_not_closed_route } from "../functions/closed-total-path-length";
 import { create_run_iterations } from "../functions/create_run_iterations";
 import { creategetdistancebyIndex } from "../functions/creategetdistancebyIndex";
 
@@ -210,7 +210,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         }
 
         local_pheromone_update(route);
-        const routelength = closed_total_path_length({
+        const routelength = total_path_length_of_not_closed_route({
             round: get_distance_round(),
             path: route,
             getdistancebyIndex: creategetdistancebyIndex(

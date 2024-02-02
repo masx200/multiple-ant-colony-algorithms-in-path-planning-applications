@@ -1,4 +1,4 @@
-import { closed_total_path_length } from "../functions/closed-total-path-length";
+import { total_path_length_of_not_closed_route } from "../functions/closed-total-path-length";
 import { creategetdistancebyIndex } from "../functions/creategetdistancebyIndex";
 import { totalpathlengthwithoutcycle } from "../functions/totalpathlengthwithoutcycle";
 import { assert_true } from "./assert_true";
@@ -12,7 +12,7 @@ export function testclosedtotalpathlength() {
 
     assert_true(
         12 ===
-            closed_total_path_length({
+            total_path_length_of_not_closed_route({
                 path: [0, 1, 2],
                 getdistancebyIndex: creategetdistancebyIndex(node_coordinates),
             }),

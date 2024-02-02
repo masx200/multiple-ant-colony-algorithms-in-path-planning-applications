@@ -1,4 +1,4 @@
-import { closed_total_path_length } from "../functions/closed-total-path-length";
+import { total_path_length_of_not_closed_route } from "../functions/closed-total-path-length";
 import { creategetdistancebyIndex } from "../functions/creategetdistancebyIndex";
 import { getBestRoute_Of_Series_routes_and_lengths } from "../functions/getBestRoute_Of_Series_routes_and_lengths";
 import { default_max_results_of_2_opt } from "../src/default_Options";
@@ -30,7 +30,7 @@ export function Precise_2_opt_eliminates_all_intersections({
 
         const routes_and_lengths = routes_of_2_opt_accurate
             .map((route) => {
-                const length = closed_total_path_length({
+                const length = total_path_length_of_not_closed_route({
                     round: get_distance_round(),
                     path: route,
                     getdistancebyIndex: creategetdistancebyIndex(

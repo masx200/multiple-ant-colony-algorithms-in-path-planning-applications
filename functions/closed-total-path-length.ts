@@ -11,7 +11,7 @@ import { not_cycle_route_to_segments } from "./not_cycle_route_to_segments";
  * @param round - 是否四舍五入，默认为 false
  * @returns 总长度
  */
-export function closed_total_path_length({
+export function total_path_length_of_not_closed_route({
     path,
     getdistancebyIndex,
     round = false,

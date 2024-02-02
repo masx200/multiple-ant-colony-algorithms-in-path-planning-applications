@@ -1,5 +1,5 @@
 import { IntegerRange } from "../cross-points/IntegerRange";
-import { closed_total_path_length } from "../functions/closed-total-path-length";
+import { total_path_length_of_not_closed_route } from "../functions/closed-total-path-length";
 import { creategetdistancebyIndex } from "../functions/creategetdistancebyIndex";
 import { getBestRoute_Of_Series_routes_and_lengths } from "../functions/getBestRoute_Of_Series_routes_and_lengths";
 import { pickRandomOne } from "../functions/pickRandomOne";
@@ -39,7 +39,7 @@ export function Random_K_OPT_full_limited_find_best({
         .flat();
     const routes_and_lengths = routes_of_k_opt
         .map((route) => {
-            const length = closed_total_path_length({
+            const length = total_path_length_of_not_closed_route({
                 round: get_distance_round(),
                 path: route,
                 getdistancebyIndex: creategetdistancebyIndex(
