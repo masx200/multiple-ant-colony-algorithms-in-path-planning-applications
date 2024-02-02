@@ -78,7 +78,7 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
         // PheromoneZeroMatrix,
         // DefaultOptions.local_pheromone_volatilization_coefficient,
         // DefaultOptions.global_pheromone_volatilization_coefficient,
-        (a, b) =>
+        (a, b, endPoint) =>
             greedy_next_point_selector(a, b, gridDistanceMatrix, endPoint),
     );
 

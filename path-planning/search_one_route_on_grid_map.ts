@@ -45,7 +45,11 @@ export function search_one_route_on_grid_map(
     // 全局信息素挥发系数
 
     //  rou_Global_pheromone_volatility: number,
-    next_point_selector: (neighbors: Array<Point>, current: Point) => Point,
+    next_point_selector: (
+        neighbors: Array<Point>,
+        current: Point,
+        end: Point,
+    ) => Point,
 ): [number, number][] {
     // 断言终点在地图上是可到达的
     assert(grid.isFree(end.x, end.y));
@@ -157,6 +161,7 @@ export function search_one_route_on_grid_map(
                 next_point_selector(
                     neighbors.map((n) => ({ x: n[0], y: n[1] })),
                     PointFromArray([current.x, current.y]),
+                    end,
                 ),
             );
 
