@@ -41,7 +41,8 @@ test("search-drawGridMap-test-greedy", () => {
         end,
         visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
-        (a, b) => greedy_next_point_selector(a, b, gridDistanceMatrix, end),
+        (a, b, end) =>
+            greedy_next_point_selector(a, b, gridDistanceMatrix, end),
     );
     // console.log(path)
     assert.deepEqual(path, [
