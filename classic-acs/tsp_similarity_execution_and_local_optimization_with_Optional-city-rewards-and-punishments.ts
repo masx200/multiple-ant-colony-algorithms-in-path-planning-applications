@@ -33,6 +33,10 @@ import {
 } from "./tsp-interface";
 import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
+import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../path-planning/FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
+import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
+import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
+import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
 
 /* eslint-disable indent */
 
@@ -255,6 +259,18 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         gridmap.data.length,
         gridmap.data[0].length,
     );
+    const visibleGridsList = getVisibleGridsList(gridmap);
+    const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
+    const pointsInsideAllConvexPolygons = new Set(
+        [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
+            (a) => a[0] * gridmap.row + a[1],
+        ),
+    );
+    const visibleGridsListWithOutPointsInsideAllConvexPolygons =
+        FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
+            visibleGridsList,
+            pointsInsideAllConvexPolygons,
+        );
     async function runOneIteration() {
         let time_ms_of_one_iteration = 0;
         if (current_search_count === 0) {
@@ -267,6 +283,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 start,
                 end,
                 gridDistanceMatrix,
+                visibleGridsMatrix,
+                visibleGridsListWithOutPointsInsideAllConvexPolygons,
                 // round: distance_round,
             });
             // Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();

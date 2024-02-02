@@ -44,6 +44,10 @@ import { update_convergence_coefficient } from "./update_convergence_coefficient
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
+import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../path-planning/FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
+import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
+import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
+import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let greedy_length = Infinity;
@@ -266,6 +270,18 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         gridmap.data.length,
         gridmap.data[0].length,
     );
+    const visibleGridsList = getVisibleGridsList(gridmap);
+    const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
+    const pointsInsideAllConvexPolygons = new Set(
+        [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
+            (a) => a[0] * gridmap.row + a[1],
+        ),
+    );
+    const visibleGridsListWithOutPointsInsideAllConvexPolygons =
+        FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
+            visibleGridsList,
+            pointsInsideAllConvexPolygons,
+        );
     async function runOneIteration() {
         if (current_search_count === 0) {
             const { best_length, best_route, average_length } =
@@ -280,6 +296,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
                     count_of_nodes,
                     emit_finish_greedy_iteration,
+                    visibleGridsListWithOutPointsInsideAllConvexPolygons,
+                    visibleGridsMatrix,
                 });
             if (greedy_length > average_length) {
                 greedy_length = average_length;
