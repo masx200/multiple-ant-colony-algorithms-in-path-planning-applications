@@ -15,24 +15,25 @@ export function select_available_cities_from_optimal_and_latest({
     current_city,
     max_cities_of_state_transition,
 }: {
-    available_nodes: Set<number>;
+    available_nodes: Iterable<number>;
     get_neighbors_from_optimal_routes_and_latest_routes: (
         current_city: number,
     ) => number[];
     current_city: number;
     max_cities_of_state_transition: number;
 }): number[] | Set<number> {
-    assert_true(available_nodes.size > 0);
+    const available_nodes_set = new Set(available_nodes);
+    assert_true(available_nodes_set.size > 0);
     const maximum = Math.min(
         max_cities_of_state_transition,
-        available_nodes.size,
+        available_nodes_set.size,
     );
     const cloned_available = new Set(available_nodes);
     const source = new Set<number>();
     for (const city of get_neighbors_from_optimal_routes_and_latest_routes(
         current_city,
     )) {
-        if (source.size <= maximum && available_nodes.has(city)) {
+        if (source.size <= maximum && available_nodes_set.has(city)) {
             source.add(city);
             cloned_available.delete(city);
         }
@@ -61,7 +62,7 @@ export function select_available_cities_from_optimal_and_latest({
     }
     const result = Array.from(source);
 
-    assert_true(result.length <= available_nodes.size);
+    assert_true(result.length <= available_nodes_set.size);
     assert_true(result.length <= max_cities_of_state_transition);
     assert_true(result.length > 0);
     return result;

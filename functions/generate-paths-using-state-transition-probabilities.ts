@@ -58,6 +58,10 @@ export function generate_paths_using_state_transition_probabilities(
             current.y,
             n,
         );
+        const available_nodes = neighbors.map((point) => {
+            const point1 = twoDimensionsToOneDimension(point.x, point.y, n);
+            return point1;
+        });
         const is_count_not_large =
             neighbors.length <= max_cities_of_state_transition;
         const get_filtered_nodes = function (): number[] | Set<number> {
