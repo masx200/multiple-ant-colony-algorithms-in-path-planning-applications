@@ -31,6 +31,7 @@ export function generate_paths_using_state_transition_probabilities(
             visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
                 [number, number]
             >[][];
+            visibleGridsMatrix: boolean[][][][];
         },
 ): {
     route: number[];
@@ -49,6 +50,7 @@ export function generate_paths_using_state_transition_probabilities(
         alpha_zero,
         beta_zero,
         visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsMatrix,
     } = options;
 
     // const count_of_nodes = node_coordinates.length;
@@ -79,6 +81,7 @@ export function generate_paths_using_state_transition_probabilities(
         startPoint,
         endPoint,
         visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsMatrix,
     );
     const route: number[] = one_route_on_grid_map.map((a) =>
         twoDimensionsToOneDimension(a[0], a[1], n),
