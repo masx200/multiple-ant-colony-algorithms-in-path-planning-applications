@@ -60,7 +60,7 @@ export function local_optimization_route({
     const { route: route3, length: length3 } = is_count_not_large
         ? Precise_2_opt_eliminates_all_intersections({
               ...route_and_length_selection2,
-              count_of_nodes,
+              //   count_of_nodes,
               max_results_of_2_opt,
               node_coordinates,
           })
