@@ -62,6 +62,24 @@ export function search_one_route_on_grid_map(
             [end.x, end.y],
         ];
     }
+    //有一半的概率随机反向搜索
+    if (Math.random() > 0.5) {
+        // [start, end] = [end, start];
+        const route = search_one_route_on_grid_map(
+            /* {
+            node_coordinates,
+            start: end,
+            end: start,
+        } */ grid,
+            end,
+            start,
+            visibleGridsListWithOutPointsInsideAllConvexPolygons,
+            visibleGridsMatrix,
+            next_point_selector,
+        );
+        return /* res.route = */ /* res */ route.toReversed();
+        // return route;
+    }
 
     // 首先进行随机搜索，然后添加信息素和启发式信息
 
