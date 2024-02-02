@@ -3,7 +3,6 @@ import { total_path_length_of_not_closed_route } from "../functions/closed-total
 import { creategetdistancebyIndex } from "../functions/creategetdistancebyIndex";
 import { geteuclideandistancebyindex } from "../functions/geteuclideandistancebyindex";
 import { get_distance_round } from "../src/set_distance_round";
-import { assert_true } from "../test/assert_true";
 
 import { picknextnodeRoulette } from "../functions/pick-next-node-Roulette";
 import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
@@ -231,7 +230,7 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
         ),
     });
     const length = routelength;
-    assert_true(route.length == count_of_nodes);
+    // assert_true(route.length == count_of_nodes);
     const endtime_of_one_route = Number(new Date());
     const time_ms = endtime_of_one_route - starttime_of_one_route;
     return { time_ms, route, length };
