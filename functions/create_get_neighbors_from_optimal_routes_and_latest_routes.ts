@@ -4,6 +4,11 @@ import { uniq } from "lodash-es";
 
 import { assert_Integer } from "../test/assert_Integer";
 
+/**
+ * 创建一个函数，用于从最优路线和最新路线中获取邻居城市。
+ * @param latest_and_optimal_routes 最新和最优路线数组，每个元素包含一个路线数组和路线长度。
+ * @returns 返回一个对象，包含一个用于获取邻居城市的函数和一个用于清空缓存的函数。
+ */
 export function create_get_neighbors_from_optimal_routes_and_latest_routes(
     latest_and_optimal_routes: {
         route: number[];
@@ -11,6 +16,11 @@ export function create_get_neighbors_from_optimal_routes_and_latest_routes(
     }[],
 ): { get: (city: number) => number[]; clear(): void } {
     const cache = new Map<number, number[]>();
+    /**
+     * 从最优路线和最新路线中获取邻居城市。
+     * @param city 城市编号。
+     * @returns 返回邻居城市数组。
+     */
     function get_neighbors_from_optimal_routes_and_latest_routes(
         city: number,
     ): number[] {

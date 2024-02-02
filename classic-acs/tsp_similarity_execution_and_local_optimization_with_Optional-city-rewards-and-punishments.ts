@@ -3,14 +3,12 @@ import { sum, uniq } from "lodash-es";
 import { create_collection_of_optimal_routes } from "../collections/collection-of-optimal-routes";
 import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIteration";
 import { calc_population_relative_information_entropy } from "../functions/calc_population-relative-information-entropy";
-import { calc_state_transition_probabilities } from "../functions/calc_state_transition_probabilities";
 import { create_run_iterations } from "../functions/create_run_iterations";
 
 import {
     not_cycle_route_to_segments,
     // not_cycle_route_to_segments,
 } from "../functions/not_cycle_route_to_segments";
-import { pickRandomOne } from "../functions/pickRandomOne";
 import { run_greedy_once_thread_with_time } from "../functions/run_greedy_once_thread_with_time";
 // import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
 import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
@@ -42,7 +40,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     const options = Object.assign(structuredClone(DefaultOptions), input);
     const { Coefficient_of_the_minimum_after_pheromone_weakening } = options;
     const {
-        // max_cities_of_state_transition = DefaultOptions.max_cities_of_state_transition,
+        max_cities_of_state_transition = DefaultOptions.max_cities_of_state_transition,
         max_size_of_collection_of_optimal_routes = DefaultOptions.max_size_of_collection_of_optimal_routes,
         max_results_of_2_opt = DefaultOptions.max_results_of_2_opt,
         max_segments_of_cross_point = DefaultOptions.max_segments_of_cross_point,
@@ -147,7 +145,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     //         []
     //     );
     // };
-    // const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
+    const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
     // const get_filtered_nodes = function (
     //     current_city: number,
     //     available_nodes: Set<number>,
@@ -164,6 +162,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     //                   max_cities_of_state_transition,
     //           });
     // };
+    const get_neighbors_from_optimal_routes_and_latest_routes =
+        neighbors_from_optimal_routes_and_latest_routes.get;
     function generate_paths_using_state_transition_probabilities(): {
         route: number[];
         length: number;
@@ -171,8 +171,29 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     } {
         return generate_paths_using_state_transition_probabilities_of_grid_map({
             ...options,
+            visibleGridsListWithOutPointsInsideAllConvexPolygons,
+            route_selection_parameters_Q0,
+            visibleGridsMatrix,
             node_coordinates,
+            set_global_best,
+            getBestLength: get_best_length,
+            getCurrentSearchCount() {
+                return current_search_count;
+            },
             pheromoneStore,
+            getBestRoute: get_best_route,
+            get_neighbors_from_optimal_routes_and_latest_routes(
+                current_city: number,
+            ): number[] {
+                return (
+                    get_neighbors_from_optimal_routes_and_latest_routes(
+                        current_city,
+                    ) ?? []
+                );
+            },
+            getSearchCountOfBest() {
+                return search_count_of_best;
+            },
             count_of_nodes,
             // picknextnode,
             alpha_zero,
@@ -382,63 +403,63 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         }
     }
 
-    function picknextnode({
-        beta_zero,
-        alpha_zero,
-        currentnode,
-        getpheromone,
-        getdistancebyserialnumber,
-        availablenextnodes,
-    }: {
-        alpha_zero: number;
-        beta_zero: number;
-        currentnode: number;
-        availablenextnodes: number[];
-        getpheromone: (left: number, right: number) => number;
-        getdistancebyserialnumber: (left: number, right: number) => number;
-    }): number {
-        const beta = beta_zero;
-        const alpha = alpha_zero;
-        const random = Math.random();
-        if (random < route_selection_parameters_Q0) {
-            const nextnode_and_weights = availablenextnodes.map((nextnode) => {
-                const weight = calc_state_transition_probabilities({
-                    getpheromone,
+    // function picknextnode({
+    //     beta_zero,
+    //     alpha_zero,
+    //     currentnode,
+    //     getpheromone,
+    //     getdistancebyserialnumber,
+    //     availablenextnodes,
+    // }: {
+    //     alpha_zero: number;
+    //     beta_zero: number;
+    //     currentnode: number;
+    //     availablenextnodes: number[];
+    //     getpheromone: (left: number, right: number) => number;
+    //     getdistancebyserialnumber: (left: number, right: number) => number;
+    // }): number {
+    //     const beta = beta_zero;
+    //     const alpha = alpha_zero;
+    //     const random = Math.random();
+    //     if (random < route_selection_parameters_Q0) {
+    //         const nextnode_and_weights = availablenextnodes.map((nextnode) => {
+    //             const weight = calc_state_transition_probabilities({
+    //                 getpheromone,
 
-                    nextnode,
-                    currentnode,
-                    alpha,
-                    getdistancebyserialnumber,
-                    beta,
-                    ...options,
-                });
-                return { nextnode, weight };
-            });
+    //                 nextnode,
+    //                 currentnode,
+    //                 alpha,
+    //                 getdistancebyserialnumber,
+    //                 beta,
+    //                 ...options,
+    //             });
+    //             return { nextnode, weight };
+    //         });
 
-            return nextnode_and_weights.reduce((c, v) => {
-                return c.weight > v.weight ? c : v;
-            }, nextnode_and_weights[0]).nextnode;
-        }
+    //         return nextnode_and_weights.reduce((c, v) => {
+    //             return c.weight > v.weight ? c : v;
+    //         }, nextnode_and_weights[0]).nextnode;
+    //     }
 
-        const result = pickRandomOne(
-            availablenextnodes,
-            availablenextnodes.map((nextnode) => {
-                const weight = calc_state_transition_probabilities({
-                    getpheromone,
+    //     const result = pickRandomOne(
+    //         availablenextnodes,
+    //         availablenextnodes.map((nextnode) => {
+    //             const weight = calc_state_transition_probabilities({
+    //                 getpheromone,
 
-                    nextnode,
-                    currentnode,
-                    alpha,
-                    getdistancebyserialnumber,
-                    beta,
-                    ...options,
-                });
+    //                 nextnode,
+    //                 currentnode,
+    //                 alpha,
+    //                 getdistancebyserialnumber,
+    //                 beta,
+    //                 ...options,
+    //             });
 
-                return Math.max(0, weight);
-            }),
-        );
-        return result;
-    }
+    //             return Math.max(0, weight);
+    //         }),
+    //     );
+    //     return result;
+    // }
 
     async function getOutputDataAndConsumeIterationAndRouteData(): Promise<COMMON_TSP_Output> {
         const output: COMMON_TSP_Output = {

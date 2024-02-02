@@ -83,7 +83,7 @@ export function generate_paths_using_state_transition_probabilities(
             ...options,
             alpha_zero,
             beta_zero,
-            get_convergence_coefficient,
+            // get_convergence_coefficient,
             currentnode: current_city,
             availablenextnodes: Array.from(get_filtered_nodes()),
             getpheromone,
@@ -95,7 +95,7 @@ export function generate_paths_using_state_transition_probabilities(
 
     // const picknextnodeRoulette = picknextnodeRoulette;
     const {
-        get_convergence_coefficient,
+        // get_convergence_coefficient,
         get_neighbors_from_optimal_routes_and_latest_routes,
         max_cities_of_state_transition,
         random_selection_probability,

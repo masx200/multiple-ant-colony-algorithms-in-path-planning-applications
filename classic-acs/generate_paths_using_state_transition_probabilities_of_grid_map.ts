@@ -15,6 +15,7 @@ import { twoDimensionsToOneDimension } from "../path-planning/twoDimensionsToOne
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
 import { search_one_route_on_grid_map } from "../path-planning/search_one_route_on_grid_map";
 import { SharedOptions } from "../functions/SharedOptions";
+import { calc_state_transition_probabilities } from "../functions/calc_state_transition_probabilities";
 /**
  * 使用网格地图的状态转换概率生成路径
  * @param node_coordinates 节点坐标数组
@@ -42,38 +43,46 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
     local_pheromone_update,
     visibleGridsMatrix,
     ...options
-}: {
-    node_coordinates: number[][];
-    pheromoneStore: MatrixSymmetry<number>;
-    count_of_nodes: number;
-    // picknextnode: ({
-    //     beta_zero,
-    //     alpha_zero,
-    //     currentnode,
-    //     getpheromone,
-    //     getdistancebyserialnumber,
-    //     availablenextnodes,
-    // }: {
-    //     alpha_zero: number;
-    //     beta_zero: number;
-    //     currentnode: number;
-    //     availablenextnodes: number[];
-    //     getpheromone: (left: number, right: number) => number;
-    //     getdistancebyserialnumber: (left: number, right: number) => number;
-    // }) => number;
-    alpha_zero: number;
-    beta_zero: number;
-    // get_filtered_nodes: (
-    //     current_city: number,
-    //     available_nodes: Set<number>,
-    // ) => number[] | Set<number>;
-    local_pheromone_update: (route: number[]) => void;
-} & SharedOptions & {
-        visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
-            [number, number]
-        >[][];
-        visibleGridsMatrix: boolean[][][][];
-    }) {
+}: Omit<
+    {
+        route_selection_parameters_Q0: number;
+        node_coordinates: number[][];
+        pheromoneStore: MatrixSymmetry<number>;
+        count_of_nodes: number;
+        // picknextnode: ({
+        //     beta_zero,
+        //     alpha_zero,
+        //     currentnode,
+        //     getpheromone,
+        //     getdistancebyserialnumber,
+        //     availablenextnodes,
+        // }: {
+        //     alpha_zero: number;
+        //     beta_zero: number;
+        //     currentnode: number;
+        //     availablenextnodes: number[];
+        //     getpheromone: (left: number, right: number) => number;
+        //     getdistancebyserialnumber: (left: number, right: number) => number;
+        // }) => number;
+        alpha_zero: number;
+        beta_zero: number;
+        // get_filtered_nodes: (
+        //     current_city: number,
+        //     available_nodes: Set<number>,
+        // ) => number[] | Set<number>;
+        local_pheromone_update: (route: number[]) => void;
+    } & SharedOptions & {
+            visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
+                [number, number]
+            >[][];
+            visibleGridsMatrix: boolean[][][][];
+        },
+    "get_convergence_coefficient" | "get_random_selection_probability"
+>) {
+    const {
+        get_neighbors_from_optimal_routes_and_latest_routes,
+        route_selection_parameters_Q0,
+    } = options;
     function next_point_selector(
         neighbors: Point[],
         current: Point,
@@ -99,7 +108,7 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
         });
         const is_count_not_large =
             neighbors.length <= max_cities_of_state_transition;
-        const get_filtered_nodes = function (): number[] | Set<number> {
+        function get_filtered_nodes(): number[] | Set<number> {
             return is_count_not_large
                 ? available_nodes
                 : select_available_cities_from_optimal_and_latest({
@@ -109,16 +118,41 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
                       max_cities_of_state_transition:
                           max_cities_of_state_transition,
                   });
-        };
+        }
 
         const end_city = twoDimensionsToOneDimension(end.x, end.y, n);
+
+        const beta = beta_zero;
+        const alpha = alpha_zero;
+        const random = Math.random();
+        if (random < route_selection_parameters_Q0) {
+            const nextnode_and_weights = available_nodes.map((nextnode) => {
+                const weight = calc_state_transition_probabilities({
+                    getpheromone,
+
+                    nextnode,
+                    currentnode: current_city,
+                    alpha,
+                    getdistancebyserialnumber,
+                    beta,
+                    ...options,
+                    end: end_city,
+                });
+                return { nextnode, weight };
+            });
+
+            const nextnode = nextnode_and_weights.reduce((c, v) => {
+                return c.weight > v.weight ? c : v;
+            }, nextnode_and_weights[0]).nextnode;
+            return PointFromArray(oneDimensionToTwoDimensions(nextnode, n));
+        }
         const nextnode = /* randomselection
         ? pickRandomOne(Array.from(get_filtered_nodes()))
         : */ picknextnodeRoulette({
             ...options,
             alpha_zero,
             beta_zero,
-            get_convergence_coefficient,
+            // get_convergence_coefficient,
             currentnode: current_city,
             availablenextnodes: Array.from(get_filtered_nodes()),
             getpheromone,
@@ -128,6 +162,7 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
             max_cities_of_state_transition,
             pheromoneStore,
             count_of_nodes,
+            start,
         });
         return PointFromArray(oneDimensionToTwoDimensions(nextnode, n));
     }

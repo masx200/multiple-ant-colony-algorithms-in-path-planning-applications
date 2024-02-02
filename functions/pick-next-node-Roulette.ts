@@ -9,9 +9,12 @@ import { SharedOptions } from "./SharedOptions";
  * @returns {number} - 选择的下一个节点的编号
  */
 export function picknextnodeRoulette(
-    options: PickNextNodeRouletteOptions & {
-        get_convergence_coefficient: () => number;
-    } & SharedOptions,
+    options: Omit<
+        PickNextNodeRouletteOptions & {
+            // get_convergence_coefficient: () => number;
+        } & SharedOptions,
+        "get_convergence_coefficient" | "get_random_selection_probability"
+    >,
 ): number {
     const {
         end,
