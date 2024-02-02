@@ -9,7 +9,11 @@ import {
 } from "vue";
 
 import { DataOfBestChange } from "../functions/DataOfBestChange";
-
+/**
+ * 使用历史最佳数据
+ * @param data_of_best 最佳数据的引用
+ * @returns 包含历史最佳数据的对象
+ */
 export function use_history_of_best(
     data_of_best: DeepReadonly<Ref<DataOfBestChange | undefined>>,
 ): {
