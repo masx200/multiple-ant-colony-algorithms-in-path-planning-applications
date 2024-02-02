@@ -4,7 +4,7 @@ import { creategetdistancebyIndex } from "../functions/creategetdistancebyIndex"
 import { getBestRoute_Of_Series_routes_and_lengths } from "../functions/getBestRoute_Of_Series_routes_and_lengths";
 import { pickRandomOne } from "../functions/pickRandomOne";
 import { get_distance_round } from "../src/set_distance_round";
-import { generate_k_opt_cycle_routes_limited } from "./generate_k_opt_cycle_routes_limited";
+import { generate_k_opt_not_cycle_routes_limited } from "./generate_k_opt_cycle_routes_limited";
 
 export function Random_K_OPT_full_limited_find_best({
     count_of_nodes,
@@ -30,7 +30,7 @@ export function Random_K_OPT_full_limited_find_best({
             );
         })
         .map((k) =>
-            generate_k_opt_cycle_routes_limited({
+            generate_k_opt_not_cycle_routes_limited({
                 k: k,
                 oldRoute,
                 max_results: 1,
