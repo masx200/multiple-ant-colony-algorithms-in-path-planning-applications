@@ -7,6 +7,15 @@ import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Ser
 import { LocalOptimizationRouteOptions } from "./LocalOptimizationRouteOptions.1";
 // import { pickRandomOne } from "./pickRandomOne";
 
+/**
+ * 本地优化路由
+ * @param {LocalOptimizationRouteOptions} options - 参数对象
+ * @returns {{
+ *  route: number[];
+ *  length: number;
+ *  time_ms: number;
+ * }} - 返回对象包含路由、长度和运行时间
+ */
 export function local_optimization_route({
     count_of_nodes,
     max_segments_of_cross_point,
@@ -40,7 +49,6 @@ export function local_optimization_route({
     // ]);
     // const { route: route2, length: length2 } = random_k_exchange_limited({
     //     ...route_and_length_selection1,
-
     //     node_coordinates,
     //     max_results_of_k_exchange,
     // });
@@ -54,7 +62,6 @@ export function local_optimization_route({
               ...route_and_length_selection2,
               count_of_nodes,
               max_results_of_2_opt,
-
               node_coordinates,
           })
         : partial_precise_random_2_opt_eliminates_cross_points({
@@ -62,7 +69,6 @@ export function local_optimization_route({
               count_of_nodes,
               max_of_segments: max_segments_of_cross_point,
               max_results_of_2_opt,
-
               node_coordinates,
           });
 
