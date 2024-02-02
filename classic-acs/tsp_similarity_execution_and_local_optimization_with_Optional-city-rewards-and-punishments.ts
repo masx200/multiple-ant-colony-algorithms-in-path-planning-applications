@@ -183,17 +183,20 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         const available_nodes = new Set<number>(
             inputindexs.filter((v) => !route.includes(v)),
         );
-        const getpheromone = (left: number, right: number) => {
+        function getpheromone(left: number, right: number): number {
             return pheromoneStore.get(left, right);
-        };
-        const getdistancebyserialnumber = (left: number, right: number) => {
+        }
+        function getdistancebyserialnumber(
+            left: number,
+            right: number,
+        ): number {
             return geteuclideandistancebyindex(
                 left,
                 right,
                 node_coordinates,
                 get_distance_round(),
             );
-        };
+        }
 
         while (route.length !== count_of_nodes) {
             const current_city = Array.from(route).slice(-1)[0];
