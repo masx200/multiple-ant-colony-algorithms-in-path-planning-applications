@@ -7,6 +7,7 @@ export async function thread_Greedy_algorithm_to_solve_tsp_with_selected_start({
     // start = get_random_start(node_coordinates),
     start,
     end,
+    gridDistanceMatrix,
     // round = false,
     // max_cities_of_greedy = Infinity,
 }: GreedyWithStartOptions): Promise<{
@@ -21,6 +22,7 @@ export async function thread_Greedy_algorithm_to_solve_tsp_with_selected_start({
         node_coordinates,
         start,
         end,
+        gridDistanceMatrix,
         // round,
         // max_cities_of_greedy,
         // });
