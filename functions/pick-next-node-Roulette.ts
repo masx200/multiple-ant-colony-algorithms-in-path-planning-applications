@@ -14,6 +14,7 @@ export function picknextnodeRoulette(
     } & SharedOptions,
 ): number {
     const {
+        end,
         alpha_zero, // 轮盘赌法的alpha参数
         beta_zero, // 轮盘赌法的beta参数
         getpheromone, // 获取pheromone值的函数
@@ -39,6 +40,7 @@ export function picknextnodeRoulette(
                 alpha,
                 getdistancebyserialnumber,
                 beta,
+                end,
             });
 
             return weight;

@@ -14,6 +14,7 @@ import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 import { select_available_cities_from_optimal_and_latest } from "./select_available_cities_from_optimal_and_latest";
 import { SharedOptions } from "./SharedOptions";
 import { random_next_point_selector } from "../path-planning/random_next_point_selector";
+import { PointFromArray } from "../path-planning/PointFromArray";
 
 /**
  * 使用状态转换概率生成路径
@@ -52,8 +53,13 @@ export function generate_paths_using_state_transition_probabilities(
         if (randomselection) {
             return random_next_point_selector(neighbors /* current, end */);
         }
+        const current_city = twoDimensionsToOneDimension(
+            current.x,
+            current.y,
+            n,
+        );
         const is_count_not_large =
-            count_of_nodes <= max_cities_of_state_transition;
+            neighbors.length <= max_cities_of_state_transition;
         const get_filtered_nodes = function (): number[] | Set<number> {
             return is_count_not_large
                 ? available_nodes
@@ -66,6 +72,7 @@ export function generate_paths_using_state_transition_probabilities(
                   });
         };
 
+        const end_city = twoDimensionsToOneDimension(end.x, end.y, n);
         const nextnode = /* randomselection
             ? pickRandomOne(Array.from(get_filtered_nodes()))
             : */ picknextnodeRoulette({
@@ -77,7 +84,9 @@ export function generate_paths_using_state_transition_probabilities(
             availablenextnodes: Array.from(get_filtered_nodes()),
             getpheromone,
             getdistancebyserialnumber,
+            end: end_city,
         });
+        return PointFromArray(oneDimensionToTwoDimensions(nextnode, n));
     }
 
     // const picknextnodeRoulette = picknextnodeRoulette;
@@ -97,10 +106,10 @@ export function generate_paths_using_state_transition_probabilities(
     } = options;
 
     // const count_of_nodes = node_coordinates.length;
-    function getpheromone(left: number, right: number) {
+    function getpheromone(left: number, right: number): number {
         return pheromoneStore.get(left, right);
     }
-    function getdistancebyserialnumber(left: number, right: number) {
+    function getdistancebyserialnumber(left: number, right: number): number {
         return geteuclideandistancebyindex(
             left,
             right,

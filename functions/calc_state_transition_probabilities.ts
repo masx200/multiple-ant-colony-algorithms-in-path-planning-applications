@@ -32,13 +32,15 @@ export function calc_state_transition_probabilities({
 }): number {
     const pheromone = getpheromone(nextnode, currentnode);
     assert_true(!Number.isNaN(pheromone), "pheromone should not be NaN");
-
+    const 启发式信息 =
+        1 /
+        (getdistancebyserialnumber(nextnode, currentnode) +
+            getdistancebyserialnumber(nextnode, end));
     const weight =
-        Math.pow(pheromone, alpha) /
+        Math.pow(pheromone, alpha) *
         Math.pow(
             //启发式信息为:1/(当前节点到下一个节点的距离+下一个节点到终点的距离)
-            getdistancebyserialnumber(nextnode, currentnode) +
-                getdistancebyserialnumber(nextnode, end),
+            启发式信息,
             beta,
         );
 
