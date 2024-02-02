@@ -1,4 +1,5 @@
 // import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
+import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 import { run_greedy_once_thread_with_time } from "./run_greedy_once_thread_with_time";
 import { SharedOptions } from "./SharedOptions";
 /**
@@ -16,10 +17,12 @@ export async function* greedy_first_search_routes_parallel({
     node_coordinates,
     start,
     end,
+    gridDistanceMatrix,
 }: {
     node_coordinates: number[][];
     count_of_nodes: number;
-} & SharedOptions): AsyncGenerator<
+} & SharedOptions &
+    GreedyWithStartOptions): AsyncGenerator<
     { length: number; route: number[]; time_ms: number },
     void,
     unknown
@@ -29,6 +32,7 @@ export async function* greedy_first_search_routes_parallel({
             node_coordinates,
             start,
             end,
+            gridDistanceMatrix,
         });
     }
     // const routes_of_greedy = Math.min(max_routes_of_greedy, count_of_nodes);
