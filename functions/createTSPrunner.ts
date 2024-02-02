@@ -58,7 +58,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     } = createEventPair<DataOfFinishGreedyIteration>(emitter);
 
     const {
-        显示每次迭代的统计,
+        // 显示每次迭代的统计,
         max_results_of_2_opt = default_max_results_of_2_opt,
 
         max_results_of_k_opt = default_max_results_of_k_opt,

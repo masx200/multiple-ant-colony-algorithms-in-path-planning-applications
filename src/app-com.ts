@@ -405,7 +405,8 @@ export default defineComponent({
 
             on_receive_Data_Of_total(data);
             on_receive_Data_Of_Global_Best(data);
-            onReceiveDeltaDataOfOneIteration(data.delta_data_of_iterations);
+            if (显示每次迭代的统计.value)
+                onReceiveDeltaDataOfOneIteration(data.delta_data_of_iterations);
             // onReceiveDeltadataOfAllIterations(data.data_of_routes);
 
             onUpdateIterationDataOfIndividualPopulations(
