@@ -10,14 +10,14 @@ export function similarityOfTwoRoutes(
     route1: number[],
     route2: number[],
 ): number {
-    console.log(route2, route1);
+    // console.log(route2, route1);
     assert_true(route1.length > 0);
     assert_true(route2.length > 0);
     // assert_true(route1.length === route2.length);
     const A: number[][] = Array(route1.length)
         .fill(0)
         .map(() => Array(route1.length).fill(0));
-    console.log(A);
+    // console.log(A);
     const n = route1.length;
 
     not_cycle_route_to_segments(route1).forEach(([x, y]) => {
