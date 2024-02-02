@@ -455,6 +455,7 @@ export default defineComponent({
 
         async function create_runner(): Promise<MultiPopulationSchedulerRemote> {
             clearDataOfHistoryOfBest();
+            clear_data_of_best();
             const count_of_ants_value = count_of_ants_ref.value;
             // const element = selecteleref.value;
             // const node_coordinates = TSP_cities_map.get(element?.value || "");

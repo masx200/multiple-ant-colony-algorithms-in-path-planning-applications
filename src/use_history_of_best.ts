@@ -61,9 +61,9 @@ export function use_history_of_best(
         });
     });
 
-    const clearData = function clear_data_of_best() {
+    function clearData() {
         history_of_best.length = 0;
-    };
+    }
     const TableHeads = ["最优解路径序号", "全局最优长度", "最优解的耗时秒"];
 
     const TableBody: ComputedRef<[number, number, number][]> = computed(() => {

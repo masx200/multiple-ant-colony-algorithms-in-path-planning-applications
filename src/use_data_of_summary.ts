@@ -2,18 +2,21 @@ import { computed, ComputedRef, ref } from "vue";
 
 import { DataOfBestChange } from "../functions/DataOfBestChange";
 import { DataOfTotal } from "../functions/DataOfTotal";
-
+/**
+ * 使用数据的摘要
+ * @param renderBestRoute 渲染最优路径的函数
+ * @returns 包含各种数据的引用和函数的对象
+ */
 export function use_data_of_summary(
     renderBestRoute: (route: Array<number>) => Array<[number, number]>,
 ) {
-    const on_receive_Data_Of_Global_Best =
-        function on_receive_Data_Of_Global_Best(data: DataOfBestChange) {
-            data_of_best.value = data;
-        };
+    function on_receive_Data_Of_Global_Best(data: DataOfBestChange) {
+        data_of_best.value = data;
+    }
 
-    const clear_data_of_best = function clear_data_of_best() {
+    function clear_data_of_best() {
         data_of_best.value = undefined;
-    };
+    }
     const summary_best_TableHeads = [
         "全局最优长度",
         "最优解的耗时秒",
