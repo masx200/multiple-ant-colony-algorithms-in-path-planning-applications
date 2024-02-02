@@ -9,7 +9,17 @@ import { Point } from "./Point";
 import { PointFromArray } from "./PointFromArray";
 import { PointToArray } from "./PointToArray";
 
-// 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
+/**
+ * 在网格地图上搜索从起点到终点的路径
+ * @param grid 网格地图对象
+ * @param start 起点对象
+ * @param end 终点对象
+ * @param visibleGridsListWithOutPointsInsideAllConvexPolygons 可见网格列表（多维度）
+ * @param visibleGridsMatrix 多边形内部点的集合
+ * @param next_point_selector 选择下一个点的函数
+ * @returns 包含起点和终点的路径数组
+ * // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
+ */
 export function search_one_route_on_grid_map(
     // 网格地图对象
     grid: GridMap,
