@@ -12,7 +12,7 @@ import {
 } from "../functions/not_cycle_route_to_segments";
 import { pickRandomOne } from "../functions/pickRandomOne";
 import { run_greedy_once_thread_with_time } from "../functions/run_greedy_once_thread_with_time";
-import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
+// import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
 import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
 // import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { DefaultOptions } from "../src/default_Options";
@@ -42,7 +42,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     const options = Object.assign(structuredClone(DefaultOptions), input);
     const { Coefficient_of_the_minimum_after_pheromone_weakening } = options;
     const {
-        max_cities_of_state_transition = DefaultOptions.max_cities_of_state_transition,
+        // max_cities_of_state_transition = DefaultOptions.max_cities_of_state_transition,
         max_size_of_collection_of_optimal_routes = DefaultOptions.max_size_of_collection_of_optimal_routes,
         max_results_of_2_opt = DefaultOptions.max_results_of_2_opt,
         max_segments_of_cross_point = DefaultOptions.max_segments_of_cross_point,
@@ -139,46 +139,47 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     }
     // const data_of_routes: COMMON_dataOfAllIterations[] = [];
     const delta_data_of_iterations: COMMON_DataOfOneIteration[] = [];
-    const get_neighbors_from_optimal_routes_and_latest_routes = function (
-        current_city: number,
-    ): number[] {
-        return (
-            neighbors_from_optimal_routes_and_latest_routes.get(current_city) ||
-            []
-        );
-    };
-    const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
-    const get_filtered_nodes = function (
-        current_city: number,
-        available_nodes: Set<number>,
-    ): number[] | Set<number> {
-        return is_count_not_large
-            ? available_nodes
-            : select_available_cities_from_optimal_and_latest({
-                  // eslint-disable-next-line indent
-                  available_nodes,
-                  get_neighbors_from_optimal_routes_and_latest_routes:
-                      get_neighbors_from_optimal_routes_and_latest_routes,
-                  current_city,
-                  max_cities_of_state_transition:
-                      max_cities_of_state_transition,
-              });
-    };
+    // const get_neighbors_from_optimal_routes_and_latest_routes = function (
+    //     current_city: number,
+    // ): number[] {
+    //     return (
+    //         neighbors_from_optimal_routes_and_latest_routes.get(current_city) ||
+    //         []
+    //     );
+    // };
+    // const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
+    // const get_filtered_nodes = function (
+    //     current_city: number,
+    //     available_nodes: Set<number>,
+    // ): number[] | Set<number> {
+    //     return is_count_not_large
+    //         ? available_nodes
+    //         : select_available_cities_from_optimal_and_latest({
+    //               // eslint-disable-next-line indent
+    //               available_nodes,
+    //               get_neighbors_from_optimal_routes_and_latest_routes:
+    //                   get_neighbors_from_optimal_routes_and_latest_routes,
+    //               current_city,
+    //               max_cities_of_state_transition:
+    //                   max_cities_of_state_transition,
+    //           });
+    // };
     function generate_paths_using_state_transition_probabilities(): {
         route: number[];
         length: number;
         time_ms: number;
     } {
-        return generate_paths_using_state_transition_probabilities_of_grid_map(
+        return generate_paths_using_state_transition_probabilities_of_grid_map({
+            ...options,
             node_coordinates,
             pheromoneStore,
             count_of_nodes,
-            picknextnode,
+            // picknextnode,
             alpha_zero,
             beta_zero,
-            get_filtered_nodes,
+            // get_filtered_nodes,
             local_pheromone_update,
-        );
+        });
     }
     function local_pheromone_update(route: number[]) {
         for (const [city1, city2] of not_cycle_route_to_segments(route)) {
