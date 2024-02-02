@@ -1,3 +1,8 @@
+import { GridMapFromArray } from "../path-planning/GridMapFromArray";
+import { Point } from "../path-planning/Point";
+import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions";
+import { search_one_route_on_grid_map } from "../path-planning/search_one_route_on_grid_map";
+import { twoDimensionsToOneDimension } from "../path-planning/twoDimensionsToOneDimension";
 import { get_distance_round } from "../src/set_distance_round";
 // import { assert_true } from "../test/assert_true";
 import { total_path_length_of_not_closed_route } from "./closed-total-path-length";
@@ -22,7 +27,11 @@ export function generate_paths_using_state_transition_probabilities(
         node_coordinates: number[][];
 
         pheromoneStore: ReadOnlyPheromone;
-    } & SharedOptions,
+    } & SharedOptions & {
+            visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
+                [number, number]
+            >[][];
+        },
 ): {
     route: number[];
     length: number;
@@ -35,9 +44,11 @@ export function generate_paths_using_state_transition_probabilities(
         random_selection_probability,
         node_coordinates,
         pheromoneStore,
-
+        start,
+        end,
         alpha_zero,
         beta_zero,
+        visibleGridsListWithOutPointsInsideAllConvexPolygons,
     } = options;
 
     // const count_of_nodes = node_coordinates.length;
@@ -57,40 +68,54 @@ export function generate_paths_using_state_transition_probabilities(
     //     .fill(0)
     //     .map((_v, i) => i);
     // const startnode = pickRandomOne(inputindexs);
-    const route: number[] = [startnode];
+
+    const map = node_coordinates;
+    const gridmap = GridMapFromArray(map);
+    const n = gridmap.data[0].length;
+    const startPoint = new Point(...oneDimensionToTwoDimensions(start, n));
+    const endPoint = new Point(...oneDimensionToTwoDimensions(end, n));
+    const one_route_on_grid_map = search_one_route_on_grid_map(
+        gridmap,
+        startPoint,
+        endPoint,
+        visibleGridsListWithOutPointsInsideAllConvexPolygons,
+    );
+    const route: number[] = one_route_on_grid_map.map((a) =>
+        twoDimensionsToOneDimension(a[0], a[1], n),
+    ); //[startnode];
     // const available_nodes = new Set<number>(
     //     inputindexs.filter((v) => !route.includes(v)),
     // );
-    // const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
+    const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
     // while (route.length !== count_of_nodes) {
     //     const current_city = Array.from(route).slice(-1)[0];
     //     assert_true(typeof current_city === "number");
 
-        const randomselection = Math.random() < random_selection_probability;
-        const get_filtered_nodes = function (): number[] | Set<number> {
-            return is_count_not_large
-                ? available_nodes
-                : select_available_cities_from_optimal_and_latest({
-                      available_nodes,
-                      get_neighbors_from_optimal_routes_and_latest_routes,
-                      current_city,
-                      max_cities_of_state_transition:
-                          max_cities_of_state_transition,
-                  });
-        };
-
-        const nextnode = randomselection
-            ? pickRandomOne(Array.from(get_filtered_nodes()))
-            : picknextnode({
-                  ...options,
-                  alpha_zero,
-                  beta_zero,
-                  get_convergence_coefficient,
-                  currentnode: current_city,
-                  availablenextnodes: Array.from(get_filtered_nodes()),
-                  getpheromone,
-                  getdistancebyserialnumber,
+    const randomselection = Math.random() < random_selection_probability;
+    const get_filtered_nodes = function (): number[] | Set<number> {
+        return is_count_not_large
+            ? available_nodes
+            : select_available_cities_from_optimal_and_latest({
+                  available_nodes,
+                  get_neighbors_from_optimal_routes_and_latest_routes,
+                  current_city,
+                  max_cities_of_state_transition:
+                      max_cities_of_state_transition,
               });
+    };
+
+    const nextnode = randomselection
+        ? pickRandomOne(Array.from(get_filtered_nodes()))
+        : picknextnode({
+              ...options,
+              alpha_zero,
+              beta_zero,
+              get_convergence_coefficient,
+              currentnode: current_city,
+              availablenextnodes: Array.from(get_filtered_nodes()),
+              getpheromone,
+              getdistancebyserialnumber,
+          });
 
     //     assert_true(typeof nextnode === "number");
     //     route.push(nextnode);

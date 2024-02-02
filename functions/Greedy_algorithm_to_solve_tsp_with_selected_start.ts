@@ -1,5 +1,5 @@
-import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../path-planning/FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
-import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
+// import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../path-planning/FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
+// import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
 import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 // import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
@@ -25,6 +25,7 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     // round = false,
     // max_cities_of_greedy = Infinity,
     end,
+    visibleGridsListWithOutPointsInsideAllConvexPolygons,
 }: GreedyWithStartOptions): { route: number[]; length: number } {
     // console.log({ start, end, node_coordinates });
     if (Math.random() > 0.5) {
@@ -34,6 +35,7 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
             start: end,
             end: start,
             gridDistanceMatrix,
+            visibleGridsListWithOutPointsInsideAllConvexPolygons,
         });
         res.route = res.route.toReversed();
         return res;
@@ -48,16 +50,16 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     // );
     const visibleGridsList = getVisibleGridsList(gridmap);
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
-    const pointsInsideAllConvexPolygons = new Set(
-        [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
-            (a) => a[0] * gridmap.row + a[1],
-        ),
-    );
-    const visibleGridsListWithOutPointsInsideAllConvexPolygons =
-        FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
-            visibleGridsList,
-            pointsInsideAllConvexPolygons,
-        );
+    // const pointsInsideAllConvexPolygons = new Set(
+    //     [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
+    //         (a) => a[0] * gridmap.row + a[1],
+    //     ),
+    // );
+    // const visibleGridsListWithOutPointsInsideAllConvexPolygons =
+    //     FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
+    //         visibleGridsList,
+    //         pointsInsideAllConvexPolygons,
+    //     );
     const n = gridmap.data[0].length;
     const startPoint = new Point(...oneDimensionToTwoDimensions(start, n));
     const endPoint = new Point(...oneDimensionToTwoDimensions(end, n));

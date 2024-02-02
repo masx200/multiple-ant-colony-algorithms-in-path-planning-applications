@@ -5,4 +5,7 @@ export interface GreedyWithStartOptions {
     // max_cities_of_greedy?: number;
     end: number;
     gridDistanceMatrix: number[][][][];
+    visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
+        [number, number]
+    >[][];
 }
