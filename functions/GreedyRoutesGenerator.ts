@@ -5,6 +5,7 @@ import { assert_true } from "../test/assert_true";
 import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Series_routes_and_lengths";
 import { greedy_first_search_routes_parallel } from "./greedy_first_search_routes_parallel";
 import { sum } from "lodash-es";
+import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 
 /**
  * 贪心路径生成器
@@ -47,7 +48,8 @@ export async function GreedyRoutesGenerator(
          * 节点数量
          */
         count_of_nodes: number;
-    } & SharedOptions,
+    } & SharedOptions &
+        GreedyWithStartOptions,
 ): Promise<{
     /**
      * 最佳长度

@@ -31,6 +31,8 @@ import {
     COMMON_TSP_Options,
     COMMON_TSP_Output,
 } from "./tsp-interface";
+import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
+import { GridMapFromArray } from "../path-planning/GridMapFromArray";
 
 /* eslint-disable indent */
 
@@ -247,6 +249,12 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     }
     const { Period_of_judgment_similarity, High_similarity_threshold } =
         options;
+    const map = node_coordinates;
+    const gridmap = GridMapFromArray(map);
+    const gridDistanceMatrix = GridDistanceMatrix(
+        gridmap.data.length,
+        gridmap.data[0].length,
+    );
     async function runOneIteration() {
         let time_ms_of_one_iteration = 0;
         if (current_search_count === 0) {
@@ -258,6 +266,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 node_coordinates,
                 start,
                 end,
+                gridDistanceMatrix,
                 // round: distance_round,
             });
             // Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
