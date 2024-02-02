@@ -4,11 +4,8 @@ import { create_collection_of_optimal_routes } from "../collections/collection-o
 import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIteration";
 import { calc_population_relative_information_entropy } from "../functions/calc_population-relative-information-entropy";
 import { calc_state_transition_probabilities } from "../functions/calc_state_transition_probabilities";
-import { total_path_length_of_not_closed_route } from "../functions/closed-total-path-length";
 import { create_run_iterations } from "../functions/create_run_iterations";
-import { creategetdistancebyIndex } from "../functions/creategetdistancebyIndex";
 
-import { geteuclideandistancebyindex } from "../functions/geteuclideandistancebyindex";
 import {
     not_cycle_route_to_segments,
     // not_cycle_route_to_segments,
@@ -19,8 +16,6 @@ import { select_available_cities_from_optimal_and_latest } from "../functions/se
 import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
 // import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { DefaultOptions } from "../src/default_Options";
-import { get_distance_round } from "../src/set_distance_round";
-import { assert_true } from "../test/assert_true";
 import { createLatestIterateBestRoutesInPeriod } from "./createLatestIterateBestRoutesInPeriod";
 import { createRewardCommonRoutes } from "./createRewardCommonRoutes";
 import { createSmoothPheromones } from "./createSmoothPheromones";
@@ -37,6 +32,7 @@ import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../p
 import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
 import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
 import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
+import { generate_paths_using_state_transition_probabilities_of_grid_map } from "./generate_paths_using_state_transition_probabilities_of_grid_map";
 
 /* eslint-disable indent */
 
@@ -173,63 +169,16 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         length: number;
         time_ms: number;
     } {
-        const starttime_of_one_route = Number(new Date());
-
-        const inputindexs = Array(node_coordinates.length)
-            .fill(0)
-            .map((_v, i) => i);
-        const startnode = pickRandomOne(inputindexs);
-        const route: number[] = [startnode];
-        const available_nodes = new Set<number>(
-            inputindexs.filter((v) => !route.includes(v)),
+        return generate_paths_using_state_transition_probabilities_of_grid_map(
+            node_coordinates,
+            pheromoneStore,
+            count_of_nodes,
+            picknextnode,
+            alpha_zero,
+            beta_zero,
+            get_filtered_nodes,
+            local_pheromone_update,
         );
-        function getpheromone(left: number, right: number): number {
-            return pheromoneStore.get(left, right);
-        }
-        function getdistancebyserialnumber(
-            left: number,
-            right: number,
-        ): number {
-            return geteuclideandistancebyindex(
-                left,
-                right,
-                node_coordinates,
-                get_distance_round(),
-            );
-        }
-
-        while (route.length !== count_of_nodes) {
-            const current_city = Array.from(route).slice(-1)[0];
-
-            const nextnode = picknextnode({
-                alpha_zero,
-                beta_zero,
-
-                currentnode: current_city,
-                availablenextnodes: Array.from(
-                    get_filtered_nodes(current_city, available_nodes),
-                ),
-                getpheromone,
-                getdistancebyserialnumber,
-            });
-            route.push(nextnode);
-            available_nodes.delete(nextnode);
-        }
-
-        local_pheromone_update(route);
-        const routelength = total_path_length_of_not_closed_route({
-            round: get_distance_round(),
-            path: route,
-            getdistancebyIndex: creategetdistancebyIndex(
-                node_coordinates,
-                get_distance_round(),
-            ),
-        });
-        const length = routelength;
-        assert_true(route.length == count_of_nodes);
-        const endtime_of_one_route = Number(new Date());
-        const time_ms = endtime_of_one_route - starttime_of_one_route;
-        return { time_ms, route, length };
     }
     function local_pheromone_update(route: number[]) {
         for (const [city1, city2] of not_cycle_route_to_segments(route)) {
