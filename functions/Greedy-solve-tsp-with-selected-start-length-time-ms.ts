@@ -13,6 +13,7 @@ export function Greedy_solve_tsp_with_selected_start_length_time_ms({
     // max_cities_of_greedy = Infinity,
     end,
     gridDistanceMatrix,
+    ...opts
 }: GreedyWithStartOptions): {
     length: number;
     route: number[];
@@ -28,6 +29,7 @@ export function Greedy_solve_tsp_with_selected_start_length_time_ms({
             // max_cities_of_greedy,
             end,
             gridDistanceMatrix,
+            ...opts,
         },
     );
     const end_time = Number(new Date());

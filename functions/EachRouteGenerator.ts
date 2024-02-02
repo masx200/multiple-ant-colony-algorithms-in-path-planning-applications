@@ -29,9 +29,11 @@ export function EachRouteGenerator(
         alpha_zero,
         beta_zero,
         last_random_selection_probability,
+        visibleGridsMatrix,
 
         getBestLength,
         getBestRoute,
+        visibleGridsListWithOutPointsInsideAllConvexPolygons,
     } = options;
     if (pheromone_exceeds_maximum_range()) {
         return {
@@ -57,6 +59,8 @@ export function EachRouteGenerator(
         alpha_zero,
         beta_zero,
         last_random_selection_probability,
+        visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsMatrix,
     });
 
     if (oldLength < getBestLength()) {

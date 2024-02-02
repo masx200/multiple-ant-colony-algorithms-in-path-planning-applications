@@ -1,3 +1,4 @@
+import { EachRouteGeneratorOptions } from "./Fun_EachRouteGenerator";
 import { generate_paths_using_state_transition_probabilities } from "./generate-paths-using-state-transition-probabilities";
 import { SharedOptions } from "./SharedOptions";
 
@@ -16,12 +17,14 @@ export function construct_one_route_all(
         alpha_zero: number;
         beta_zero: number;
         last_random_selection_probability: number;
-    } & SharedOptions,
+    } & SharedOptions &
+        EachRouteGeneratorOptions,
 ): {
     route: number[];
     length: number;
 } {
     const {
+        visibleGridsMatrix,
         node_coordinates,
 
         pheromoneStore,
@@ -29,6 +32,7 @@ export function construct_one_route_all(
         alpha_zero,
         beta_zero,
         last_random_selection_probability,
+        visibleGridsListWithOutPointsInsideAllConvexPolygons,
     } = options;
 
     const result = generate_paths_using_state_transition_probabilities({
@@ -36,8 +40,10 @@ export function construct_one_route_all(
         pheromoneStore,
         alpha_zero,
         beta_zero,
+        visibleGridsMatrix,
         random_selection_probability: last_random_selection_probability,
         node_coordinates,
+        visibleGridsListWithOutPointsInsideAllConvexPolygons,
     });
     return result;
 }

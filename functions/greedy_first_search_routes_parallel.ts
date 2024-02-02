@@ -18,6 +18,7 @@ export async function* greedy_first_search_routes_parallel({
     start,
     end,
     gridDistanceMatrix,
+    ...opts
 }: {
     node_coordinates: number[][];
     count_of_nodes: number;
@@ -33,6 +34,7 @@ export async function* greedy_first_search_routes_parallel({
             start,
             end,
             gridDistanceMatrix,
+            ...opts,
         });
     }
     // const routes_of_greedy = Math.min(max_routes_of_greedy, count_of_nodes);
