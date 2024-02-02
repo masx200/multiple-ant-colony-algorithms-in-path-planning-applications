@@ -1,5 +1,7 @@
 import { CommunicationStrategy } from "./CommunicationStrategy";
-
+/**
+ * TSP默认选项接口
+ */
 export interface TSPDefaultOptions {
     显示每次迭代的统计: boolean;
     CommunicationStrategy: CommunicationStrategy;
@@ -36,6 +38,9 @@ export interface TSPDefaultOptions {
     Coefficient_of_the_minimum_after_pheromone_weakening: number;
 }
 
+/**
+ * TSP运行器选项类型
+ */
 export type TSPRunnerOptions = {
     node_coordinates: number[][];
 } & Partial<TSPDefaultOptions> & { start: number; end: number };

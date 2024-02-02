@@ -95,7 +95,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     //     data_of_routes.push(data);
     // });
     on_finish_one_iteration((data) => {
-        if (显示每次迭代的统计) delta_data_of_iterations.push(data);
+        /*  if (显示每次迭代的统计) */ delta_data_of_iterations.push(data);
     });
     on_finish_greedy_iteration((data) => {
         data_of_greedy.push(data);

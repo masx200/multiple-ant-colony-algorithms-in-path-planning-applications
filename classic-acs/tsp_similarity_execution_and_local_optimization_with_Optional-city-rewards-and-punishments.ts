@@ -398,7 +398,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 endtime_of_process_iteration -
                 starttime_of_process_iteration;
             total_time_ms += time_ms_of_one_iteration;
-            if (显示每次迭代的统计)
+            // if (显示每次迭代的统计)
                 delta_data_of_iterations.push({
                     global_best_length: get_best_length(),
                     current_iterations: getCountOfIterations(),
