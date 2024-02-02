@@ -264,19 +264,32 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     const { max_number_of_stagnation, relative_Information_Entropy_Factor } =
         options;
+    // 定义地图的坐标
     const map = node_coordinates;
+
+    // 根据地图坐标生成网格地图
     const gridmap = GridMapFromArray(map);
+
+    // 根据网格地图的大小生成网格距离矩阵
     const gridDistanceMatrix = GridDistanceMatrix(
         gridmap.data.length,
         gridmap.data[0].length,
     );
+
+    // 获取可见网格列表
     const visibleGridsList = getVisibleGridsList(gridmap);
+
+    // 根据可见网格列表生成可见网格矩阵
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
+
+    // 查找所有凸多边形内部的点，并将其存储到集合中
     const pointsInsideAllConvexPolygons = new Set(
         [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
             (a) => a[0] * gridmap.row + a[1],
         ),
     );
+
+    // 过滤掉不在凸多边形内部的可见网格列表
     const visibleGridsListWithOutPointsInsideAllConvexPolygons =
         FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
             visibleGridsList,
