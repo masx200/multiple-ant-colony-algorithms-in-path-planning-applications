@@ -4,4 +4,5 @@ export interface GreedyWithStartOptions {
     // round?: boolean;
     // max_cities_of_greedy?: number;
     end: number;
+    gridDistanceMatrix: number[][][][];
 }

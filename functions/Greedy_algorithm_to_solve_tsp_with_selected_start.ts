@@ -1,7 +1,7 @@
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../path-planning/FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
 import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
 import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
-import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
+// import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
 import { Point } from "../path-planning/Point";
 import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
@@ -21,6 +21,7 @@ import { twoDimensionsToOneDimension } from "../path-planning/twoDimensionsToOne
 export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     node_coordinates,
     start,
+    gridDistanceMatrix,
     // round = false,
     // max_cities_of_greedy = Infinity,
     end,
@@ -32,6 +33,7 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
             node_coordinates,
             start: end,
             end: start,
+            gridDistanceMatrix,
         });
         res.route = res.route.toReversed();
         return res;
@@ -40,10 +42,10 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     const map = node_coordinates;
     const gridmap = GridMapFromArray(map);
 
-    const gridDistanceMatrix = GridDistanceMatrix(
-        gridmap.data.length,
-        gridmap.data[0].length,
-    );
+    // const gridDistanceMatrix = GridDistanceMatrix(
+    //     gridmap.data.length,
+    //     gridmap.data[0].length,
+    // );
     const visibleGridsList = getVisibleGridsList(gridmap);
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
     const pointsInsideAllConvexPolygons = new Set(

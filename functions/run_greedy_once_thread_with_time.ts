@@ -1,5 +1,6 @@
 // import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { Greedy_solve_tsp_with_selected_start_length_time_ms } from "../functions/Greedy-solve-tsp-with-selected-start-length-time-ms";
+import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 /**
  * 使用贪婪算法计算一次带有时间限制的旅行商问题的最优解。
  * @param node_coordinates 节点的坐标
@@ -11,6 +12,7 @@ export async function run_greedy_once_thread_with_time({
     node_coordinates,
     start,
     end,
+    gridDistanceMatrix,
     // inputindexs = Array.from(node_coordinates.keys()),
 
     // round = false,
@@ -22,7 +24,11 @@ export async function run_greedy_once_thread_with_time({
     end: number;
     // round?: boolean;
     // max_cities_of_greedy?: number;
-}): Promise<{ length: number; route: number[]; time_ms: number }> {
+} & GreedyWithStartOptions): Promise<{
+    length: number;
+    route: number[];
+    time_ms: number;
+}> {
     // const start = pickRandomOne(inputindexs);
     /*   return Greedy_algorithm_to_solve_tsp_with_selected_start_pool.run((w) => {
         const remote = w.remote;
@@ -31,6 +37,7 @@ export async function run_greedy_once_thread_with_time({
         node_coordinates,
         start,
         end,
+        gridDistanceMatrix,
         // round,
         // max_cities_of_greedy,
         // });
