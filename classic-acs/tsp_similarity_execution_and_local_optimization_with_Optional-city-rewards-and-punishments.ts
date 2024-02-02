@@ -1,5 +1,5 @@
 import { MatrixFill, MatrixSymmetryCreate } from "@masx200/sparse-2d-matrix";
-import { sum, uniq } from "lodash-es";
+import { sum } from "lodash-es";
 import { create_collection_of_optimal_routes } from "../collections/collection-of-optimal-routes";
 import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIteration";
 import { calc_population_relative_information_entropy } from "../functions/calc_population-relative-information-entropy";
@@ -31,12 +31,20 @@ import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsIn
 import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
 import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
 import { generate_paths_using_state_transition_probabilities_of_grid_map } from "./generate_paths_using_state_transition_probabilities_of_grid_map";
+import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "../functions/create_get_neighbors_from_optimal_routes_and_latest_routes";
+import { assignOwnKeys } from "../collections/assignOwnKeys";
 
 /* eslint-disable indent */
 
 export function tsp_similarity_execution_and_local_optimization_with_Optional_city_rewards_and_punishments(
     input: COMMON_TSP_Options,
 ): COMMON_TSP_EXECUTION {
+    function update_latest_and_optimal_routes() {
+        assignOwnKeys(
+            global_optimal_routes,
+            Array.from(collection_of_optimal_routes),
+        );
+    }
     const options = Object.assign(structuredClone(DefaultOptions), input);
     const { Coefficient_of_the_minimum_after_pheromone_weakening } = options;
     const {
@@ -66,35 +74,40 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     const collection_of_optimal_routes = create_collection_of_optimal_routes(
         max_size_of_collection_of_optimal_routes,
     );
-    const global_optimal_routes = collection_of_optimal_routes;
-    const neighbors_from_optimal_routes_and_latest_routes = new Map<
-        number,
-        number[]
-    >();
-    const latest_and_optimal_routes = collection_of_optimal_routes;
-    function update_neighbors_from_optimal_routes() {
-        const cache = neighbors_from_optimal_routes_and_latest_routes;
-        cache.clear();
-        for (const city of node_coordinates.keys()) {
-            const result = uniq(
-                latest_and_optimal_routes
-                    .map(({ route }) => {
-                        const index = route.findIndex((v) => v === city);
+    const global_optimal_routes = Array.from(collection_of_optimal_routes);
+    // const global_optimal_routes = collection_of_optimal_routes;
+    // const neighbors_from_optimal_routes_and_latest_routes = new Map<
+    //     number,
+    //     number[]
+    // >();
+    const neighbors_from_optimal_routes_and_latest_routes =
+        create_get_neighbors_from_optimal_routes_and_latest_routes(
+            global_optimal_routes,
+        );
+    // const latest_and_optimal_routes = collection_of_optimal_routes;
+    // function update_neighbors_from_optimal_routes() {
+    //     const cache = neighbors_from_optimal_routes_and_latest_routes;
+    //     cache.clear();
+    //     for (const city of node_coordinates.keys()) {
+    //         const result = uniq(
+    //             latest_and_optimal_routes
+    //                 .map(({ route }) => {
+    //                     const index = route.findIndex((v) => v === city);
 
-                        if (index < 0) {
-                            throw Error("Incorrect_route_found of city");
-                        }
+    //                     if (index < 0) {
+    //                         throw Error("Incorrect_route_found of city");
+    //                     }
 
-                        return [
-                            route.at((index - 1 + route.length) % route.length),
-                            route.at((index + 1 + route.length) % route.length),
-                        ].filter((n) => typeof n === "number") as number[];
-                    })
-                    .flat(),
-            );
-            cache.set(city, result);
-        }
-    }
+    //                     return [
+    //                         route.at((index - 1 + route.length) % route.length),
+    //                         route.at((index + 1 + route.length) % route.length),
+    //                     ].filter((n) => typeof n === "number") as number[];
+    //                 })
+    //                 .flat(),
+    //         );
+    //         cache.set(city, result);
+    //     }
+    // }
     const count_of_nodes = node_coordinates.length * node_coordinates[0].length;
     const pheromoneStore = MatrixSymmetryCreate({ row: count_of_nodes });
     let pheromoneZero = Number.EPSILON;
@@ -185,10 +198,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
             get_neighbors_from_optimal_routes_and_latest_routes(
                 current_city: number,
             ): number[] {
-                return (
-                    get_neighbors_from_optimal_routes_and_latest_routes(
-                        current_city,
-                    ) ?? []
+                return get_neighbors_from_optimal_routes_and_latest_routes(
+                    current_city,
                 );
             },
             getSearchCountOfBest() {
@@ -292,7 +303,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
             });
         }
         if (!is_count_not_large) {
-            update_neighbors_from_optimal_routes();
+            neighbors_from_optimal_routes_and_latest_routes.clear();
+            // update_neighbors_from_optimal_routes();
         }
         const routes_and_lengths_of_one_iteration: {
             route: number[];
@@ -401,6 +413,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                     random_selection_probability: -Infinity,
                 });
         }
+
+        update_latest_and_optimal_routes();
     }
 
     // function picknextnode({
