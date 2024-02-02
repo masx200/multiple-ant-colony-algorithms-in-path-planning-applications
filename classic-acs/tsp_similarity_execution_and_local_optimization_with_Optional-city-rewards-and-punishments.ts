@@ -101,7 +101,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
             cache.set(city, result);
         }
     }
-    const count_of_nodes = node_coordinates.length;
+    const count_of_nodes = node_coordinates.length * node_coordinates[0].length;
     const pheromoneStore = MatrixSymmetryCreate({ row: count_of_nodes });
     let pheromoneZero = Number.EPSILON;
     let greedy_length = Infinity;

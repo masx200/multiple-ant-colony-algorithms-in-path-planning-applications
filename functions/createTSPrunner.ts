@@ -146,8 +146,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         max_size_of_collection_of_optimal_routes,
     } = options;
     set_distance_round(distance_round);
-    const count_of_nodes = node_coordinates.length;
-
+    const count_of_nodes = node_coordinates.length * node_coordinates[0].length;
     const collection_of_optimal_routes = create_collection_of_optimal_routes(
         max_size_of_collection_of_optimal_routes,
     );
