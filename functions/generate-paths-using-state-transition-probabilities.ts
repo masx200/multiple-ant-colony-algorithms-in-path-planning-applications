@@ -1,5 +1,5 @@
 import { get_distance_round } from "../src/set_distance_round";
-import { assert_true } from "../test/assert_true";
+// import { assert_true } from "../test/assert_true";
 import { total_path_length_of_not_closed_route } from "./closed-total-path-length";
 import { creategetdistancebyIndex } from "./creategetdistancebyIndex";
 import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
@@ -40,7 +40,7 @@ export function generate_paths_using_state_transition_probabilities(
         beta_zero,
     } = options;
 
-    const count_of_nodes = node_coordinates.length;
+    // const count_of_nodes = node_coordinates.length;
     const getpheromone = (left: number, right: number) => {
         return pheromoneStore.get(left, right);
     };
@@ -53,18 +53,18 @@ export function generate_paths_using_state_transition_probabilities(
         );
     };
 
-    const inputindexs = Array(node_coordinates.length)
-        .fill(0)
-        .map((_v, i) => i);
-    const startnode = pickRandomOne(inputindexs);
+    // const inputindexs = Array(node_coordinates.length)
+    //     .fill(0)
+    //     .map((_v, i) => i);
+    // const startnode = pickRandomOne(inputindexs);
     const route: number[] = [startnode];
-    const available_nodes = new Set<number>(
-        inputindexs.filter((v) => !route.includes(v)),
-    );
-    const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
-    while (route.length !== count_of_nodes) {
-        const current_city = Array.from(route).slice(-1)[0];
-        assert_true(typeof current_city === "number");
+    // const available_nodes = new Set<number>(
+    //     inputindexs.filter((v) => !route.includes(v)),
+    // );
+    // const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
+    // while (route.length !== count_of_nodes) {
+    //     const current_city = Array.from(route).slice(-1)[0];
+    //     assert_true(typeof current_city === "number");
 
         const randomselection = Math.random() < random_selection_probability;
         const get_filtered_nodes = function (): number[] | Set<number> {
@@ -92,12 +92,12 @@ export function generate_paths_using_state_transition_probabilities(
                   getdistancebyserialnumber,
               });
 
-        assert_true(typeof nextnode === "number");
-        route.push(nextnode);
-        available_nodes.delete(nextnode);
-    }
+    //     assert_true(typeof nextnode === "number");
+    //     route.push(nextnode);
+    //     available_nodes.delete(nextnode);
+    // }
 
-    assert_true(route.length == count_of_nodes);
+    // assert_true(route.length == count_of_nodes);
     const routelength = total_path_length_of_not_closed_route({
         round: get_distance_round(),
         path: route,

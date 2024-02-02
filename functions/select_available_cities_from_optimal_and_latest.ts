@@ -1,5 +1,14 @@
 import { assert_true } from "../test/assert_true";
 
+/**
+ * 从最优可用节点中选择可用的城市
+ * @param {Object} options - 参数对象
+ * @param {Set<number>} options.available_nodes - 可用节点的集合
+ * @param {Function} options.get_neighbors_from_optimal_routes_and_latest_routes - 获取当前城市邻居的城市集合函数
+ * @param {number} options.current_city - 当前城市
+ * @param {number} options.max_cities_of_state_transition - 状态转换的最大城市数量
+ * @returns {number[] | Set<number>} - 返回选择的城市集合
+ */
 export function select_available_cities_from_optimal_and_latest({
     available_nodes,
     get_neighbors_from_optimal_routes_and_latest_routes,
