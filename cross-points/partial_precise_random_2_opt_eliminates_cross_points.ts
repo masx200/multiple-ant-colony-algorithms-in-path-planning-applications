@@ -5,6 +5,20 @@ import { get_distance_round } from "../src/set_distance_round";
 import { assert_true as assert_true } from "../test/assert_true";
 import { generate_2_opt_routes_by_random_or_cross_point } from "./generate_2_opt_routes_by_random_or_cross_point";
 
+/**
+ * 函数：partial_precise_random_2_opt_eliminates_cross_points
+ * 功能：通过随机或消除交叉点生成2-opt路径，并选择最优路径
+ * 参数：
+ *   - max_of_segments：最大分割数
+ *   - max_results_of_2_opt：2-opt路径的最大结果数
+ *   - route：原始路径
+ *   - length：原始路径长度
+ *   - node_coordinates：节点坐标
+ *   - count_of_nodes：节点数量
+ * 返回值：
+ *   - length：最优路径长度
+ *   - route：最优路径
+ */
 export function partial_precise_random_2_opt_eliminates_cross_points({
     max_of_segments,
     max_results_of_2_opt,
