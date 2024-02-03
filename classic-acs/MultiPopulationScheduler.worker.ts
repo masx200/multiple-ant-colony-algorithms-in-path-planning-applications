@@ -6,9 +6,13 @@ import { MultiPopulationSchedulerAPI } from "./MultiPopulationSchedulerAPI";
 import { MultiPopulationSchedulerCreate } from "./MultiPopulationSchedulerCreate";
 
 let runner: MultiPopulationScheduler | undefined = undefined;
+/**
+ * 初始化运行器
+ * @param options 运行器选项
+ */
 async function init_runner(options: TSPRunnerOptions) {
     if (runner) {
-        throw new Error("cannot init runner twice");
+        throw new Error("无法初始化运行器两次");
     }
 
     runner = await MultiPopulationSchedulerCreate(options);
