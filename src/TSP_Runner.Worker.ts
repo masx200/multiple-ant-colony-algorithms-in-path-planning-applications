@@ -7,13 +7,18 @@ import { TSP_Worker_API } from "./TSP_Worker_API";
 import { TSPRunnerOptions } from "./TSPRunnerOptions";
 
 let runner: RunnerMultipleCommunicative | undefined = undefined;
-function init_runner(options: TSPRunnerOptions) {
+
+/**
+ * 初始化 runner
+ * @param options TSPRunnerOptions
+ */
+async function init_runner(options: TSPRunnerOptions) {
     if (runner) {
         throw new Error("cannot init runner twice");
     }
     assert_true(typeof options.ClassOfPopulation === "string");
     const createTSPrunner =
-        ClassOfPopulationToConstructor[options.ClassOfPopulation]?.();
+        await ClassOfPopulationToConstructor[options.ClassOfPopulation]?.();
     assert_true(typeof createTSPrunner === "function");
     runner = createTSPrunner(options);
     Object.assign(API, runner);
