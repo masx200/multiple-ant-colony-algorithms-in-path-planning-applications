@@ -23,7 +23,7 @@ export function use_data_of_summary(
         "最优解路径序号",
     ];
     const summary_total_TableHeads = [
-        "总共耗时秒",
+        "总共迭代耗时秒",
         "总计路径数量",
         "总计迭代次数",
         "初始化耗时秒",
