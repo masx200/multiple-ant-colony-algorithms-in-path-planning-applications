@@ -42,12 +42,12 @@ import { TSP_Output_Data } from "./TSP_Output_Data";
 import { TSP_Runner } from "./TSP_Runner";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
-import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../path-planning/FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
 import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
 import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
 import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
+import { getGridDistance } from "../path-planning/getGridDistance";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let greedy_length = Infinity;
@@ -270,10 +270,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const gridmap = GridMapFromArray(map);
 
     // 根据网格地图的大小生成网格距离矩阵
-    const gridDistanceMatrix = GridDistanceMatrix(
-        gridmap.data.length,
-        gridmap.data[0].length,
-    );
+    // const gridDistanceMatrix = GridDistanceMatrix(
+    //     gridmap.data.length,
+    //     gridmap.data[0].length,
+    // );
 
     // 获取可见网格列表
     const visibleGridsList = getVisibleGridsList(gridmap);
@@ -298,7 +298,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         if (current_search_count === 0) {
             const { best_length, best_route, average_length } =
                 await GreedyRoutesGenerator({
-                    gridDistanceMatrix,
+                    getGridDistance,
                     ...shared,
                     getBestRoute,
                     getBestLength,

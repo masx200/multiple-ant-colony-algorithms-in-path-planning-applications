@@ -17,7 +17,7 @@ export async function* greedy_first_search_routes_parallel({
     node_coordinates,
     start,
     end,
-    gridDistanceMatrix,
+    getGridDistance,
     ...opts
 }: {
     node_coordinates: number[][];
@@ -33,7 +33,7 @@ export async function* greedy_first_search_routes_parallel({
             node_coordinates,
             start,
             end,
-            gridDistanceMatrix,
+            getGridDistance,
             ...opts,
         });
     }

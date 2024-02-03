@@ -12,7 +12,7 @@ export function Greedy_solve_tsp_with_selected_start_length_time_ms({
     // round = false,
     // max_cities_of_greedy = Infinity,
     end,
-    gridDistanceMatrix,
+    getGridDistance,
     ...opts
 }: GreedyWithStartOptions): {
     length: number;
@@ -28,7 +28,7 @@ export function Greedy_solve_tsp_with_selected_start_length_time_ms({
             // round,
             // max_cities_of_greedy,
             end,
-            gridDistanceMatrix,
+            getGridDistance,
             ...opts,
         },
     );
