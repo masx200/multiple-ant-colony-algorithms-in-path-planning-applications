@@ -50,6 +50,7 @@ import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
 import { getGridDistance } from "../path-planning/getGridDistance";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
+    const time_of_initialization_start = Date.now();
     let greedy_length = Infinity;
     const emitter = EventEmitterTargetClass();
     const {
@@ -573,6 +574,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         getCollectionOfBetterRoutes() {
             return Array.from(global_optimal_routes).map((a) => a.route);
         },
+        get_time_of_initialization() {
+            return time_of_initialization;
+        },
     };
+    const time_of_initialization = Date.now() - time_of_initialization_start;
     return result;
 }

@@ -13,10 +13,12 @@ import { COMMON_DataOfOneIteration, COMMON_TSP_Output } from "./tsp-interface";
 import { CallThirdCommunication } from "./CallThirdCommunication";
 import { CallSecondCommunication } from "./CallSecondCommunication";
 import { CallFirstCommunication } from "./CallFirstCommunication";
-
+/**
+ * 工作远程和信息类型
+ */
 export type WorkerRemoteAndInfo = TSP_Worker_Remote["remote"] & {
-    ClassOfPopulation: string;
-    id_Of_Population: number;
+    ClassOfPopulation: string; // 人口分类
+    id_Of_Population: number; // 人口ID
 };
 export type WayPopulationsCommunicate =
     | "奖励最差种群"
@@ -392,7 +394,7 @@ export async function MultiPopulationSchedulerCreate(
         }
     }
 
-    return {
+    const result: MultiPopulationScheduler = {
         getCountOfIterations(): number {
             return current_iterations;
         },
@@ -413,5 +415,14 @@ export async function MultiPopulationSchedulerCreate(
         getTimeOfBest(): number {
             return time_of_best_ms;
         },
+        get_time_of_initialization() {
+            return time_of_initialization;
+        },
     };
+    const time_of_initialization = (
+        await Promise.all(
+            remoteWorkers.map((r) => r.get_time_of_initialization()),
+        )
+    ).reduce((a, b) => a + b, 0);
+    return result;
 }

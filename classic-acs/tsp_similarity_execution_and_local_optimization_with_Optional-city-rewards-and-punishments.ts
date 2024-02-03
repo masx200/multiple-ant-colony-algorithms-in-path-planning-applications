@@ -40,6 +40,7 @@ import { getGridDistance } from "../path-planning/getGridDistance";
 export function tsp_similarity_execution_and_local_optimization_with_Optional_city_rewards_and_punishments(
     input: COMMON_TSP_Options,
 ): COMMON_TSP_EXECUTION {
+    const time_of_initialization_start = Date.now();
     function update_latest_and_optimal_routes() {
         assignOwnKeys(
             global_optimal_routes,
@@ -511,7 +512,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         pheromoneStore,
         count_of_nodes,
     );
-    return {
+    const time_of_initialization = Date.now() - time_of_initialization_start;
+    const result: COMMON_TSP_EXECUTION = {
         getLatestIterateBestRoutesInPeriod,
         getCountOfIterations,
         getCurrentSearchCount() {
@@ -544,5 +546,9 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         getCollectionOfBetterRoutes() {
             return Array.from(global_optimal_routes).map((a) => a.route);
         },
+        get_time_of_initialization() {
+            return time_of_initialization;
+        },
     };
+    return result;
 }

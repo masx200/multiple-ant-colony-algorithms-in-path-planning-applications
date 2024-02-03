@@ -54,4 +54,6 @@ export interface CommonTspRunner {
      * 获取最佳路线
      */
     getBestRoute: () => number[];
+
+    get_time_of_initialization: () => number;
 }
