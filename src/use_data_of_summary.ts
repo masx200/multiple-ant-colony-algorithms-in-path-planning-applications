@@ -26,6 +26,7 @@ export function use_data_of_summary(
         "总共耗时秒",
         "总计路径数量",
         "总计迭代次数",
+        "初始化耗时秒",
     ];
     const global_best_routeHeads = ["全局最优路径"];
     const global_best_routeBody: ComputedRef<[string][]> = computed(() => {
@@ -47,20 +48,22 @@ export function use_data_of_summary(
                   ]
                 : [];
         });
-    const summary_total_TableBody: ComputedRef<[number, number, number][]> =
-        computed(() => {
-            const result = data_of_total.value;
-            return result
-                ? [
-                      [
-                          result.total_time_ms / 1000,
+    const summary_total_TableBody: ComputedRef<
+        [number, number, number, number][]
+    > = computed(() => {
+        const result = data_of_total.value;
+        return result
+            ? [
+                  [
+                      result.total_time_ms / 1000,
 
-                          result.current_search_count,
-                          result.current_iterations,
-                      ],
-                  ]
-                : [];
-        });
+                      result.current_search_count,
+                      result.current_iterations,
+                      result.time_of_initialization / 1000,
+                  ],
+              ]
+            : [];
+    });
     const data_of_best = ref<DataOfBestChange>();
     const data_of_total = ref<DataOfTotal>();
     function on_receive_Data_Of_total(data: DataOfTotal) {

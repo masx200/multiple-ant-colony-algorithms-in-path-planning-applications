@@ -302,6 +302,7 @@ export async function MultiPopulationSchedulerCreate(
             time_of_best_ms,
             search_count_of_best,
             IterationDataOfIndividualPopulations,
+            time_of_initialization,
             // RouteDataOfIndividualPopulations,
         };
 

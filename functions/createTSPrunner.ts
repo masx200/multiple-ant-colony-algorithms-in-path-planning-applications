@@ -104,6 +104,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     async function getOutputDataAndConsumeIterationAndRouteData(): Promise<COMMON_TSP_Output> {
         const output_data: TSP_Output_Data = {
             data_of_greedy,
+            time_of_initialization,
             delta_data_of_iterations: Array.from(delta_data_of_iterations),
 
             // data_of_routes: Array.from(data_of_routes),

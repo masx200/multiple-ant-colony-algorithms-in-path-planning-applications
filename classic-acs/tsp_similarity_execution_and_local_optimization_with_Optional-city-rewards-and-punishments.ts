@@ -489,6 +489,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
             current_search_count,
             current_iterations: getCountOfIterations(),
             global_best_route: get_best_route(),
+            time_of_initialization,
         };
         delta_data_of_iterations.length = 0;
         // data_of_routes.length = 0;
