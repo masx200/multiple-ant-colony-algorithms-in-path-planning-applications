@@ -33,9 +33,9 @@ export function create_get_neighbors_from_optimal_routes_and_latest_routes(
             latest_and_optimal_routes
                 .map(({ route }) => {
                     const index = route.findIndex((v) => v === city);
-
+                    /* 由于栅格地图,不是每个格子都会走到,所以有可能找不到城市。 */
                     if (index < 0) {
-                        throw Error("Incorrect_route_found of city");
+                        return []; //  throw Error("Incorrect_route_found of city");
                     }
 
                     return [
@@ -45,7 +45,13 @@ export function create_get_neighbors_from_optimal_routes_and_latest_routes(
                 })
                 .flat(),
         );
-        cache.set(city, result);
+        if (result.length) {
+            cache.set(city, result);
+        } else {
+            console.log(
+                "由于栅格地图,不是每个格子都会走到,所以有可能找不到城市。",
+            );
+        }
         return result;
     }
     return {

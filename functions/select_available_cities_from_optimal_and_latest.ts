@@ -22,6 +22,14 @@ export function select_available_cities_from_optimal_and_latest({
     current_city: number;
     max_cities_of_state_transition: number;
 }): number[] | Set<number> {
+    const neighbor_cities =
+        get_neighbors_from_optimal_routes_and_latest_routes(current_city);
+
+    if (neighbor_cities.length === 0) {
+        console.log("由于栅格地图,不是每个格子都会走到,所以有可能找不到城市。");
+        return Array.from(available_nodes);
+    }
+    /* 由于栅格地图,不是每个格子都会走到,所以有可能找不到城市。 */
     const available_nodes_set = new Set(available_nodes);
     assert_true(available_nodes_set.size > 0);
     const maximum = Math.min(
@@ -30,9 +38,8 @@ export function select_available_cities_from_optimal_and_latest({
     );
     const cloned_available = new Set(available_nodes);
     const source = new Set<number>();
-    for (const city of get_neighbors_from_optimal_routes_and_latest_routes(
-        current_city,
-    )) {
+
+    for (const city of neighbor_cities) {
         if (source.size <= maximum && available_nodes_set.has(city)) {
             source.add(city);
             cloned_available.delete(city);

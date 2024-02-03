@@ -62,11 +62,14 @@ export function search_one_route_on_grid_map(
     ) => Point,
 ): [number, number][] {
     // 断言终点在地图上是可到达的
-    assert(grid.isFree(end.x, end.y));
+    assert(grid.isFree(end.x, end.y), "终点不能有障碍物");
     // 断言起点和终点不相同
-    assert.isFalse(start.x === end.x && start.y === end.y);
+    assert.isFalse(
+        start.x === end.x && start.y === end.y,
+        "起点和终点不能相同",
+    );
     // 断言起点在地图上是可到达的
-    assert(grid.isFree(start.x, start.y));
+    assert(grid.isFree(start.x, start.y), "起点不能有障碍物");
 
     // 如果可以从起点直接到达终点，则返回包含起点和终点的路径
     if (visibleGridsMatrix[start.x][start.y][end.x][end.y]) {
