@@ -48,9 +48,9 @@ export function create_get_neighbors_from_optimal_routes_and_latest_routes(
         if (result.length) {
             cache.set(city, result);
         } else {
-            console.log(
-                "由于栅格地图,不是每个格子都会走到,所以有可能找不到城市。",
-            );
+            // console.log(
+            //     "由于栅格地图,不是每个格子都会走到,所以有可能找不到城市。",
+            // );
         }
         return result;
     }

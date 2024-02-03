@@ -26,7 +26,7 @@ export function select_available_cities_from_optimal_and_latest({
         get_neighbors_from_optimal_routes_and_latest_routes(current_city);
 
     if (neighbor_cities.length === 0) {
-        console.log("由于栅格地图,不是每个格子都会走到,所以有可能找不到城市。");
+        // console.log("由于栅格地图,不是每个格子都会走到,所以有可能找不到城市。");
         return Array.from(available_nodes);
     }
     /* 由于栅格地图,不是每个格子都会走到,所以有可能找不到城市。 */
