@@ -4,10 +4,9 @@
  * @param route - 路径的坐标点数组
  * @param DistanceMatrix - 网格地图的距离矩阵
  * @returns 该路径的长度，如果路径为空或只有一个点，则返回无穷大
- *这个函数用于计算网格地图上一条路径的长度。函数接受两个参数，一个是路径的坐标数组route，另一个是距离矩阵DistanceMatrix。函数通过遍历路径中的每个坐标对，使用距离矩阵来计算两个相邻坐标之间的距离，并将距离累加到长度变量length上。最后返回路径的长度。如果路径为空或只有一个坐标对，则返回无穷大值。
-
-
- 当调用get_length_of_one_route_on_grid_map函数时，需要传入两个参数：route和DistanceMatrix。
+ *
+ * 这个函数用于计算网格地图上一条路径的长度。函数接受两个参数，一个是路径的坐标数组route，另一个是距离矩阵DistanceMatrix。函数通过遍历路径中的每个坐标对，使用距离矩阵来计算两个相邻坐标之间的距离，并将距离累加到长度变量length上。最后返回路径的长度。如果路径为空或只有一个坐标对，则返回无穷大值。
+ * 当调用get_length_of_one_route_on_grid_map函数时，需要传入两个参数：route和DistanceMatrix。
 
 route参数是一个由坐标点组成的数组，表示一个路径。路径是由一系列坐标点构成的，每个坐标点由横坐标和纵坐标组成，格式为 [number, number]。路径中的第一个点和最后一个点可以是相同的。
 
@@ -21,7 +20,7 @@ DistanceMatrix参数是一个四维数组，表示一个网格地图的距离矩
 
  * 获取网格地图上一条路径的长度
  *
- 
+
  * 这个函数用于计算网格地图上一条路径的长度。函数接受两个参数，一个是路径的坐标数组route，另一个是距离矩阵DistanceMatrix。
  * 函数通过遍历路径中的每个坐标对，使用距离矩阵来计算两个相邻坐标之间的距离，并将距离累加到长度变量length上。
  * 最后返回路径的长度。如果路径为空或只有一个坐标对，则返回无穷大值。
@@ -45,7 +44,8 @@ DistanceMatrix参数是一个四维数组，表示一个网格地图的距离矩
  */
 export function get_length_of_one_route_on_grid_map(
     route: [number, number][],
-    DistanceMatrix: number[][][][],
+    // getGridDistance: (a: [number, number], b: [number, number]) => number,
+    getGridDistance: (a: [number, number], b: [number, number]) => number,
 ): number {
     // 如果路径为空，返回无穷大
     if (route.length === 0) return Infinity;
@@ -61,10 +61,10 @@ export function get_length_of_one_route_on_grid_map(
         // console.log(length);
         // console.log(DistanceMatrix);
         // console.log(route[i], route[i + 1]);
-        length +=
-            DistanceMatrix[route[i][0]][route[i][1]][route[i + 1][0]][
-                route[i + 1][1]
-            ];
+        length += getGridDistance(
+            [route[i][0], route[i][1]],
+            [route[i + 1][0], route[i + 1][1]],
+        );
     }
 
     // 返回路径的长度

@@ -8,13 +8,15 @@ describe("HeuristicInformation", function () {
     const next: [number, number] = [3, 4];
     const destination: [number, number] = [5, 6];
     const distanceMatrix = createDistanceMatrix();
-
+    function getGridDistance(a: [number, number], b: [number, number]): number {
+        return distanceMatrix[a[0]][a[1]][b[0]][b[1]];
+    }
     it("should return a number", function () {
         const result = HeuristicInformation(
             current,
             next,
             destination,
-            distanceMatrix,
+            getGridDistance,
         );
         expect(result).to.be.a("number");
     });
@@ -24,7 +26,7 @@ describe("HeuristicInformation", function () {
             current,
             next,
             destination,
-            distanceMatrix,
+            getGridDistance,
         );
         expect(result).to.be.closeTo(0.0005767012687427913, 0.0001);
     });

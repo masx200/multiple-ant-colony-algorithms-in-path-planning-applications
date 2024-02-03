@@ -5,13 +5,14 @@ import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "./Fi
 import { FindPointsInsideAllConvexPolygons } from "./FindPointsInsideAllConvexPolygons";
 import { getVisibleGridsList } from "./getVisibleGridsList";
 import { greedy_next_point_selector } from "./greedy_next_point_selector";
-import { GridDistanceMatrix } from "./Grid-distance-matrix";
+// import { GridDistanceMatrix } from "./Grid-distance-matrix";
 import { GridMapFromArray } from "./GridMapFromArray";
 import { Point } from "./Point";
 import map from "./screen-capture-2023-11-24-162727_result-result-test.json";
 import { search_one_route_on_grid_map } from "./search_one_route_on_grid_map";
 import { VisibleGridsMatrix } from "./VisibleGridsMatrix";
 import { isEqual } from "lodash-es";
+import { getGridDistance } from "./getGridDistance";
 
 test("search-drawGridMap-test-greedy-reverse", () => {
     const start = new Point(22, 1);
@@ -19,10 +20,10 @@ test("search-drawGridMap-test-greedy-reverse", () => {
 
     const gridmap = GridMapFromArray(map);
 
-    const gridDistanceMatrix = GridDistanceMatrix(
-        gridmap.data.length,
-        gridmap.data[0].length,
-    );
+    // const gridDistanceMatrix = GridDistanceMatrix(
+    //     gridmap.data.length,
+    //     gridmap.data[0].length,
+    // );
     const visibleGridsList = getVisibleGridsList(gridmap);
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
     const pointsInsideAllConvexPolygons = new Set(
@@ -42,8 +43,7 @@ test("search-drawGridMap-test-greedy-reverse", () => {
         end,
         visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
-        (a, b, end) =>
-            greedy_next_point_selector(a, b, gridDistanceMatrix, end),
+        (a, b, end) => greedy_next_point_selector(a, b, getGridDistance, end),
     );
     // console.log(path)
     assert.isTrue(

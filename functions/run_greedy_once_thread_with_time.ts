@@ -12,7 +12,7 @@ export async function run_greedy_once_thread_with_time({
     node_coordinates,
     start,
     end,
-    gridDistanceMatrix,
+    getGridDistance,
     ...opts
     // inputindexs = Array.from(node_coordinates.keys()),
 
@@ -38,7 +38,7 @@ export async function run_greedy_once_thread_with_time({
         node_coordinates,
         start,
         end,
-        gridDistanceMatrix,
+        getGridDistance,
         ...opts,
         // round,
         // max_cities_of_greedy,

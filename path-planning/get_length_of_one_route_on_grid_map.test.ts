@@ -1,24 +1,31 @@
 import { describe, expect, it } from "vitest";
 
 import { get_length_of_one_route_on_grid_map } from "./get_length_of_one_route_on_grid_map";
+import { getGridDistance } from "./getGridDistance";
 
 describe("get_length_of_one_route_on_grid_map", () => {
     it("should return Infinity if the route is empty", () => {
         const route: [number, number][] = [];
-        const DistanceMatrix: number[][][][] = [];
+        // const getGridDistance: (
+        //     a: [number, number],
+        //     b: [number, number],
+        // ) => number = [];
         const result = get_length_of_one_route_on_grid_map(
             route,
-            DistanceMatrix,
+            getGridDistance,
         );
         expect(result).toBe(Infinity);
     });
 
     it("should return Infinity if the route has only one point", () => {
         const route: [number, number][] = [[0, 0]];
-        const DistanceMatrix: number[][][][] = [];
+        // const getGridDistance: (
+        //     a: [number, number],
+        //     b: [number, number],
+        // ) => number = [];
         const result = get_length_of_one_route_on_grid_map(
             route,
-            DistanceMatrix,
+            getGridDistance,
         );
         expect(result).toBe(Infinity);
     });
@@ -32,7 +39,7 @@ describe("get_length_of_one_route_on_grid_map", () => {
             [5, 1],
             [3, 3],
         ];
-        const DistanceMatrix: number[][][][] = [
+        const distanceMatrix = [
             [
                 [
                     [0, 1, 2, 5, 6, 7],
@@ -335,9 +342,15 @@ describe("get_length_of_one_route_on_grid_map", () => {
             ],
             // More distance matrix rows...
         ];
+        function getGridDistance(
+            a: [number, number],
+            b: [number, number],
+        ): number {
+            return distanceMatrix[a[0]][a[1]][b[0]][b[1]];
+        }
         const result = get_length_of_one_route_on_grid_map(
             route,
-            DistanceMatrix,
+            getGridDistance,
         );
         expect(result).toBe(11);
     });
@@ -348,7 +361,7 @@ describe("get_length_of_one_route_on_grid_map", () => {
 
             [5, 3],
         ];
-        const DistanceMatrix: number[][][][] = [
+        const distanceMatrix = [
             [
                 [
                     [0, 1, 2, 5, 6, 7],
@@ -651,9 +664,15 @@ describe("get_length_of_one_route_on_grid_map", () => {
             ],
             // More distance matrix rows...
         ];
+        function getGridDistance(
+            a: [number, number],
+            b: [number, number],
+        ): number {
+            return distanceMatrix[a[0]][a[1]][b[0]][b[1]];
+        }
         const result = get_length_of_one_route_on_grid_map(
             route,
-            DistanceMatrix,
+            getGridDistance,
         );
         expect(result).toBe(5);
     });

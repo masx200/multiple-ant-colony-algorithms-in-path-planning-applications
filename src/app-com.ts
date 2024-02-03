@@ -21,7 +21,7 @@ import {
 import DataTable from "./Data_table.vue";
 import { ECBasicOption } from "echarts/types/dist/shared";
 // import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
-import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix.ts";
+// import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix.ts";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray.ts";
 import GridMapSelector from "../path-planning/GridMapSelector.vue";
 import { GridMapSelectorOptions } from "./GridMapSelectorOptions.ts";
@@ -58,6 +58,7 @@ import { 迭代次数和相对信息熵 } from "./get_options_iterations_and_inf
 import { 迭代次数和种群相似度 } from "./getOptionsOfIterationsAndPopulationSimilarityChart";
 import { 迭代次数和迭代平均路径长度 } from "./get_options_route_number_and_current_length_chart";
 import { 迭代次数和迭代最差路径长度 } from "./getOptionsOfRouteNumberAndBestLengthChartOfIndividualPopulations";
+import { getGridDistance } from "../path-planning/getGridDistance.ts";
 
 export const 迭代次数和全局最优路径长度 = "迭代次数和全局最优路径长度";
 export default defineComponent({
@@ -291,13 +292,13 @@ export default defineComponent({
             ];
             const gridmap = GridMapFromArray(options);
             options_of_best_route_route.value = path;
-            const gridDistanceMatrix = GridDistanceMatrix(
-                gridmap.data.length,
-                gridmap.data[0].length,
-            );
+            // const gridDistanceMatrix = GridDistanceMatrix(
+            //     gridmap.data.length,
+            //     gridmap.data[0].length,
+            // );
             const length = get_length_of_one_route_on_grid_map(
                 path,
-                gridDistanceMatrix,
+                getGridDistance,
             );
             const n = gridmap.data[0].length;
             // return;

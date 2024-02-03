@@ -13,14 +13,14 @@ import { Point } from "./Point";
 export function greedy_next_point_selector(
     neighbors: Array<Point>,
     current: Point,
-    gridDistanceMatrix: number[][][][],
+    getGridDistance: (a: [number, number], b: [number, number]) => number,
     end: Point,
 ): Point {
     // 找到距离最近的点
     const next = minBy(neighbors, (point: Point) => {
         const distance =
-            gridDistanceMatrix[current.x][current.y][point.x][point.y] +
-            gridDistanceMatrix[end.x][end.y][point.x][point.y];
+            getGridDistance([current.x, current.y], [point.x, point.y]) +
+            getGridDistance([end.x, end.y], [point.x, point.y]);
         return distance;
     });
     // 如果没有找到距离最近的点，则返回邻居列表的第一个点

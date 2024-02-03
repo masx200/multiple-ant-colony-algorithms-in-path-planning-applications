@@ -24,7 +24,7 @@ import {
     COMMON_TSP_Options,
     COMMON_TSP_Output,
 } from "./tsp-interface";
-import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
+// import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
 import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../path-planning/FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
 import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
@@ -33,6 +33,7 @@ import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
 import { generate_paths_using_state_transition_probabilities_of_grid_map } from "./generate_paths_using_state_transition_probabilities_of_grid_map";
 import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "../functions/create_get_neighbors_from_optimal_routes_and_latest_routes";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
+import { getGridDistance } from "../path-planning/getGridDistance";
 
 /* eslint-disable indent */
 
@@ -245,10 +246,10 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     const gridmap = GridMapFromArray(map);
 
     // 根据网格地图的大小生成网格距离矩阵
-    const gridDistanceMatrix = GridDistanceMatrix(
-        gridmap.data.length,
-        gridmap.data[0].length,
-    );
+    // const gridDistanceMatrix = GridDistanceMatrix(
+    //     gridmap.data.length,
+    //     gridmap.data[0].length,
+    // );
 
     // 获取可见网格列表
     const visibleGridsList = getVisibleGridsList(gridmap);
@@ -280,7 +281,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 node_coordinates,
                 start,
                 end,
-                gridDistanceMatrix,
+                getGridDistance,
                 visibleGridsMatrix,
                 visibleGridsListWithOutPointsInsideAllConvexPolygons,
                 // round: distance_round,

@@ -21,7 +21,8 @@ import { twoDimensionsToOneDimension } from "../path-planning/twoDimensionsToOne
 export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     node_coordinates,
     start,
-    gridDistanceMatrix,
+    getGridDistance,
+    // gridDistanceMatrix,
     // round = false,
     // max_cities_of_greedy = Infinity,
     end,
@@ -36,7 +37,8 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
             start: end,
             visibleGridsMatrix,
             end: start,
-            gridDistanceMatrix,
+            getGridDistance,
+            // gridDistanceMatrix,
             visibleGridsListWithOutPointsInsideAllConvexPolygons,
         });
         res.route = res.route.toReversed();
@@ -83,14 +85,11 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
         // DefaultOptions.local_pheromone_volatilization_coefficient,
         // DefaultOptions.global_pheromone_volatilization_coefficient,
         (a, b, endPoint) =>
-            greedy_next_point_selector(a, b, gridDistanceMatrix, endPoint),
+            greedy_next_point_selector(a, b, getGridDistance, endPoint),
     );
 
     const result = path.map((a) => twoDimensionsToOneDimension(a[0], a[1], n));
-    const length = get_length_of_one_route_on_grid_map(
-        path,
-        gridDistanceMatrix,
-    );
+    const length = get_length_of_one_route_on_grid_map(path, getGridDistance);
     // console.log({ route: result, length: length });
     return { route: result, length: length };
 }
