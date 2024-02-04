@@ -4,14 +4,9 @@ import { describe, it } from "vitest";
 import { HeuristicInformation } from "./Heuristic-information.ts";
 
 describe("HeuristicInformation", function () {
-    const current: [number, number] = [1, 2];
-    const next: [number, number] = [3, 4];
-    const destination: [number, number] = [5, 6];
-    const distanceMatrix = createDistanceMatrix();
-    function getGridDistance(a: [number, number], b: [number, number]): number {
-        return distanceMatrix[a[0]][a[1]][b[0]][b[1]];
-    }
     it("should return a number", function () {
+        const { getGridDistance, current, next, destination } =
+            create_test_instance();
         const result = HeuristicInformation(
             current,
             next,
@@ -22,6 +17,8 @@ describe("HeuristicInformation", function () {
     });
 
     it("should return a number close to the expected result", function () {
+        const { getGridDistance, current, next, destination } =
+            create_test_instance();
         const result = HeuristicInformation(
             current,
             next,
@@ -31,6 +28,17 @@ describe("HeuristicInformation", function () {
         expect(result).to.be.closeTo(0.0005767012687427913, 0.0001);
     });
 });
+
+function create_test_instance() {
+    const current: [number, number] = [1, 2];
+    const next: [number, number] = [3, 4];
+    const destination: [number, number] = [5, 6];
+    const distanceMatrix = createDistanceMatrix();
+    function getGridDistance(a: [number, number], b: [number, number]): number {
+        return distanceMatrix[a[0]][a[1]][b[0]][b[1]];
+    }
+    return { current, next, destination, getGridDistance };
+}
 
 function createDistanceMatrix() {
     let k = 1;
