@@ -80,11 +80,3 @@ import { uniqBy } from "lodash-es";
 // import { generate_initial_pheromone_matrix } from "./generate_initial_pheromone_matrix";
 // import { DefaultOptions } from "../src/default_Options";
 </script>
-{ grid: gridmap, start, end, // PheromoneMatrix, visibleGridsList:
-visibleGridsListWithOutPointsInsideAllConvexPolygons, visibleGridsMatrix, //
-pointsInsideAllConvexPolygons, // DefaultOptions.alpha_zero, //
-DefaultOptions.beta_zero, // q0_Path_selection_parameters, //
-PheromoneZeroMatrix, //
-DefaultOptions.local_pheromone_volatilization_coefficient, //
-DefaultOptions.global_pheromone_volatilization_coefficient, next_point_selector:
-random_next_point_selector }
