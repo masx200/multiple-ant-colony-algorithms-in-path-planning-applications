@@ -17,6 +17,21 @@ describe("CachedGridVisibilityChecker", () => {
         console.log(result);
         // Assert
         expect(result).toBeDefined();
+
+        expect([...result].length).toBeGreaterThan(0);
+        assert.deepEqual(
+            new Set([
+                [0, 1],
+                [1, 1],
+                [2, 1],
+                [2, 3],
+                [3, 4],
+                [4, 5],
+                [1, 3],
+                [0, 3],
+            ]),
+            new Set(result),
+        );
         // Add more assertions here
     });
 
