@@ -38,12 +38,12 @@ test("search-drawGridMap-test", () => {
             visibleGridsList,
             pointsInsideAllConvexPolygons,
         );
-    const path = search_one_route_on_grid_map(
-        gridmap,
+    const path = search_one_route_on_grid_map({
+        grid: gridmap,
         start,
         end,
         // PheromoneMatrix,
-        visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsList: visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
         //  pointsInsideAllConvexPolygons,
         // DefaultOptions.alpha_zero,
@@ -52,8 +52,8 @@ test("search-drawGridMap-test", () => {
         // PheromoneZeroMatrix,
         // DefaultOptions.local_pheromone_volatilization_coefficient,
         // DefaultOptions.global_pheromone_volatilization_coefficient,
-        random_next_point_selector,
-    );
+        next_point_selector: random_next_point_selector,
+    });
     // console.log(path);
 
     assert(path.length == 0);

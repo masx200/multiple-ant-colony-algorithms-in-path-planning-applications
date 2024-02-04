@@ -173,14 +173,14 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
     const n = gridmap.data[0].length;
     const startPoint = new Point(...oneDimensionToTwoDimensions(start, n));
     const endPoint = new Point(...oneDimensionToTwoDimensions(end, n));
-    const one_route_on_grid_map = search_one_route_on_grid_map(
-        gridmap,
-        startPoint,
-        endPoint,
+    const one_route_on_grid_map = search_one_route_on_grid_map({
+        grid: gridmap,
+        start: startPoint,
+        end: endPoint,
         visibleGridsList,
         visibleGridsMatrix,
         next_point_selector,
-    );
+    });
     const route: number[] = one_route_on_grid_map.map((a) =>
         twoDimensionsToOneDimension(a[0], a[1], n),
     ); // const route: number[] = [startnode];

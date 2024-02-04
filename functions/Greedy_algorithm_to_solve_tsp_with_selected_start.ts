@@ -70,10 +70,10 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     /**
      * 在网格地图上搜索一条路径
      */
-    const path = search_one_route_on_grid_map(
-        gridmap,
-        startPoint,
-        endPoint,
+    const path = search_one_route_on_grid_map({
+        grid: gridmap,
+        start: startPoint,
+        end: endPoint,
         // PheromoneMatrix,
         visibleGridsList,
         visibleGridsMatrix,
@@ -84,9 +84,9 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
         // PheromoneZeroMatrix,
         // DefaultOptions.local_pheromone_volatilization_coefficient,
         // DefaultOptions.global_pheromone_volatilization_coefficient,
-        (a, b, endPoint) =>
+        next_point_selector: (a, b, endPoint) =>
             greedy_next_point_selector(a, b, getGridDistance, endPoint),
-    );
+    });
 
     const result = path.map((a) => twoDimensionsToOneDimension(a[0], a[1], n));
     const length = get_length_of_one_route_on_grid_map(path, getGridDistance);

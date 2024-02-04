@@ -36,14 +36,15 @@ test("search-drawGridMap-test-greedy", () => {
             visibleGridsList,
             pointsInsideAllConvexPolygons,
         );
-    const path = search_one_route_on_grid_map(
-        gridmap,
+    const path = search_one_route_on_grid_map({
+        grid: gridmap,
         start,
         end,
-        visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsList: visibleGridsListWithOutPointsInsideAllConvexPolygons,
         visibleGridsMatrix,
-        (a, b, end) => greedy_next_point_selector(a, b, getGridDistance, end),
-    );
+        next_point_selector: (a, b, end) =>
+            greedy_next_point_selector(a, b, getGridDistance, end),
+    });
     // console.log(path);
     assert.isTrue(
         isEqual(path, [

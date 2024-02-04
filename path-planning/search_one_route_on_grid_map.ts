@@ -8,6 +8,7 @@ import { GridMap } from "./grid-map";
 import { Point } from "./Point";
 import { PointFromArray } from "./PointFromArray";
 import { PointToArray } from "./PointToArray";
+import { GridVisibilityChecker } from "../classic-acs/GridVisibilityChecker";
 
 /**
  * 在网格地图上搜索从起点到终点的路径
@@ -20,24 +21,29 @@ import { PointToArray } from "./PointToArray";
  * @returns 包含起点和终点的路径数组
  * // 导出一个函数，该函数在网格地图上搜索一条从起点到终点的路径
  */
-export function search_one_route_on_grid_map(
+export function search_one_route_on_grid_map({
+    grid,
+    start,
+    end,
+    visibleGridsList,
+    visibleGridsMatrix,
+    next_point_selector,
+}: {
     // 网格地图对象
-    grid: GridMap,
+    grid: GridMap;
     // 起点对象
-    start: Point,
+    start: Point;
     // 终点对象
-    end: Point,
-
+    end: Point;
     // 可见网格列表（多维度）
-    visibleGridsList: (a: number, b: number) => Iterable<[number, number]>,
-    visibleGridsMatrix: (a: number, b: number, c: number, d: number) => boolean,
-
+    // visibleGridsList: (a: number, b: number) => Iterable<[number, number]>;
+    // visibleGridsMatrix: (a: number, b: number, c: number, d: number) => boolean;
     next_point_selector: (
         neighbors: Array<Point>,
         current: Point,
         end: Point,
-    ) => Point,
-): [number, number][] {
+    ) => Point;
+} & GridVisibilityChecker): [number, number][] {
     // 断言终点在地图上是可到达的
     assert(grid.isFree(end.x, end.y), "终点不能有障碍物");
     // 断言起点和终点不相同
@@ -59,18 +65,18 @@ export function search_one_route_on_grid_map(
     //有一半的概率随机反向搜索
     if (Math.random() > 0.5) {
         // [start, end] = [end, start];
-        const route = search_one_route_on_grid_map(
+        const route = search_one_route_on_grid_map({
             /* {
-            node_coordinates,
+                node_coordinates,
+                start: end,
+                end: start,
+            } */ grid,
             start: end,
             end: start,
-        } */ grid,
-            end,
-            start,
             visibleGridsList,
             visibleGridsMatrix,
             next_point_selector,
-        );
+        });
         return /* res.route = */ /* res */ route.toReversed();
         // return route;
     }
