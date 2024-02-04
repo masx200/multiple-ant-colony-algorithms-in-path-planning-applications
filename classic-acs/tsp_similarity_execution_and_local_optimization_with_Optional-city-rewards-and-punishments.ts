@@ -33,6 +33,7 @@ import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "../f
 import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { getGridDistance } from "../path-planning/getGridDistance";
 import { CachedGridVisibilityChecker } from "../path-planning/CachedGridVisibilityChecker";
+import { GridVisibilityChecker } from "../path-planning/GridVisibilityChecker";
 
 /* eslint-disable indent */
 
@@ -178,7 +179,9 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     // };
     const get_neighbors_from_optimal_routes_and_latest_routes =
         neighbors_from_optimal_routes_and_latest_routes.get;
-    function generate_paths_using_state_transition_probabilities(): {
+    function generate_paths_using_state_transition_probabilities(
+        cachedGridVisibilityChecker: GridVisibilityChecker,
+    ): {
         route: number[];
         length: number;
         time_ms: number;
@@ -317,7 +320,9 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
             length: number;
             time_ms: number;
         }[] = Array.from({ length: count_of_ants }).map(() => {
-            return generate_paths_using_state_transition_probabilities();
+            return generate_paths_using_state_transition_probabilities(
+                cachedGridVisibilityChecker,
+            );
         });
         onUpdateIterateBestRoutesInPeriod(routes_and_lengths_of_one_iteration);
         for (const {
