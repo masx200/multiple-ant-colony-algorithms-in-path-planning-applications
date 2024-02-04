@@ -26,6 +26,8 @@ export function CachedGridVisibilityChecker(
         ) {
             return matrix[a][b][c][d];
         }
+
+        console.log(grid, a, b, c, d, result, matrix);
         const VisibleGrids = visibleGridsList(a, b);
         matrix[a] ??= [];
         matrix[a][b] ??= Array(grid.data.length)
@@ -39,7 +41,10 @@ export function CachedGridVisibilityChecker(
 
             matrix[a][b][element[0]][element[1]] = true;
             matrix[element[0]] ??= [];
-            matrix[element[0]][element[1]] ??= [];
+            matrix[element[0]][element[1]] ??= Array(grid.data.length)
+                .fill(0)
+                .map(() => Array(grid.data[0].length).fill(false));
+
             matrix[element[0]][element[1]][a] ??= [];
             matrix[element[0]][element[1]][a][b] = true;
         }
