@@ -65,10 +65,6 @@ export interface EachRouteGeneratorOptions {
     /**
      * 可见网格列表，不包含所有凸多边形内的点
      */
-    visibleGridsList: Iterable<[number, number]>[][];
-
-    /**
-     * 可见网格矩阵
-     */
-    visibleGridsMatrix: boolean[][][][];
+    visibleGridsList: (a: number, b: number) => Iterable<[number, number]>;
+    visibleGridsMatrix: (a: number, b: number, c: number, d: number) => boolean;
 }
