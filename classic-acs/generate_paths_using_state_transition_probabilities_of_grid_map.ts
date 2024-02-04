@@ -33,7 +33,7 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
     end,
     max_cities_of_state_transition,
     pheromoneStore,
-    visibleGridsListWithOutPointsInsideAllConvexPolygons,
+    visibleGridsList,
     count_of_nodes,
     // picknextnode,
     alpha_zero,
@@ -71,9 +71,7 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
         // ) => number[] | Set<number>;
         local_pheromone_update: (route: number[]) => void;
     } & SharedOptions & {
-            visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
-                [number, number]
-            >[][];
+            visibleGridsList: Iterable<[number, number]>[][];
             visibleGridsMatrix: boolean[][][][];
         },
     "get_convergence_coefficient" | "get_random_selection_probability"
@@ -180,7 +178,7 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
         gridmap,
         startPoint,
         endPoint,
-        visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsList,
         visibleGridsMatrix,
         next_point_selector,
     );

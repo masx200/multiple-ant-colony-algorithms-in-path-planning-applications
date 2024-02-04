@@ -32,7 +32,7 @@ export function construct_one_route_all(
         alpha_zero,
         beta_zero,
         last_random_selection_probability,
-        visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsList,
     } = options;
 
     const result = generate_paths_using_state_transition_probabilities({
@@ -43,7 +43,7 @@ export function construct_one_route_all(
         visibleGridsMatrix,
         random_selection_probability: last_random_selection_probability,
         node_coordinates,
-        visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsList,
     });
     return result;
 }

@@ -65,9 +65,7 @@ export interface EachRouteGeneratorOptions {
     /**
      * 可见网格列表，不包含所有凸多边形内的点
      */
-    visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
-        [number, number]
-    >[][];
+    visibleGridsList: Iterable<[number, number]>[][];
 
     /**
      * 可见网格矩阵

@@ -30,7 +30,7 @@ export function generate_paths_using_state_transition_probabilities(
 
         pheromoneStore: ReadOnlyPheromone;
     } & SharedOptions & {
-            visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
+            visibleGridsList: Iterable<
                 [number, number]
             >[][];
             visibleGridsMatrix: boolean[][][][];
@@ -105,7 +105,7 @@ export function generate_paths_using_state_transition_probabilities(
         end,
         alpha_zero,
         beta_zero,
-        visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsList,
         visibleGridsMatrix,
     } = options;
 
@@ -136,7 +136,7 @@ export function generate_paths_using_state_transition_probabilities(
         gridmap,
         startPoint,
         endPoint,
-        visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsList,
         visibleGridsMatrix,
         next_point_selector,
     );

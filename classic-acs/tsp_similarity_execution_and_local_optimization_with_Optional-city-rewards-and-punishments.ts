@@ -184,7 +184,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     } {
         return generate_paths_using_state_transition_probabilities_of_grid_map({
             ...options,
-            visibleGridsListWithOutPointsInsideAllConvexPolygons,
+            visibleGridsList: visibleGridsList,
             route_selection_parameters_Q0,
             visibleGridsMatrix,
             node_coordinates,
@@ -264,12 +264,12 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     // );
 
     // 过滤掉不在凸多边形内部的可见网格列表
-    const visibleGridsListWithOutPointsInsideAllConvexPolygons =
-        // FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
-        //     visibleGridsList,
-        //     pointsInsideAllConvexPolygons,
-        // );
-        visibleGridsList;
+    // const visibleGridsList =
+    //     // FiltervisibleGridsList(
+    //     //     visibleGridsList,
+    //     //     pointsInsideAllConvexPolygons,
+    //     // );
+    //     visibleGridsList;
     async function runOneIteration() {
         let time_ms_of_one_iteration = 0;
         if (current_search_count === 0) {
@@ -283,7 +283,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 end,
                 getGridDistance,
                 visibleGridsMatrix,
-                visibleGridsListWithOutPointsInsideAllConvexPolygons,
+                visibleGridsList: visibleGridsList,
                 // round: distance_round,
             });
             // Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();

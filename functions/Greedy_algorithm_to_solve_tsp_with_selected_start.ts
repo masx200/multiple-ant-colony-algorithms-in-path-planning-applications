@@ -26,7 +26,7 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     // round = false,
     // max_cities_of_greedy = Infinity,
     end,
-    visibleGridsListWithOutPointsInsideAllConvexPolygons,
+    visibleGridsList: visibleGridsList,
     visibleGridsMatrix,
 }: GreedyWithStartOptions): { route: number[]; length: number } {
     // console.log({ start, end, node_coordinates });
@@ -39,7 +39,7 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
             end: start,
             getGridDistance,
             // gridDistanceMatrix,
-            visibleGridsListWithOutPointsInsideAllConvexPolygons,
+            visibleGridsList: visibleGridsList,
         });
         res.route = res.route.toReversed();
         return res;
@@ -75,7 +75,7 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
         startPoint,
         endPoint,
         // PheromoneMatrix,
-        visibleGridsListWithOutPointsInsideAllConvexPolygons,
+        visibleGridsList,
         visibleGridsMatrix,
         //   pointsInsideAllConvexPolygons,
         // DefaultOptions.alpha_zero,

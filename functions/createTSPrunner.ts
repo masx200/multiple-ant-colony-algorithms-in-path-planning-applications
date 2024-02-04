@@ -289,11 +289,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     // );
 
     // 过滤掉不在凸多边形内部的可见网格列表
-    const visibleGridsListWithOutPointsInsideAllConvexPolygons =
-        /*  FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
-            visibleGridsList,
-            pointsInsideAllConvexPolygons,
-        ); */ visibleGridsList;
+    // const visibleGridsList =
+    //     /*  FiltervisibleGridsList(
+    //         visibleGridsList,
+    //         pointsInsideAllConvexPolygons,
+    //     ); */ visibleGridsList;
     async function runOneIteration() {
         if (current_search_count === 0) {
             const { best_length, best_route, average_length } =
@@ -308,7 +308,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
                     count_of_nodes,
                     emit_finish_greedy_iteration,
-                    visibleGridsListWithOutPointsInsideAllConvexPolygons,
+                    visibleGridsList: visibleGridsList,
                     visibleGridsMatrix,
                 });
             if (greedy_length > average_length) {
@@ -342,7 +342,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     getBestRoute,
                     visibleGridsMatrix,
                     greedy_length,
-                    visibleGridsListWithOutPointsInsideAllConvexPolygons,
+                    visibleGridsList: visibleGridsList,
                     pheromone_exceeds_maximum_range: () =>
                         pheromone_exceeds_maximum_range,
                 }),

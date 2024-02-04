@@ -15,9 +15,7 @@ export interface GreedyWithStartOptions {
     // max_cities_of_greedy?: number;
     end: number;
     // getGridDistance: (a: [number, number], b: [number, number]) => number;
-    visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
-        [number, number]
-    >[][];
+    visibleGridsList: Iterable<[number, number]>[][];
 
     getGridDistance: (a: [number, number], b: [number, number]) => number;
 }
