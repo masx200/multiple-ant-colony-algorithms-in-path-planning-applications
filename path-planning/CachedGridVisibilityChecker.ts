@@ -31,8 +31,10 @@ export function CachedGridVisibilityChecker(
             // 获取当前元素（VisibleGrids[index]）
             // 将对应位置的值设为 true（表示可见）
             matrix[a] ??= [];
-            matrix[a][b] ??= [];
-            matrix[a][b][element[0]] ??= [];
+            matrix[a][b] ??= Array(grid.data.length)
+                .fill(0)
+                .map(() => Array(grid.data[0].length).fill(false));
+            // matrix[a][b][element[0]] ??= [];
 
             matrix[a][b][element[0]][element[1]] = true;
             matrix[element[0]] ??= [];

@@ -77,7 +77,7 @@ describe("CachedGridVisibilityChecker", () => {
 
         // Act
         const result = checker.visibleGridsMatrix(a, b, c, d);
-        console.log(result);
+        // console.log(result);
         assert.equal(false, result);
         // Assert
         expect(result).toBeDefined();
