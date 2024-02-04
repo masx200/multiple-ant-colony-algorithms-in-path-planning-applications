@@ -29,8 +29,8 @@ export function search_one_route_on_grid_map(
     end: Point,
 
     // 可见网格列表（多维度）
-    visibleGridsList: Iterable<[number, number]>[][],
-    visibleGridsMatrix: boolean[][][][],
+    visibleGridsList: (a: number, b: number) => Iterable<[number, number]>,
+    visibleGridsMatrix: (a: number, b: number, c: number, d: number) => boolean,
 
     next_point_selector: (
         neighbors: Array<Point>,
@@ -49,7 +49,7 @@ export function search_one_route_on_grid_map(
     assert(grid.isFree(start.x, start.y), "起点不能有障碍物");
 
     // 如果可以从起点直接到达终点，则返回包含起点和终点的路径
-    if (visibleGridsMatrix[start.x][start.y][end.x][end.y]) {
+    if (visibleGridsMatrix(start.x, start.y, end.x, end.y)) {
         // console.log("如果可以从起点直接到达终点，则返回包含起点和终点的路径");
         return [
             [start.x, start.y],
@@ -91,7 +91,7 @@ export function search_one_route_on_grid_map(
 
     while (!(current.x == end.x && current.y == end.y)) {
         // 如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径
-        if (visibleGridsMatrix[current.x][current.y][end.x][end.y]) {
+        if (visibleGridsMatrix(current.x, current.y, end.x, end.y)) {
             // console.log(
             //     "如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径",
             // );
