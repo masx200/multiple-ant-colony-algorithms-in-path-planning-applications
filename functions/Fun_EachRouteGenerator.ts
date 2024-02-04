@@ -1,4 +1,4 @@
-import { GridVisibilityChecker } from "../classic-acs/GridVisibilityChecker";
+import { GridVisibilityChecker } from "../path-planning/GridVisibilityChecker";
 
 /**
  * 每个路由生成器的选项接口

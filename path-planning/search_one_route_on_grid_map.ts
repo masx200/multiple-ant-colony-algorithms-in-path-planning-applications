@@ -8,7 +8,7 @@ import { GridMap } from "./grid-map";
 import { Point } from "./Point";
 import { PointFromArray } from "./PointFromArray";
 import { PointToArray } from "./PointToArray";
-import { GridVisibilityChecker } from "../classic-acs/GridVisibilityChecker";
+import { GridVisibilityChecker } from "./GridVisibilityChecker";
 
 /**
  * 在网格地图上搜索从起点到终点的路径

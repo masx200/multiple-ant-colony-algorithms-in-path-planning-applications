@@ -12,7 +12,7 @@ export function getVisibleGridsList(
 ): Iterable<[number, number]>[][] {
     // debugger;
     // 定义一个四维数组 result，用于存储最终的结果
-    const result: Set<[number, number]>[][] = [];
+    const result: Iterable<[number, number]>[][] = [];
     // 遍历 grid.data 数组
     for (let i = 0; i < grid.data.length; ++i) {
         // 定义一个三维数组 row，用于存储当前行的数据

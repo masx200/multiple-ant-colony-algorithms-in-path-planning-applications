@@ -1,4 +1,4 @@
-import { GridVisibilityChecker } from "../classic-acs/GridVisibilityChecker";
+import { GridVisibilityChecker } from "../path-planning/GridVisibilityChecker";
 
 /**
  * Greedy算法的配置选项。
