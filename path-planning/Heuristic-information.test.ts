@@ -4,18 +4,6 @@ import { describe, it } from "vitest";
 import { HeuristicInformation } from "./Heuristic-information.ts";
 
 describe("HeuristicInformation", function () {
-    it("should return a number", function () {
-        const { getGridDistance, current, next, destination } =
-            create_test_instance();
-        const result = HeuristicInformation(
-            current,
-            next,
-            destination,
-            getGridDistance,
-        );
-        expect(result).to.be.a("number");
-    });
-
     it("should return a number close to the expected result", function () {
         const { getGridDistance, current, next, destination } =
             create_test_instance();
