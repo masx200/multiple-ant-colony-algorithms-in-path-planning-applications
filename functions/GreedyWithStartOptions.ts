@@ -8,14 +8,15 @@
  * @param visibleGridsListWithOutPointsInsideAllConvexPolygons 不包含在凸多边形内部的点的可见网格列表。
  */
 export interface GreedyWithStartOptions {
-    visibleGridsMatrix: boolean[][][][];
+    visibleGridsList: (a: number, b: number) => Iterable<[number, number]>;
+    visibleGridsMatrix: (a: number, b: number, c: number, d: number) => boolean;
     node_coordinates: number[][];
     start: number;
     // round?: boolean;
     // max_cities_of_greedy?: number;
     end: number;
     // getGridDistance: (a: [number, number], b: [number, number]) => number;
-    visibleGridsList: Iterable<[number, number]>[][];
+    // visibleGridsList: Iterable<[number, number]>[][];
 
     getGridDistance: (a: [number, number], b: [number, number]) => number;
 }

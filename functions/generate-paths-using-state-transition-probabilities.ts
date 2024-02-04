@@ -30,10 +30,16 @@ export function generate_paths_using_state_transition_probabilities(
 
         pheromoneStore: ReadOnlyPheromone;
     } & SharedOptions & {
-            visibleGridsList: Iterable<
-                [number, number]
-            >[][];
-            visibleGridsMatrix: boolean[][][][];
+            visibleGridsList: (
+                a: number,
+                b: number,
+            ) => Iterable<[number, number]>;
+            visibleGridsMatrix: (
+                a: number,
+                b: number,
+                c: number,
+                d: number,
+            ) => boolean;
         },
 ): {
     route: number[];
