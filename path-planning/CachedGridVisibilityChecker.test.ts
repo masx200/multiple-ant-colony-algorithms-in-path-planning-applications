@@ -83,6 +83,22 @@ describe("CachedGridVisibilityChecker", () => {
         expect(result).toBeDefined();
         // Add more assertions here
     });
+    it("should return visible grid matrix", () => {
+        let checker: GridVisibilityChecker = create_test_instance();
+        // Arrange
+        const a = 0;
+        const b = 0;
+        const c = 1;
+        const d = 2;
+
+        // Act
+        const result = checker.visibleGridsMatrix(a, b, c, d);
+        // console.log(result);
+        assert.equal(false, result);
+        // Assert
+        expect(result).toBeDefined();
+        // Add more assertions here
+    });
 });
 function create_test_instance() {
     let grid: GridMap = GridMapFromArray([

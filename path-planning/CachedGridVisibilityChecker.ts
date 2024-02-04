@@ -27,13 +27,14 @@ export function CachedGridVisibilityChecker(
             return matrix[a][b][c][d];
         }
         const VisibleGrids = visibleGridsList(a, b);
+        matrix[a] ??= [];
+        matrix[a][b] ??= Array(grid.data.length)
+            .fill(0)
+            .map(() => Array(grid.data[0].length).fill(false));
+
         for (const element of VisibleGrids) {
             // 获取当前元素（VisibleGrids[index]）
             // 将对应位置的值设为 true（表示可见）
-            matrix[a] ??= [];
-            matrix[a][b] ??= Array(grid.data.length)
-                .fill(0)
-                .map(() => Array(grid.data[0].length).fill(false));
             // matrix[a][b][element[0]] ??= [];
 
             matrix[a][b][element[0]][element[1]] = true;
