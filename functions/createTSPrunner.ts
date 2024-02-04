@@ -43,8 +43,6 @@ import { TSP_Runner } from "./TSP_Runner";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
-import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../path-planning/FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
-import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
 import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
 import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
 import { getGridDistance } from "../path-planning/getGridDistance";

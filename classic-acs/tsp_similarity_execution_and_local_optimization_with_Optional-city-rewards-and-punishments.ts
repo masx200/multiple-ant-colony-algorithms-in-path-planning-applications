@@ -26,8 +26,6 @@ import {
 } from "./tsp-interface";
 // import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
-import { FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons } from "../path-planning/FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons";
-import { FindPointsInsideAllConvexPolygons } from "../path-planning/FindPointsInsideAllConvexPolygons";
 import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
 import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
 import { generate_paths_using_state_transition_probabilities_of_grid_map } from "./generate_paths_using_state_transition_probabilities_of_grid_map";

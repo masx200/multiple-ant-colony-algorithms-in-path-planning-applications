@@ -70,7 +70,7 @@ export function findVisibleGridsCircle(
 
             let dy = Math.sin(current_angle) / max_dx_dy;
 
-            loop1: while (
+            while (
                 !(y_current < 0 || y_current >= grid.data[0].length) &&
                 !(x_current < 0 || x_current >= grid.data.length) &&
                 grid.isFree(x_current, y_current)
