@@ -29,6 +29,7 @@ export function getAvailableNeighbors(
             getPathCoordinates([x, y], [nx, ny])
                 //不包括自己把自己挡住
                 .filter(([ni, nj]) => !(ni == x && nj == y))
+                /* 路径不能经过被禁止的格子 */
                 .every(([ni, nj]) => !blocked.has(ni * grid.row + nj))
         ) {
             res.push([nx, ny]);
