@@ -14,7 +14,7 @@ import { PointToArray } from "./PointToArray";
  * @param grid 网格地图对象
  * @param start 起点对象
  * @param end 终点对象
- * @param visibleGridsListWithOutPointsInsideAllConvexPolygons 可见网格列表（多维度）
+ * @param visibleGridsList 可见网格列表（多维度）
  * @param visibleGridsMatrix 多边形内部点的集合
  * @param next_point_selector 选择下一个点的函数
  * @returns 包含起点和终点的路径数组
@@ -27,34 +27,11 @@ export function search_one_route_on_grid_map(
     start: Point,
     // 终点对象
     end: Point,
-    // 信息素矩阵
 
-    //PheromoneMatrix: number[][],
     // 可见网格列表（多维度）
-    visibleGridsListWithOutPointsInsideAllConvexPolygons: Iterable<
-        [number, number]
-    >[][],
+    visibleGridsList: Iterable<[number, number]>[][],
     visibleGridsMatrix: boolean[][][][],
-    // 多边形内部点的集合
-    // pointsInsideAllConvexPolygons: Set<number>,
-    // 信息素因子 alpha
 
-    // alpha_Pheromone_factor: number,
-    // 启发式因子 beta
-    //
-    // beta_Heuristic_factors: number,
-    // 路径选择参数 q0
-
-    // q0_Path_selection_parameters: number,
-    // 信息素零矩阵
-
-    // PheromoneZeroMatrix: number[][],
-    // 局部信息素挥发系数
-
-    //  partial_Local_pheromone_volatility: number,
-    // 全局信息素挥发系数
-
-    //  rou_Global_pheromone_volatility: number,
     next_point_selector: (
         neighbors: Array<Point>,
         current: Point,
@@ -90,7 +67,7 @@ export function search_one_route_on_grid_map(
         } */ grid,
             end,
             start,
-            visibleGridsListWithOutPointsInsideAllConvexPolygons,
+            visibleGridsList,
             visibleGridsMatrix,
             next_point_selector,
         );
@@ -127,7 +104,7 @@ export function search_one_route_on_grid_map(
         const neighbors = getAvailableNeighbors(
             //  pointsInsideAllConvexPolygons,
             blocked,
-            visibleGridsListWithOutPointsInsideAllConvexPolygons,
+            visibleGridsList,
             grid,
             [current.x, current.y],
         ); //.filter((n) => !(n[0] == start.x && n[1] == start.y));
