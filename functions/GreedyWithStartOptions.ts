@@ -1,3 +1,5 @@
+import { GridVisibilityChecker } from "../classic-acs/GridVisibilityChecker";
+
 /**
  * Greedy算法的配置选项。
  * @param visibleGridsMatrix 可见网格的三维数组。
@@ -7,9 +9,9 @@
  * @param gridDistanceMatrix 网格距离的四维数组。
  * @param visibleGridsListWithOutPointsInsideAllConvexPolygons 不包含在凸多边形内部的点的可见网格列表。
  */
-export interface GreedyWithStartOptions {
-    visibleGridsList: (a: number, b: number) => Iterable<[number, number]>;
-    visibleGridsMatrix: (a: number, b: number, c: number, d: number) => boolean;
+export interface GreedyWithStartOptions extends GridVisibilityChecker {
+    // visibleGridsList: (a: number, b: number) => Iterable<[number, number]>;
+    // visibleGridsMatrix: (a: number, b: number, c: number, d: number) => boolean;
     node_coordinates: number[][];
     start: number;
     // round?: boolean;

@@ -1,7 +1,9 @@
+import { GridVisibilityChecker } from "../classic-acs/GridVisibilityChecker";
+
 /**
  * 每个路由生成器的选项接口
  */
-export interface EachRouteGeneratorOptions {
+export interface EachRouteGeneratorOptions extends GridVisibilityChecker {
     /**
      * 2-opt算法的最大结果数
      */
@@ -65,6 +67,6 @@ export interface EachRouteGeneratorOptions {
     /**
      * 可见网格列表，不包含所有凸多边形内的点
      */
-    visibleGridsList: (a: number, b: number) => Iterable<[number, number]>;
-    visibleGridsMatrix: (a: number, b: number, c: number, d: number) => boolean;
+    // visibleGridsList: (a: number, b: number) => Iterable<[number, number]>;
+    // visibleGridsMatrix: (a: number, b: number, c: number, d: number) => boolean;
 }
