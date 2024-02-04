@@ -57,7 +57,7 @@ test("search-drawGridMap-test-greedy-reverse", () => {
     });
     // console.log(path)
     assert.isTrue(
-        isEqual(path, [
+        isEqual(path.toReversed(), [
             [1, 21],
             [2, 20],
             [3, 19],
@@ -128,7 +128,7 @@ test("search-drawGridMap-test-greedy-reverse", () => {
             [12, 1],
             [22, 1],
         ]) ||
-            isEqual(path, [
+            isEqual(path.toReversed(), [
                 [1, 21],
                 [10, 5],
                 [11, 2],
