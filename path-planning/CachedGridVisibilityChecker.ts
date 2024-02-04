@@ -35,7 +35,7 @@ export function CachedGridVisibilityChecker(
         for (const element of VisibleGrids) {
             // 获取当前元素（VisibleGrids[index]）
             // 将对应位置的值设为 true（表示可见）
-            // matrix[a][b][element[0]] ??= [];
+            matrix[a][b][element[0]] ??= [];
 
             matrix[a][b][element[0]][element[1]] = true;
             matrix[element[0]] ??= [];
