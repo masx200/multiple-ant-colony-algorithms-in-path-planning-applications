@@ -41,8 +41,17 @@ test("search-drawGridMap-test-greedy-reverse", () => {
         grid: gridmap,
         start,
         end,
-        visibleGridsList: visibleGridsListWithOutPointsInsideAllConvexPolygons,
-        visibleGridsMatrix,
+        visibleGridsList: function (a: number, b: number) {
+            return visibleGridsListWithOutPointsInsideAllConvexPolygons[a][b];
+        },
+        visibleGridsMatrix: function (
+            a: number,
+            b: number,
+            c: number,
+            d: number,
+        ) {
+            return visibleGridsMatrix[a][b][c][d];
+        },
         next_point_selector: (a, b, end) =>
             greedy_next_point_selector(a, b, getGridDistance, end),
     });
