@@ -1,4 +1,4 @@
-import { expect, describe, it } from "vitest";
+import { expect, describe, it, assert } from "vitest";
 import { GridVisibilityChecker } from "./GridVisibilityChecker";
 import { GridMap } from "./grid-map";
 import { GridMapFromArray } from "./GridMapFromArray";
@@ -31,6 +31,39 @@ describe("CachedGridVisibilityChecker", () => {
         // Act
         const result = checker.visibleGridsMatrix(a, b, c, d);
         console.log(result);
+        // Assert
+        expect(result).toBeDefined();
+        assert.equal(true, result);
+
+        // Add more assertions here
+    });
+    it("should return visible grid list", () => {
+        let checker: GridVisibilityChecker = create_test_instance();
+        // Arrange
+        const a = 0;
+        const b = 0;
+
+        // Act
+        const result = checker.visibleGridsList(a, b);
+        console.log(result);
+        // Assert
+        expect(result).toBeDefined();
+        expect([...result].length).toBe(0);
+        // Add more assertions here
+    });
+
+    it("should return visible grid matrix", () => {
+        let checker: GridVisibilityChecker = create_test_instance();
+        // Arrange
+        const a = 1;
+        const b = 2;
+        const c = 0;
+        const d = 0;
+
+        // Act
+        const result = checker.visibleGridsMatrix(a, b, c, d);
+        console.log(result);
+        assert.equal(false, result);
         // Assert
         expect(result).toBeDefined();
         // Add more assertions here
