@@ -15,6 +15,7 @@ import { GridMapFromArray } from "../path-planning/GridMapFromArray";
 import { search_one_route_on_grid_map } from "../path-planning/search_one_route_on_grid_map";
 import { SharedOptions } from "../functions/SharedOptions";
 import { calc_state_transition_probabilities } from "../functions/calc_state_transition_probabilities";
+import { GridVisibilityChecker } from "./GridVisibilityChecker";
 /**
  * 使用网格地图的状态转换概率生成路径
  * @param node_coordinates 节点坐标数组
@@ -70,10 +71,8 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
         //     available_nodes: Set<number>,
         // ) => number[] | Set<number>;
         local_pheromone_update: (route: number[]) => void;
-    } & SharedOptions & {
-            visibleGridsList: Iterable<[number, number]>[][];
-            visibleGridsMatrix: boolean[][][][];
-        },
+    } & SharedOptions &
+        GridVisibilityChecker,
     "get_convergence_coefficient" | "get_random_selection_probability"
 >) {
     const {
