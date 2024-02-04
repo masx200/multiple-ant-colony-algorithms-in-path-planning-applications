@@ -26,12 +26,13 @@ import {
 } from "./tsp-interface";
 // import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
-import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
-import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
+// import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
+// import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
 import { generate_paths_using_state_transition_probabilities_of_grid_map } from "./generate_paths_using_state_transition_probabilities_of_grid_map";
 import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "../functions/create_get_neighbors_from_optimal_routes_and_latest_routes";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { getGridDistance } from "../path-planning/getGridDistance";
+import { CachedGridVisibilityChecker } from "../path-planning/CachedGridVisibilityChecker";
 
 /* eslint-disable indent */
 
@@ -182,6 +183,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         length: number;
         time_ms: number;
     } {
+        const { visibleGridsList, visibleGridsMatrix } =
+            cachedGridVisibilityChecker;
         return generate_paths_using_state_transition_probabilities_of_grid_map({
             ...options,
             visibleGridsList: visibleGridsList,
@@ -243,7 +246,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
 
     // 根据地图坐标生成网格地图
     const gridmap = GridMapFromArray(map);
-
+    const cachedGridVisibilityChecker = CachedGridVisibilityChecker(gridmap);
     // 根据网格地图的大小生成网格距离矩阵
     // const gridDistanceMatrix = GridDistanceMatrix(
     //     gridmap.data.length,
@@ -251,10 +254,10 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     // );
 
     // 获取可见网格列表
-    const visibleGridsList = getVisibleGridsList(gridmap);
+    // const visibleGridsList = getVisibleGridsList(gridmap);
 
     // 根据可见网格列表生成可见网格矩阵
-    const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
+    // const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
     /* 由于计算量太大，需要换其他方案。 */
     // // 查找所有凸多边形内部的点，并将其存储到集合中
     // const pointsInsideAllConvexPolygons = new Set(
@@ -271,6 +274,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     //     // );
     //     visibleGridsList;
     async function runOneIteration() {
+        const { visibleGridsList, visibleGridsMatrix } =
+            cachedGridVisibilityChecker;
         let time_ms_of_one_iteration = 0;
         if (current_search_count === 0) {
             const {
