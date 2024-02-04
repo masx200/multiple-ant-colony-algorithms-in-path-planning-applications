@@ -282,20 +282,20 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     // 根据可见网格列表生成可见网格矩阵
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
-
+    /* 由于计算量太大，需要换其他方案。 */
     // 查找所有凸多边形内部的点，并将其存储到集合中
-    const pointsInsideAllConvexPolygons = new Set(
-        [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
-            (a) => a[0] * gridmap.row + a[1],
-        ),
-    );
+    // const pointsInsideAllConvexPolygons = new Set(
+    //     [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
+    //         (a) => a[0] * gridmap.row + a[1],
+    //     ),
+    // );
 
     // 过滤掉不在凸多边形内部的可见网格列表
     const visibleGridsListWithOutPointsInsideAllConvexPolygons =
-        FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
+        /*  FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
             visibleGridsList,
             pointsInsideAllConvexPolygons,
-        );
+        ); */ visibleGridsList;
     async function runOneIteration() {
         if (current_search_count === 0) {
             const { best_length, best_route, average_length } =

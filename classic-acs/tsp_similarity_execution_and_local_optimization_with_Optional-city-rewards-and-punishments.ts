@@ -257,20 +257,21 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
 
     // 根据可见网格列表生成可见网格矩阵
     const visibleGridsMatrix = VisibleGridsMatrix(visibleGridsList);
-
-    // 查找所有凸多边形内部的点，并将其存储到集合中
-    const pointsInsideAllConvexPolygons = new Set(
-        [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
-            (a) => a[0] * gridmap.row + a[1],
-        ),
-    );
+    /* 由于计算量太大，需要换其他方案。 */
+    // // 查找所有凸多边形内部的点，并将其存储到集合中
+    // const pointsInsideAllConvexPolygons = new Set(
+    //     [...FindPointsInsideAllConvexPolygons(gridmap, visibleGridsMatrix)].map(
+    //         (a) => a[0] * gridmap.row + a[1],
+    //     ),
+    // );
 
     // 过滤掉不在凸多边形内部的可见网格列表
     const visibleGridsListWithOutPointsInsideAllConvexPolygons =
-        FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
-            visibleGridsList,
-            pointsInsideAllConvexPolygons,
-        );
+        // FilterVisibleGridsListWithOutPointsInsideAllConvexPolygons(
+        //     visibleGridsList,
+        //     pointsInsideAllConvexPolygons,
+        // );
+        visibleGridsList;
     async function runOneIteration() {
         let time_ms_of_one_iteration = 0;
         if (current_search_count === 0) {
