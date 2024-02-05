@@ -1,6 +1,6 @@
 import { Queue } from "@datastructures-js/queue";
 
-import { canStraightReach } from "./canStraightReach";
+import { CachedCanStraightReach } from "./canStraightReach";
 import { formatSmallArcsAngleRange } from "./formatSmallArcsAngleRange";
 import { getAngleOfVector } from "./getAngleOfVector";
 import { getAngleRangeOfPointAndSquare1 } from "./getAngleRangeOfPointAndSquare1";
@@ -167,7 +167,7 @@ export function findVisibleGridsCircle(
     const extendedResults = Array<[number, number]>();
 
     for (const [i, j] of result) {
-        if (canStraightReach(start, [i, j], grid)) {
+        if (CachedCanStraightReach(start, [i, j], grid)) {
             extendedResults.push([i, j]);
         }
     }
@@ -185,7 +185,9 @@ export function findVisibleGridsCircle(
                     !visited[ii][jj]
                 ) {
                     visited[ii][jj] = true;
-                    if (canStraightReach([starti, startj], [ii, jj], grid)) {
+                    if (
+                        CachedCanStraightReach([starti, startj], [ii, jj], grid)
+                    ) {
                         extendedResults.push([ii, jj]);
                     }
                 }

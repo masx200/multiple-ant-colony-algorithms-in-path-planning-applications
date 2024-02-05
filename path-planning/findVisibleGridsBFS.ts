@@ -1,6 +1,6 @@
 import { MinHeap } from "@datastructures-js/heap";
 
-import { canStraightReach } from "./canStraightReach";
+import { CachedCanStraightReach } from "./canStraightReach";
 import { EuclideanDistance } from "./Euclidean-distance";
 import { GridMap } from "./grid-map";
 
@@ -59,7 +59,7 @@ export function findVisibleGridsBFS(
         if (
             grid.isFree(x, y) &&
             !(starti == x && startj == y) &&
-            canStraightReach([starti, startj], [x, y], grid)
+            CachedCanStraightReach([starti, startj], [x, y], grid)
         ) {
             result.push([x, y]);
         }

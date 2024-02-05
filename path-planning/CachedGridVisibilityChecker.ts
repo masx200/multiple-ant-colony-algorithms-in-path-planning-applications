@@ -24,6 +24,7 @@ export function CachedGridVisibilityChecker(
             matrix[a][b][c] &&
             typeof matrix[a][b][c][d] != "undefined"
         ) {
+            // console.log("cache hit", grid, a, b, c, d);
             return matrix[a][b][c][d];
         }
 
@@ -55,6 +56,7 @@ export function CachedGridVisibilityChecker(
         b: number,
     ): Iterable<[number, number]> {
         if (result[a] && typeof result[a][b] != "undefined") {
+            // console.log("cache hit", grid, a, b);
             return result[a][b];
         }
         const VisibleGrids = findVisibleGridsCircle([a, b], grid);

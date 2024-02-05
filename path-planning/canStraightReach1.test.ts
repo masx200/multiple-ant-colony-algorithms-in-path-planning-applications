@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { canStraightReach } from "./canStraightReach";
+import { CachedCanStraightReach } from "./canStraightReach";
 import { GridMap } from "./grid-map";
 
 describe("canStraightReach", () => {
@@ -29,18 +29,18 @@ describe("canStraightReach", () => {
     ]);
 
     test("canStraightReach: test case 1", () => {
-        expect(canStraightReach([0, 0], [2, 2], grid1)).toBe(false);
+        expect(CachedCanStraightReach([0, 0], [2, 2], grid1)).toBe(false);
     });
 
     test("canStraightReach: test case 2", () => {
-        expect(canStraightReach([0, 0], [2, 2], grid2)).toBe(false);
+        expect(CachedCanStraightReach([0, 0], [2, 2], grid2)).toBe(false);
     });
 
     test("canStraightReach: test case 3", () => {
-        expect(canStraightReach([0, 0], [1, 1], grid3)).toBe(false);
+        expect(CachedCanStraightReach([0, 0], [1, 1], grid3)).toBe(false);
     });
 
     test("canStraightReach: test case 4", () => {
-        expect(canStraightReach([0, 0], [0, 0], grid4)).toBe(true);
+        expect(CachedCanStraightReach([0, 0], [0, 0], grid4)).toBe(true);
     });
 });
