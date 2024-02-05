@@ -41,7 +41,7 @@ import drawGridMapAndRoute from "../path-planning/drawGridMapAndRoute.vue";
 import { get_length_of_one_route_on_grid_map } from "../path-planning/get_length_of_one_route_on_grid_map.ts";
 import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions.ts";
 import { run_tsp_by_search_rounds } from "./run_tsp-by-search-rounds";
-import { run_tsp_by_search_time } from "./run_tsp_by_search_time";
+// import { run_tsp_by_search_time } from "./run_tsp_by_search_time";
 import { set_distance_round } from "./set_distance_round";
 // import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { startAndEnds } from "../all-grid-maps/index";
@@ -517,22 +517,22 @@ export default defineComponent({
                 throw new Error("incorrect parameters create_runner");
             }
         }
-        async function create_and_run_tsp_by_search_time() {
-            is_running.value = true;
-            TSP_RunnerRef.value ||= await create_runner();
-            const runner = TSP_RunnerRef.value;
-            return run_tsp_by_search_time({
-                on_update_output_data,
-                runner: runner.remote,
+        // async function create_and_run_tsp_by_search_time() {
+        //     is_running.value = true;
+        //     TSP_RunnerRef.value ||= await create_runner();
+        //     const runner = TSP_RunnerRef.value;
+        //     return run_tsp_by_search_time({
+        //         on_update_output_data,
+        //         runner: runner.remote,
 
-                search_time_seconds,
-                is_running,
-                onprogress,
-            });
-        }
+        //         search_time_seconds,
+        //         is_running,
+        //         onprogress,
+        //     });
+        // }
 
         const radio_run_way = ref(RunWay.round);
-        const run_way_time = RunWay.time;
+        // const run_way_time = RunWay.time;
         const run_way_round = RunWay.round;
         const alpha_zero = computed(() => input_options.alpha_zero);
 
@@ -599,9 +599,9 @@ export default defineComponent({
             show_chart_of_best_individual,
             run_way_round,
             // 显示每次迭代的统计,
-            run_way_time,
+            // run_way_time,
             radio_run_way,
-            create_and_run_tsp_by_search_time,
+            // create_and_run_tsp_by_search_time,
             search_time_seconds,
             indeterminate,
             TableHeadsOfHistoryOfBest,

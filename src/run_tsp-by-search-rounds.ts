@@ -6,7 +6,8 @@ import {
     default_count_of_ants,
     default_search_rounds,
 } from "./default_Options";
-import { RunnerRemote, tsp_runner_run_async } from "./tsp_runner_run_async";
+import { tsp_runner_run_async } from "./tsp_runner_run_async";
+import { RunnerRemote } from "./RunnerRemote";
 
 /**
  * 通过搜索轮数运行TSP算法

@@ -1,14 +1,19 @@
 import { MultiPopulationOutput } from "../classic-acs/MultiPopulationOutput";
 import { assert_true } from "../test/assert_true";
 import { drawChartMaxWait, drawChartWait } from "./drawChartMaxWait";
+import { RunnerRemote } from "./RunnerRemote";
 import { RunWay } from "./RunWay";
 import { sleep_requestAnimationFrame_async_or_settimeout } from "./sleep_requestAnimationFrame_async_or_settimeout";
 
-export type RunnerRemote = {
-    runIterations: (iterations: number) => Promise<void>;
-    getOutputDataAndConsumeIterationAndRouteData: () => Promise<MultiPopulationOutput>;
-};
-
+/**
+ * 异步执行TSP运行函数
+ * @param on_update_output_data - 输出数据更新回调函数
+ * @param runner - 运行器对象
+ * @param time_of_search_ms - 搜索时间（默认为无穷大）
+ * @param iterations_of_search - 迭代次数（默认为无穷大）
+ * @param onprogress - 进度回调函数（可选）
+ * @returns 一个Promise对象，表示异步操作的完成
+ */
 export async function tsp_runner_run_async({
     on_update_output_data,
     runner,
@@ -34,10 +39,11 @@ export async function tsp_runner_run_async({
     const min_count = 1;
     let rest_time = time_of_search_ms;
     const type_of_search =
-        time_of_search_ms < Infinity ? RunWay.time : RunWay.round;
+        /*     time_of_search_ms < Infinity ? RunWay.time : */ RunWay.round;
     let duration = 0;
     while (
-        type_of_search === RunWay.time ? rest_time > 0 : rest_iterations > 0
+        /*  type_of_search === RunWay.time ? rest_time > 0 : */ rest_iterations >
+        0
     ) {
         if (type_of_search === RunWay.round) {
             if (rest_iterations > 5) {
