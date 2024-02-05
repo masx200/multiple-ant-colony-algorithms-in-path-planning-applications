@@ -17,6 +17,7 @@ export function canStraightReach(
     end: [number, number],
     grid: GridMap,
 ): boolean {
+    // console.log(start[0], start[1], end[0], end[1]);
     const [startCol, startRow] = start;
     const [endCol, endRow] = end;
 
