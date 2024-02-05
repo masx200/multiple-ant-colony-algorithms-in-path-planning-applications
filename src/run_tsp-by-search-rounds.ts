@@ -8,6 +8,16 @@ import {
 } from "./default_Options";
 import { RunnerRemote, tsp_runner_run_async } from "./tsp_runner_run_async";
 
+/**
+ * 通过搜索轮数运行TSP算法
+ * @param runner 运行器
+ * @param on_update_output_data 更新输出数据的回调函数
+ * @param onprogress 进度回调函数
+ * @param searchrounds 搜索轮数的引用
+ * @param count_of_ants_ref 蚂蚁数量的引用
+ * @param is_running 是否正在运行的引用
+ * @returns 返回一个Promise对象
+ */
 export async function run_tsp_by_search_rounds({
     runner,
     on_update_output_data,
