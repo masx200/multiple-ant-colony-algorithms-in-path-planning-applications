@@ -5,7 +5,7 @@ import { geteuclideandistancebyindex } from "../functions/geteuclideandistanceby
 import { get_distance_round } from "../src/set_distance_round";
 
 import { picknextnodeRoulette } from "../functions/pick-next-node-Roulette";
-import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
+// import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
 import { Point } from "../path-planning/Point";
 import { PointFromArray } from "../path-planning/PointFromArray";
 import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions";
@@ -76,7 +76,7 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
     "get_convergence_coefficient" | "get_random_selection_probability"
 >) {
     const {
-        get_neighbors_from_optimal_routes_and_latest_routes,
+        // get_neighbors_from_optimal_routes_and_latest_routes,
         route_selection_parameters_Q0,
     } = options;
     function next_point_selector(
@@ -102,18 +102,19 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
             const point1 = twoDimensionsToOneDimension(point.x, point.y, n);
             return point1;
         });
-        const is_count_not_large =
-            neighbors.length <= max_cities_of_state_transition;
+        // const is_count_not_large =
+        //     neighbors.length <= max_cities_of_state_transition;
         function get_filtered_nodes(): number[] | Set<number> {
-            return is_count_not_large
-                ? available_nodes
-                : select_available_cities_from_optimal_and_latest({
-                      available_nodes,
-                      get_neighbors_from_optimal_routes_and_latest_routes,
-                      current_city,
-                      max_cities_of_state_transition:
-                          max_cities_of_state_transition,
-                  });
+            return available_nodes;
+            // return is_count_not_large
+            //     ? available_nodes
+            //     : select_available_cities_from_optimal_and_latest({
+            //           available_nodes,
+            //           get_neighbors_from_optimal_routes_and_latest_routes,
+            //           current_city,
+            //           max_cities_of_state_transition:
+            //               max_cities_of_state_transition,
+            //       });
         }
 
         const end_city = twoDimensionsToOneDimension(end.x, end.y, n);

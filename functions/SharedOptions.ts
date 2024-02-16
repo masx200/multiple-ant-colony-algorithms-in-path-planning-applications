@@ -14,9 +14,9 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
      * @param current_city 当前城市
      * @returns 邻居城市数组
      */
-    get_neighbors_from_optimal_routes_and_latest_routes: (
-        current_city: number,
-    ) => number[];
+    // get_neighbors_from_optimal_routes_and_latest_routes: (
+    //     current_city: number,
+    // ) => number[];
 
     /**
      * 获取随机选择概率

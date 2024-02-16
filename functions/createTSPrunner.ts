@@ -25,7 +25,7 @@ import {
     Cached_hash_table_of_path_lengths_and_path_segments,
     update_Cached_hash_table_of_path_lengths_and_path_segments,
 } from "./Cached_hash_table_of_path_lengths_and_path_segments";
-import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "./create_get_neighbors_from_optimal_routes_and_latest_routes";
+// import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "./create_get_neighbors_from_optimal_routes_and_latest_routes";
 import { createCachePheromoneCalc } from "./createCachePheromoneCalc";
 import { createEventPair } from "./createEventPair";
 import { not_cycle_route_to_segments } from "./not_cycle_route_to_segments";
@@ -140,7 +140,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const {
         distance_round,
         max_routes_of_greedy,
-        max_cities_of_state_transition,
+        // max_cities_of_state_transition,
 
         max_size_of_collection_of_optimal_routes,
     } = options;
@@ -236,13 +236,13 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             convergence_coefficient,
         });
     }
-    const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
+    // const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
     on_finish_one_iteration(() => {
         update_latest_and_optimal_routes();
         resetPheromoneExceedsRange();
-        if (!is_count_not_large) {
-            neighbors_from_optimal_routes_and_latest_routes.clear();
-        }
+        // if (!is_count_not_large) {
+        //     neighbors_from_optimal_routes_and_latest_routes.clear();
+        // }
     });
     on_finish_greedy_iteration(() => {
         update_latest_and_optimal_routes();
@@ -493,19 +493,19 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         return last_random_selection_probability;
     }
 
-    const neighbors_from_optimal_routes_and_latest_routes =
-        create_get_neighbors_from_optimal_routes_and_latest_routes(
-            global_optimal_routes,
-        );
-    const get_neighbors_from_optimal_routes_and_latest_routes =
-        neighbors_from_optimal_routes_and_latest_routes.get;
+    // const neighbors_from_optimal_routes_and_latest_routes =
+    //     create_get_neighbors_from_optimal_routes_and_latest_routes(
+    //         global_optimal_routes,
+    //     );
+    // const get_neighbors_from_optimal_routes_and_latest_routes =
+        // neighbors_from_optimal_routes_and_latest_routes.get;
     const shared = getShared();
 
     function getShared(): SharedOptions {
         return {
             ...options,
             get_convergence_coefficient,
-            get_neighbors_from_optimal_routes_and_latest_routes,
+            // get_neighbors_from_optimal_routes_and_latest_routes,
             get_random_selection_probability,
             getSearchCountOfBest,
 

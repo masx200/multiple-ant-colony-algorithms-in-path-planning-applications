@@ -11,7 +11,7 @@ import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
 import { picknextnodeRoulette } from "./pick-next-node-Roulette";
 // import { pickRandomOne } from "./pickRandomOne";
 import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
-import { select_available_cities_from_optimal_and_latest } from "./select_available_cities_from_optimal_and_latest";
+// import { select_available_cities_from_optimal_and_latest } from "./select_available_cities_from_optimal_and_latest";
 import { SharedOptions } from "./SharedOptions";
 import { random_next_point_selector } from "../path-planning/random_next_point_selector";
 import { PointFromArray } from "../path-planning/PointFromArray";
@@ -68,18 +68,19 @@ export function generate_paths_using_state_transition_probabilities(
             const point1 = twoDimensionsToOneDimension(point.x, point.y, n);
             return point1;
         });
-        const is_count_not_large =
-            neighbors.length <= max_cities_of_state_transition;
+        // const is_count_not_large =
+        // neighbors.length <= max_cities_of_state_transition;
         const get_filtered_nodes = function (): number[] | Set<number> {
-            return is_count_not_large
-                ? available_nodes
-                : select_available_cities_from_optimal_and_latest({
-                      available_nodes,
-                      get_neighbors_from_optimal_routes_and_latest_routes,
-                      current_city,
-                      max_cities_of_state_transition:
-                          max_cities_of_state_transition,
-                  });
+            return available_nodes;
+            // return is_count_not_large
+            //     ? available_nodes
+            //     : select_available_cities_from_optimal_and_latest({
+            //           available_nodes,
+            //           get_neighbors_from_optimal_routes_and_latest_routes,
+            //           current_city,
+            //           max_cities_of_state_transition:
+            //               max_cities_of_state_transition,
+            //       });
         };
 
         const end_city = twoDimensionsToOneDimension(end.x, end.y, n);
@@ -102,8 +103,8 @@ export function generate_paths_using_state_transition_probabilities(
     // const picknextnodeRoulette = picknextnodeRoulette;
     const {
         // get_convergence_coefficient,
-        get_neighbors_from_optimal_routes_and_latest_routes,
-        max_cities_of_state_transition,
+        // get_neighbors_from_optimal_routes_and_latest_routes,
+        // max_cities_of_state_transition,
         random_selection_probability,
         node_coordinates,
         pheromoneStore,

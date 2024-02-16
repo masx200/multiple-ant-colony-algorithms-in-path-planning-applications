@@ -4,7 +4,16 @@ import { Cached_hash_table_of_path_lengths_and_path_segments } from "./Cached_ha
 import { calc_pheromone_dynamic } from "./calc_pheromone_dynamic";
 import { create_pheromone_cache } from "./create_pheromone_cache";
 import { PheromoneCache } from "./PheromoneCache";
-
+/**
+ * 创建一个缓存的pheromone计算函数
+ * @param count_of_nodes 节点数量
+ * @param global_optimal_routes 全局最优路径数组
+ * @param greedy_length 获取greedy长度的函数
+ * @param convergence_coefficient 获取收敛系数的函数
+ * @param routes_segments_cache 路径长度和路径片段的缓存
+ * @param pheromone_exceeds_maximum_range 超出最大范围的函数
+ * @returns 缓存的pheromone计算函数
+ */
 export function createCachePheromoneCalc(
     count_of_nodes: number,
     global_optimal_routes: { route: number[]; length: number }[],

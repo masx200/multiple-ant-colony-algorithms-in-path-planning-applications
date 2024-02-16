@@ -29,7 +29,7 @@ import { GridMapFromArray } from "../path-planning/GridMapFromArray";
 // import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
 // import { getVisibleGridsList } from "../path-planning/getVisibleGridsList";
 import { generate_paths_using_state_transition_probabilities_of_grid_map } from "./generate_paths_using_state_transition_probabilities_of_grid_map";
-import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "../functions/create_get_neighbors_from_optimal_routes_and_latest_routes";
+// import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "../functions/create_get_neighbors_from_optimal_routes_and_latest_routes";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { getGridDistance } from "../path-planning/getGridDistance";
 import { CachedGridVisibilityChecker } from "../path-planning/CachedGridVisibilityChecker";
@@ -50,7 +50,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     const options = Object.assign(structuredClone(DefaultOptions), input);
     const { Coefficient_of_the_minimum_after_pheromone_weakening } = options;
     const {
-        max_cities_of_state_transition = DefaultOptions.max_cities_of_state_transition,
+        // max_cities_of_state_transition = DefaultOptions.max_cities_of_state_transition,
         max_size_of_collection_of_optimal_routes = DefaultOptions.max_size_of_collection_of_optimal_routes,
         max_results_of_2_opt = DefaultOptions.max_results_of_2_opt,
         max_segments_of_cross_point = DefaultOptions.max_segments_of_cross_point,
@@ -82,10 +82,10 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     //     number,
     //     number[]
     // >();
-    const neighbors_from_optimal_routes_and_latest_routes =
-        create_get_neighbors_from_optimal_routes_and_latest_routes(
-            global_optimal_routes,
-        );
+    // const neighbors_from_optimal_routes_and_latest_routes =
+    //     create_get_neighbors_from_optimal_routes_and_latest_routes(
+    //         global_optimal_routes,
+    //     );
     // const latest_and_optimal_routes = collection_of_optimal_routes;
     // function update_neighbors_from_optimal_routes() {
     //     const cache = neighbors_from_optimal_routes_and_latest_routes;
@@ -160,7 +160,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     //         []
     //     );
     // };
-    const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
+    // const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
     // const get_filtered_nodes = function (
     //     current_city: number,
     //     available_nodes: Set<number>,
@@ -177,8 +177,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     //                   max_cities_of_state_transition,
     //           });
     // };
-    const get_neighbors_from_optimal_routes_and_latest_routes =
-        neighbors_from_optimal_routes_and_latest_routes.get;
+    // const get_neighbors_from_optimal_routes_and_latest_routes =
+    //     neighbors_from_optimal_routes_and_latest_routes.get;
     function generate_paths_using_state_transition_probabilities(
         cachedGridVisibilityChecker: GridVisibilityChecker,
     ): {
@@ -201,13 +201,13 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
             },
             pheromoneStore,
             getBestRoute: get_best_route,
-            get_neighbors_from_optimal_routes_and_latest_routes(
-                current_city: number,
-            ): number[] {
-                return get_neighbors_from_optimal_routes_and_latest_routes(
-                    current_city,
-                );
-            },
+            // get_neighbors_from_optimal_routes_and_latest_routes(
+            //     current_city: number,
+            // ): number[] {
+            //     return get_neighbors_from_optimal_routes_and_latest_routes(
+            //         current_city,
+            //     );
+            // },
             getSearchCountOfBest() {
                 return search_count_of_best;
             },
@@ -311,10 +311,10 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 average_length_of_iteration: best_length,
             });
         }
-        if (!is_count_not_large) {
-            neighbors_from_optimal_routes_and_latest_routes.clear();
-            // update_neighbors_from_optimal_routes();
-        }
+        // if (!is_count_not_large) {
+        //     neighbors_from_optimal_routes_and_latest_routes.clear();
+        //     // update_neighbors_from_optimal_routes();
+        // }
         const routes_and_lengths_of_one_iteration: {
             route: number[];
             length: number;
