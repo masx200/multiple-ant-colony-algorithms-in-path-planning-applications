@@ -17,13 +17,13 @@ export function generate_local_optimization_grid_routes(
     let result: [number, number][] = every_nodes;
     loop1: while (true) {
         const sequences = combinations(
-            ArrayShuffle([...every_nodes.keys()]),
+            ArrayShuffle([...result.keys()]),
             2,
         );
 
         for (const [a, b] of sequences) {
-            const point1 = every_nodes[a];
-            const point2 = every_nodes[b];
+            const point1 = result[a];
+            const point2 = result[b];
             if (
                 canStraightReach(point1, point2) &&
                 //必须是不相邻的点,否则和原来的路径一样
