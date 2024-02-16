@@ -1,7 +1,20 @@
 import { uniqBy } from "lodash-es";
 
 import { local_optimization_route_thread } from "../functions/local_optimization_route_thread";
-
+/**
+ * Runs local optimization for a given set of routes and lengths.
+ * @param routes_and_lengths_of_one_iteration - An array of objects containing route, length, and time_ms for one iteration.
+ * @param get_best_route - A function that returns the best route.
+ * @param get_best_length - A function that returns the best length.
+ * @param count_of_nodes - The number of nodes.
+ * @param max_segments_of_cross_point - The maximum number of segments for cross-point.
+ * @param distance_round - A boolean indicating whether to round the distance.
+ * @param max_results_of_k_opt - The maximum number of results for K-opt.
+ * @param node_coordinates - An array of arrays representing the coordinates of the nodes.
+ * @param max_results_of_k_exchange - The maximum number of results for K-exchange.
+ * @param max_results_of_2_opt - The maximum number of results for 2-opt.
+ * @returns A Promise that resolves to an object containing time_ms, length, and route.
+ */
 export async function run_local_optimization(
     routes_and_lengths_of_one_iteration: {
         route: number[];
