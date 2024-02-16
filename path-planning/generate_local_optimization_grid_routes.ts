@@ -11,16 +11,19 @@ import { ArrayShuffle } from "../functions/ArrayShuffle";
 export function generate_local_optimization_grid_routes(
     route: [number, number][],
     canStraightReach: visibleGridsMatrixCallBack,
-): [number, number][][] {
+): [number, number][] {
     const every_nodes = convert_grid_route_to_every_Passed_node(route);
-    const sequences = [
-        ...combinations(ArrayShuffle([...every_nodes.keys()]), 2),
-    ];
-    const result: [number, number][][] = [];
+    const sequences = combinations(ArrayShuffle([...every_nodes.keys()]), 2);
+    let result: [number, number][] = route;
     for (const [a, b] of sequences) {
         const point1 = every_nodes[a];
         const point2 = every_nodes[b];
         if (canStraightReach(point1, point2)) {
+            result = [...route.slice(0, a + 1), ...route.slice(b)];
+            return generate_local_optimization_grid_routes(
+                result,
+                canStraightReach,
+            );
         }
     }
     return result;
