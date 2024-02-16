@@ -1,5 +1,12 @@
 import { EuclideanDistance } from "./Euclidean-distance";
-
+/**
+ * 计算两个点之间的欧几里得距离
+ * @param x1 第一个点的 x 坐标
+ * @param y1 第一个点的 y 坐标
+ * @param x2 第二个点的 x 坐标
+ * @param y2 第二个点的 y 坐标
+ * @returns 两点之间的欧几里得距离
+ */
 export function getGridDistance(
     // 第一个点的 x 坐标
     [

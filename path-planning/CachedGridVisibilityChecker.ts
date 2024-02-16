@@ -1,6 +1,6 @@
 import { GridVisibilityChecker } from "./GridVisibilityChecker";
 import { CachedCanStraightReach } from "./canStraightReach";
-import { findVisibleGridsCircle } from "./findVisibleGridsCircle";
+import { findVisibleGridsCircleWithDistanceLimit } from "./findVisibleGridsCircleWithDistanceLimit";
 import { GridMap } from "./grid-map";
 
 /**
@@ -10,6 +10,14 @@ import { GridMap } from "./grid-map";
  */
 export function CachedGridVisibilityChecker(
     grid: GridMap,
+    distancelimit: number,
+    getGridDistance: ([x1, y1]: [
+        number,
+        number,
+    ], [x2, y2]: [
+        number,
+        number,
+    ]) => number,
 ): GridVisibilityChecker {
     const result: Iterable<[number, number]>[][] = [];
     const matrix: boolean[][][][] = [];
@@ -67,7 +75,12 @@ export function CachedGridVisibilityChecker(
             // console.log("cache hit", grid, a, b);
             return result[a][b];
         }
-        const VisibleGrids = findVisibleGridsCircle([a, b], grid);
+        const VisibleGrids = findVisibleGridsCircleWithDistanceLimit(
+            [a, b],
+            grid,
+            distancelimit,
+            getGridDistance,
+        );
         result[a] ??= [];
         result[a][b] = VisibleGrids;
         return VisibleGrids;
