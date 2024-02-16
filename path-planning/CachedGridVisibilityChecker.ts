@@ -10,7 +10,7 @@ import { GridMap } from "./grid-map";
  */
 export function CachedGridVisibilityChecker(
     grid: GridMap,
-    distancelimit: number,
+    distanceLimit: number,
     getGridDistance: ([x1, y1]: [
         number,
         number,
@@ -78,7 +78,7 @@ export function CachedGridVisibilityChecker(
         const VisibleGrids = findVisibleGridsCircleWithDistanceLimit(
             [a, b],
             grid,
-            distancelimit,
+            distanceLimit,
             getGridDistance,
         );
         result[a] ??= [];

@@ -27,7 +27,7 @@ import { Whether_the_four_sides_of_two_beveled_squares_have_an_intersection_with
 export function findVisibleGridsCircleWithDistanceLimit(
     [starti, startj]: [number, number],
     grid: GridMap,
-    distancelimit: number,
+    distanceLimit: number,
     getGridDistance: ([x1, y1]: [
         number,
         number,
@@ -83,7 +83,7 @@ export function findVisibleGridsCircleWithDistanceLimit(
                 !(y_current < 0 || y_current >= grid.data[0].length) &&
                 !(x_current < 0 || x_current >= grid.data.length) &&
                 grid.isFree(x_current, y_current) &&
-                getGridDistance([x_current, y_current], start) <= distancelimit
+                getGridDistance([x_current, y_current], start) <= distanceLimit
             ) {
                 if (!visited[x_current][y_current]) {
                     visited[x_current][y_current] = true;
@@ -193,7 +193,7 @@ export function findVisibleGridsCircleWithDistanceLimit(
                     jj < grid.row &&
                     grid.isFree(ii, jj) &&
                     !visited[ii][jj] &&
-                    getGridDistance(start, [ii, jj]) <= distancelimit
+                    getGridDistance(start, [ii, jj]) <= distanceLimit
                 ) {
                     visited[ii][jj] = true;
                     if (
