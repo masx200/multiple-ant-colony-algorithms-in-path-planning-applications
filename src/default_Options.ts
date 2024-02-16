@@ -20,6 +20,7 @@ export { DefaultOptions };
  * @type {Required<TSPDefaultOptions>}
  */
 const DefaultOptions: Required<TSPDefaultOptions> = {
+    grid_map_visibility_distance_limit: 5,
     /**
      * 是否显示每次迭代的统计信息
      * @type {boolean}

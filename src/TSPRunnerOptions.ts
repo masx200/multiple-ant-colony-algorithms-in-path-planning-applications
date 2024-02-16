@@ -36,6 +36,7 @@ export interface TSPDefaultOptions {
     Period_of_judgment_similarity: number;
     High_similarity_threshold: number;
     Coefficient_of_the_minimum_after_pheromone_weakening: number;
+    grid_map_visibility_distance_limit: number;
 }
 
 /**

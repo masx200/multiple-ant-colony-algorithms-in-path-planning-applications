@@ -32,7 +32,7 @@ import { generate_paths_using_state_transition_probabilities_of_grid_map } from 
 // import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "../functions/create_get_neighbors_from_optimal_routes_and_latest_routes";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { getGridDistance } from "../path-planning/getGridDistance";
-import { CachedGridVisibilityChecker } from "../path-planning/CachedGridVisibilityChecker";
+import { CachedGridVisibilityCheckerFactory } from "../path-planning/CachedGridVisibilityCheckerFactory";
 import { GridVisibilityChecker } from "../path-planning/GridVisibilityChecker";
 
 /* eslint-disable indent */
@@ -250,7 +250,11 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
 
     // 根据地图坐标生成网格地图
     const gridmap = GridMapFromArray(map);
-    const cachedGridVisibilityChecker = CachedGridVisibilityChecker(gridmap);
+    const cachedGridVisibilityChecker = CachedGridVisibilityCheckerFactory(
+        gridmap,
+        options.grid_map_visibility_distance_limit,
+        getGridDistance,
+    );
     // 根据网格地图的大小生成网格距离矩阵
     // const gridDistanceMatrix = GridDistanceMatrix(
     //     gridmap.data.length,

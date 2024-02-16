@@ -1,23 +1,9 @@
 import { GridVisibilityChecker } from "./GridVisibilityChecker";
-import { CachedCanStraightReach } from "./canStraightReach";
-import { findVisibleGridsCircleWithDistanceLimit } from "./findVisibleGridsCircleWithDistanceLimit";
+import { findVisibleGridsCircle } from "./findVisibleGridsCircle";
 import { GridMap } from "./grid-map";
 
-/**
- * 缓存网格可见性检查器
- * @param grid 网格地图
- * @returns 网格可见性检查器
- */
 export function CachedGridVisibilityChecker(
     grid: GridMap,
-    distanceLimit: number,
-    getGridDistance: ([x1, y1]: [
-        number,
-        number,
-    ], [x2, y2]: [
-        number,
-        number,
-    ]) => number,
 ): GridVisibilityChecker {
     const result: Iterable<[number, number]>[][] = [];
     const matrix: boolean[][][][] = [];
@@ -36,36 +22,26 @@ export function CachedGridVisibilityChecker(
         }
 
         // console.log(grid, a, b, c, d, result, matrix);
-        // const VisibleGrids = visibleGridsList([a, b]);
-        // matrix[a] ??= [];
-        // matrix[a][b] ??= Array(grid.data.length)
-        //     .fill(0)
-        //     .map(() => Array(grid.data[0].length).fill(false));
-
-        // for (const element of VisibleGrids) {
-        //     // 获取当前元素（VisibleGrids[index]）
-        //     // 将对应位置的值设为 true（表示可见）
-        //     matrix[a][b][element[0]] ??= [];
-
-        //     matrix[a][b][element[0]][element[1]] = true;
-        //     // matrix[element[0]] ??= [];
-        //     // matrix[element[0]][element[1]] ??= Array(grid.data.length)
-        //     //     .fill(0)
-        //     //     .map(() => Array(grid.data[0].length).fill(false));
-
-        //     // matrix[element[0]][element[1]][a] ??= [];
-        //     // matrix[element[0]][element[1]][a][b] = true;
-        // }
-        const result = CachedCanStraightReach([a, b], [c, d], grid);
-
+        const VisibleGrids = visibleGridsList([a, b]);
         matrix[a] ??= [];
-        matrix[a][b] ??= [];
-        matrix[a][b][c] ??= [];
-        matrix[a][b][c][d] = result;
-        matrix[c] ??= [];
-        matrix[c][d] ??= [];
-        matrix[c][d][a] ??= [];
-        matrix[c][d][a][b] = result;
+        matrix[a][b] ??= Array(grid.data.length)
+            .fill(0)
+            .map(() => Array(grid.data[0].length).fill(false));
+
+        for (const element of VisibleGrids) {
+            // 获取当前元素（VisibleGrids[index]）
+            // 将对应位置的值设为 true（表示可见）
+            matrix[a][b][element[0]] ??= [];
+
+            matrix[a][b][element[0]][element[1]] = true;
+            // matrix[element[0]] ??= [];
+            // matrix[element[0]][element[1]] ??= Array(grid.data.length)
+            //     .fill(0)
+            //     .map(() => Array(grid.data[0].length).fill(false));
+
+            // matrix[element[0]][element[1]][a] ??= [];
+            // matrix[element[0]][element[1]][a][b] = true;
+        }
         return matrix[a][b][c][d]; // 返回最终结果 result
     }
     function visibleGridsList([a, b]: [number, number]): Iterable<
@@ -75,12 +51,7 @@ export function CachedGridVisibilityChecker(
             // console.log("cache hit", grid, a, b);
             return result[a][b];
         }
-        const VisibleGrids = findVisibleGridsCircleWithDistanceLimit(
-            [a, b],
-            grid,
-            distanceLimit,
-            getGridDistance,
-        );
+        const VisibleGrids = findVisibleGridsCircle([a, b], grid);
         result[a] ??= [];
         result[a][b] = VisibleGrids;
         return VisibleGrids;

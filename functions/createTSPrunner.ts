@@ -44,7 +44,7 @@ import { update_convergence_coefficient } from "./update_convergence_coefficient
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray";
 import { getGridDistance } from "../path-planning/getGridDistance";
-import { CachedGridVisibilityChecker } from "../path-planning/CachedGridVisibilityChecker";
+import { CachedGridVisibilityCheckerFactory } from "../path-planning/CachedGridVisibilityCheckerFactory";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const time_of_initialization_start = Date.now();
@@ -267,7 +267,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     // 根据地图坐标生成网格地图
     const gridmap = GridMapFromArray(map);
-    const cachedGridVisibilityChecker = CachedGridVisibilityChecker(gridmap);
+    const cachedGridVisibilityChecker = CachedGridVisibilityCheckerFactory(
+        gridmap,
+        options.grid_map_visibility_distance_limit,
+        getGridDistance,
+    );
     // 根据网格地图的大小生成网格距离矩阵
     // const gridDistanceMatrix = GridDistanceMatrix(
     //     gridmap.data.length,

@@ -28,13 +28,10 @@ export function findVisibleGridsCircleWithDistanceLimit(
     [starti, startj]: [number, number],
     grid: GridMap,
     distanceLimit: number,
-    getGridDistance: ([x1, y1]: [
-        number,
-        number,
-    ], [x2, y2]: [
-        number,
-        number,
-    ]) => number,
+    getGridDistance: (
+        [x1, y1]: [number, number],
+        [x2, y2]: [number, number],
+    ) => number,
 ): [number, number][] {
     const start = [starti, startj] as [number, number];
 
