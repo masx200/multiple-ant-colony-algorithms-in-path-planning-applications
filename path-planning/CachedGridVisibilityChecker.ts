@@ -1,4 +1,5 @@
 import { GridVisibilityChecker } from "./GridVisibilityChecker";
+import { CachedCanStraightReach } from "./canStraightReach";
 import { findVisibleGridsCircle } from "./findVisibleGridsCircle";
 import { GridMap } from "./grid-map";
 
@@ -27,26 +28,36 @@ export function CachedGridVisibilityChecker(
         }
 
         // console.log(grid, a, b, c, d, result, matrix);
-        const VisibleGrids = visibleGridsList([a, b]);
+        // const VisibleGrids = visibleGridsList([a, b]);
+        // matrix[a] ??= [];
+        // matrix[a][b] ??= Array(grid.data.length)
+        //     .fill(0)
+        //     .map(() => Array(grid.data[0].length).fill(false));
+
+        // for (const element of VisibleGrids) {
+        //     // 获取当前元素（VisibleGrids[index]）
+        //     // 将对应位置的值设为 true（表示可见）
+        //     matrix[a][b][element[0]] ??= [];
+
+        //     matrix[a][b][element[0]][element[1]] = true;
+        //     // matrix[element[0]] ??= [];
+        //     // matrix[element[0]][element[1]] ??= Array(grid.data.length)
+        //     //     .fill(0)
+        //     //     .map(() => Array(grid.data[0].length).fill(false));
+
+        //     // matrix[element[0]][element[1]][a] ??= [];
+        //     // matrix[element[0]][element[1]][a][b] = true;
+        // }
+        const result = CachedCanStraightReach([a, b], [c, d], grid);
+
         matrix[a] ??= [];
-        matrix[a][b] ??= Array(grid.data.length)
-            .fill(0)
-            .map(() => Array(grid.data[0].length).fill(false));
-
-        for (const element of VisibleGrids) {
-            // 获取当前元素（VisibleGrids[index]）
-            // 将对应位置的值设为 true（表示可见）
-            matrix[a][b][element[0]] ??= [];
-
-            matrix[a][b][element[0]][element[1]] = true;
-            // matrix[element[0]] ??= [];
-            // matrix[element[0]][element[1]] ??= Array(grid.data.length)
-            //     .fill(0)
-            //     .map(() => Array(grid.data[0].length).fill(false));
-
-            // matrix[element[0]][element[1]][a] ??= [];
-            // matrix[element[0]][element[1]][a][b] = true;
-        }
+        matrix[a][b] ??= [];
+        matrix[a][b][c] ??= [];
+        matrix[a][b][c][d] = result;
+        matrix[c] ??= [];
+        matrix[c][d] ??= [];
+        matrix[c][d][a] ??= [];
+        matrix[c][d][a][b] = result;
         return matrix[a][b][c][d]; // 返回最终结果 result
     }
     function visibleGridsList([a, b]: [number, number]): Iterable<
