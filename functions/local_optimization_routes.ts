@@ -1,6 +1,6 @@
 import { sumBy } from "lodash-es";
 import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Series_routes_and_lengths";
-import { LocalOptimizationRoutesOptions } from "./LocalOptimizationRouteOptions";
+import { LocalOptimizationRoutesOptions } from "./LocalOptimizationRoutesOptions";
 import { local_optimization_route } from "./local_optimization_route";
 /**
  * 本地优化路径函数

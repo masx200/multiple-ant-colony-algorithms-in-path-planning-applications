@@ -8,7 +8,7 @@ import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoD
 import { twoDimensionsToOneDimension } from "../path-planning/twoDimensionsToOneDimension";
 import { set_distance_round } from "../src/set_distance_round";
 import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Series_routes_and_lengths";
-import { LocalOptimizationRouteOptions } from "./LocalOptimizationRouteOptions.1";
+import { LocalOptimizationRouteOptions } from "./LocalOptimizationRouteOptions";
 // import { pickRandomOne } from "./pickRandomOne";
 
 /**

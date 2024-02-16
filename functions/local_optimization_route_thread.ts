@@ -1,5 +1,5 @@
 import { local_optimization_route_pool } from "./local_optimization_route_pool";
-import { LocalOptimizationRoutesOptions } from "./LocalOptimizationRouteOptions";
+import { LocalOptimizationRoutesOptions } from "./LocalOptimizationRoutesOptions";
 
 export async function local_optimization_route_thread(
     options: LocalOptimizationRoutesOptions,
