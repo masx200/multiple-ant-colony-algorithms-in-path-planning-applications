@@ -14,25 +14,32 @@ export function generate_local_optimization_grid_routes(
     canStraightReach: visibleGridsMatrixCallBack,
 ): [number, number][] {
     const every_nodes = convert_grid_route_to_every_Passed_node(route);
-    const sequences = combinations(ArrayShuffle([...every_nodes.keys()]), 2);
-    let result: [number, number][] = route;
-    for (const [a, b] of sequences) {
-        const point1 = every_nodes[a];
-        const point2 = every_nodes[b];
-        if (
-            canStraightReach(point1, point2) &&
-            //必须是不相邻的点,否则和原来的路径一样
-            Math.abs(point1[0] - point2[0]) + Math.abs(point1[1] - point2[1]) >
+    let result: [number, number][] = every_nodes;
+    while (true) {
+        const sequences = combinations(ArrayShuffle([...every_nodes.keys()]), 2);
+
+        for (const [a, b] of sequences) {
+            const point1 = every_nodes[a];
+            const point2 = every_nodes[b];
+            if (
+                canStraightReach(point1, point2) &&
+                //必须是不相邻的点,否则和原来的路径一样
+                Math.abs(point1[0] - point2[0]) + Math.abs(point1[1] - point2[1]) >
                 2
-        ) {
-            result = [...route.slice(0, a + 1), ...route.slice(b)];
-            //替换后的路径必须不相同
-            if (!isEqual(result, route) && !isEqual(result, every_nodes))
-                return generate_local_optimization_grid_routes(
-                    result,
-                    canStraightReach,
-                );
+            ) {
+                const result_new = [...result.slice(0, a + 1), ...result.slice(b)];
+                //替换后的路径必须不相同
+                if (!isEqual(result_new, route) && !isEqual(result_new, every_nodes) && !isEqual(result_new, result)) {
+                    // return generate_local_optimization_grid_routes(
+                    //     result,
+                    //     canStraightReach,
+                    // );
+                    result = result_new;
+                    break
+                }
+            }
         }
+        return result;
     }
-    return result;
+
 }

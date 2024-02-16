@@ -361,6 +361,19 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 canStraightReach: visibleGridsMatrix,
                 getGridDistance,
             });
+            if (optimal_length_of_iteration < get_best_length()) {
+                console.log(
+                    "local  optimization route success",
+                    optimal_length_of_iteration,
+                    get_best_length(),
+                );
+                set_global_best(
+                    optimal_route_of_iteration,
+                    optimal_length_of_iteration,
+                );
+            } else {
+                console.log("local  optimization route failure");
+            }
             onRouteCreated(
                 optimal_route_of_iteration,
                 optimal_length_of_iteration,

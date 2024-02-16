@@ -1,6 +1,6 @@
 import { uniqBy } from "lodash-es";
 
-import { local_optimization_route_thread } from "../functions/local_optimization_route_thread";
+import { local_optimization_routes } from "../functions/local_optimization_routes";
 import { visibleGridsMatrixCallBack } from "../path-planning/visibleGridsMatrixCallBack";
 /**
  * Runs local optimization for a given set of routes and lengths.
@@ -58,7 +58,7 @@ export async function run_local_optimization({
         ],
         (a) => a.length,
     );
-    const optimization_results = await local_optimization_route_thread({
+    const optimization_results = await local_optimization_routes({
         count_of_nodes,
         max_segments_of_cross_point,
         distance_round,

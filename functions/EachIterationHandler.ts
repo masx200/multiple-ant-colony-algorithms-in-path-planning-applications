@@ -3,9 +3,10 @@ import { uniqBy } from "lodash-es";
 import { assert_true } from "../test/assert_true";
 import { calc_population_relative_information_entropy } from "./calc_population-relative-information-entropy";
 import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Series_routes_and_lengths";
-import { local_optimization_route_thread } from "./local_optimization_route_thread";
+// import { local_optimization_routes } from "./local_optimization_routes";
 import { SharedOptions } from "./SharedOptions";
 import { GridVisibilityChecker } from "../path-planning/GridVisibilityChecker";
+import { local_optimization_routes } from "./local_optimization_routes";
 // import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
 /**
  * EachIterationHandler is an asynchronous function that handles each iteration of the optimization process.
@@ -81,7 +82,7 @@ export async function EachIterationHandler(
         (a) => a.length,
     );
 
-    const optimization_results = await local_optimization_route_thread({
+    const optimization_results = await local_optimization_routes({
         count_of_nodes,
         max_segments_of_cross_point,
         distance_round,
@@ -98,10 +99,17 @@ export async function EachIterationHandler(
     const optimal_length_of_iteration = optimization_results.length;
     const optimal_time_ms = optimization_results.time_ms;
     if (optimal_length_of_iteration < getBestLength()) {
+        console.log(
+            "local  optimization route success",
+            optimal_length_of_iteration,
+            getBestLength(),
+        );
         set_global_best(
             optimal_route_of_iteration,
             optimal_length_of_iteration,
         );
+    } else {
+        console.log("local  optimization route failure");
     }
 
     const timems_of_process_iteration =
