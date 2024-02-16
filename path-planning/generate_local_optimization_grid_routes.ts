@@ -2,6 +2,7 @@ import { visibleGridsMatrixCallBack } from "./visibleGridsMatrixCallBack";
 import { combinations } from "combinatorial-generators";
 import { convert_grid_route_to_every_Passed_node } from "./convert_grid_route_to_every_Passed_node";
 import { ArrayShuffle } from "../functions/ArrayShuffle";
+import { isEqual } from "lodash-es";
 /**
  * 生成局部优化网格路径的路由
  * @param route 路径数组
@@ -18,12 +19,19 @@ export function generate_local_optimization_grid_routes(
     for (const [a, b] of sequences) {
         const point1 = every_nodes[a];
         const point2 = every_nodes[b];
-        if (canStraightReach(point1, point2)) {
+        if (
+            canStraightReach(point1, point2) &&
+            //必须是不相邻的点,否则和原来的路径一样
+            Math.abs(point1[0] - point2[0]) + Math.abs(point1[1] - point2[1]) >
+                2
+        ) {
             result = [...route.slice(0, a + 1), ...route.slice(b)];
-            return generate_local_optimization_grid_routes(
-                result,
-                canStraightReach,
-            );
+            //替换后的路径必须不相同
+            if (!isEqual(result, route) && !isEqual(result, every_nodes))
+                return generate_local_optimization_grid_routes(
+                    result,
+                    canStraightReach,
+                );
         }
     }
     return result;
