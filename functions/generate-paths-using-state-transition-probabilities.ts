@@ -79,8 +79,8 @@ export function generate_paths_using_state_transition_probabilities(
             ? pickRandomOne(Array.from(get_filtered_nodes()))
             : */ picknextnodeRoulette({
             ...options,
-            alpha_zero,
-            beta_zero,
+            alpha_zero: alpha_zero,
+            beta_zero: beta_zero,
             // get_convergence_coefficient,
             currentnode: current_city,
             availablenextnodes: Array.from(get_filtered_nodes()),

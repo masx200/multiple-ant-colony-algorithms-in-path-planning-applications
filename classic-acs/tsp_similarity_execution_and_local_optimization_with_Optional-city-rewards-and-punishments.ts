@@ -217,6 +217,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
             beta_zero,
             // get_filtered_nodes,
             local_pheromone_update,
+            getGridDistance,
         });
     }
     function local_pheromone_update(route: number[]) {
@@ -357,6 +358,8 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 node_coordinates,
                 max_results_of_k_exchange,
                 max_results_of_2_opt,
+                canStraightReach: visibleGridsMatrix,
+                getGridDistance,
             });
             onRouteCreated(
                 optimal_route_of_iteration,

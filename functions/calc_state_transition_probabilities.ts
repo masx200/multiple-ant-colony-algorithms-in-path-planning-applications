@@ -18,17 +18,17 @@ export function calc_state_transition_probabilities({
     getpheromone,
     nextnode,
     currentnode,
-    alpha,
+    alpha_zero: alpha_zero,
     getdistancebyserialnumber,
-    beta,
+    beta_zero: beta_zero,
 }: {
     getpheromone: GetPheromone;
     nextnode: number;
     currentnode: number;
-    alpha: number;
+    alpha_zero: number;
     end: number;
     getdistancebyserialnumber: GetDistanceBySerialNumber;
-    beta: number;
+    beta_zero: number;
 }): number {
     const pheromone = getpheromone(nextnode, currentnode);
     assert_true(!Number.isNaN(pheromone), "pheromone should not be NaN");
@@ -37,11 +37,11 @@ export function calc_state_transition_probabilities({
         (getdistancebyserialnumber(nextnode, currentnode) +
             getdistancebyserialnumber(nextnode, end));
     const weight =
-        Math.pow(pheromone, alpha) *
+        Math.pow(pheromone, alpha_zero) *
         Math.pow(
             //启发式信息为:1/(当前节点到下一个节点的距离+下一个节点到终点的距离)
             启发式信息,
-            beta,
+            beta_zero,
         );
 
     assert_true(!Number.isNaN(weight), "weight should not be NaN");

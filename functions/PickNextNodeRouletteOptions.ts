@@ -2,11 +2,12 @@ import { GetDistanceBySerialNumber } from "./GetDistanceBySerialNumber";
 import { GetPheromone } from "./GetPheromone";
 
 export type PickNextNodeRouletteOptions = {
-    alpha_zero: number;
-    beta_zero: number;
     getpheromone: GetPheromone;
+    // nextnode: number;
     currentnode: number;
-    availablenextnodes: number[];
-
+    alpha_zero: number;
+    end: number;
     getdistancebyserialnumber: GetDistanceBySerialNumber;
+    beta_zero: number;
+    availablenextnodes: number[];
 };

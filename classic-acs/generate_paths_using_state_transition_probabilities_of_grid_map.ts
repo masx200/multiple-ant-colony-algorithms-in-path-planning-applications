@@ -119,8 +119,8 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
 
         const end_city = twoDimensionsToOneDimension(end.x, end.y, n);
 
-        const beta = beta_zero;
-        const alpha = alpha_zero;
+        // const beta = beta_zero;
+        // const alpha = alpha_zero;
         const random = Math.random();
         if (random < route_selection_parameters_Q0) {
             const nextnode_and_weights = available_nodes.map((nextnode) => {
@@ -129,9 +129,9 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
 
                     nextnode,
                     currentnode: current_city,
-                    alpha,
+                    alpha_zero,
                     getdistancebyserialnumber,
-                    beta,
+                    beta_zero,
                     ...options,
                     end: end_city,
                 });
@@ -147,19 +147,19 @@ export function generate_paths_using_state_transition_probabilities_of_grid_map(
         ? pickRandomOne(Array.from(get_filtered_nodes()))
         : */ picknextnodeRoulette({
             ...options,
-            alpha_zero,
-            beta_zero,
+            alpha_zero: alpha_zero,
+            beta_zero: beta_zero,
             // get_convergence_coefficient,
             currentnode: current_city,
             availablenextnodes: Array.from(get_filtered_nodes()),
             getpheromone,
             getdistancebyserialnumber,
             end: end_city,
-            node_coordinates,
-            max_cities_of_state_transition,
-            pheromoneStore,
-            count_of_nodes,
-            start,
+            // node_coordinates,
+            // max_cities_of_state_transition,
+            // pheromoneStore,
+            // count_of_nodes,
+            // start,
         });
         return PointFromArray(oneDimensionToTwoDimensions(nextnode, n));
     }
