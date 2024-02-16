@@ -22,7 +22,7 @@ export function local_optimization_route({
     distance_round,
     route: oldRoute,
     // max_results_of_k_opt,
-    node_coordinates,
+    // node_coordinates,
     length: oldLength,
     // max_results_of_k_exchange,
     // max_results_of_2_opt,
