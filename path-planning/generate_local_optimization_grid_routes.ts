@@ -26,8 +26,8 @@ export function generate_local_optimization_grid_routes(
                 canStraightReach(point1, point2) &&
                 //必须是不相邻的点,否则和原来的路径一样
                 Math.abs(point1[0] - point2[0]) +
-                    Math.abs(point1[1] - point2[1]) >
-                    2
+                Math.abs(point1[1] - point2[1]) >
+                2
             ) {
                 const result_new = [
                     ...result.slice(0, a + 1),
@@ -50,4 +50,5 @@ export function generate_local_optimization_grid_routes(
         }
         return result;
     }
+    return result;
 }
