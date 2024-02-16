@@ -498,7 +498,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     //         global_optimal_routes,
     //     );
     // const get_neighbors_from_optimal_routes_and_latest_routes =
-        // neighbors_from_optimal_routes_and_latest_routes.get;
+    // neighbors_from_optimal_routes_and_latest_routes.get;
     const shared = getShared();
 
     function getShared(): SharedOptions {

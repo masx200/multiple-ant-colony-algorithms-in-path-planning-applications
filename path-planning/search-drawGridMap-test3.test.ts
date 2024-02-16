@@ -43,15 +43,13 @@ test("search-drawGridMap-test", () => {
         start,
         end,
         // PheromoneMatrix,
-        visibleGridsList: function (a: number, b: number) {
+        visibleGridsList: function ([a, b]: [number, number]) {
             return visibleGridsListWithOutPointsInsideAllConvexPolygons[a][b];
         },
 
         visibleGridsMatrix: function (
-            a: number,
-            b: number,
-            c: number,
-            d: number,
+            [a, b]: [number, number],
+            [c, d]: [number, number],
         ) {
             return visibleGridsMatrix[a][b][c][d];
         },

@@ -13,10 +13,8 @@ export function CachedGridVisibilityChecker(
     const result: Iterable<[number, number]>[][] = [];
     const matrix: boolean[][][][] = [];
     function visibleGridsMatrix(
-        a: number,
-        b: number,
-        c: number,
-        d: number,
+        [a, b]: [number, number],
+        [c, d]: [number, number],
     ): boolean {
         if (
             matrix[a] &&
@@ -29,7 +27,7 @@ export function CachedGridVisibilityChecker(
         }
 
         // console.log(grid, a, b, c, d, result, matrix);
-        const VisibleGrids = visibleGridsList(a, b);
+        const VisibleGrids = visibleGridsList([a, b]);
         matrix[a] ??= [];
         matrix[a][b] ??= Array(grid.data.length)
             .fill(0)
@@ -51,10 +49,9 @@ export function CachedGridVisibilityChecker(
         }
         return matrix[a][b][c][d]; // 返回最终结果 result
     }
-    function visibleGridsList(
-        a: number,
-        b: number,
-    ): Iterable<[number, number]> {
+    function visibleGridsList([a, b]: [number, number]): Iterable<
+        [number, number]
+    > {
         if (result[a] && typeof result[a][b] != "undefined") {
             // console.log("cache hit", grid, a, b);
             return result[a][b];

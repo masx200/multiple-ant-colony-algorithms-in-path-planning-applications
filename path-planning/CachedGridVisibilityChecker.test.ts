@@ -13,7 +13,7 @@ describe("CachedGridVisibilityChecker", () => {
         const b = 2;
 
         // Act
-        const result = checker.visibleGridsList(a, b);
+        const result = checker.visibleGridsList([a, b]);
         // console.log(result);
         // Assert
         expect(result).toBeDefined();
@@ -44,7 +44,7 @@ describe("CachedGridVisibilityChecker", () => {
         const d = 4;
 
         // Act
-        const result = checker.visibleGridsMatrix(a, b, c, d);
+        const result = checker.visibleGridsMatrix([a, b], [c, d]);
         // console.log(result);
         // Assert
         expect(result).toBeDefined();
@@ -59,7 +59,7 @@ describe("CachedGridVisibilityChecker", () => {
         const b = 0;
 
         // Act
-        const result = checker.visibleGridsList(a, b);
+        const result = checker.visibleGridsList([a, b]);
         // console.log(result);
         // Assert
         expect(result).toBeDefined();
@@ -76,7 +76,7 @@ describe("CachedGridVisibilityChecker", () => {
         const d = 0;
 
         // Act
-        const result = checker.visibleGridsMatrix(a, b, c, d);
+        const result = checker.visibleGridsMatrix([a, b], [c, d]);
         // console.log(result);
         assert.equal(false, result);
         // Assert
@@ -92,7 +92,7 @@ describe("CachedGridVisibilityChecker", () => {
         const d = 2;
 
         // Act
-        const result = checker.visibleGridsMatrix(a, b, c, d);
+        const result = checker.visibleGridsMatrix([a, b], [c, d]);
         // console.log(result);
         assert.equal(false, result);
         // Assert

@@ -1,3 +1,4 @@
+import { GridVisibilityChecker } from "./GridVisibilityChecker";
 import { getPathCoordinates } from "./getPathCoordinates";
 import { GridMap } from "./grid-map";
 
@@ -14,13 +15,13 @@ import { GridMap } from "./grid-map";
 export function getAvailableNeighbors(
     //    pointsInsideAllConvexPolygons: Set<number>,
     blocked: Set<number>,
-    visibleGridsList: (a: number, b: number) => Iterable<[number, number]>,
+    visibleGridsList: GridVisibilityChecker["visibleGridsList"],
     grid: GridMap,
     [x, y]: [number, number],
 ): [number, number][] {
     /*每一步可选的格子,从当前格子能够直线到达的格子中筛选,条件有,下一个格子不能是已经经过的格子,当前格子到下一个格子的路径不包含已经经过的格子,而且下一个格子也不在事先算好的凸多边形内部的格子.*/
     const res = new Array<[number, number]>();
-    for (const [nx, ny] of visibleGridsList(x, y)) {
+    for (const [nx, ny] of visibleGridsList([x, y])) {
         if (
             grid.isFree(nx, ny) &&
             !blocked.has(nx * grid.row + ny) &&

@@ -15,6 +15,7 @@ import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 import { SharedOptions } from "./SharedOptions";
 import { random_next_point_selector } from "../path-planning/random_next_point_selector";
 import { PointFromArray } from "../path-planning/PointFromArray";
+import { GridVisibilityChecker } from "../path-planning/GridVisibilityChecker";
 
 /**
  * 使用状态转换概率生成路径
@@ -29,18 +30,8 @@ export function generate_paths_using_state_transition_probabilities(
         node_coordinates: number[][];
 
         pheromoneStore: ReadOnlyPheromone;
-    } & SharedOptions & {
-            visibleGridsList: (
-                a: number,
-                b: number,
-            ) => Iterable<[number, number]>;
-            visibleGridsMatrix: (
-                a: number,
-                b: number,
-                c: number,
-                d: number,
-            ) => boolean;
-        },
+    } & SharedOptions &
+        GridVisibilityChecker,
 ): {
     route: number[];
     length: number;
