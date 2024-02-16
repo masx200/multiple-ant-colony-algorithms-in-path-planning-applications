@@ -299,7 +299,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         if (current_search_count === 0) {
             const { best_length, best_route, average_length } =
                 await GreedyRoutesGenerator({
-                    getGridDistance,
                     ...shared,
                     getBestRoute,
                     getBestLength,
@@ -311,6 +310,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     emit_finish_greedy_iteration,
                     visibleGridsList: visibleGridsList,
                     visibleGridsMatrix,
+                    getGridDistance,
                 });
             if (greedy_length > average_length) {
                 greedy_length = average_length;
@@ -502,6 +502,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const shared = getShared();
 
     function getShared(): SharedOptions {
+        const { visibleGridsList, visibleGridsMatrix } =
+            cachedGridVisibilityChecker;
         return {
             ...options,
             get_convergence_coefficient,
@@ -517,8 +519,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             count_of_nodes,
             set_global_best,
             start,
+            visibleGridsList,
+            visibleGridsMatrix,
             end,
-        };
+            getGridDistance,
+        } satisfies SharedOptions;
     }
 
     const {
