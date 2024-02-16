@@ -1,3 +1,4 @@
+import { GridVisibilityChecker } from "../path-planning/GridVisibilityChecker";
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
 import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 /**
@@ -90,4 +91,6 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
      * 蚁群素存储
      */
     pheromoneStore: ReadOnlyPheromone;
-} & { start: number; end: number };
+} & { start: number; end: number } & GridVisibilityChecker & {
+        getGridDistance: (a: [number, number], b: [number, number]) => number;
+    };

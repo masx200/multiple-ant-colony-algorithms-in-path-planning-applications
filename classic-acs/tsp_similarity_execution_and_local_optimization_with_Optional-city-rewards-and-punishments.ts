@@ -346,7 +346,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 time_ms: optimal_time_ms,
                 length: optimal_length_of_iteration,
                 route: optimal_route_of_iteration,
-            } = await run_local_optimization(
+            } = await run_local_optimization({
                 routes_and_lengths_of_one_iteration,
                 get_best_route,
                 get_best_length,
@@ -357,7 +357,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 node_coordinates,
                 max_results_of_k_exchange,
                 max_results_of_2_opt,
-            );
+            });
             onRouteCreated(
                 optimal_route_of_iteration,
                 optimal_length_of_iteration,

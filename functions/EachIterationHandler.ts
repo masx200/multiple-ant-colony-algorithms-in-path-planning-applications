@@ -5,7 +5,15 @@ import { calc_population_relative_information_entropy } from "./calc_population-
 import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Series_routes_and_lengths";
 import { local_optimization_route_thread } from "./local_optimization_route_thread";
 import { SharedOptions } from "./SharedOptions";
-
+import { GridVisibilityChecker } from "../path-planning/GridVisibilityChecker";
+// import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
+/**
+ * EachIterationHandler is an asynchronous function that handles each iteration of the optimization process.
+ * It takes in options object which includes the routes and lengths, getBestRoute and getBestLength functions,
+ * node_coordinates, and other parameters related to the optimization process.
+ * It returns an object with various properties such as iterate_best_length, coefficient_of_diversity_increase,
+ * optimal_length_of_iteration, optimal_route_of_iteration, population_relative_information_entropy, and time_ms.
+ */
 export async function EachIterationHandler(
     options: SharedOptions & {
         routes_and_lengths: {
@@ -16,7 +24,7 @@ export async function EachIterationHandler(
         getBestRoute: () => number[];
         getBestLength: () => number;
         node_coordinates: number[][];
-    },
+    } & GridVisibilityChecker,
 ): Promise<{
     iterate_best_length: number;
     coefficient_of_diversity_increase: number;
@@ -40,7 +48,9 @@ export async function EachIterationHandler(
         max_results_of_k_opt,
         node_coordinates,
         max_results_of_k_exchange,
+        getGridDistance,
         max_results_of_2_opt,
+        visibleGridsMatrix,
     } = options;
     const routes = routes_and_lengths.map(({ route }) => route);
 
@@ -80,6 +90,8 @@ export async function EachIterationHandler(
         max_results_of_k_exchange,
         max_results_of_2_opt,
         routes_and_lengths: need_to_optimization_routes_and_lengths,
+        canStraightReach: visibleGridsMatrix,
+        getGridDistance,
     });
 
     const optimal_route_of_iteration = optimization_results.route;
