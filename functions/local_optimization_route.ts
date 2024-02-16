@@ -17,15 +17,15 @@ import { LocalOptimizationRouteOptions } from "./LocalOptimizationRouteOptions.1
  * }} - 返回对象包含路由、长度和运行时间
  */
 export function local_optimization_route({
-    count_of_nodes,
-    max_segments_of_cross_point,
+    // count_of_nodes,
+    // max_segments_of_cross_point,
     distance_round,
     route: oldRoute,
     // max_results_of_k_opt,
     node_coordinates,
     length: oldLength,
     // max_results_of_k_exchange,
-    max_results_of_2_opt,
+    // max_results_of_2_opt,
 }: LocalOptimizationRouteOptions): {
     route: number[];
     length: number;
@@ -33,7 +33,7 @@ export function local_optimization_route({
 } {
     set_distance_round(distance_round);
     const starttime_of_one_route = Number(new Date());
-    const is_count_not_large = count_of_nodes <= max_segments_of_cross_point;
+    // const is_count_not_large = count_of_nodes <= max_segments_of_cross_point;
 
     // const { route: route1, length: length1 } =
     //     Random_K_OPT_full_limited_find_best({
@@ -57,20 +57,21 @@ export function local_optimization_route({
         { route: route2, length: length2 }, */
         { route: oldRoute, length: oldLength }; //,
     //]);
-    const { route: route3, length: length3 } = is_count_not_large
-        ? Precise_2_opt_eliminates_all_intersections({
-              ...route_and_length_selection2,
-              //   count_of_nodes,
-              max_results_of_2_opt,
-              node_coordinates,
-          })
-        : partial_precise_random_2_opt_eliminates_cross_points({
-              ...route_and_length_selection2,
-              count_of_nodes,
-              max_of_segments: max_segments_of_cross_point,
-              max_results_of_2_opt,
-              node_coordinates,
-          });
+    const { route: route3, length: length3 } = route_and_length_selection2;
+    // is_count_not_large
+    //     ? Precise_2_opt_eliminates_all_intersections({
+    //           ...route_and_length_selection2,
+    //           //   count_of_nodes,
+    //           max_results_of_2_opt,
+    //           node_coordinates,
+    //       })
+    //     : partial_precise_random_2_opt_eliminates_cross_points({
+    //           ...route_and_length_selection2,
+    //           count_of_nodes,
+    //           max_of_segments: max_segments_of_cross_point,
+    //           max_results_of_2_opt,
+    //           node_coordinates,
+    //       });
 
     const temp_set_of_routes = [
         // { route: route1, length: length1 },
