@@ -192,7 +192,8 @@ export function findVisibleGridsCircleWithDistanceLimit(
                     jj >= 0 &&
                     jj < grid.row &&
                     grid.isFree(ii, jj) &&
-                    !visited[ii][jj]
+                    !visited[ii][jj] &&
+                    getGridDistance(start, [ii, jj]) <= distancelimit
                 ) {
                     visited[ii][jj] = true;
                     if (
