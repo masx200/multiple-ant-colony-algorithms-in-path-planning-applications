@@ -1,5 +1,5 @@
 import { visibleGridsMatrixCallBack } from "./visibleGridsMatrixCallBack";
-
+import { combinations } from "combinatorial-generators";
 /**
  * 生成局部优化网格路径的路由
  * @param route 路径数组
@@ -10,5 +10,13 @@ export function generate_local_optimization_grid_routes(
     route: [number, number][],
     canStraightReach: visibleGridsMatrixCallBack,
 ): [number, number][][] {
-    return [route];
+    const sequences = [...combinations(route.keys(), 2)];
+    const result: [number, number][][] = [];
+    for (const [a, b] of sequences) {
+        const point1 = route[a];
+        const point2 = route[b];
+        if (canStraightReach(point1, point2)) {
+        }
+    }
+    return result;
 }
