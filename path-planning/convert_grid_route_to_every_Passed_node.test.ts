@@ -65,4 +65,54 @@ describe("convert_grid_route_to_every_Passed_node", () => {
             [0, 3],
         ]);
     });
+    it("should return an array of nodes for a route with multiple segments", () => {
+        const route: [number, number][] = [
+            [1, 21],
+            [10, 5],
+            [11, 2],
+            [12, 1],
+            [14, 1],
+            [15, 1],
+            [16, 1],
+            [17, 1],
+            [20, 1],
+            [21, 1],
+            [22, 1],
+        ];
+        const result = convert_grid_route_to_every_Passed_node(route);
+        // console.log(result);
+        expect(result).toEqual([
+            [1, 21],
+            [2, 20],
+            [2, 19],
+            [3, 18],
+            [3, 17],
+            [4, 16],
+            [4, 15],
+            [5, 14],
+            [6, 13],
+            [6, 12],
+            [7, 11],
+            [7, 10],
+            [8, 9],
+            [8, 8],
+            [9, 7],
+            [9, 6],
+            [10, 5],
+            [10, 4],
+            [11, 3],
+            [11, 2],
+            [12, 1],
+            [13, 1],
+            [14, 1],
+            [15, 1],
+            [16, 1],
+            [17, 1],
+            [18, 1],
+            [19, 1],
+            [20, 1],
+            [21, 1],
+            [22, 1],
+        ]);
+    });
 });
