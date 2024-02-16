@@ -46,6 +46,19 @@
                 :min="1"
                 :controls="false"
             /><br />
+            <hr />
+            <span>栅格地图可视距离限制</span>
+            <el-input-number
+                step-strictly
+                :step="0.1"
+                v-model.number="
+                    input_options.grid_map_visibility_distance_limit
+                "
+                :disabled="disable_switching"
+                :min="0.1"
+                :controls="false"
+            /><br />
+            <hr />
             <span>信息素交流挥发系数</span>
             <el-input-number
                 step-strictly
