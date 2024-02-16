@@ -1,3 +1,8 @@
+/**
+ * 获取最佳路线和长度
+ * @param routes_and_lengths 路线和长度的数组
+ * @returns 最佳路线和长度的对象
+ */
 export function getBestRoute_Of_Series_routes_and_lengths(
     routes_and_lengths: {
         route: number[];
