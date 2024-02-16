@@ -13,7 +13,10 @@ export function picknextnodeRoulette(
         PickNextNodeRouletteOptions & {
             // get_convergence_coefficient: () => number;
         } & SharedOptions,
-        "get_convergence_coefficient" | "get_random_selection_probability"
+        | "get_convergence_coefficient"
+        | "get_random_selection_probability"
+        | "visibleGridsList"
+        | "visibleGridsMatrix"
     >,
 ): number {
     const {
