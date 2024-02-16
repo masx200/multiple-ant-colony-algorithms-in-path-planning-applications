@@ -1,3 +1,5 @@
+import { visibleGridsMatrixCallBack } from "./visibleGridsMatrixCallBack";
+
 /**
  * 生成局部优化网格路径的路由
  * @param route 路径数组
@@ -6,7 +8,7 @@
  */
 export function generate_local_optimization_grid_routes(
     route: [number, number][],
-    canStraightReach: (a: [number, number], b: [number, number]) => boolean,
+    canStraightReach: visibleGridsMatrixCallBack,
 ): [number, number][][] {
     return [route];
 }

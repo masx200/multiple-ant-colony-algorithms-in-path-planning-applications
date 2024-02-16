@@ -1,3 +1,5 @@
+import { visibleGridsMatrixCallBack } from "./visibleGridsMatrixCallBack";
+
 /**
  * 网格可见性检查器接口
  */
@@ -18,8 +20,5 @@ export interface GridVisibilityChecker {
      * @param d 网格的高度
      * @returns 网格是否可见
      */
-    visibleGridsMatrix: (
-        [a, b]: [number, number],
-        [c, d]: [number, number],
-    ) => boolean;
+    visibleGridsMatrix: visibleGridsMatrixCallBack;
 }
