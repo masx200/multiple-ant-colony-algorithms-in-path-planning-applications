@@ -15,11 +15,9 @@ export function generate_local_optimization_grid_routes(
 ): [number, number][] {
     const every_nodes = convert_grid_route_to_every_Passed_node(route);
     let result: [number, number][] = every_nodes;
-    loop1: while (true) {
-        const sequences = combinations(
-            ArrayShuffle([...result.keys()]),
-            2,
-        );
+
+    loop1: for (let i = 0; i < every_nodes.length; i++) {
+        const sequences = combinations(ArrayShuffle([...result.keys()]), 2);
 
         for (const [a, b] of sequences) {
             const point1 = result[a];
