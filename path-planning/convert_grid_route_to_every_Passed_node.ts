@@ -1,5 +1,8 @@
+import { assert } from "chai";
 import { not_cycle_route_to_segments } from "../functions/not_cycle_route_to_segments";
 import { getPathCoordinates } from "./getPathCoordinates";
+import { uniqBy } from "lodash-es";
+import { removeSubarrayRepeatElements } from "./removeSubarrayRepeatElements";
 /**
  * 将网格路由转换为每个经过的节点的数组
  * @param route 网格路由数组，每个元素为一个二维数组，表示一个节点的行列坐标
@@ -13,7 +16,7 @@ export function convert_grid_route_to_every_Passed_node(
     const nodes = segments
         .map((segment) => getPathCoordinates(segment[0], segment[1]))
         .flat();
-    const result: [number, number][] = [];
+    let result: [number, number][] = [];
     //删除nodes数组中连续相同的节点
     nodes.forEach((node, index) => {
         if (
@@ -28,5 +31,15 @@ export function convert_grid_route_to_every_Passed_node(
         }
     });
 
+    // console.log(result)
+    /* 这里可能出现重复节点 */
+
+    result = removeSubarrayRepeatElements(result) as [number, number][]
+    assert.equal(
+        result.length,
+        uniqBy(result, (a) => JSON.stringify(a)).length, JSON.stringify(result),
+    );
     return result;
 }
+
+
