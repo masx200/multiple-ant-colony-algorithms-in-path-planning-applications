@@ -96,7 +96,7 @@ export function search_one_route_on_grid_map({
     blocked.add(start.x * grid.row + start.y);
     let count = 0;
     while (!(current.x == end.x && current.y == end.y)) {
-        console.log(JSON.stringify({ start, end, count, path }, null, 4));
+        console.log(JSON.stringify({ count, start, end, path }, null, 4));
         // 如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径
         if (visibleGridsMatrix([current.x, current.y], [end.x, end.y])) {
             // console.log(
