@@ -34,12 +34,11 @@ export function convert_grid_route_to_every_Passed_node(
     // console.log(result)
     /* 这里可能出现重复节点 */
 
-    result = removeSubarrayRepeatElements(result) as [number, number][]
+    result = removeSubarrayRepeatElements(result) as [number, number][];
     assert.equal(
         result.length,
-        uniqBy(result, (a) => JSON.stringify(a)).length, JSON.stringify(result),
+        uniqBy(result, (a) => JSON.stringify(a)).length,
+        JSON.stringify(result),
     );
     return result;
 }
-
-

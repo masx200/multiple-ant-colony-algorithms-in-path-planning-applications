@@ -1,4 +1,3 @@
-
 /**
  * 下面是一个在 TypeScript 中实现的函数，它接收一个数组作为输入，检查其中是否存在重复数字并根据条件删除子数组。
  * 注意：此函数会直接修改结果数组，这意味着原始数组中的连续重复元素将会被删除。此外，当遇到重复项时，它会删除从重复项首次出现的位置到第二次出现位置之间的所有元素，而不是只删除重复项本身。若只需要删除重复项，请对上述逻辑进行适当调整。
@@ -18,7 +17,7 @@ export function removeSubarrayRepeatElements(arr: number[][]): number[][] {
 
         // 如果当前数字已经存在于 map 中，则找到其第一次出现的位置
         if (numMap.has(JSON.stringify(currentNum))) {
-            const firstIndex = numMap.get(JSON.stringify((currentNum)))!;
+            const firstIndex = numMap.get(JSON.stringify(currentNum))!;
 
             // 删除从首次出现位置到当前位置（不包含当前位置）的所有元素
             result.splice(firstIndex + 1, i - firstIndex - 1);
@@ -32,5 +31,3 @@ export function removeSubarrayRepeatElements(arr: number[][]): number[][] {
 
     return result;
 }
-
-

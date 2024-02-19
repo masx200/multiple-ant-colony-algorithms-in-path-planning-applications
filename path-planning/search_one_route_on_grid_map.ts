@@ -169,12 +169,10 @@ export function search_one_route_on_grid_map({
             /* 如果一步跨越多个格子,则经过的格子都需要更新信息素.每走一步时,对于跨越多个格子的直线路径走过的格子都放入禁止表中.蚂蚁禁止选择已经走过的路径. */
 
             const last = path[path.length - 1 - 1] ?? current;
-            for (
-                const [x, y] of getPathCoordinates(
-                    [last[0], last[1]],
-                    [current.x, current.y],
-                )
-            ) {
+            for (const [x, y] of getPathCoordinates(
+                [last[0], last[1]],
+                [current.x, current.y],
+            )) {
                 if (!(x == last[0] && y == last[1])) {
                     blocked.add(x * grid.row + y);
 
@@ -195,9 +193,9 @@ export function search_one_route_on_grid_map({
         }
         if (
             经过的所有格子[经过的所有格子.length - 1].x ===
-            经过的所有格子[经过的所有格子.length - 2]?.x &&
+                经过的所有格子[经过的所有格子.length - 2]?.x &&
             经过的所有格子[经过的所有格子.length - 1].y ===
-            经过的所有格子[经过的所有格子.length - 2]?.y
+                经过的所有格子[经过的所有格子.length - 2]?.y
         ) {
             经过的所有格子.pop();
         }

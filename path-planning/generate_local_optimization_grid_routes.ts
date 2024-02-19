@@ -29,17 +29,14 @@ export function generate_local_optimization_grid_routes(
                 canStraightReach(point1, point2) &&
                 //必须是不相邻的点,否则和原来的路径一样
                 Math.abs(point1[0] - point2[0]) +
-                Math.abs(point1[1] - point2[1]) >
-                2
+                    Math.abs(point1[1] - point2[1]) >
+                    2
             ) {
                 /* a,b大小可能不一定 */
-                const result_new = a < b ? [
-                    ...result.slice(0, a + 1),
-                    ...result.slice(b),
-                ] : [
-                    ...result.slice(0, b + 1),
-                    ...result.slice(a),
-                ];
+                const result_new =
+                    a < b
+                        ? [...result.slice(0, a + 1), ...result.slice(b)]
+                        : [...result.slice(0, b + 1), ...result.slice(a)];
 
                 /* result_new中会意外出现重复的点多次 */
                 //替换后的路径必须不相同
