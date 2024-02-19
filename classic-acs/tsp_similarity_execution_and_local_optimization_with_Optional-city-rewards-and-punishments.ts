@@ -1,12 +1,6 @@
-import {
-    MatrixFill,
-    MatrixSymmetry,
-    MatrixSymmetryCreate,
-} from "@masx200/sparse-2d-matrix";
-import { sum } from "lodash-es";
+import { MatrixFill, MatrixSymmetryCreate } from "@masx200/sparse-2d-matrix";
 import { create_collection_of_optimal_routes } from "../collections/collection-of-optimal-routes";
 import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIteration";
-import { calc_population_relative_information_entropy } from "../functions/calc_population-relative-information-entropy";
 import { create_run_iterations } from "../functions/create_run_iterations";
 
 import {
@@ -15,13 +9,11 @@ import {
 } from "../functions/not_cycle_route_to_segments";
 import { run_greedy_once_thread_with_time } from "../functions/run_greedy_once_thread_with_time";
 // import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
-import { similarityOfMultipleRoutes } from "../similarity/similarityOfMultipleRoutes";
 // import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 import { DefaultOptions } from "../src/default_Options";
 import { createLatestIterateBestRoutesInPeriod } from "./createLatestIterateBestRoutesInPeriod";
 import { createRewardCommonRoutes } from "./createRewardCommonRoutes";
 import { createSmoothPheromones } from "./createSmoothPheromones";
-import { run_local_optimization } from "./run_local_optimization";
 import {
     COMMON_DataOfOneIteration,
     COMMON_TSP_EXECUTION,
@@ -38,7 +30,7 @@ import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { getGridDistance } from "../path-planning/getGridDistance";
 import { CachedGridVisibilityCheckerFactory } from "../path-planning/CachedGridVisibilityCheckerFactory";
 import { GridVisibilityChecker } from "../path-planning/GridVisibilityChecker";
-import { visibleGridsMatrixCallBack } from "../path-planning/visibleGridsMatrixCallBack";
+import { Process_iteration_data } from "./Process_iteration_data";
 
 /* eslint-disable indent */
 
@@ -56,26 +48,20 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     const { Coefficient_of_the_minimum_after_pheromone_weakening } = options;
     const {
         // max_cities_of_state_transition = DefaultOptions.max_cities_of_state_transition,
-        max_size_of_collection_of_optimal_routes =
-            DefaultOptions.max_size_of_collection_of_optimal_routes,
+        max_size_of_collection_of_optimal_routes = DefaultOptions.max_size_of_collection_of_optimal_routes,
         max_results_of_2_opt = DefaultOptions.max_results_of_2_opt,
-        max_segments_of_cross_point =
-            DefaultOptions.max_segments_of_cross_point,
+        max_segments_of_cross_point = DefaultOptions.max_segments_of_cross_point,
         max_results_of_k_opt = DefaultOptions.max_results_of_k_opt,
         max_results_of_k_exchange = DefaultOptions.max_results_of_k_exchange,
         count_of_ants = DefaultOptions.count_of_ants,
         node_coordinates,
         distance_round = true,
-        local_pheromone_volatilization_coefficient =
-            DefaultOptions.local_pheromone_volatilization_coefficient,
-        global_pheromone_volatilization_coefficient =
-            DefaultOptions.global_pheromone_volatilization_coefficient,
+        local_pheromone_volatilization_coefficient = DefaultOptions.local_pheromone_volatilization_coefficient,
+        global_pheromone_volatilization_coefficient = DefaultOptions.global_pheromone_volatilization_coefficient,
         beta_zero = DefaultOptions.beta_for_the_second_type_of_population,
         alpha_zero = DefaultOptions.alpha_for_the_second_type_of_population,
-        path_selection_parameter_q0_max =
-            DefaultOptions.path_selection_parameter_q0_max,
-        path_selection_parameter_q0_min =
-            DefaultOptions.path_selection_parameter_q0_min,
+        path_selection_parameter_q0_max = DefaultOptions.path_selection_parameter_q0_max,
+        path_selection_parameter_q0_min = DefaultOptions.path_selection_parameter_q0_min,
         start,
         end,
         // 显示每次迭代的统计,
@@ -341,13 +327,11 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
             );
         });
         onUpdateIterateBestRoutesInPeriod(routes_and_lengths_of_one_iteration);
-        for (
-            const {
-                route,
-                length: route_length,
-                time_ms: time_ms_of_one_route,
-            } of routes_and_lengths_of_one_iteration
-        ) {
+        for (const {
+            route,
+            length: route_length,
+            time_ms: time_ms_of_one_route,
+        } of routes_and_lengths_of_one_iteration) {
             onRouteCreated(route, route_length);
 
             time_ms_of_one_iteration += time_ms_of_one_route;
@@ -366,44 +350,43 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                  time_ms_of_one_iteration,
                  total_time_ms,
              } = */
-            await Process_iteration_data(
-                {
-                    routes_and_lengths_of_one_iteration,
-                    get_best_route,
-                    get_best_length,
-                    count_of_nodes,
-                    max_segments_of_cross_point,
-                    distance_round,
-                    max_results_of_k_opt,
-                    node_coordinates,
-                    max_results_of_k_exchange,
-                    max_results_of_2_opt,
-                    visibleGridsMatrix,
-                    set_global_best,
-                    onRouteCreated,
-                    global_pheromone_update,
-                    Intra_population_similarity,
-                    route_selection_parameters_Q0,
-                    path_selection_parameter_q0_min,
-                    path_selection_parameter_q0_max,
-                    High_similarity_threshold,
-                    getCountOfIterations,
-                    Period_of_judgment_similarity,
-                    pheromoneStore,
-                    global_optimal_routes,
-                    Coefficient_of_the_minimum_after_pheromone_weakening,
-                    time_ms_of_one_iteration,
-                    total_time_ms,
-                    delta_data_of_iterations,
-                    set_Intra_population_similarity: (v: number) =>
-                        Intra_population_similarity = v,
-                    set_route_selection_parameters_Q0: (v: number) =>
-                        route_selection_parameters_Q0 = v,
-                    set_time_ms_of_one_iteration: (v: number) =>
-                        time_ms_of_one_iteration = v,
-                    set_total_time_ms: (v: number) => total_time_ms = v,
-                },
-            );
+            await Process_iteration_data({
+                getGridDistance,
+                routes_and_lengths_of_one_iteration,
+                get_best_route,
+                get_best_length,
+                count_of_nodes,
+                max_segments_of_cross_point,
+                distance_round,
+                max_results_of_k_opt,
+                node_coordinates,
+                max_results_of_k_exchange,
+                max_results_of_2_opt,
+                visibleGridsMatrix,
+                set_global_best,
+                onRouteCreated,
+                global_pheromone_update,
+                Intra_population_similarity,
+                route_selection_parameters_Q0,
+                path_selection_parameter_q0_min,
+                path_selection_parameter_q0_max,
+                High_similarity_threshold,
+                getCountOfIterations,
+                Period_of_judgment_similarity,
+                pheromoneStore,
+                global_optimal_routes,
+                Coefficient_of_the_minimum_after_pheromone_weakening,
+                time_ms_of_one_iteration,
+                total_time_ms,
+                delta_data_of_iterations,
+                set_Intra_population_similarity: (v: number) =>
+                    (Intra_population_similarity = v),
+                set_route_selection_parameters_Q0: (v: number) =>
+                    (route_selection_parameters_Q0 = v),
+                set_time_ms_of_one_iteration: (v: number) =>
+                    (time_ms_of_one_iteration = v),
+                set_total_time_ms: (v: number) => (total_time_ms = v),
+            });
         }
 
         update_latest_and_optimal_routes();
@@ -467,9 +450,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     //     return result;
     // }
 
-    async function getOutputDataAndConsumeIterationAndRouteData(): Promise<
-        COMMON_TSP_Output
-    > {
+    async function getOutputDataAndConsumeIterationAndRouteData(): Promise<COMMON_TSP_Output> {
         const output: COMMON_TSP_Output = {
             // data_of_routes: Array.from(data_of_routes),
             delta_data_of_iterations: Array.from(delta_data_of_iterations),
@@ -544,180 +525,4 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
         },
     };
     return result;
-}
-async function Process_iteration_data(
-    {
-        routes_and_lengths_of_one_iteration,
-        get_best_route,
-        get_best_length,
-        count_of_nodes,
-        max_segments_of_cross_point,
-        distance_round,
-        max_results_of_k_opt,
-        node_coordinates,
-        max_results_of_k_exchange,
-        max_results_of_2_opt,
-        visibleGridsMatrix,
-        set_global_best,
-        onRouteCreated,
-        global_pheromone_update,
-        Intra_population_similarity,
-        route_selection_parameters_Q0,
-        path_selection_parameter_q0_min,
-        path_selection_parameter_q0_max,
-        High_similarity_threshold,
-        getCountOfIterations,
-        Period_of_judgment_similarity,
-        pheromoneStore,
-        global_optimal_routes,
-        Coefficient_of_the_minimum_after_pheromone_weakening,
-        time_ms_of_one_iteration,
-        total_time_ms,
-        delta_data_of_iterations,
-        set_Intra_population_similarity,
-        set_route_selection_parameters_Q0,
-        set_time_ms_of_one_iteration,
-        set_total_time_ms,
-    }: {
-        routes_and_lengths_of_one_iteration: {
-            route: number[];
-            length: number;
-            time_ms: number;
-        }[];
-        get_best_route: () => number[];
-        get_best_length: () => number;
-        count_of_nodes: number;
-        max_segments_of_cross_point: number;
-        distance_round: boolean;
-        max_results_of_k_opt: number;
-        node_coordinates: number[][];
-        max_results_of_k_exchange: number;
-        max_results_of_2_opt: number;
-        visibleGridsMatrix: visibleGridsMatrixCallBack;
-        set_global_best: (route: number[], length: number) => void;
-        onRouteCreated: (route: number[], length: number) => void;
-        global_pheromone_update: (iterate_best_length: number) => void;
-        Intra_population_similarity: number;
-        route_selection_parameters_Q0: number;
-        path_selection_parameter_q0_min: number;
-        path_selection_parameter_q0_max: number;
-        High_similarity_threshold: number;
-        getCountOfIterations: () => number;
-        Period_of_judgment_similarity: number;
-        pheromoneStore: MatrixSymmetry<number>;
-        global_optimal_routes: { route: number[]; length: number }[];
-        Coefficient_of_the_minimum_after_pheromone_weakening: number;
-        time_ms_of_one_iteration: number;
-        total_time_ms: number;
-        delta_data_of_iterations: COMMON_DataOfOneIteration[];
-        set_Intra_population_similarity: { (arg0: number): void };
-        set_route_selection_parameters_Q0: { (arg0: number): void };
-        set_time_ms_of_one_iteration: { (arg0: number): void };
-        set_total_time_ms: { (arg0: number): void };
-    },
-) {
-    const {
-        time_ms: optimal_time_ms,
-        length: optimal_length_of_iteration,
-        route: optimal_route_of_iteration,
-    } = await run_local_optimization({
-        routes_and_lengths_of_one_iteration,
-        get_best_route,
-        get_best_length,
-        count_of_nodes,
-        max_segments_of_cross_point,
-        distance_round,
-        max_results_of_k_opt,
-        node_coordinates,
-        max_results_of_k_exchange,
-        max_results_of_2_opt,
-        canStraightReach: visibleGridsMatrix,
-        getGridDistance,
-    });
-    let local_optimization_route_rate = 1;
-    if (optimal_length_of_iteration < get_best_length()) {
-        // console.log(
-        //     "local  optimization route success",
-        //     optimal_length_of_iteration,
-        //     get_best_length(),
-        // );
-        local_optimization_route_rate = get_best_length() /
-            optimal_length_of_iteration;
-        set_global_best(
-            optimal_route_of_iteration,
-            optimal_length_of_iteration,
-        );
-    } else {
-        local_optimization_route_rate = 1;
-        // console.log("local  optimization route failure");
-    }
-    onRouteCreated(
-        optimal_route_of_iteration,
-        optimal_length_of_iteration,
-    );
-
-    const starttime_of_process_iteration = Number(new Date());
-
-    const current_routes = routes_and_lengths_of_one_iteration.map(
-        (a) => a.route,
-    );
-    const iterate_best_length = Math.min(
-        ...routes_and_lengths_of_one_iteration.map((a) => a.length),
-    );
-    global_pheromone_update(iterate_best_length);
-    const population_relative_information_entropy =
-        calc_population_relative_information_entropy(current_routes);
-    const average_length_of_iteration =
-        sum(routes_and_lengths_of_one_iteration.map((a) => a.length)) /
-        routes_and_lengths_of_one_iteration.length;
-    const worst_length_of_iteration = Math.max(
-        ...routes_and_lengths_of_one_iteration.map((a) => a.length),
-    );
-
-    Intra_population_similarity = similarityOfMultipleRoutes(
-        current_routes,
-        get_best_route(),
-    );
-    route_selection_parameters_Q0 = path_selection_parameter_q0_min +
-        (path_selection_parameter_q0_max -
-                path_selection_parameter_q0_min) *
-            Math.pow(1 - Intra_population_similarity, 3);
-    const InnerPopulationSimilarityThreshold = High_similarity_threshold;
-    if (
-        getCountOfIterations() % Period_of_judgment_similarity === 0 &&
-        Intra_population_similarity > InnerPopulationSimilarityThreshold
-    ) {
-        createSmoothPheromones(
-            pheromoneStore,
-            global_optimal_routes,
-            Coefficient_of_the_minimum_after_pheromone_weakening,
-        )(Intra_population_similarity);
-    }
-    const endtime_of_process_iteration = Number(new Date());
-
-    time_ms_of_one_iteration += optimal_time_ms +
-        endtime_of_process_iteration -
-        starttime_of_process_iteration;
-    total_time_ms += time_ms_of_one_iteration;
-    // if (显示每次迭代的统计)
-    delta_data_of_iterations.push({
-        global_best_length: get_best_length(),
-        current_iterations: getCountOfIterations(),
-        time_ms_of_one_iteration,
-        population_relative_information_entropy,
-        average_length_of_iteration,
-        worst_length_of_iteration,
-        iterate_best_length,
-        Intra_population_similarity,
-        optimal_length_of_iteration,
-        convergence_coefficient: -Infinity,
-        random_selection_probability: -Infinity,
-        local_optimization_route_rate,
-    });
-    // return {
-    set_Intra_population_similarity(Intra_population_similarity);
-    set_route_selection_parameters_Q0(route_selection_parameters_Q0);
-    set_time_ms_of_one_iteration(time_ms_of_one_iteration);
-    set_total_time_ms(total_time_ms);
-    // };
 }
