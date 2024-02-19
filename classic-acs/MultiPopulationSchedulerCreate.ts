@@ -55,20 +55,19 @@ export async function MultiPopulationSchedulerCreate(
         if (iterations === 1) return await runOneIteration();
         const splitted_iterations: number[] = [];
 
-        const rest_iterations_period =
-            current_iterations %
+        const rest_iterations_period = current_iterations %
+                    (population_communication_iterate_cycle *
+                        remoteWorkers.length) ===
+                0
+            ? 0
+            : Math.floor(
                 (population_communication_iterate_cycle *
-                    remoteWorkers.length) ===
-            0
-                ? 0
-                : Math.floor(
-                      (population_communication_iterate_cycle *
-                          remoteWorkers.length -
-                          (current_iterations %
-                              (population_communication_iterate_cycle *
-                                  remoteWorkers.length))) /
-                          remoteWorkers.length,
-                  );
+                        remoteWorkers.length -
+                    (current_iterations %
+                        (population_communication_iterate_cycle *
+                            remoteWorkers.length))) /
+                    remoteWorkers.length,
+            );
         if (rest_iterations_period > 0) {
             splitted_iterations.push(
                 Math.min(rest_iterations_period, iterations),
@@ -108,12 +107,12 @@ export async function MultiPopulationSchedulerCreate(
                     remoteWorkers.map((remote) =>
                         remote.getLatestIterateBestRoutesInPeriod(
                             population_communication_iterate_cycle,
-                        ),
+                        )
                     ),
                 )
             ).flat();
-            routesAndLengths.forEach(({ route, length }) => {
-                onRouteCreated(route, length);
+            routesAndLengths.forEach(({ route, length: route_length }) => {
+                onRouteCreated(route, route_length);
             });
 
             total_time_ms = totaltimemsall.reduce((p, c) => p + c, 0);
@@ -141,9 +140,9 @@ export async function MultiPopulationSchedulerCreate(
         if (remoteWorkers.length > 1) {
             if (
                 current_iterations %
-                    (population_communication_iterate_cycle *
-                        remoteWorkers.length) ===
-                0
+                        (population_communication_iterate_cycle *
+                            remoteWorkers.length) ===
+                    0
             ) {
                 await PerformCommunicationBetweenPopulations(
                     routesAndLengths,
@@ -153,10 +152,10 @@ export async function MultiPopulationSchedulerCreate(
 
                 if (
                     current_iterations %
-                        (population_communication_iterate_cycle *
-                            remoteWorkers.length *
-                            PeriodOfUpdateAllOptimalRoutes) ===
-                    0
+                            (population_communication_iterate_cycle *
+                                remoteWorkers.length *
+                                PeriodOfUpdateAllOptimalRoutes) ===
+                        0
                 ) {
                     HistoryOfPopulationsAllUpdateBestRoute.push(true);
                     await Promise.all(
@@ -164,7 +163,7 @@ export async function MultiPopulationSchedulerCreate(
                             remote.updateBestRoute(
                                 getBestRoute(),
                                 getBestLength(),
-                            ),
+                            )
                         ),
                     );
                 } else {
@@ -223,12 +222,12 @@ export async function MultiPopulationSchedulerCreate(
                 remoteWorkers.map((remote) =>
                     remote.getLatestIterateBestRoutesInPeriod(
                         population_communication_iterate_cycle,
-                    ),
+                    )
                 ),
             )
         ).flat();
-        routesAndLengths.forEach(({ route, length }) => {
-            onRouteCreated(route, length);
+        routesAndLengths.forEach(({ route, length: route_length }) => {
+            onRouteCreated(route, route_length);
         });
 
         total_time_ms = totaltimemsall.reduce((p, c) => p + c, 0);
@@ -249,10 +248,12 @@ export async function MultiPopulationSchedulerCreate(
     let search_count_of_best = 0;
 
     // let best_length_of_history_route_data = Infinity;
-    async function getOutputDataAndConsumeIterationAndRouteData(): Promise<MultiPopulationOutput> {
+    async function getOutputDataAndConsumeIterationAndRouteData(): Promise<
+        MultiPopulationOutput
+    > {
         const dataOfChildren = await Promise.all(
             remoteWorkers.map((remote) =>
-                remote.getOutputDataAndConsumeIterationAndRouteData(),
+                remote.getOutputDataAndConsumeIterationAndRouteData()
             ),
         );
         // const RouteDataOfIndividualPopulations = dataOfChildren.map(
@@ -280,8 +281,10 @@ export async function MultiPopulationSchedulerCreate(
                     return di;
                 }),
         );
-        const delta_data_of_iterations: COMMON_TSP_Output["delta_data_of_iterations"] =
-            zip(...IterationDataOfIndividualPopulations)
+        const delta_data_of_iterations:
+            COMMON_TSP_Output["delta_data_of_iterations"] = zip(
+                ...IterationDataOfIndividualPopulations,
+            )
                 .flat()
                 .filter(Boolean) as COMMON_DataOfOneIteration[];
 
