@@ -40,7 +40,7 @@
         "combinatorial-generators": "^1.1.2",
         "comlink": "^4.3.1",
         "core-js": "^3.36.0",
-        "echarts": "^5.3.2",
+        "echarts": "^5.5.0",
         "element-plus": "^2.5.5",
         "eslint": "^8.56.0",
         "eslint-config-standard": "^17.0.0",
