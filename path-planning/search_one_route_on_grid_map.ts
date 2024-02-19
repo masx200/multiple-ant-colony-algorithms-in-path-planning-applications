@@ -94,8 +94,9 @@ export function search_one_route_on_grid_map({
     经过的所有格子.push(structuredClone(start));
     const blocked = new Set<number>();
     blocked.add(start.x * grid.row + start.y);
-
+    let count = 0;
     while (!(current.x == end.x && current.y == end.y)) {
+        console.log(JSON.stringify({ start, end, count, path }, null, 4));
         // 如果可以从当前点直接到达终点，则返回包含当前路径和终点的路径
         if (visibleGridsMatrix([current.x, current.y], [end.x, end.y])) {
             // console.log(
@@ -168,10 +169,12 @@ export function search_one_route_on_grid_map({
             /* 如果一步跨越多个格子,则经过的格子都需要更新信息素.每走一步时,对于跨越多个格子的直线路径走过的格子都放入禁止表中.蚂蚁禁止选择已经走过的路径. */
 
             const last = path[path.length - 1 - 1] ?? current;
-            for (const [x, y] of getPathCoordinates(
-                [last[0], last[1]],
-                [current.x, current.y],
-            )) {
+            for (
+                const [x, y] of getPathCoordinates(
+                    [last[0], last[1]],
+                    [current.x, current.y],
+                )
+            ) {
                 if (!(x == last[0] && y == last[1])) {
                     blocked.add(x * grid.row + y);
 
@@ -192,14 +195,15 @@ export function search_one_route_on_grid_map({
         }
         if (
             经过的所有格子[经过的所有格子.length - 1].x ===
-                经过的所有格子[经过的所有格子.length - 2]?.x &&
+            经过的所有格子[经过的所有格子.length - 2]?.x &&
             经过的所有格子[经过的所有格子.length - 1].y ===
-                经过的所有格子[经过的所有格子.length - 2]?.y
+            经过的所有格子[经过的所有格子.length - 2]?.y
         ) {
             经过的所有格子.pop();
         }
         // console.log({ path: JSON.stringify(path) });
         // console.log({ 经过的所有格子: JSON.stringify(经过的所有格子) });
+        count++;
     }
     // console.log("正常搜索走到了终点");
     path.push([end.x, end.y]);
