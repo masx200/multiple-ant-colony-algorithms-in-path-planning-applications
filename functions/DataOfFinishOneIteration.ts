@@ -58,4 +58,6 @@ export interface DataOfFinishOneIteration {
      * 种群类别（可选）
      */
     ClassOfPopulation?: string;
+    /* 局部路径优化的比率, 值为原来的路径长度/优化后的路径长度 */
+    local_optimization_route_rate: number;
 }

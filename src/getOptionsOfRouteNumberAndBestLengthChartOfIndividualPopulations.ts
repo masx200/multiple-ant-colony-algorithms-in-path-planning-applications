@@ -6,6 +6,11 @@ import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration"
 import { ECOption } from "../functions/echarts-line";
 
 export const 迭代次数和迭代最差路径长度 = "迭代次数和迭代最差路径长度";
+/**
+ * 获取迭代次数和迭代最差路径长度的图表选项
+ * @param RouteDataOfIndividualPopulations 每个种群的迭代数据
+ * @returns ECBasicOption & ECOption 图表选项
+ */
 export function getoptionsOfIterationAndIterationWorstLength(
     RouteDataOfIndividualPopulations: DataOfFinishOneIteration[][],
 ): ECBasicOption & ECOption {

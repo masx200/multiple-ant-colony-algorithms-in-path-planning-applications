@@ -9,11 +9,11 @@ import { GridVisibilityChecker } from "../path-planning/GridVisibilityChecker";
 import { local_optimization_routes } from "./local_optimization_routes";
 // import { VisibleGridsMatrix } from "../path-planning/VisibleGridsMatrix";
 /**
- * EachIterationHandler is an asynchronous function that handles each iteration of the optimization process.
- * It takes in options object which includes the routes and lengths, getBestRoute and getBestLength functions,
- * node_coordinates, and other parameters related to the optimization process.
- * It returns an object with various properties such as iterate_best_length, coefficient_of_diversity_increase,
- * optimal_length_of_iteration, optimal_route_of_iteration, population_relative_information_entropy, and time_ms.
+ * EachIterationHandler 是一个异步函数，用于处理优化过程的每次迭代。
+ *   它采用选项对象，其中包括路由和长度、getBestRoute 和 getBestLength 函数，
+ *   node_coordinates，以及与优化过程相关的其他参数。
+ *   它返回一个具有各种属性的对象，例如 iterate_best_length、coefficient_of_diversity_increase、
+ *   optimal_length_of_iteration、optimal_route_of_iteration、population_relative_information_entropy和time_ms。
  */
 export async function EachIterationHandler(
     options: SharedOptions & {
@@ -36,7 +36,10 @@ export async function EachIterationHandler(
     population_relative_information_entropy: number;
     time_ms: number;
     iterate_best_route: number[];
+    /* 局部路径优化的比率, 值为原来的路径长度/优化后的路径长度 */
+    local_optimization_route_rate: number;
 }> {
+    let local_optimization_route_rate = 1;
     const starttime_of_process_iteration = Number(new Date());
     const {
         set_global_best,
@@ -99,21 +102,23 @@ export async function EachIterationHandler(
     const optimal_length_of_iteration = optimization_results.length;
     const optimal_time_ms = optimization_results.time_ms;
     if (optimal_length_of_iteration < getBestLength()) {
-        console.log(
-            "local  optimization route success",
-            optimal_length_of_iteration,
-            getBestLength(),
-        );
+        // console.log(
+        //     "local  optimization route success",
+        //     optimal_length_of_iteration,
+        //     getBestLength(),
+        // );
+        local_optimization_route_rate = getBestLength() /
+            optimal_length_of_iteration;
         set_global_best(
             optimal_route_of_iteration,
             optimal_length_of_iteration,
         );
     } else {
-        console.log("local  optimization route failure");
+        // console.log("local  optimization route failure");
+        local_optimization_route_rate = 1;
     }
 
-    const timems_of_process_iteration =
-        endtime_of_process_iteration -
+    const timems_of_process_iteration = endtime_of_process_iteration -
         starttime_of_process_iteration +
         optimal_time_ms;
     return {
@@ -126,5 +131,6 @@ export async function EachIterationHandler(
 
         population_relative_information_entropy:
             current_population_relative_information_entropy,
+        local_optimization_route_rate,
     };
 }

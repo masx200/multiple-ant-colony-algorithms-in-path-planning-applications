@@ -16,7 +16,7 @@ export function use_data_of_one_iteration(): {
     oneiterationtablebody: string[][];
 } {
     // 定义一次迭代的表头
-    const oneiterationtableheads = [
+    const oneiterationtableheads: string[] = [
         "序号",
         "信息熵",
         "随机选择概率",
@@ -30,6 +30,7 @@ export function use_data_of_one_iteration(): {
         "内部相似度",
         "种群的类别",
         "种群的序号",
+        "局部路径优化的比率",
     ];
     /**
      * 接收一次迭代的增量数据
@@ -56,6 +57,7 @@ export function use_data_of_one_iteration(): {
                     data.Intra_population_similarity,
                     data.ClassOfPopulation,
                     data.id_Of_Population,
+                    data.local_optimization_route_rate,
                 ].map(String),
             );
         }

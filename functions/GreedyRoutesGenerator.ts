@@ -13,43 +13,45 @@ import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
  * @returns - 返回包含最佳长度、最佳路由和平均长度的对象
  */
 export async function GreedyRoutesGenerator(
-    options: {
-        /**
-         * 发出完成贪婪迭代的事件
-         * @param data - 数据参数
-         */
-        emit_finish_greedy_iteration: (
-            data: DataOfFinishGreedyIteration,
-        ) => void;
-        /**
-         * 获取最佳路由
-         * @returns - 返回最佳路由
-         */
-        getBestRoute: () => number[];
-        /**
-         * 获取最佳长度
-         * @returns - 返回最佳长度
-         */
-        getBestLength: () => number;
+    options:
+        & {
+            /**
+             * 发出完成贪婪迭代的事件
+             * @param data - 数据参数
+             */
+            emit_finish_greedy_iteration: (
+                data: DataOfFinishGreedyIteration,
+            ) => void;
+            /**
+             * 获取最佳路由
+             * @returns - 返回最佳路由
+             */
+            getBestRoute: () => number[];
+            /**
+             * 获取最佳长度
+             * @returns - 返回最佳长度
+             */
+            getBestLength: () => number;
 
-        /**
-         * 创建路由事件
-         * @param route - 路由数组
-         * @param length - 路由长度
-         */
-        onRouteCreated: (route: number[], length: number) => void;
-        /**
-         * 发出完成一个路由的事件
-         * @param data - 数据参数
-         */
-        emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
+            /**
+             * 创建路由事件
+             * @param route - 路由数组
+             * @param length - 路由长度
+             */
+            onRouteCreated: (route: number[], length: number) => void;
+            /**
+             * 发出完成一个路由的事件
+             * @param data - 数据参数
+             */
+            emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
 
-        /**
-         * 节点数量
-         */
-        count_of_nodes: number;
-    } & SharedOptions &
-        GreedyWithStartOptions,
+            /**
+             * 节点数量
+             */
+            count_of_nodes: number;
+        }
+        & SharedOptions
+        & GreedyWithStartOptions,
 ): Promise<{
     /**
      * 最佳长度
@@ -63,6 +65,10 @@ export async function GreedyRoutesGenerator(
      * 平均长度
      */
     average_length: number;
+    routes_and_lengths_of_one_iteration: {
+        route: number[];
+        length: number;
+    }[];
 }> {
     const {
         set_global_best,
@@ -104,7 +110,7 @@ export async function GreedyRoutesGenerator(
             current_route_length: length,
         });
     }
-
+    const routes_and_lengths_of_one_iteration = parallel_results;
     const { length: best_length, route: optimal_route_of_iteration } =
         getBestRoute_Of_Series_routes_and_lengths(parallel_results);
     const best_route = optimal_route_of_iteration;
@@ -132,5 +138,6 @@ export async function GreedyRoutesGenerator(
         best_length,
         best_route,
         average_length: average_length_of_iteration,
+        routes_and_lengths_of_one_iteration,
     };
 }

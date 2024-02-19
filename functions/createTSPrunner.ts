@@ -98,7 +98,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     on_finish_greedy_iteration((data) => {
         data_of_greedy.push(data);
     });
-    async function getOutputDataAndConsumeIterationAndRouteData(): Promise<COMMON_TSP_Output> {
+    async function getOutputDataAndConsumeIterationAndRouteData(): Promise<
+        COMMON_TSP_Output
+    > {
         const output_data: TSP_Output_Data = {
             data_of_greedy,
             time_of_initialization,
@@ -249,8 +251,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         resetPheromoneExceedsRange();
     });
 
-    const routes_segments_cache: Cached_hash_table_of_path_lengths_and_path_segments =
-        new Map<number, Set<string>>();
+    const routes_segments_cache:
+        Cached_hash_table_of_path_lengths_and_path_segments = new Map<
+            number,
+            Set<string>
+        >();
     const pheromoneStore = createCachePheromoneCalc(
         count_of_nodes,
         global_optimal_routes,
@@ -301,21 +306,30 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         const { visibleGridsList, visibleGridsMatrix } =
             cachedGridVisibilityChecker;
         if (current_search_count === 0) {
-            const { best_length, best_route, average_length } =
-                await GreedyRoutesGenerator({
-                    ...shared,
-                    getBestRoute,
-                    getBestLength,
+            const {
+                best_length,
+                best_route,
+                average_length,
+                routes_and_lengths_of_one_iteration,
+            } = await GreedyRoutesGenerator({
+                ...shared,
+                getBestRoute,
+                getBestLength,
 
-                    onRouteCreated,
-                    emit_finish_one_route,
+                onRouteCreated,
+                emit_finish_one_route,
 
-                    count_of_nodes,
-                    emit_finish_greedy_iteration,
-                    visibleGridsList: visibleGridsList,
-                    visibleGridsMatrix,
-                    getGridDistance,
-                });
+                count_of_nodes,
+                emit_finish_greedy_iteration,
+                visibleGridsList: visibleGridsList,
+                visibleGridsMatrix,
+                getGridDistance,
+            });
+            // emit_finish_one_route({
+            //     time_ms_of_one_route: time_ms_of_one_route,
+
+            //     current_route_length: route_length,
+            // });
             if (greedy_length > average_length) {
                 greedy_length = average_length;
             }
@@ -325,6 +339,49 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 routes_segments_cache,
                 collection_of_optimal_routes,
             );
+            const {
+                // coefficient_of_diversity_increase,
+                population_relative_information_entropy,
+                iterate_best_length,
+                optimal_length_of_iteration,
+                optimal_route_of_iteration,
+                time_ms: timems_of_process_iteration,
+                local_optimization_route_rate,
+            } = await EachIterationHandler({
+                ...shared,
+
+                routes_and_lengths: routes_and_lengths_of_one_iteration,
+                getBestLength: getBestLength,
+                getBestRoute: getBestRoute,
+                pheromoneStore,
+                node_coordinates,
+            });
+            onRouteCreated(
+                optimal_route_of_iteration,
+                optimal_length_of_iteration,
+            );
+            const average_length_of_iteration = sum(
+                routes_and_lengths_of_one_iteration.map(
+                    (a) => a.length,
+                ),
+            ) / routes_and_lengths_of_one_iteration.length;
+            const worst_length_of_iteration = Math.max(
+                ...routes_and_lengths_of_one_iteration.map((a) => a.length),
+            );
+            emit_finish_one_iteration({
+                worst_length_of_iteration,
+
+                iterate_best_length,
+                average_length_of_iteration,
+                optimal_length_of_iteration,
+
+                population_relative_information_entropy,
+                Intra_population_similarity,
+                random_selection_probability: last_random_selection_probability,
+                time_ms_of_one_iteration: timems_of_process_iteration,
+                convergence_coefficient,
+                local_optimization_route_rate,
+            });
         } else {
             let time_ms_of_one_iteration = 0;
             const routes_and_lengths_of_one_iteration: {
@@ -350,23 +407,25 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     visibleGridsList: visibleGridsList,
                     pheromone_exceeds_maximum_range: () =>
                         pheromone_exceeds_maximum_range,
-                }),
+                })
             );
             onUpdateIterateBestRoutesInPeriod(
                 routes_and_lengths_of_one_iteration,
             );
-            for (const {
-                route,
-                length,
-                time_ms: time_ms_of_one_route,
-            } of routes_and_lengths_of_one_iteration) {
+            for (
+                const {
+                    route,
+                    length: route_length,
+                    time_ms: time_ms_of_one_route,
+                } of routes_and_lengths_of_one_iteration
+            ) {
                 onRouteCreated(route, length);
 
                 time_ms_of_one_iteration += time_ms_of_one_route;
                 emit_finish_one_route({
                     time_ms_of_one_route: time_ms_of_one_route,
 
-                    current_route_length: length,
+                    current_route_length: route_length,
                 });
             }
             if (routes_and_lengths_of_one_iteration.length === count_of_ants) {
@@ -378,6 +437,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     optimal_length_of_iteration,
                     optimal_route_of_iteration,
                     time_ms: timems_of_process_iteration,
+                    local_optimization_route_rate,
                 } = await EachIterationHandler({
                     ...shared,
 
@@ -394,12 +454,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 time_ms_of_one_iteration += timems_of_process_iteration;
                 total_time_ms += timems_of_process_iteration;
 
-                const average_length_of_iteration =
-                    sum(
-                        routes_and_lengths_of_one_iteration.map(
-                            (a) => a.length,
-                        ),
-                    ) / routes_and_lengths_of_one_iteration.length;
+                const average_length_of_iteration = sum(
+                    routes_and_lengths_of_one_iteration.map(
+                        (a) => a.length,
+                    ),
+                ) / routes_and_lengths_of_one_iteration.length;
                 const worst_length_of_iteration = Math.max(
                     ...routes_and_lengths_of_one_iteration.map((a) => a.length),
                 );
@@ -423,6 +482,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         last_random_selection_probability,
                     time_ms_of_one_iteration: time_ms_of_one_iteration,
                     convergence_coefficient,
+                    local_optimization_route_rate,
                 });
                 convergence_coefficient = update_convergence_coefficient({
                     number_of_stagnation,
@@ -452,10 +512,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     ].map((a) => a.route);
 
                     for (const route of routes_should_update_pheromone) {
-                        for (const [
-                            city1,
-                            city2,
-                        ] of not_cycle_route_to_segments(route)) {
+                        for (
+                            const [
+                                city1,
+                                city2,
+                            ] of not_cycle_route_to_segments(route)
+                        ) {
                             pheromoneStore.calc(city1, city2);
                         }
                     }

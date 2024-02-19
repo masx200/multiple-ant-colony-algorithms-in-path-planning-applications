@@ -4,26 +4,20 @@ import { computed, Ref } from "vue";
 
 import { get_options_route_number_and_current_length_chart } from "./get_options_route_number_and_current_length_chart";
 import { getoptionsOfIterationAndIterationWorstLength } from "./getOptionsOfRouteNumberAndBestLengthChartOfIndividualPopulations";
-
+import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
+/**
+ * 使用选项和路线长度图表的选项
+ * @param IterationDataOfIndividualPopulationsRef 一个迭代数据的引用
+ * @returns 包含选项的对象
+ */
 export function useOptionsOfRoutesAndRouteLengthChart(
     IterationDataOfIndividualPopulationsRef: Ref<
-        {
-            current_iterations: number;
-            global_best_length: number;
-            iterate_best_length: number;
-            population_relative_information_entropy: number;
-            average_length_of_iteration: number;
-            worst_length_of_iteration: number;
-            time_ms_of_one_iteration: number;
-            random_selection_probability: number;
-            optimal_length_of_iteration: number;
-            convergence_coefficient: number;
-            id_Of_Population?: number | undefined;
-            Intra_population_similarity: number;
-            ClassOfPopulation?: string | undefined;
-        }[][]
+        DataOfFinishOneIteration[][]
     >,
-) {
+): {
+    optionsOfIterationAndIterationWorstLength: Ref<ECBasicOption>;
+    optionsOfIterationAndIterationAverageLength: Ref<ECBasicOption>;
+} {
     // const RouteDataOfIndividualPopulationsRef = ref(
     //     [] as DataOfFinishOneRoute[][]
     // );
@@ -31,13 +25,13 @@ export function useOptionsOfRoutesAndRouteLengthChart(
         computed(() =>
             get_options_route_number_and_current_length_chart(
                 IterationDataOfIndividualPopulationsRef.value,
-            ),
+            )
         );
     const optionsOfIterationAndIterationWorstLength: Ref<ECBasicOption> =
         computed(() =>
             getoptionsOfIterationAndIterationWorstLength(
                 IterationDataOfIndividualPopulationsRef.value,
-            ),
+            )
         );
 
     // function onUpdateRouteDataOfIndividualPopulations(
