@@ -1,15 +1,15 @@
 import {
-    DefaultOptions,
     default_search_rounds,
     default_search_time_seconds,
+    DefaultOptions,
 } from "./default_Options";
 import {
-    Ref,
     computed,
     defineComponent,
     onMounted,
     reactive,
     readonly,
+    Ref,
     ref,
     watch,
 } from "vue";
@@ -59,10 +59,11 @@ import { 迭代次数和种群相似度 } from "./getOptionsOfIterationsAndPopul
 import { 迭代次数和迭代平均路径长度 } from "./get_options_route_number_and_current_length_chart";
 import { 迭代次数和迭代最差路径长度 } from "./getOptionsOfRouteNumberAndBestLengthChartOfIndividualPopulations";
 import { getGridDistance } from "../path-planning/getGridDistance.ts";
-
+import ChartOfLocalOptimizationRateDetails from "./ChartOfLocalOptimizationRateDetails.vue";
 export const 迭代次数和全局最优路径长度 = "迭代次数和全局最优路径长度";
 export default defineComponent({
     components: {
+        ChartOfLocalOptimizationRateDetails,
         drawGridMapAndRoute,
         GridMapSelector,
         MultiplePopulationsConfigs,
@@ -112,6 +113,7 @@ export default defineComponent({
             options_of_iterations_and_information_entropy_chart,
             onUpdateIterationDataOfIndividualPopulations,
             IterationDataOfIndividualPopulationsRef,
+            options_of_iterations_and_local_optimization_rate,
         } = useOptionsOfIterationsAndInformationEntropyChart();
         const {
             optionsOfIterationAndIterationAverageLength:
@@ -141,6 +143,7 @@ export default defineComponent({
         const show_chart_of_best_individual = ref(false);
         const show_summary_of_routes = ref(true);
         const show_routes_of_best = ref(true);
+        const show_chart_of_local_optimization_rate = ref(true);
 
         const show_chart_of_latest = ref(false);
         const show_chart_of_latest_similarity = ref(false);
@@ -161,6 +164,7 @@ export default defineComponent({
             show_summary_of_routes,
             show_routes_of_best,
             show_chart_of_best,
+            show_chart_of_local_optimization_rate,
         ];
         onMounted(() => {
             watch(is_running, (running) => {
@@ -406,8 +410,9 @@ export default defineComponent({
 
             on_receive_Data_Of_total(data);
             on_receive_Data_Of_Global_Best(data);
-            if (显示每次迭代的统计.value)
+            if (显示每次迭代的统计.value) {
                 onReceiveDeltaDataOfOneIteration(data.delta_data_of_iterations);
+            }
             // onReceiveDeltadataOfAllIterations(data.data_of_routes);
 
             onUpdateIterationDataOfIndividualPopulations(
@@ -555,6 +560,7 @@ export default defineComponent({
             return route.map((a) => oneDimensionToTwoDimensions(a, n));
         }
         return {
+            show_chart_of_local_optimization_rate,
             data_of_best,
             options_of_best_route_route,
             options_of_best_route_map,
@@ -588,6 +594,7 @@ export default defineComponent({
             alpha_zero,
             beta_zero,
             can_run,
+            options_of_iterations_and_local_optimization_rate,
             show_chart_of_latest_similarity,
             search_rounds_all,
             show_summary_of_similarity,

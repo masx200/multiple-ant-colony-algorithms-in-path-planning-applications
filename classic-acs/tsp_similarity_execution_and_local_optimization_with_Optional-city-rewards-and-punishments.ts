@@ -48,26 +48,20 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     const { Coefficient_of_the_minimum_after_pheromone_weakening } = options;
     const {
         // max_cities_of_state_transition = DefaultOptions.max_cities_of_state_transition,
-        max_size_of_collection_of_optimal_routes =
-            DefaultOptions.max_size_of_collection_of_optimal_routes,
+        max_size_of_collection_of_optimal_routes = DefaultOptions.max_size_of_collection_of_optimal_routes,
         max_results_of_2_opt = DefaultOptions.max_results_of_2_opt,
-        max_segments_of_cross_point =
-            DefaultOptions.max_segments_of_cross_point,
+        max_segments_of_cross_point = DefaultOptions.max_segments_of_cross_point,
         max_results_of_k_opt = DefaultOptions.max_results_of_k_opt,
         max_results_of_k_exchange = DefaultOptions.max_results_of_k_exchange,
         count_of_ants = DefaultOptions.count_of_ants,
         node_coordinates,
         distance_round = true,
-        local_pheromone_volatilization_coefficient =
-            DefaultOptions.local_pheromone_volatilization_coefficient,
-        global_pheromone_volatilization_coefficient =
-            DefaultOptions.global_pheromone_volatilization_coefficient,
+        local_pheromone_volatilization_coefficient = DefaultOptions.local_pheromone_volatilization_coefficient,
+        global_pheromone_volatilization_coefficient = DefaultOptions.global_pheromone_volatilization_coefficient,
         beta_zero = DefaultOptions.beta_for_the_second_type_of_population,
         alpha_zero = DefaultOptions.alpha_for_the_second_type_of_population,
-        path_selection_parameter_q0_max =
-            DefaultOptions.path_selection_parameter_q0_max,
-        path_selection_parameter_q0_min =
-            DefaultOptions.path_selection_parameter_q0_min,
+        path_selection_parameter_q0_max = DefaultOptions.path_selection_parameter_q0_max,
+        path_selection_parameter_q0_min = DefaultOptions.path_selection_parameter_q0_min,
         start,
         end,
         // 显示每次迭代的统计,
@@ -333,13 +327,11 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
             );
         });
         onUpdateIterateBestRoutesInPeriod(routes_and_lengths_of_one_iteration);
-        for (
-            const {
-                route,
-                length: route_length,
-                time_ms: time_ms_of_one_route,
-            } of routes_and_lengths_of_one_iteration
-        ) {
+        for (const {
+            route,
+            length: route_length,
+            time_ms: time_ms_of_one_route,
+        } of routes_and_lengths_of_one_iteration) {
             onRouteCreated(route, route_length);
 
             time_ms_of_one_iteration += time_ms_of_one_route;
@@ -387,15 +379,12 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 time_ms_of_one_iteration,
                 total_time_ms,
                 delta_data_of_iterations,
-                set_Intra_population_similarity: (
-                    v: number,
-                ) => (Intra_population_similarity = v),
-                set_route_selection_parameters_Q0: (
-                    v: number,
-                ) => (route_selection_parameters_Q0 = v),
-                set_time_ms_of_one_iteration: (
-                    v: number,
-                ) => (time_ms_of_one_iteration = v),
+                set_Intra_population_similarity: (v: number) =>
+                    (Intra_population_similarity = v),
+                set_route_selection_parameters_Q0: (v: number) =>
+                    (route_selection_parameters_Q0 = v),
+                set_time_ms_of_one_iteration: (v: number) =>
+                    (time_ms_of_one_iteration = v),
                 set_total_time_ms: (v: number) => (total_time_ms = v),
             });
         }
@@ -461,9 +450,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     //     return result;
     // }
 
-    async function getOutputDataAndConsumeIterationAndRouteData(): Promise<
-        COMMON_TSP_Output
-    > {
+    async function getOutputDataAndConsumeIterationAndRouteData(): Promise<COMMON_TSP_Output> {
         const output: COMMON_TSP_Output = {
             // data_of_routes: Array.from(data_of_routes),
             delta_data_of_iterations: Array.from(delta_data_of_iterations),

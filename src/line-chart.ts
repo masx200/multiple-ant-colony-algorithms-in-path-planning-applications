@@ -6,7 +6,10 @@ import { run_idle_work } from "../functions/run_idle_work";
 import { debounce_animation_frame } from "./debounce_animation_frame";
 import { drawChartWait } from "./drawChartMaxWait";
 import { use_escharts_container_pair } from "./use_escharts_container_pair";
-
+/**
+ * This component is responsible for rendering a chart using ECharts.
+ * It takes in an options object as a prop and uses it to configure the chart.
+ */
 export default defineComponent({
     props: {
         options: { required: true, type: Object as PropType<ECBasicOption> },
@@ -35,13 +38,9 @@ export default defineComponent({
                 update_chart();
             });
 
-            watch(
-                chart,
-
-                () => {
-                    update_chart();
-                },
-            );
+            watch(chart, () => {
+                update_chart();
+            });
         });
 
         return { container };

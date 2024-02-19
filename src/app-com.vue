@@ -193,6 +193,16 @@
             ></LineChart>
         </details>
         <hr />
+        <ChartOfLocalOptimizationRateDetails
+            class="width-100-percent"
+            :options_of_iterations_and_local_optimization_rate="
+                options_of_iterations_and_local_optimization_rate
+            "
+            v-model:show_chart_of_local_optimization_rate="
+                show_chart_of_local_optimization_rate
+            "
+        />
+        <hr />
         <details
             class="width-100-percent"
             :open="show_chart_of_latest"
@@ -363,6 +373,7 @@
     </div>
 </template>
 <script lang="ts" src="./app-com.ts"></script>
+
 <style scoped>
 .detail-96CCB01F-4CA6-DB88-D008-F1D1DCFF789D {
     width: 95%;
