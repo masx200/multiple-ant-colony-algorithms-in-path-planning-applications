@@ -107,8 +107,8 @@ export async function EachIterationHandler(
         //     optimal_length_of_iteration,
         //     getBestLength(),
         // );
-        local_optimization_route_rate = getBestLength() /
-            optimal_length_of_iteration;
+        local_optimization_route_rate =
+            getBestLength() / optimal_length_of_iteration;
         set_global_best(
             optimal_route_of_iteration,
             optimal_length_of_iteration,
@@ -118,7 +118,8 @@ export async function EachIterationHandler(
         local_optimization_route_rate = 1;
     }
 
-    const timems_of_process_iteration = endtime_of_process_iteration -
+    const timems_of_process_iteration =
+        endtime_of_process_iteration -
         starttime_of_process_iteration +
         optimal_time_ms;
     return {

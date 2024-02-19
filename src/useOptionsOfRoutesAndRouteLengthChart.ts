@@ -11,9 +11,7 @@ import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration"
  * @returns 包含选项的对象
  */
 export function useOptionsOfRoutesAndRouteLengthChart(
-    IterationDataOfIndividualPopulationsRef: Ref<
-        DataOfFinishOneIteration[][]
-    >,
+    IterationDataOfIndividualPopulationsRef: Ref<DataOfFinishOneIteration[][]>,
 ): {
     optionsOfIterationAndIterationWorstLength: Ref<ECBasicOption>;
     optionsOfIterationAndIterationAverageLength: Ref<ECBasicOption>;
@@ -25,13 +23,13 @@ export function useOptionsOfRoutesAndRouteLengthChart(
         computed(() =>
             get_options_route_number_and_current_length_chart(
                 IterationDataOfIndividualPopulationsRef.value,
-            )
+            ),
         );
     const optionsOfIterationAndIterationWorstLength: Ref<ECBasicOption> =
         computed(() =>
             getoptionsOfIterationAndIterationWorstLength(
                 IterationDataOfIndividualPopulationsRef.value,
-            )
+            ),
         );
 
     // function onUpdateRouteDataOfIndividualPopulations(

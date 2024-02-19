@@ -41,8 +41,8 @@ export function createLatestIterateBestRoutesInPeriod() {
     function getLatestIterateBestRoutesInPeriod(period: number) {
         const result = latestIterateBestRoutesInPeriod.slice(-period);
         if (latestIterateBestRoutesInPeriod.length > period) {
-            latestIterateBestRoutesInPeriod = latestIterateBestRoutesInPeriod
-                .slice(-period);
+            latestIterateBestRoutesInPeriod =
+                latestIterateBestRoutesInPeriod.slice(-period);
         }
 
         return result;
