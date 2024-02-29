@@ -14,6 +14,14 @@ export function generate_local_optimization_grid_routes(
     route: [number, number][],
     canStraightReach: visibleGridsMatrixCallBack,
 ): [number, number][] {
+    if (
+        route.length >= 2 &&
+        canStraightReach(route[0], route[route.length - 1])
+    ) {
+        /* 局部优化方法,(1)如果起点和终点可以直线到达,则退出循环,输出路径为从起点到终点 */
+        return route;
+    }
+
     const every_nodes = convert_grid_route_to_every_Passed_node(route);
     // const max_length = every_nodes.length * 1.5
     let result: [number, number][] = every_nodes;
@@ -29,14 +37,13 @@ export function generate_local_optimization_grid_routes(
                 canStraightReach(point1, point2) &&
                 //必须是不相邻的点,否则和原来的路径一样
                 Math.abs(point1[0] - point2[0]) +
-                    Math.abs(point1[1] - point2[1]) >
+                            Math.abs(point1[1] - point2[1]) >
                     2
             ) {
                 /* a,b大小可能不一定 */
-                const result_new =
-                    a < b
-                        ? [...result.slice(0, a + 1), ...result.slice(b)]
-                        : [...result.slice(0, b + 1), ...result.slice(a)];
+                const result_new = a < b
+                    ? [...result.slice(0, a + 1), ...result.slice(b)]
+                    : [...result.slice(0, b + 1), ...result.slice(a)];
 
                 /* result_new中会意外出现重复的点多次 */
                 //替换后的路径必须不相同

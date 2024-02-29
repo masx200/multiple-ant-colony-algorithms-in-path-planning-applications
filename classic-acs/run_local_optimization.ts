@@ -3,18 +3,18 @@ import { uniqBy } from "lodash-es";
 import { local_optimization_routes } from "../functions/local_optimization_routes";
 import { visibleGridsMatrixCallBack } from "../path-planning/visibleGridsMatrixCallBack";
 /**
- * Runs local optimization for a given set of routes and lengths.
- * @param routes_and_lengths_of_one_iteration - An array of objects containing route, length, and time_ms for one iteration.
- * @param get_best_route - A function that returns the best route.
- * @param get_best_length - A function that returns the best length.
- * @param count_of_nodes - The number of nodes.
- * @param max_segments_of_cross_point - The maximum number of segments for cross-point.
- * @param distance_round - A boolean indicating whether to round the distance.
- * @param max_results_of_k_opt - The maximum number of results for K-opt.
- * @param node_coordinates - An array of arrays representing the coordinates of the nodes.
- * @param max_results_of_k_exchange - The maximum number of results for K-exchange.
- * @param max_results_of_2_opt - The maximum number of results for 2-opt.
- * @returns A Promise that resolves to an object containing time_ms, length, and route.
+ * 对一组给定的路线和长度运行局部优化。
+ * @param routes_and_lengths_of_one_iteration - 包含一次迭代的路线、长度和time_ms的对象数组。
+ * @param get_best_route - 返回最佳路由的函数。
+ * @param get_best_length - 返回最佳长度的函数。
+ * @param count_of_nodes - 节点数。
+ * @param max_segments_of_cross_point - 交叉点的最大段数。
+ * @param distance_round - 指示是否对距离进行舍入的布尔值。
+ * @param max_results_of_k_opt - K-opt 的最大结果数。
+ * @param node_coordinates - 表示节点坐标的数组数组。
+ * @param max_results_of_k_exchange - K-exchange 的最大结果数。
+ * @param max_results_of_2_opt - 2-opt 的最大结果数。
+ * @returns 解析为包含time_ms、长度和路由的对象的 Promise。
  */
 export async function run_local_optimization({
     routes_and_lengths_of_one_iteration,

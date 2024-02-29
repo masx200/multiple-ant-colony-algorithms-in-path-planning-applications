@@ -1,7 +1,3 @@
-// import { partial_precise_random_2_opt_eliminates_cross_points } from "../cross-points/partial_precise_random_2_opt_eliminates_cross_points";
-// import { Precise_2_opt_eliminates_all_intersections } from "../cross-points/Precise_2_opt_eliminates_all_intersections";
-// import { random_k_exchange_limited } from "../cross-points/random_k_exchange_limited";
-// import { Random_K_OPT_full_limited_find_best } from "../k-opt/Random_K_OPT_full_limited_find_best";
 import { generate_local_optimization_grid_routes } from "../path-planning/generate_local_optimization_grid_routes";
 import { get_length_of_one_route_on_grid_map } from "../path-planning/get_length_of_one_route_on_grid_map";
 import { oneDimensionToTwoDimensions } from "../path-planning/oneDimensionToTwoDimensions";
@@ -9,7 +5,6 @@ import { twoDimensionsToOneDimension } from "../path-planning/twoDimensionsToOne
 import { set_distance_round } from "../src/set_distance_round";
 import { getBestRoute_Of_Series_routes_and_lengths } from "./getBestRoute_Of_Series_routes_and_lengths";
 import { LocalOptimizationRouteOptions } from "./LocalOptimizationRouteOptions";
-// import { pickRandomOne } from "./pickRandomOne";
 
 /**
  * 本地优化路由
@@ -21,17 +16,13 @@ import { LocalOptimizationRouteOptions } from "./LocalOptimizationRouteOptions";
  * }} - 返回对象包含路由、长度和运行时间
  */
 export function local_optimization_route({
-    // count_of_nodes,
-    // max_segments_of_cross_point,
     distance_round,
     route: oldRoute,
-    // max_results_of_k_opt,
+
     node_coordinates,
     length: oldLength,
     getGridDistance,
     canStraightReach,
-    // max_results_of_k_exchange,
-    // max_results_of_2_opt,
 }: LocalOptimizationRouteOptions): {
     route: number[];
     length: number;
@@ -39,31 +30,7 @@ export function local_optimization_route({
 } {
     set_distance_round(distance_round);
     const starttime_of_one_route = Number(new Date());
-    // const is_count_not_large = count_of_nodes <= max_segments_of_cross_point;
 
-    // const { route: route1, length: length1 } =
-    //     Random_K_OPT_full_limited_find_best({
-    //         count_of_nodes,
-    //         route: oldRoute,
-    //         max_results_of_k_opt,
-    //         node_coordinates,
-    //         length: oldLength,
-    //     });
-    // const route_and_length_selection1 = pickRandomOne([
-    //     { route: route1, length: length1 },
-    //     { route: oldRoute, length: oldLength },
-    // ]);
-    // const { route: route2, length: length2 } = random_k_exchange_limited({
-    //     ...route_and_length_selection1,
-    //     node_coordinates,
-    //     max_results_of_k_exchange,
-    // });
-    // const route_and_length_selection2 =
-    //     /* pickRandomOne([
-    //     { route: route2, length: length2 }, */
-    //     { route: oldRoute, length: oldLength }; //,
-    // //]);
-    // const { route: route3, length: length3 } =
     const n = node_coordinates[0].length;
     const route3 = generate_local_optimization_grid_routes(
         oldRoute.map((a) => oneDimensionToTwoDimensions(a, n)),
@@ -73,27 +40,11 @@ export function local_optimization_route({
         route3,
         getGridDistance,
     );
-    // is_count_not_large
-    //     ? Precise_2_opt_eliminates_all_intersections({
-    //           ...route_and_length_selection2,
-    //           //   count_of_nodes,
-    //           max_results_of_2_opt,
-    //           node_coordinates,
-    //       })
-    //     : partial_precise_random_2_opt_eliminates_cross_points({
-    //           ...route_and_length_selection2,
-    //           count_of_nodes,
-    //           max_of_segments: max_segments_of_cross_point,
-    //           max_results_of_2_opt,
-    //           node_coordinates,
-    //       });
 
     const temp_set_of_routes: {
         route: number[];
         length: number;
     }[] = [
-        // { route: route1, length: length1 },
-        // { route: route2, length: length2 },
         {
             route: route3.map((a) =>
                 twoDimensionsToOneDimension(a[0], a[1], n),
