@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ECBasicOption } from "echarts/types/dist/shared";
+import type { ECBasicOption } from "echarts/types/dist/shared.d.ts";
 import LineChart from "./LineChart.vue";
 defineProps<{
     options_of_iterations_and_local_optimization_rate: ECBasicOption;

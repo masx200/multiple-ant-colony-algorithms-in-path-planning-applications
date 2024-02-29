@@ -1,6 +1,6 @@
 import * as echarts from "echarts";
 
-import { EChartsType } from "echarts/types/dist/shared";
+import type { EChartsType } from "echarts/types/dist/shared.d.ts";
 import { debounce } from "lodash-es";
 import { debounce_animation_frame } from "./debounce_animation_frame";
 

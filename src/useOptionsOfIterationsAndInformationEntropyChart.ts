@@ -1,4 +1,4 @@
-import { ECBasicOption } from "echarts/types/dist/shared";
+import type { ECBasicOption } from "echarts/types/dist/shared.d.ts";
 import { computed, Ref, ref } from "vue";
 
 import { COMMON_DataOfOneIteration } from "../classic-acs/tsp-interface";

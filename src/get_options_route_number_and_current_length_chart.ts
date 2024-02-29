@@ -1,5 +1,5 @@
 // import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
-import { ECBasicOption } from "echarts/types/dist/shared";
+import type { ECBasicOption } from "echarts/types/dist/shared.d.ts";
 
 import { createMultipleLinesChartOptions } from "../functions/createMultipleLinesChartOptions";
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";

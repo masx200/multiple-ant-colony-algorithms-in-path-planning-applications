@@ -19,7 +19,7 @@ import {
 } from "./get_options_route_number_and_best_length_chart";
 
 import DataTable from "./Data_table.vue";
-import { ECBasicOption } from "echarts/types/dist/shared";
+import type { ECBasicOption } from "echarts/types/dist/shared.d.ts";
 // import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 // import { GridDistanceMatrix } from "../path-planning/Grid-distance-matrix.ts";
 import { GridMapFromArray } from "../path-planning/GridMapFromArray.ts";

@@ -1,5 +1,5 @@
 // import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
-import { ECBasicOption } from "echarts/types/dist/shared";
+import type { ECBasicOption } from "echarts/types/dist/shared.d.ts";
 import { computed, Ref } from "vue";
 
 import { get_options_route_number_and_current_length_chart } from "./get_options_route_number_and_current_length_chart";

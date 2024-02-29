@@ -1,4 +1,4 @@
-import { ECBasicOption } from "echarts/types/dist/shared";
+import type { ECBasicOption } from "echarts/types/dist/shared.d.ts";
 import { throttle } from "lodash-es";
 import { defineComponent, onMounted, PropType, watch } from "vue";
 
