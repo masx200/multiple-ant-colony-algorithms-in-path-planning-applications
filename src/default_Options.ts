@@ -12,7 +12,7 @@ export const default_beta = 4;
 
 // export const default_max_results_of_k_opt = 10;
 export const default_max_results_of_2_opt = 10;
-export const default_max_results_of_k_exchange = 10;
+// export const default_max_results_of_k_exchange = 10;
 
 export { DefaultOptions };
 /**
@@ -40,7 +40,7 @@ const DefaultOptions: Required<TSPDefaultOptions> = {
      * k交换的最大结果数
      * @type {number}
      */
-    max_results_of_k_exchange: default_max_results_of_k_exchange,
+    // max_results_of_k_exchange: default_max_results_of_k_exchange,
     /**
      * 状态转换的最大城市数
      * @type {number}

@@ -36,7 +36,7 @@ export interface LocalOptimizationRoutesOptions {
     /**
      * Maximum number of results for K-exchange.
      */
-    max_results_of_k_exchange: number;
+    // max_results_of_k_exchange: number;
 
     /**
      * Maximum number of results for 2-opt.

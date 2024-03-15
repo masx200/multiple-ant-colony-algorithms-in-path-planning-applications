@@ -5,7 +5,7 @@ import { CommunicationStrategy } from "./CommunicationStrategy";
 export interface TSPDefaultOptions {
     显示每次迭代的统计: boolean;
     CommunicationStrategy: CommunicationStrategy;
-    max_results_of_k_exchange?: number;
+    // max_results_of_k_exchange?: number;
     distance_round?: boolean;
     max_cities_of_greedy?: number;
     max_segments_of_cross_point?: number;
