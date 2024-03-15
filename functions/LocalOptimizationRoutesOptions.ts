@@ -26,7 +26,7 @@ export interface LocalOptimizationRoutesOptions {
     /**
      * Maximum number of results for K-opt.
      */
-    max_results_of_k_opt: number;
+    // max_results_of_k_opt: number;
 
     /**
      * Node coordinates.

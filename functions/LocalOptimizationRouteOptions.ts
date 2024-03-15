@@ -5,7 +5,7 @@ export interface LocalOptimizationRouteOptions {
     max_segments_of_cross_point: number;
     distance_round: boolean;
     route: number[];
-    max_results_of_k_opt: number;
+    // max_results_of_k_opt: number;
     node_coordinates: number[][];
     length: number;
     max_results_of_k_exchange: number;

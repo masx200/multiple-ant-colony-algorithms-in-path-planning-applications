@@ -19,7 +19,7 @@ export async function Process_iteration_data({
     count_of_nodes,
     max_segments_of_cross_point,
     distance_round,
-    max_results_of_k_opt,
+    // max_results_of_k_opt,
     node_coordinates,
     max_results_of_k_exchange,
     max_results_of_2_opt,
@@ -57,7 +57,7 @@ export async function Process_iteration_data({
     count_of_nodes: number;
     max_segments_of_cross_point: number;
     distance_round: boolean;
-    max_results_of_k_opt: number;
+    // max_results_of_k_opt: number;
     node_coordinates: number[][];
     max_results_of_k_exchange: number;
     max_results_of_2_opt: number;
@@ -95,7 +95,7 @@ export async function Process_iteration_data({
         count_of_nodes,
         max_segments_of_cross_point,
         distance_round,
-        max_results_of_k_opt,
+        // max_results_of_k_opt,
         node_coordinates,
         max_results_of_k_exchange,
         max_results_of_2_opt,

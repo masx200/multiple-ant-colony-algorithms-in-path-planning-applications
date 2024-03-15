@@ -10,7 +10,7 @@ export const default_search_time_seconds = 600;
 export const default_alpha = 1;
 export const default_beta = 4;
 
-export const default_max_results_of_k_opt = 10;
+// export const default_max_results_of_k_opt = 10;
 export const default_max_results_of_2_opt = 10;
 export const default_max_results_of_k_exchange = 10;
 
@@ -55,7 +55,7 @@ const DefaultOptions: Required<TSPDefaultOptions> = {
      * k-opt的最大结果数
      * @type {number}
      */
-    max_results_of_k_opt: default_max_results_of_k_opt,
+    // max_results_of_k_opt: default_max_results_of_k_opt,
     /**
      * alpha的初始值
      * @type {number}

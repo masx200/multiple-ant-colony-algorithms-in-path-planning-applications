@@ -148,7 +148,7 @@
                 :disabled="disable_switching"
                 :min="2"
                 :controls="false"
-            /><br /><span>每条的k-opt最大数量</span>
+            /><br /><!-- <span>每条的k-opt最大数量</span>
             <el-input-number
                 step-strictly
                 :step="1"
@@ -173,7 +173,7 @@
                 :disabled="disable_switching"
                 :min="1"
                 :controls="false"
-            /><br />
+            /><br /> -->
 
             <span>蚂蚁数量</span>
             <el-input-number

@@ -14,7 +14,7 @@ import {
     default_beta,
     default_count_of_ants,
     default_max_results_of_2_opt,
-    default_max_results_of_k_opt,
+    // default_max_results_of_k_opt,
     DefaultOptions,
 } from "../src/default_Options";
 import { set_distance_round } from "../src/set_distance_round";
@@ -59,7 +59,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         // 显示每次迭代的统计,
         max_results_of_2_opt = default_max_results_of_2_opt,
 
-        max_results_of_k_opt = default_max_results_of_k_opt,
+        // max_results_of_k_opt = default_max_results_of_k_opt,
 
         node_coordinates,
         alpha_zero = default_alpha,
@@ -392,7 +392,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     alpha_zero,
                     beta_zero,
                     last_random_selection_probability,
-                    max_results_of_k_opt,
+                    // max_results_of_k_opt,
                     getBestLength,
                     getBestRoute,
                     visibleGridsMatrix,
@@ -608,7 +608,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         ...shared,
         max_results_of_2_opt,
 
-        max_results_of_k_opt,
+        // max_results_of_k_opt,
         getOutputDataAndConsumeIterationAndRouteData,
         getSearchCountOfBest,
         getTimeOfBest,

@@ -65,7 +65,7 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     /**
      * k-opt算法的最大结果数量
      */
-    max_results_of_k_opt: number;
+    // max_results_of_k_opt: number;
 
     /**
      * Alpha零值

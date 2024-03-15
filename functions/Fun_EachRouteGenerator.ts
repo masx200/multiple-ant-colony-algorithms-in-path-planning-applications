@@ -42,7 +42,7 @@ export interface EachRouteGeneratorOptions extends GridVisibilityChecker {
     /**
      * k-opt算法的最大结果数
      */
-    max_results_of_k_opt: number;
+    // max_results_of_k_opt: number;
 
     /**
      * 获取最佳长度的函数
