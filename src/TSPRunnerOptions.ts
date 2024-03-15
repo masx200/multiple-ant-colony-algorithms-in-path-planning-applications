@@ -12,7 +12,7 @@ export interface TSPDefaultOptions {
     max_cities_of_state_transition?: number;
     max_routes_of_greedy?: number;
     max_size_of_collection_of_optimal_routes?: number;
-    max_results_of_2_opt?: number;
+    // max_results_of_2_opt?: number;
     // max_results_of_k_opt?: number | undefined;
     alpha_zero?: number | undefined;
     beta_zero?: number | undefined;

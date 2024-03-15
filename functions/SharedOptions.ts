@@ -60,7 +60,7 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     /**
      * 2-opt算法的最大结果数量
      */
-    max_results_of_2_opt: number;
+    // max_results_of_2_opt: number;
 
     /**
      * k-opt算法的最大结果数量

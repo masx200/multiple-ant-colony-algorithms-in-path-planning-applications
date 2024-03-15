@@ -7,7 +7,7 @@ export interface EachRouteGeneratorOptions extends GridVisibilityChecker {
     /**
      * 2-opt算法的最大结果数
      */
-    max_results_of_2_opt?: number;
+    // max_results_of_2_opt?: number;
 
     /**
      * 当前搜索计数

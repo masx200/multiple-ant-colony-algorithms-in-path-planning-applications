@@ -13,7 +13,7 @@ import { visibleGridsMatrixCallBack } from "../path-planning/visibleGridsMatrixC
 //  * @param max_results_of_k_opt - K-opt 的最大结果数。
  * @param node_coordinates - 表示节点坐标的数组数组。
 //  * @param max_results_of_k_exchange - K-exchange 的最大结果数。
- * @param max_results_of_2_opt - 2-opt 的最大结果数。
+//  * @param max_results_of_2_opt - 2-opt 的最大结果数。
  * @returns 解析为包含time_ms、长度和路由的对象的 Promise。
  */
 export async function run_local_optimization({
@@ -26,7 +26,7 @@ export async function run_local_optimization({
     // max_results_of_k_opt,
     node_coordinates,
     // max_results_of_k_exchange,
-    max_results_of_2_opt,
+    // max_results_of_2_opt,
     canStraightReach,
     getGridDistance,
 }: {
@@ -43,7 +43,7 @@ export async function run_local_optimization({
     // max_results_of_k_opt: number;
     node_coordinates: number[][];
     // max_results_of_k_exchange: number;
-    max_results_of_2_opt: number;
+    // max_results_of_2_opt: number;
     canStraightReach: visibleGridsMatrixCallBack;
     getGridDistance: (a: [number, number], b: [number, number]) => number;
 }): Promise<{ time_ms: number; length: number; route: number[] }> {
@@ -65,7 +65,7 @@ export async function run_local_optimization({
         // max_results_of_k_opt,
         node_coordinates,
         // max_results_of_k_exchange,
-        max_results_of_2_opt,
+        // max_results_of_2_opt,
         routes_and_lengths: need_to_optimization_routes_and_lengths,
         canStraightReach,
         getGridDistance,

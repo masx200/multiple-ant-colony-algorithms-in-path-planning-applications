@@ -41,7 +41,7 @@ export interface LocalOptimizationRoutesOptions {
     /**
      * Maximum number of results for 2-opt.
      */
-    max_results_of_2_opt: number;
+    // max_results_of_2_opt: number;
 
     /**
      * Check if a straight line can reach.

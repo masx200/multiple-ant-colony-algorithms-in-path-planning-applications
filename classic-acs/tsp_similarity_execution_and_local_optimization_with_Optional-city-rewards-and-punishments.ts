@@ -49,7 +49,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
     const {
         // max_cities_of_state_transition = DefaultOptions.max_cities_of_state_transition,
         max_size_of_collection_of_optimal_routes = DefaultOptions.max_size_of_collection_of_optimal_routes,
-        max_results_of_2_opt = DefaultOptions.max_results_of_2_opt,
+        // max_results_of_2_opt = DefaultOptions.max_results_of_2_opt,
         max_segments_of_cross_point = DefaultOptions.max_segments_of_cross_point,
         // max_results_of_k_opt = DefaultOptions.max_results_of_k_opt,
         // max_results_of_k_exchange = DefaultOptions.max_results_of_k_exchange,
@@ -361,7 +361,7 @@ export function tsp_similarity_execution_and_local_optimization_with_Optional_ci
                 // max_results_of_k_opt,
                 node_coordinates,
                 // max_results_of_k_exchange,
-                max_results_of_2_opt,
+                // max_results_of_2_opt,
                 visibleGridsMatrix,
                 set_global_best,
                 onRouteCreated,

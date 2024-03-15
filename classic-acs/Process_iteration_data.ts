@@ -22,7 +22,7 @@ export async function Process_iteration_data({
     // max_results_of_k_opt,
     node_coordinates,
     // max_results_of_k_exchange,
-    max_results_of_2_opt,
+    // max_results_of_2_opt,
     visibleGridsMatrix,
     set_global_best,
     onRouteCreated,
@@ -60,7 +60,7 @@ export async function Process_iteration_data({
     // max_results_of_k_opt: number;
     node_coordinates: number[][];
     // max_results_of_k_exchange: number;
-    max_results_of_2_opt: number;
+    // max_results_of_2_opt: number;
     visibleGridsMatrix: visibleGridsMatrixCallBack;
     set_global_best: (route: number[], length: number) => void;
     onRouteCreated: (route: number[], length: number) => void;
@@ -98,7 +98,7 @@ export async function Process_iteration_data({
         // max_results_of_k_opt,
         node_coordinates,
         // max_results_of_k_exchange,
-        max_results_of_2_opt,
+        // max_results_of_2_opt,
         canStraightReach: visibleGridsMatrix,
         getGridDistance,
     });

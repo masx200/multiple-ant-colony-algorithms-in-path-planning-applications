@@ -53,7 +53,7 @@ export async function EachIterationHandler(
         node_coordinates,
         // max_results_of_k_exchange,
         getGridDistance,
-        max_results_of_2_opt,
+        // max_results_of_2_opt,
         visibleGridsMatrix,
     } = options;
     const routes = routes_and_lengths.map(({ route }) => route);
@@ -92,7 +92,7 @@ export async function EachIterationHandler(
         // max_results_of_k_opt,
         node_coordinates,
         // max_results_of_k_exchange,
-        max_results_of_2_opt,
+        // max_results_of_2_opt,
         routes_and_lengths: need_to_optimization_routes_and_lengths,
         canStraightReach: visibleGridsMatrix,
         getGridDistance,
