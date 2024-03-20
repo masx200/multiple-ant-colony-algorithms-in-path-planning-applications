@@ -76,7 +76,7 @@
         "@masx200/leetcode-class": "^1.2.7",
         "@masx200/rollup-plugin-http-resolve": "^5.0.2",
         "@masx200/weighted-randomly-select": "^2.1.1",
-        "@types/chai": "^4.3.12",
+        "@types/chai": "^4.3.13",
         "@types/core-js": "^2.5.8",
         "@types/node": "^20.11.29",
         "@types/robust-segment-intersect": "^1.0.0",
