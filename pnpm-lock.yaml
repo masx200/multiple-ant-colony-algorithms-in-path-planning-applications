@@ -31,8 +31,8 @@ dependencies:
     specifier: ^2.1.1
     version: 2.1.1
   '@types/chai':
-    specifier: ^4.3.13
-    version: 4.3.13
+    specifier: ^4.3.16
+    version: 4.3.16
   '@types/core-js':
     specifier: ^2.5.8
     version: 2.5.8
@@ -2124,8 +2124,8 @@ packages:
       '@babel/types': 7.23.9
     dev: true
 
-  /@types/chai@4.3.13:
-    resolution: {integrity: sha512-+LxQEbg4BDUf88utmhpUpTyYn1zHao443aGnXIAQak9ZMt9Rtsic0Oig0OS1xyIqdDXc5uMekoC6NaiUlkT/qA==}
+  /@types/chai@4.3.16:
+    resolution: {integrity: sha512-PatH4iOdyh3MyWtmHVFXLWCCIhUbopaltqddG9BzB+gMIzee2MJrvd+jouii9Z3wzQJruGWAm7WOMjgfG8hQlQ==}
     dev: false
 
   /@types/core-js@2.5.8:
