@@ -18,7 +18,7 @@
         "format": " prettier --write */*.json */*/*.json *.ts */*.html */*.ts */*.css *.md  */*.vue *.json *.cjs"
     },
     "devDependencies": {
-        "@babel/core": "^7.24.0",
+        "@babel/core": "^7.24.6",
         "@babel/generator": "^7.24.1",
         "@babel/plugin-proposal-async-generator-functions": "^7.17.12",
         "@babel/plugin-syntax-typescript": "^7.24.1",
@@ -70,7 +70,7 @@
         "vue-tsc": "^2.0.7"
     },
     "dependencies": {
-        "@babel/core": "^7.24.0",
+        "@babel/core": "^7.24.6",
         "@datastructures-js/heap": "^4.3.3",
         "@datastructures-js/queue": "^4.2.3",
         "@masx200/leetcode-class": "^1.2.7",
